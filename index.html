@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fawtara — Free Bilingual Arabic/English Invoice Generator with ZATCA QR | مولد فواتير مجاني</title>
+  <meta name="description" content="Create professional bilingual Arabic/English VAT invoices in 60 seconds. Free, no signup, ZATCA Phase 1 QR code included. Built for freelancers in Saudi Arabia, UAE and the GCC. أنشئ فاتورة ضريبية مجانية متوافقة مع هيئة الزكاة والضريبة والجمارك.">
+  <meta name="keywords" content="invoice generator, arabic invoice, فاتورة ضريبية, ZATCA QR code, VAT invoice Saudi Arabia, مولد فواتير, freelancer invoice UAE">
+  <meta property="og:title" content="Fawtara — Free Bilingual Invoice Generator with ZATCA QR">
+  <meta property="og:description" content="Professional Arabic/English VAT invoices in 60 seconds. Free, no signup, your data never leaves your browser.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/vendor/qrcode.min.js" defer></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="#top">Fawtara <span class="brand-ar">فوترة</span></a>
+    <nav class="site-nav">
+      <a href="#app" data-i18n="nav.generator">Generator</a>
+      <a href="#features" data-i18n="nav.features">Features</a>
+      <a href="#pricing" data-i18n="nav.pricing">Pricing</a>
+      <a href="#faq" data-i18n="nav.faq">FAQ</a>
+    </nav>
+    <button id="langToggle" class="btn btn-ghost" type="button">العربية</button>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="container">
+    <h1 data-i18n="hero.title">Bilingual Arabic / English invoices in 60 seconds</h1>
+    <p class="hero-sub" data-i18n="hero.sub">Free VAT invoice generator for freelancers in Saudi Arabia, the UAE and the GCC — with the ZATCA Phase 1 QR code built in. No signup. Your data never leaves your browser.</p>
+    <div class="hero-cta">
+      <a href="#app" class="btn btn-primary btn-lg" data-i18n="hero.cta">Create a free invoice</a>
+      <span class="hero-note" data-i18n="hero.note">✓ ZATCA QR &nbsp;✓ GCC VAT presets &nbsp;✓ PDF download</span>
+    </div>
+  </div>
+</section>
+
+<main class="container app-layout" id="app">
+
+  <!-- ===================== FORM ===================== -->
+  <section class="panel form-panel" aria-label="Invoice form">
+
+    <h2 data-i18n="form.seller">Your details (seller)</h2>
+    <div class="grid-2">
+      <label><span data-i18n="form.sellerName">Business / your name</span>
+        <input id="sellerName" type="text" placeholder="Anas Design Studio">
+      </label>
+      <label><span data-i18n="form.sellerVat">VAT registration number</span>
+        <input id="sellerVat" type="text" inputmode="numeric" placeholder="310122393500003">
+      </label>
+      <label><span data-i18n="form.country">Country (sets VAT rate)</span>
+        <select id="country">
+          <option value="SA" data-vat="15" data-cur="SAR">Saudi Arabia — السعودية (15%)</option>
+          <option value="AE" data-vat="5" data-cur="AED">UAE — الإمارات (5%)</option>
+          <option value="BH" data-vat="10" data-cur="BHD">Bahrain — البحرين (10%)</option>
+          <option value="OM" data-vat="5" data-cur="OMR">Oman — عُمان (5%)</option>
+          <option value="QA" data-vat="0" data-cur="QAR">Qatar — قطر (0%)</option>
+          <option value="KW" data-vat="0" data-cur="KWD">Kuwait — الكويت (0%)</option>
+          <option value="JO" data-vat="16" data-cur="JOD">Jordan — الأردن (16%)</option>
+          <option value="EG" data-vat="14" data-cur="EGP">Egypt — مصر (14%)</option>
+          <option value="XX" data-vat="0" data-cur="USD">Other — أخرى</option>
+        </select>
+      </label>
+      <label><span data-i18n="form.currency">Currency</span>
+        <select id="currency">
+          <option>SAR</option><option>AED</option><option>BHD</option><option>OMR</option>
+          <option>QAR</option><option>KWD</option><option>JOD</option><option>EGP</option>
+          <option>USD</option><option>EUR</option>
+        </select>
+      </label>
+    </div>
+    <label><span data-i18n="form.sellerAddress">Address</span>
+      <input id="sellerAddress" type="text" placeholder="Riyadh, Saudi Arabia">
+    </label>
+    <button type="button" id="logoBtn" class="btn btn-ghost pro-locked">🔒 <span data-i18n="form.logo">Add your logo</span> <span class="pro-badge">PRO</span></button>
+
+    <h2 data-i18n="form.client">Client details</h2>
+    <div class="grid-2">
+      <label><span data-i18n="form.clientName">Client name</span>
+        <input id="clientName" type="text" placeholder="Alfaisal Trading Co.">
+      </label>
+      <label><span data-i18n="form.clientVat">Client VAT number (optional)</span>
+        <input id="clientVat" type="text" inputmode="numeric">
+      </label>
+    </div>
+    <label><span data-i18n="form.clientAddress">Client address</span>
+      <input id="clientAddress" type="text" placeholder="Jeddah, Saudi Arabia">
+    </label>
+
+    <h2 data-i18n="form.invoice">Invoice details</h2>
+    <div class="grid-3">
+      <label><span data-i18n="form.number">Invoice #</span>
+        <input id="invNumber" type="text">
+      </label>
+      <label><span data-i18n="form.issueDate">Issue date</span>
+        <input id="issueDate" type="date">
+      </label>
+      <label><span data-i18n="form.dueDate">Due date</span>
+        <input id="dueDate" type="date">
+      </label>
+    </div>
+
+    <h2 data-i18n="form.items">Line items</h2>
+    <div id="items" class="items"></div>
+    <button type="button" id="addItem" class="btn btn-ghost">＋ <span data-i18n="form.addItem">Add item</span></button>
+
+    <div class="grid-2 totals-inputs">
+      <label><span data-i18n="form.discount">Discount %</span>
+        <input id="discount" type="number" min="0" max="100" step="0.01" value="0">
+      </label>
+      <label><span data-i18n="form.vatRate">VAT rate %</span>
+        <input id="vatRate" type="number" min="0" max="50" step="0.01" value="15">
+      </label>
+    </div>
+
+    <label><span data-i18n="form.notes">Notes / payment details (IBAN…)</span>
+      <textarea id="notes" rows="2" placeholder="IBAN: SA00 0000 0000 0000 0000 0000"></textarea>
+    </label>
+
+    <div class="form-actions">
+      <button type="button" id="printBtn" class="btn btn-primary btn-lg" data-i18n="form.print">⬇ Download PDF / Print</button>
+      <button type="button" id="newBtn" class="btn btn-ghost" data-i18n="form.new">New invoice</button>
+    </div>
+    <p class="privacy-note" data-i18n="form.privacy">🔒 Everything runs in your browser. Your invoice data is never uploaded anywhere.</p>
+  </section>
+
+  <!-- ===================== PREVIEW ===================== -->
+  <section class="preview-wrap" aria-label="Invoice preview">
+    <div class="invoice-paper" id="invoicePaper" dir="ltr">
+      <div class="inv-head">
+        <div>
+          <div class="inv-title">TAX INVOICE <span class="inv-title-ar">فاتورة ضريبية</span></div>
+          <div class="inv-number">№ <span id="pInvNumber">INV-0001</span></div>
+        </div>
+        <div class="inv-qr" id="qrBox" hidden>
+          <div id="qrcode"></div>
+          <div class="qr-label">ZATCA E-Invoice QR</div>
+        </div>
+      </div>
+
+      <div class="inv-parties">
+        <div class="party">
+          <div class="party-label">From <span class="ar">من</span></div>
+          <div class="party-name" id="pSellerName">—</div>
+          <div class="party-line" id="pSellerAddress"></div>
+          <div class="party-line" id="pSellerVat"></div>
+        </div>
+        <div class="party">
+          <div class="party-label">Bill to <span class="ar">إلى</span></div>
+          <div class="party-name" id="pClientName">—</div>
+          <div class="party-line" id="pClientAddress"></div>
+          <div class="party-line" id="pClientVat"></div>
+        </div>
+        <div class="party party-dates">
+          <div class="party-line"><strong>Issue date <span class="ar">تاريخ الإصدار</span>:</strong> <span id="pIssueDate">—</span></div>
+          <div class="party-line"><strong>Due date <span class="ar">تاريخ الاستحقاق</span>:</strong> <span id="pDueDate">—</span></div>
+        </div>
+      </div>
+
+      <table class="inv-table">
+        <thead>
+          <tr>
+            <th class="col-desc">Description <span class="ar">الوصف</span></th>
+            <th>Qty <span class="ar">الكمية</span></th>
+            <th>Unit price <span class="ar">سعر الوحدة</span></th>
+            <th>Amount <span class="ar">المبلغ</span></th>
+          </tr>
+        </thead>
+        <tbody id="pItems"></tbody>
+      </table>
+
+      <div class="inv-totals">
+        <div class="tot-row"><span>Subtotal <span class="ar">المجموع الفرعي</span></span><span id="pSubtotal">0.00</span></div>
+        <div class="tot-row" id="pDiscountRow" hidden><span>Discount <span class="ar">الخصم</span></span><span id="pDiscount">0.00</span></div>
+        <div class="tot-row"><span>VAT <span class="ar">ضريبة القيمة المضافة</span> (<span id="pVatRate">15</span>%)</span><span id="pVat">0.00</span></div>
+        <div class="tot-row tot-grand"><span>Total due <span class="ar">الإجمالي المستحق</span></span><span id="pTotal">0.00</span></div>
+      </div>
+
+      <div class="inv-notes" id="pNotes" hidden></div>
+
+      <div class="inv-watermark" id="watermark">
+        Made free with <strong>Fawtara</strong> · fawtara.app — <a href="#pricing" class="wm-remove" data-i18n="wm.remove">remove</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===================== FEATURES ===================== -->
+<section class="section" id="features">
+  <div class="container">
+    <h2 class="section-title" data-i18n="feat.title">Built for GCC & MENA freelancers</h2>
+    <div class="features-grid">
+      <div class="feature"><div class="feature-icon">🧾</div><h3 data-i18n="feat.f1t">ZATCA Phase 1 QR</h3><p data-i18n="feat.f1p">Simplified tax invoices for Saudi Arabia automatically include the mandatory TLV/Base64 QR code.</p></div>
+      <div class="feature"><div class="feature-icon">🌐</div><h3 data-i18n="feat.f2t">Truly bilingual</h3><p data-i18n="feat.f2p">Every invoice prints with Arabic and English labels side by side — the format GCC clients expect.</p></div>
+      <div class="feature"><div class="feature-icon">🏛️</div><h3 data-i18n="feat.f3t">GCC VAT presets</h3><p data-i18n="feat.f3p">Correct VAT rates for KSA, UAE, Bahrain, Oman, Jordan, Egypt and more — one click.</p></div>
+      <div class="feature"><div class="feature-icon">🔒</div><h3 data-i18n="feat.f4t">Private by design</h3><p data-i18n="feat.f4p">Everything runs in your browser. Your financial data is never uploaded to any server.</p></div>
+      <div class="feature"><div class="feature-icon">⚡</div><h3 data-i18n="feat.f5t">No signup</h3><p data-i18n="feat.f5p">Open the page, fill the form, download the PDF. Sixty seconds, start to finish.</p></div>
+      <div class="feature"><div class="feature-icon">💾</div><h3 data-i18n="feat.f6t">Remembers you</h3><p data-i18n="feat.f6p">Your business details and invoice numbering are saved on your device for next time.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PRICING ===================== -->
+<section class="section section-alt" id="pricing">
+  <div class="container">
+    <h2 class="section-title" data-i18n="price.title">Simple pricing</h2>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <h3 data-i18n="price.freeT">Free</h3>
+        <div class="price">$0</div>
+        <ul>
+          <li data-i18n="price.free1">Unlimited invoices</li>
+          <li data-i18n="price.free2">Bilingual AR/EN output</li>
+          <li data-i18n="price.free3">ZATCA Phase 1 QR code</li>
+          <li data-i18n="price.free4">GCC VAT presets & PDF</li>
+          <li class="muted" data-i18n="price.free5">Small “Made with Fawtara” footer</li>
+        </ul>
+        <a href="#app" class="btn btn-ghost" data-i18n="price.freeCta">Start now</a>
+      </div>
+      <div class="price-card price-featured">
+        <div class="ribbon" data-i18n="price.popular">Most popular</div>
+        <h3>Pro</h3>
+        <div class="price">$7<span>/mo</span><div class="price-local">≈ 26 SAR</div></div>
+        <ul>
+          <li data-i18n="price.pro1">Everything in Free</li>
+          <li data-i18n="price.pro2">Remove the watermark</li>
+          <li data-i18n="price.pro3">Your logo on invoices</li>
+          <li data-i18n="price.pro4">Saved clients & drafts</li>
+          <li data-i18n="price.pro5">Priority support (AR/EN)</li>
+        </ul>
+        <button type="button" class="btn btn-primary checkout-btn" data-plan="pro" data-i18n="price.proCta">Upgrade to Pro</button>
+      </div>
+      <div class="price-card">
+        <h3 data-i18n="price.bizT">Business</h3>
+        <div class="price">$19<span>/mo</span></div>
+        <ul>
+          <li data-i18n="price.biz1">Everything in Pro</li>
+          <li data-i18n="price.biz2">ZATCA Phase 2 integration (Fatoora API) — coming</li>
+          <li data-i18n="price.biz3">Team seats</li>
+          <li data-i18n="price.biz4">Recurring invoices</li>
+        </ul>
+        <button type="button" class="btn btn-ghost checkout-btn" data-plan="business" data-i18n="price.bizCta">Join waitlist</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FAQ (SEO) ===================== -->
+<section class="section" id="faq">
+  <div class="container faq">
+    <h2 class="section-title" data-i18n="faq.title">Frequently asked questions</h2>
+    <details><summary data-i18n="faq.q1">Is this invoice valid for ZATCA (Saudi Arabia)?</summary><p data-i18n="faq.a1">Yes for Phase 1 (Generation): simplified tax invoices include the mandatory QR code encoded in the official TLV/Base64 format with seller name, VAT number, timestamp, total and VAT amount. Phase 2 (Integration with the Fatoora portal) applies to businesses above the announced turnover waves and is on our Business-tier roadmap.</p></details>
+    <details><summary data-i18n="faq.q2">Do I need to create an account?</summary><p data-i18n="faq.a2">No. The generator is free and requires no signup. Your details are stored only on your own device so they are pre-filled next time.</p></details>
+    <details><summary data-i18n="faq.q3">Where does my data go?</summary><p data-i18n="faq.a3">Nowhere. The app runs entirely in your browser — invoice data is never transmitted to any server, which makes it safe for sensitive financial information.</p></details>
+    <details><summary data-i18n="faq.q4">How do I download the PDF?</summary><p data-i18n="faq.a4">Click “Download PDF / Print” and choose “Save as PDF” in your browser's print dialog. The output is a clean A4 invoice without the app interface.</p></details>
+    <details><summary data-i18n="faq.q5">Which countries are supported?</summary><p data-i18n="faq.a5">Saudi Arabia, UAE, Bahrain, Oman, Qatar, Kuwait, Jordan and Egypt have one-click VAT presets, and you can set any custom rate and currency for other countries.</p></details>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <span>© 2026 Fawtara · <span data-i18n="footer.tag">Bilingual invoicing for MENA freelancers</span></span>
+    <a href="mailto:support@yourdomain.com">support@yourdomain.com</a>
+  </div>
+</footer>
+
+<!-- ===================== UPGRADE MODAL ===================== -->
+<div class="modal-backdrop" id="modal" hidden>
+  <div class="modal" role="dialog" aria-modal="true">
+    <button class="modal-close" id="modalClose" type="button" aria-label="Close">×</button>
+    <h3 data-i18n="modal.title">Fawtara Pro is almost here 🚀</h3>
+    <p data-i18n="modal.body">We're onboarding early users now. Leave your email and get 50% off your first year when Pro launches.</p>
+    <form id="waitlistForm" class="waitlist-form">
+      <input type="email" id="waitlistEmail" required placeholder="you@email.com">
+      <button type="submit" class="btn btn-primary" data-i18n="modal.cta">Get early access</button>
+    </form>
+    <p class="modal-done" id="waitlistDone" hidden data-i18n="modal.done">✓ You're on the list! We'll email you at launch.</p>
+  </div>
+</div>
+
+<script src="js/i18n.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
