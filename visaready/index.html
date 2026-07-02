@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VisaReady — Check Your Schengen Visa Rejection Risk Before You Pay the Fee</title>
+  <meta name="description" content="1.7 million Schengen visa applications are rejected every year — €185 lost each time. Answer 10 questions and get your rejection-risk score, red flags, and exactly what to fix before you apply. Free, no signup.">
+  <meta name="keywords" content="schengen visa rejection, visa rejection risk, proof of funds schengen, visa refused what to do, schengen visa Nigeria, schengen visa Pakistan, visa cover letter">
+  <meta property="og:title" content="VisaReady — Will your Schengen visa be rejected? Check before you pay.">
+  <meta property="og:description" content="Free rejection-risk score based on real EU refusal data and each country's funds rules. Know what to fix before losing the fee.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="#top">Visa<span>Ready</span></a>
+    <nav class="site-nav">
+      <a href="#check">Risk check</a>
+      <a href="#how">How it works</a>
+      <a href="#pack">Document pack</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="container">
+    <p class="hero-kicker">1.7 million Schengen applications rejected last year · €185 lost each time</p>
+    <h1>Will your visa be <em>rejected</em>?<br>Find out before you pay the fee.</h1>
+    <p class="hero-sub">Answer 10 questions. Get your rejection-risk score — computed from real EU refusal statistics for your nationality and the exact financial rules of your destination — plus a fix-list for every red flag in your file. Free, no signup.</p>
+    <a href="#check" class="btn btn-primary btn-lg">Check my risk score — free</a>
+    <div class="hero-stats">
+      <div><strong>45–62%</strong><span>refusal rates for Nigeria, Ghana, Pakistan, Bangladesh</span></div>
+      <div><strong>#1 reason</strong><span>weak ties to home country — fixable with the right documents</span></div>
+      <div><strong>€45–120/day</strong><span>funds each country requires — most applicants never check</span></div>
+    </div>
+  </div>
+</section>
+
+<main class="container" id="check">
+  <div class="wizard" id="wizard">
+
+    <div class="wizard-progress">
+      <div class="wp-step is-active" data-step="1">1. Your trip</div>
+      <div class="wp-step" data-step="2">2. Money &amp; work</div>
+      <div class="wp-step" data-step="3">3. History &amp; ties</div>
+      <div class="wp-step" data-step="4">4. Your score</div>
+    </div>
+
+    <!-- STEP 1 -->
+    <section class="wstep is-active" data-step="1">
+      <h2>Your trip</h2>
+      <div class="grid-2">
+        <label><span>Your nationality (passport)</span>
+          <select id="nationality"></select>
+        </label>
+        <label><span>Main destination (where you'll spend most nights)</span>
+          <select id="destination"></select>
+        </label>
+        <label><span>Trip length (days)</span>
+          <input id="days" type="number" min="1" max="90" value="10">
+        </label>
+        <label><span>Purpose</span>
+          <select id="purpose">
+            <option value="tourism">Tourism</option>
+            <option value="visit">Visiting family / friends</option>
+            <option value="business">Business</option>
+            <option value="event">Conference / event</option>
+          </select>
+        </label>
+      </div>
+      <p class="rule-note" id="destNote"></p>
+      <div class="wnav"><span></span><button class="btn btn-primary next-btn" type="button">Continue →</button></div>
+    </section>
+
+    <!-- STEP 2 -->
+    <section class="wstep" data-step="2">
+      <h2>Money &amp; work</h2>
+      <div class="grid-2">
+        <label><span>Bank balance you can show (EUR equivalent)</span>
+          <input id="balance" type="number" min="0" step="50" placeholder="e.g. 2500">
+        </label>
+        <label><span>Your work situation</span>
+          <select id="employment">
+            <option value="employed_letter">Employed — I can get an employment + leave letter</option>
+            <option value="employed_no_letter">Employed — no letter from my employer</option>
+            <option value="self_employed">Self-employed / business owner</option>
+            <option value="student">Student</option>
+            <option value="unemployed">Not currently working</option>
+          </select>
+        </label>
+        <label><span>Who pays for the trip?</span>
+          <select id="sponsor">
+            <option value="self">I pay myself</option>
+            <option value="sponsor">A sponsor (relative / friend / company) pays</option>
+          </select>
+        </label>
+        <label><span>Large deposits into your account in the last 2 months?</span>
+          <select id="deposits">
+            <option value="no">No — my balance built up over time</option>
+            <option value="yes">Yes — recent large deposit(s)</option>
+          </select>
+        </label>
+      </div>
+      <div class="wnav"><button class="btn btn-ghost back-btn" type="button">← Back</button><button class="btn btn-primary next-btn" type="button">Continue →</button></div>
+    </section>
+
+    <!-- STEP 3 -->
+    <section class="wstep" data-step="3">
+      <h2>History &amp; ties to home</h2>
+      <div class="grid-2">
+        <label><span>Your travel history</span>
+          <select id="history">
+            <option value="none">First international trip (blank passport)</option>
+            <option value="some">Some travel (regional / visa-free countries)</option>
+            <option value="strong">Previous Schengen / UK / US / Canada / Japan visas, used correctly</option>
+          </select>
+        </label>
+        <label><span>Ever had a Schengen visa refused?</span>
+          <select id="rejected">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+          </select>
+        </label>
+        <label><span>Flight &amp; hotel reservations</span>
+          <select id="bookings">
+            <option value="ready">Refundable reservations ready</option>
+            <option value="none">Nothing booked yet</option>
+          </select>
+        </label>
+      </div>
+      <fieldset class="ties">
+        <legend>Which ties to your home country can you document? (select all that apply)</legend>
+        <label class="check"><input type="checkbox" class="tie" value="job"> Permanent job I'm returning to</label>
+        <label class="check"><input type="checkbox" class="tie" value="property"> Property / apartment / land in my name</label>
+        <label class="check"><input type="checkbox" class="tie" value="family"> Spouse or children staying home</label>
+        <label class="check"><input type="checkbox" class="tie" value="business"> A business I own and run</label>
+      </fieldset>
+      <div class="wnav"><button class="btn btn-ghost back-btn" type="button">← Back</button><button class="btn btn-primary" id="scoreBtn" type="button">Get my risk score →</button></div>
+    </section>
+
+    <!-- STEP 4: RESULTS -->
+    <section class="wstep" data-step="4">
+      <h2>Your rejection-risk estimate</h2>
+      <div class="result-top">
+        <div class="gauge">
+          <div class="gauge-num"><span id="scoreNum">–</span><small>%</small></div>
+          <div class="gauge-band" id="scoreBand">–</div>
+        </div>
+        <div class="result-advice">
+          <p id="bandAdvice"></p>
+          <p class="baseline">Baseline for your nationality: <strong id="baseRate">–</strong> of applications refused. Your answers <span id="direction">–</span> that baseline.</p>
+        </div>
+      </div>
+
+      <div class="funds-box" id="fundsBox"></div>
+
+      <h3>🚩 Red flags in your file</h3>
+      <ul class="flags" id="flagList"></ul>
+
+      <h3>✅ Your fix-list before applying</h3>
+      <ol class="fixes" id="fixList"></ol>
+
+      <!-- Monetization: mandatory-insurance affiliate slot.
+           Replace href with your AXA-Schengen / EKTA affiliate link (see README). -->
+      <div class="cta-insurance">
+        <div>
+          <strong>Required step: travel insurance (€30,000 coverage minimum)</strong>
+          <p>Schengen rules make medical travel insurance mandatory — your application is refused without it. Get a visa-compliant certificate in minutes; if the visa is refused, compliant policies are refundable.</p>
+        </div>
+        <a class="btn btn-primary" id="insuranceCta" href="#" rel="nofollow sponsored">Get visa-compliant insurance →</a>
+      </div>
+
+      <div class="cta-pack" id="pack">
+        <h3>Get the complete application pack — $9</h3>
+        <p>Personalized cover letter, day-by-day itinerary, document ordering guide, ties-evidence builder and funds-presentation guide — generated from your answers, ready to print.</p>
+        <button class="btn btn-gold checkout-btn" type="button">Build my document pack — $9</button>
+        <span class="pack-note">One-time payment · instant download · built for your nationality &amp; destination</span>
+      </div>
+
+      <div class="wnav"><button class="btn btn-ghost back-btn" type="button">← Edit my answers</button><button class="btn btn-ghost" id="printBtn" type="button">Print my report</button></div>
+      <p class="disclaimer">VisaReady provides preparation guidance based on published consulate requirements and EU refusal statistics (2024–2025 averages). It is not legal advice and no tool can guarantee a visa decision. Always verify exact requirements with your consulate or visa center.</p>
+    </section>
+  </div>
+</main>
+
+<section class="section" id="how">
+  <div class="container">
+    <h2 class="section-title">Why applications really get refused</h2>
+    <div class="features-grid">
+      <div class="feature"><div class="feature-icon">🏠</div><h3>Weak ties to home</h3><p>The #1 refusal reason. Officers must believe you'll return: job, property, family and business evidence decide this — most applicants simply don't include enough of it.</p></div>
+      <div class="feature"><div class="feature-icon">💶</div><h3>Wrong funds math</h3><p>Every country sets its own funds-per-day rule (Germany ≈ €45, Spain ≈ €108, France up to €120). Showing “a healthy balance” isn't enough — it must clear <em>their</em> number for <em>your</em> trip length.</p></div>
+      <div class="feature"><div class="feature-icon">🏦</div><h3>“Show money” deposits</h3><p>A big deposit last week reads as borrowed money. Statements need 3–6 months of natural history — or documented explanations.</p></div>
+      <div class="feature"><div class="feature-icon">🗺️</div><h3>Unclear travel plans</h3><p>No reservations, vague itineraries and mismatched dates read as an unclear purpose of travel — an official refusal ground.</p></div>
+      <div class="feature"><div class="feature-icon">📄</div><h3>Missing documents</h3><p>Each consulate wants a precise set, in a precise order. One missing paper can end a 46%-risk application.</p></div>
+      <div class="feature"><div class="feature-icon">🔁</div><h3>Unaddressed past refusals</h3><p>Consulates share refusal data. A hidden or unexplained previous refusal is close to an automatic no.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="faq">
+  <div class="container faq">
+    <h2 class="section-title">Frequently asked questions</h2>
+    <details><summary>Is the risk score accurate?</summary><p>The score is an estimate built from the EU Commission's published refusal statistics for your nationality (2024–2025) adjusted by the file-strength factors consulates themselves cite: ties, funds, travel history, and clarity of purpose. It cannot predict an individual decision — it shows how your file compares to why applications actually get refused, and what to fix.</p></details>
+    <details><summary>Is it really free?</summary><p>Yes — the risk check, red flags and fix-list are free with no signup. We earn a commission if you buy your (mandatory) travel insurance through our partner link, and we sell an optional $9 document pack. Your answers never leave your browser.</p></details>
+    <details><summary>My risk is high — should I still apply?</summary><p>Usually not immediately. Most red flags (funds, employment letters, statement history, reservations) take 1–3 months to fix and dramatically change your file. Applying with a weak file costs the full fee and adds a refusal to your record.</p></details>
+    <details><summary>Do you support UK / US / Canada visas?</summary><p>Schengen first — it has the clearest published rules. UK and US visitor-visa modules are next on the roadmap.</p></details>
+    <details><summary>Where does my data go?</summary><p>Nowhere. The checker runs entirely in your browser; your answers are never uploaded to any server.</p></details>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <span>© 2026 VisaReady · Know before you apply</span>
+    <a href="mailto:support@yourdomain.com">support@yourdomain.com</a>
+  </div>
+</footer>
+
+<!-- Pack checkout placeholder modal (wire Lemon Squeezy/Paddle here — see README) -->
+<div class="modal-backdrop" id="modal" hidden>
+  <div class="modal" role="dialog" aria-modal="true">
+    <button class="modal-close" id="modalClose" type="button" aria-label="Close">×</button>
+    <h3>Document packs launch this month 🚀</h3>
+    <p>Leave your email and we'll send your personalized pack builder the moment it's live — with 50% off for early users.</p>
+    <form id="waitlistForm" class="waitlist-form">
+      <input type="email" id="waitlistEmail" required placeholder="you@email.com">
+      <button type="submit" class="btn btn-primary">Get early access</button>
+    </form>
+    <p class="modal-done" id="waitlistDone" hidden>✓ You're on the list! We'll email you at launch.</p>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

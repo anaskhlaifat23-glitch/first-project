@@ -1,3 +1,19 @@
+# Money-making webapp portfolio
+
+Two zero-hosting-cost, client-side products, each backed by its own market research:
+
+| Product | Folder | Market | Research |
+|---|---|---|---|
+| **VisaReady** — Schengen visa rejection-risk checker | [`visaready/`](visaready/) | Visa applicants from high-refusal countries (NG, GH, PK, BD, MA, EG, JO…) — monetized via **mandatory-insurance affiliate** (earns on every user, even free) + $9 document packs | [RESEARCH-V2.md](RESEARCH-V2.md) |
+| **Fawtara** — bilingual AR/EN invoice generator | root (this page) | GCC/MENA freelancers; ZATCA compliance angle | [RESEARCH.md](RESEARCH.md) |
+
+**VisaReady quick start:** serve the repo (`python3 -m http.server 8000`) and open
+`http://localhost:8000/visaready/`. To monetize: put your AXA-Schengen/EKTA/VisitorsCoverage
+affiliate URL in the `#insuranceCta` link in `visaready/index.html`, and wire the $9 pack
+button to Lemon Squeezy/Paddle (same pattern as described below for Fawtara).
+
+---
+
 # Fawtara — فوترة
 
 **Free bilingual (Arabic/English) VAT invoice generator for freelancers in Saudi Arabia,
