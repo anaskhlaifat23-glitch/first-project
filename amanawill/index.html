@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AmanaWill — Islamic Inheritance Calculator & Shariah-Compliant Will | See Who Inherits If You Die Today</title>
+  <meta name="description" content="Free Islamic inheritance (Faraid/Mirath) calculator with exact Quranic shares — then create your Shariah-compliant will for a fraction of what services charge. Your family's amanah, settled in 20 minutes.">
+  <meta name="keywords" content="islamic will, wasiyyah, islamic inheritance calculator, faraid calculator, mirath, shariah compliant will, muslim will UK USA">
+  <meta property="og:title" content="AmanaWill — If you passed away today, who inherits what?">
+  <meta property="og:description" content="Exact Quranic inheritance shares for your family, free. Then fix what needs fixing with a Shariah-compliant will.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Amiri:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="#top">Amana<span>Will</span> <span class="brand-ar">أمانة</span></a>
+    <nav class="site-nav">
+      <a href="#calc">Calculator</a>
+      <a href="#how">How it works</a>
+      <a href="#will">Your will</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="container">
+    <p class="hero-kicker">«ما حَقُّ امرئٍ مسلمٍ لهُ شيءٌ يوصي فيهِ يبيتُ ليلتينِ إلا ووصيتُهُ مكتوبةٌ عندَهُ» — It is not right for a Muslim who has anything to bequeath to spend two nights without his will written down. (Bukhari & Muslim)</p>
+    <h1>If you passed away today,<br><em>who inherits what?</em></h1>
+    <p class="hero-sub">Most Muslims have never run the numbers — and without a valid will, many countries won't apply Islamic shares at all. See your family's exact Quranic shares in one minute, free. Then settle your amanah properly.</p>
+    <a href="#calc" class="btn btn-primary btn-lg">Calculate my family's shares — free</a>
+    <div class="hero-stats">
+      <div><strong>2/3</strong><span>of your estate follows fixed Quranic shares — most people guess them wrong</span></div>
+      <div><strong>0 wills</strong><span>most Muslims in the UK/US/EU die without one — local intestacy law applies instead of Shariah</span></div>
+      <div><strong>1/3</strong><span>is yours to bequeath — charity, non-heir relatives, causes you choose</span></div>
+    </div>
+  </div>
+</section>
+
+<main class="container" id="calc">
+  <div class="calc-layout">
+
+    <!-- ============ FORM ============ -->
+    <section class="panel form-panel">
+      <h2>1 · About you</h2>
+      <div class="grid-2">
+        <label><span>You are</span>
+          <select id="deceased">
+            <option value="male">A man</option>
+            <option value="female">A woman</option>
+          </select>
+        </label>
+        <label><span id="spouseLabel">Wives (living)</span>
+          <select id="spouses">
+            <option value="0">Not married</option>
+            <option value="1" selected>1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
+        </label>
+      </div>
+
+      <h2>2 · Your family (living)</h2>
+      <div class="grid-2">
+        <label><span>Sons</span><input id="sons" type="number" min="0" max="20" value="0"></label>
+        <label><span>Daughters</span><input id="daughters" type="number" min="0" max="20" value="0"></label>
+        <label class="check-line"><input type="checkbox" id="father"> <span>Father is alive</span></label>
+        <label class="check-line"><input type="checkbox" id="mother"> <span>Mother is alive</span></label>
+        <label class="check-line"><input type="checkbox" id="pgf"> <span>Paternal grandfather alive</span></label>
+        <label><span>Grandmothers alive</span><input id="grandmothers" type="number" min="0" max="2" value="0"></label>
+        <label><span>Full brothers</span><input id="fullBrothers" type="number" min="0" max="20" value="0"></label>
+        <label><span>Full sisters</span><input id="fullSisters" type="number" min="0" max="20" value="0"></label>
+        <label><span>Maternal half-siblings</span><input id="maternalSiblings" type="number" min="0" max="20" value="0"></label>
+      </div>
+
+      <h2>3 · Your estate</h2>
+      <div class="grid-2">
+        <label><span>Estate value</span><input id="estate" type="number" min="0" step="1000" value="100000"></label>
+        <label><span>Currency</span>
+          <select id="currency">
+            <option>USD</option><option>GBP</option><option>EUR</option><option>CAD</option>
+            <option>SAR</option><option>AED</option><option>JOD</option><option>EGP</option><option>PKR</option><option>MYR</option>
+          </select>
+        </label>
+        <label><span>Outstanding debts</span><input id="debts" type="number" min="0" step="500" value="0"></label>
+        <label><span>Bequest (wasiyyah) to non-heirs / charity</span><input id="bequest" type="number" min="0" step="500" value="0"></label>
+      </div>
+      <p class="rule-note">Order applied: funeral costs & debts are settled first, your wasiyyah is honoured up to <strong>1/3 of the net estate</strong>, and the remainder is distributed by the Quranic shares below.</p>
+
+      <button class="btn btn-primary btn-lg btn-block" id="calcBtn" type="button">Show who inherits what →</button>
+    </section>
+
+    <!-- ============ RESULTS ============ -->
+    <section class="panel results-panel" id="results" hidden>
+      <h2>Your family's shares <span class="ar-title">الميراث</span></h2>
+      <div class="estate-summary" id="estateSummary"></div>
+      <div class="shares" id="shares"></div>
+      <div class="notes" id="notes"></div>
+
+      <div class="cta-will" id="will">
+        <h3>Now make it legally real — your Shariah-compliant will, $29</h3>
+        <p>These shares only apply automatically in a few countries. In the UK, US, Canada and the EU, <strong>dying without a valid will means local intestacy law overrides the Quranic shares</strong>. AmanaWill generates your personalized, witness-ready Islamic will: executor, guardianship for your children, funeral wishes, your wasiyyah, and the Faraid distribution — with signing guidance for your country.</p>
+        <button class="btn btn-gold checkout-btn" type="button">Create my Islamic will — $29</button>
+        <span class="pack-note">One-time payment · services charge $99–$300 for the same document · lawyers charge more</span>
+      </div>
+
+      <div class="result-actions">
+        <button class="btn btn-ghost" id="printBtn" type="button">Print this report</button>
+      </div>
+      <p class="disclaimer">AmanaWill applies the majority (jumhur) Sunni positions for the heirs listed; rarer cases (e.g. grandfather with siblings) differ between schools and are flagged in the notes. This tool is educational and is not a fatwa or legal advice — for complex estates consult a qualified scholar and a local lawyer.</p>
+    </section>
+  </div>
+</main>
+
+<section class="section" id="how">
+  <div class="container">
+    <h2 class="section-title">Why this matters now, not later</h2>
+    <div class="features-grid">
+      <div class="feature"><div class="feature-icon">⚖️</div><h3>Local law overrides Shariah by default</h3><p>Without a valid will, UK/US/EU intestacy rules decide everything — a spouse may take 100% while parents and siblings entitled to Quranic shares receive nothing.</p></div>
+      <div class="feature"><div class="feature-icon">🕌</div><h3>It's a religious duty</h3><p>The Prophet ﷺ said a Muslim with anything to bequeath should not let two nights pass without a written will. Most of us have let years pass.</p></div>
+      <div class="feature"><div class="feature-icon">👶</div><h3>Guardianship of your children</h3><p>A will is the only place you choose who raises your children. Without it, a court decides — with no requirement that the guardian be Muslim.</p></div>
+      <div class="feature"><div class="feature-icon">🧮</div><h3>Exact, sourced math</h3><p>Every share is computed as an exact fraction with its Quranic basis (an-Nisa 4:11, 4:12, 4:176) — including 'awl, radd and the 'Umariyyah cases most calculators get wrong.</p></div>
+      <div class="feature"><div class="feature-icon">💝</div><h3>Your 1/3 for good</h3><p>Up to one-third of your estate can go to charity or loved ones outside the fixed heirs — sadaqah jariyah that keeps working for you. The calculator enforces the 1/3 cap.</p></div>
+      <div class="feature"><div class="feature-icon">🔒</div><h3>Private by design</h3><p>Everything runs in your browser. Your family and financial details are never uploaded anywhere.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="faq">
+  <div class="container faq">
+    <h2 class="section-title">Frequently asked questions</h2>
+    <details><summary>Which school of fiqh does the calculator follow?</summary><p>The shares implemented (spouse, children, parents, grandparents, full and maternal siblings, 'awl, radd, the 'Umariyyah cases) follow the positions agreed upon or held by the majority of Sunni schools. Where schools genuinely differ — such as the grandfather inheriting alongside siblings — the tool flags the difference and recommends consulting a scholar rather than silently picking a side.</p></details>
+    <details><summary>Is the generated will legally valid?</summary><p>The will pack produces a complete, witness-ready document with country-specific signing guidance (e.g. two adult witnesses who are not beneficiaries, in England & Wales and most US states). Validity requirements are jurisdiction-specific — for large or complex estates we recommend having a local lawyer review the signed document.</p></details>
+    <details><summary>Why is the spouse's share so small?</summary><p>This surprises almost everyone — a wife receives 1/8 when there are children, a husband 1/4. This is exactly why running the numbers matters: within your wasiyyah third and lifetime gifts there are fully halal ways to provide more for your spouse, and the will pack explains them.</p></details>
+    <details><summary>What about half-siblings, grandchildren, or more distant relatives?</summary><p>The current version covers the most common heir set. Paternal half-siblings, grandchildren of predeceased sons, and dhawu al-arham cases are on the roadmap — for those estates, consult a scholar today.</p></details>
+    <details><summary>Where does my data go?</summary><p>Nowhere. The calculator runs entirely in your browser; nothing you enter is transmitted or stored on any server.</p></details>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <span>© 2026 AmanaWill · Settle your amanah</span>
+    <a href="mailto:support@yourdomain.com">support@yourdomain.com</a>
+  </div>
+</footer>
+
+<!-- Will-pack checkout placeholder (wire Lemon Squeezy/Paddle — see README) -->
+<div class="modal-backdrop" id="modal" hidden>
+  <div class="modal" role="dialog" aria-modal="true">
+    <button class="modal-close" id="modalClose" type="button" aria-label="Close">×</button>
+    <h3>The will builder launches this month 🌙</h3>
+    <p>Leave your email and we'll send you the will builder the moment it's live — early users get it for $19 instead of $29.</p>
+    <form id="waitlistForm" class="waitlist-form">
+      <input type="email" id="waitlistEmail" required placeholder="you@email.com">
+      <button type="submit" class="btn btn-primary">Get early access</button>
+    </form>
+    <p class="modal-done" id="waitlistDone" hidden>✓ You're on the list! We'll email you at launch.</p>
+  </div>
+</div>
+
+<script src="js/faraid.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

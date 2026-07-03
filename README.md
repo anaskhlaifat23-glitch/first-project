@@ -4,6 +4,7 @@ Two zero-hosting-cost, client-side products, each backed by its own market resea
 
 | Product | Folder | Market | Research |
 |---|---|---|---|
+| **AmanaWill** — Islamic inheritance calculator + $29 Shariah-compliant will | [`amanawill/`](amanawill/) | 25M+ Muslims in UK/US/EU/CA where intestacy law overrides Quranic shares; competitors charge $99–$300; unit-tested Faraid engine ('awl, radd, 'Umariyyah) | [RESEARCH-V3.md](RESEARCH-V3.md) |
 | **VisaReady** — Schengen visa rejection-risk checker | [`visaready/`](visaready/) | Visa applicants from high-refusal countries (NG, GH, PK, BD, MA, EG, JO…) — monetized via **mandatory-insurance affiliate** (earns on every user, even free) + $9 document packs | [RESEARCH-V2.md](RESEARCH-V2.md) |
 | **Fawtara** — bilingual AR/EN invoice generator | root (this page) | GCC/MENA freelancers; ZATCA compliance angle | [RESEARCH.md](RESEARCH.md) |
 
