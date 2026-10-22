@@ -1,0 +1,237 @@
+{%- assign cwg = all_products['claude-without-guesswork'] -%}
+{%- if cwg.price -%}{%- capture cwg_price -%}{{ cwg.price | money_without_trailing_zeros }}{%- endcapture -%}{%- else -%}{%- assign cwg_price = '$39' -%}{%- endif -%}
+{%- assign book_url = '/pages/claude-without-guesswork' -%}
+{%- assign buy_url = '/cart/55357621338449:1' -%}
+<style>
+.aih{--bg:#F4EFE6;--paper:#FBF8F2;--ink:#1C1A17;--soft:#3D3A34;--muted:#6A645A;--line:#E2DACB;--clay:#B4532F;--clay-hi:#9E4526;--clay-lt:#E8946F;--clay-t:#F3E3D9;--night:#201D19;--night-2:#2B2722;--night-ln:#3A352E;--night-tx:#EFE8DC;--night-mu:#B3AA9C;--teal:#1D6A65;--navy:#24435E;--amber:#C98A1C;--sage:#9CC4BE;
+--serif:'Newsreader',Georgia,serif;--sans:'IBM Plex Sans',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace;
+background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:18px;line-height:1.6;overflow-x:clip}
+.aih *,.aih *::before,.aih *::after{box-sizing:border-box}
+.aih h1,.aih h2,.aih h3,.aih p,.aih ul{margin:0;padding:0}
+.aih ul{list-style:none}
+.aih h1,.aih h2,.aih h3{font-family:var(--serif);font-weight:500;color:inherit;letter-spacing:-.015em;text-transform:none;text-wrap:balance}
+.aih a{color:inherit}
+.aih .wrap{max-width:1160px;margin:0 auto;padding:0 28px}
+.aih section{padding:104px 0}
+.aih .h2{font-size:clamp(34px,4.6vw,54px);line-height:1.08;max-width:20ch}
+.aih .sub{font-size:20px;color:var(--soft);margin-top:18px;max-width:58ch}
+.aih .btn{display:inline-flex;align-items:center;justify-content:center;background:var(--clay);color:#fff;font-weight:600;font-size:18px;line-height:1;padding:20px 30px;border-radius:999px;text-decoration:none;box-shadow:0 10px 24px -10px rgba(180,83,47,.7);transition:background .2s,transform .2s}
+.aih .btn:hover{background:var(--clay-hi);transform:translateY(-1px);color:#fff}
+.aih .btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.aih .btn.ghost:hover{background:var(--ink);color:var(--bg)}
+.aih .btn:focus-visible,.aih input:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.aih .note{font-size:15px;color:var(--muted)}
+/* hero */
+.aih .hero{padding:88px 0 96px;background:radial-gradient(1100px 520px at 80% 20%,#FBF6EC 0,rgba(251,246,236,0) 70%),var(--bg)}
+.aih .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
+.aih .kicker{font-size:16px;font-weight:500;color:var(--clay);margin-bottom:22px}
+.aih .hero h1{font-size:clamp(46px,6.4vw,88px);line-height:.98;letter-spacing:-.03em;max-width:12ch}
+.aih .lede{font-size:21px;line-height:1.55;color:var(--soft);margin:28px 0 36px;max-width:32em}
+.aih .ctas{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.aih .composer{background:var(--paper);border:1px solid var(--line);border-radius:26px;padding:26px;box-shadow:0 40px 80px -48px rgba(80,45,20,.45);animation:aihRise 1s cubic-bezier(.2,.8,.2,1) both}
+.aih .composer .lbl{font-size:14px;color:var(--muted);margin-bottom:12px}
+.aih .ask{font-family:var(--mono);font-size:17px;line-height:1.5;min-height:5.2em;background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 20px;color:var(--ink)}
+.aih .ask .car{display:inline-block;width:.55em;height:1.1em;background:var(--clay);vertical-align:-.2em;margin-left:2px;animation:aihBlink 1s steps(1) infinite}
+.aih .outs{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.aih .outs span{font-size:14px;font-weight:500;border-radius:999px;padding:7px 13px;background:var(--clay-t);color:#7A3418;transition:background .3s,color .3s}
+.aih .outs span.on{background:var(--clay);color:#fff}
+.aih .composer .foot{margin-top:18px;font-size:14px;color:var(--muted)}
+/* why */
+.aih .why{background:var(--night);color:var(--night-tx)}
+.aih .why .sub{color:var(--night-mu)}
+.aih .why-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:72px;margin-top:56px;align-items:start}
+.aih .stat b{display:block;font-family:var(--serif);font-weight:500;font-size:clamp(110px,15vw,190px);line-height:.85;letter-spacing:-.05em;color:var(--clay-lt)}
+.aih .stat p{font-size:19px;margin-top:22px;max-width:30ch}
+.aih .stat .src{display:block;font-size:14px;color:var(--night-mu);margin-top:14px}
+.aih .points{border-top:1px solid var(--night-ln)}
+.aih .points li{padding:24px 0;border-bottom:1px solid var(--night-ln);display:grid;gap:6px}
+.aih .points h3{font-size:26px;line-height:1.2;color:#fff}
+.aih .points p{font-size:18px;color:var(--night-mu)}
+/* featured */
+.aih .feat-card{display:grid;grid-template-columns:.75fr 1.25fr;gap:56px;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:30px;padding:56px;box-shadow:0 40px 80px -50px rgba(80,45,20,.4)}
+.aih .tag{display:inline-block;font-size:14px;font-weight:600;color:var(--clay);margin-bottom:14px}
+.aih .mini{display:block;position:relative;width:min(280px,100%);margin:0 auto;aspect-ratio:794/1123;background:#F6F4EE;border-radius:3px 7px 7px 3px;box-shadow:inset 6px 0 9px -6px rgba(0,0,0,.28),22px 30px 50px -20px rgba(40,25,10,.5);transform:rotate(-3deg);overflow:hidden;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.aih .feat-card:hover .mini{transform:rotate(0) translateY(-6px)}
+.aih .feat-card h2{font-size:clamp(32px,3.8vw,46px);line-height:1.08}
+.aih .feat-card .desc{font-size:19px;color:var(--soft);margin:16px 0 22px;max-width:46ch}
+.aih .checks{display:grid;gap:12px;margin-bottom:28px}
+.aih .checks li{display:grid;grid-template-columns:26px 1fr;gap:10px;font-size:17px}
+.aih .checks li::before{content:'';width:22px;height:22px;border-radius:50%;background:var(--clay-t) url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23B4532F%27 stroke-width=%273%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27M6 12.5l4 4 8-9%27/%3E%3C/svg%3E') center/13px no-repeat;margin-top:3px}
+.aih .pricerow{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px}
+.aih .pricerow b{font-family:var(--serif);font-weight:500;font-size:52px;line-height:1;letter-spacing:-.03em}
+/* uses */
+.aih .uses{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.aih .use-grid{margin-top:52px;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.aih .use-grid li{padding:28px 26px 30px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;gap:8px;align-content:start;transition:background .25s}
+.aih .use-grid li:hover{background:#fff}
+.aih .use-grid h3{font-size:24px;line-height:1.15}
+.aih .use-grid p{font-size:17px;color:var(--soft)}
+.aih .more{margin-top:36px}
+.aih .more a{font-weight:600;color:var(--clay);text-decoration:none;border-bottom:1.5px solid currentColor;padding-bottom:2px}
+/* principles */
+.aih .prin{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:52px;border-top:1px solid var(--ink)}
+.aih .prin li{padding:26px 24px 0 0;display:grid;gap:8px;align-content:start}
+.aih .prin li+li{padding-left:24px;border-left:1px solid var(--line)}
+.aih .prin h3{font-size:23px;line-height:1.2}
+.aih .prin p{font-size:16px;color:var(--soft)}
+/* notify */
+.aih .notify{background:var(--night);color:var(--night-tx);text-align:center}
+.aih .notify h2{font-size:clamp(34px,4.8vw,58px);line-height:1.08;max-width:20ch;margin:0 auto}
+.aih .notify .sub{color:var(--night-mu);margin:20px auto 36px}
+.aih .nform{display:flex;gap:10px;max-width:520px;margin:0 auto;flex-wrap:wrap;justify-content:center}
+.aih .nform input[type=email]{flex:1 1 260px;min-width:0;font:inherit;font-size:17px;padding:17px 22px;border-radius:999px;border:1px solid var(--night-ln);background:var(--night-2);color:#fff}
+.aih .nform input::placeholder{color:var(--night-mu)}
+.aih .nform .btn{border:0;cursor:pointer;font-family:var(--sans)}
+.aih .visually-hidden{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.aih .okmsg{margin-top:18px;color:var(--clay-lt);font-weight:500}
+.aih .legal{background:var(--night);color:#8E8578;font-size:13px;padding:0 0 44px}
+.aih .legal p{border-top:1px solid var(--night-ln);padding-top:22px;max-width:90ch}
+@keyframes aihRise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes aihBlink{50%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.aih *,.aih *::before{animation:none!important;transition:none!important}}
+@media (max-width:960px){
+.aih section{padding:76px 0}
+.aih .hero{padding:48px 0 72px}
+.aih .hero-grid,.aih .why-grid,.aih .feat-card{grid-template-columns:1fr}
+.aih .hero-grid{gap:44px}
+.aih .why-grid{gap:40px}
+.aih .feat-card{padding:36px 24px;gap:36px}
+.aih .use-grid{grid-template-columns:1fr 1fr}
+.aih .prin{grid-template-columns:1fr 1fr;row-gap:28px}
+.aih .prin li:nth-child(3){padding-left:0;border-left:0}
+}
+@media (max-width:600px){
+.aih{font-size:17px}
+.aih .wrap{padding:0 20px}
+.aih .lede{font-size:19px}
+.aih .ctas .btn{width:100%}
+.aih .use-grid{grid-template-columns:1fr}
+.aih .prin{grid-template-columns:1fr}
+.aih .prin li+li{padding-left:0;border-left:0}
+.aih .ask{font-size:15px}
+}
+</style>
+
+<div class='aih' id='aih'>
+
+<section class='hero'>
+  <div class='wrap hero-grid'>
+    <div>
+      <p class='kicker'>Practical AI guides, October 2026</p>
+      <h1>Learn AI the way you'll actually use it.</h1>
+      <p class='lede'>Clear, sourced guides for people who want AI to do real work: research, data, documents, tools, and automation. We start with the most complete practical guide to Claude.</p>
+      <div class='ctas'>
+        <a class='btn' href='{{ book_url }}'>Explore the Claude book</a>
+        <a class='btn ghost' href='{{ buy_url }}'>Buy now for {{ cwg_price }}</a>
+      </div>
+    </div>
+    <div class='composer' aria-hidden='true'>
+      <p class='lbl'>What readers learn to hand Claude</p>
+      <div class='ask'><span id='aih-t'>Clean this 1,206-row sales export and show me margin by product.</span><span class='car'></span></div>
+      <div class='outs'><span class='on'>Data analysis</span><span>Sourced research</span><span>Documents and decks</span><span>Working tools</span><span>Automation</span></div>
+      <p class='foot'>Every example comes from a chapter in the book.</p>
+    </div>
+  </div>
+</section>
+
+<section class='why'>
+  <div class='wrap'>
+    <h2 class='h2'>Why learning AI now matters more than ever.</h2>
+    <p class='sub'>The jobs are changing faster than most training can keep up with. The people who learn to hand AI real work, and check what comes back, are the ones who move ahead.</p>
+    <div class='why-grid'>
+      <div class='stat'>
+        <b>39%</b>
+        <p>of workers' core skills are expected to change by 2030, and AI and big data top the list of fastest-growing skills.</p>
+        <span class='src'>World Economic Forum, Future of Jobs Report 2025</span>
+      </div>
+      <ul class='points'>
+        <li><h3>It's a skill, not a talent</h3><p>Getting reliable work out of AI is a method you can learn: how to brief it, how to check it, and how to test it.</p></li>
+        <li><h3>The gap compounds</h3><p>Every month you hand AI more of your work, you get faster at the next task. Starting later means catching up longer.</p></li>
+        <li><h3>Trust is the real edge</h3><p>Anyone can get an answer. Knowing which answers to trust, and proving it, is what clients and managers pay for.</p></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class='featured'>
+  <div class='wrap'>
+    <div class='feat-card'>
+      <a class='mini' href='{{ book_url }}' aria-label='Claude Without Guesswork'><img src='https://cdn.shopify.com/s/files/1/1041/0557/4737/files/cwg-cover-web.jpg?v=1792672870' alt='Claude Without Guesswork book cover' width='900' height='1273' loading='lazy' style='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block'></a>
+      <div>
+        <span class='tag'>Featured guide</span>
+        <h2>Claude Without Guesswork</h2>
+        <p class='desc'>From your first prompt to expert workflows you can trust. 279 pages, 33 chapters, plus a free 120-Prompt Playbook and practice files you can use the same day.</p>
+        <ul class='checks'>
+          <li><span>Research, data analysis, documents, apps, and automation, each with its own chapter</span></li>
+          <li><span>Bonus: the 120-Prompt Playbook, a separate designed PDF of copy-ready prompts</span></li>
+          <li><span>Every changing fact dated and sourced, with a 30-minute monthly update routine</span></li>
+        </ul>
+        <div class='pricerow'><b>{{ cwg_price }}</b><a class='btn' href='{{ buy_url }}'>Get the book</a><a class='btn ghost' href='{{ book_url }}'>See what's inside</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class='uses'>
+  <div class='wrap'>
+    <h2 class='h2'>What you'll be able to do with Claude.</h2>
+    <ul class='use-grid'>
+      <li><h3>Research you can cite</h3><p>Turn a real question into a sourced report and check every citation.</p></li>
+      <li><h3>Data you can prove</h3><p>Clean and analyze spreadsheets with figures computed by code, not guessed.</p></li>
+      <li><h3>Documents and decks</h3><p>Reports, slide decks, one-pagers, and dashboards that live beyond the chat.</p></li>
+      <li><h3>Tools without coding</h3><p>Build a working pricing tool, then a real project in Claude Code.</p></li>
+      <li><h3>Work that runs itself</h3><p>Connect your apps, write reusable skills, and schedule recurring tasks.</p></li>
+      <li><h3>Business and career</h3><p>Proposals, support replies, investor updates, hiring, and the weekly report.</p></li>
+    </ul>
+    <p class='more'><a href='{{ book_url }}'>See all 15 parts of the book</a></p>
+  </div>
+</section>
+
+<section class='how'>
+  <div class='wrap'>
+    <h2 class='h2'>How we write every guide.</h2>
+    <ul class='prin'>
+      <li><h3>Dated and sourced</h3><p>Prices, plans, and features are dated and linked to official sources, so you know what to re-check.</p></li>
+      <li><h3>Real practice</h3><p>You learn on real-looking files: messy spreadsheets, supplier PDFs, scanned notes.</p></li>
+      <li><h3>Tested, not hyped</h3><p>Methods come with test sets and checklists. No secret prompts, no magic promises.</p></li>
+      <li><h3>Independent</h3><p>Written to be accurate and practical. Not affiliated with or endorsed by any AI company.</p></li>
+    </ul>
+  </div>
+</section>
+
+<section class='notify'>
+  <div class='wrap'>
+    <h2>More AI guides are on the way.</h2>
+    <p class='sub'>Get one email when the next guide launches. No spam, unsubscribe anytime.</p>
+    {%- form 'customer', id: 'aih-news' -%}
+      <input type='hidden' name='contact[tags]' value='newsletter,ai-guides'>
+      <div class='nform'>
+        <label for='aih-email' class='visually-hidden'>Email address</label>
+        <input id='aih-email' type='email' name='contact[email]' placeholder='you@example.com' autocomplete='email' required>
+        <button class='btn' type='submit'>Notify me</button>
+      </div>
+      {%- if form.posted_successfully? -%}<p class='okmsg'>You're on the list. We'll email you when the next guide is ready.</p>{%- endif -%}
+      {%- if form.errors -%}<p class='okmsg'>Check the email address and try again.</p>{%- endif -%}
+    {%- endform -%}
+  </div>
+</section>
+<div class='legal'><div class='wrap'><p>Our guides are independent educational resources. They are not affiliated with, endorsed by, or sponsored by Anthropic or any other AI company. “Claude” and “Anthropic” are trademarks of their respective owners. Source for the 39% figure: World Economic Forum, The Future of Jobs Report 2025.</p></div></div>
+</div>
+
+<script>
+(function(){
+var t=document.getElementById('aih-t');if(!t)return;
+if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+var tasks=['Clean this 1,206-row sales export and show me margin by product.','Should we launch an office coffee subscription in Amman? Research it with sources.','Turn these meeting notes into a one-page plan and a slide deck.','Build me a pricing tool, and write the test cases first.','Every Friday at 3 pm, prepare my weekly wholesale summary.'];
+var chips=document.querySelectorAll('#aih .outs span'),map=[0,1,2,3,4],k=0,i=0,del=false;
+function tick(){var s=tasks[k];
+if(!del){i++;t.textContent=s.slice(0,i);if(i>=s.length){del=true;return setTimeout(tick,2200)}return setTimeout(tick,32)}
+i-=3;if(i<=0){i=0;del=false;k=(k+1)%tasks.length;chips.forEach(function(c,n){c.classList.toggle('on',n===map[k])})}
+t.textContent=s.slice(0,i);setTimeout(tick,del?12:400)}
+t.textContent='';setTimeout(tick,900);
+})();
+</script>
+
+{% schema %}
+{"name":"AI home","settings":[],"presets":[{"name":"AI home"}]}
+{% endschema %}
