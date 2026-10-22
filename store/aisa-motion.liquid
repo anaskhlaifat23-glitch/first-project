@@ -1,59 +1,189 @@
-{% comment %} AI Step Ahead motion layer: scroll reveals, count-ups, hover lift. Content stays visible if JS is off. {% endcomment %}
+{% comment %} AI Step Ahead motion layer v2: scroll progress, reveals, word-by-word headlines, text decode, tilt+glare cards, magnetic buttons, cursor spotlight, parallax, icon line-draw, count-ups. Content stays visible if JS is off. {% endcomment %}
 <style>
+  .aisa-bar{position:fixed;left:0;top:0;height:2px;width:100%;z-index:9999;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,#9E4526,#E8946F 60%,#F1D3BC);pointer-events:none}
   .aisa-rv{opacity:0;translate:0 28px;transition:opacity .9s cubic-bezier(.2,.8,.2,1) var(--rv-d,0ms),translate .9s cubic-bezier(.2,.8,.2,1) var(--rv-d,0ms)}
   .aisa-rv.aisa-in{opacity:1;translate:0 0}
   .aih .card.aisa-rv{transition:opacity .9s cubic-bezier(.2,.8,.2,1) var(--rv-d,0ms),translate .9s cubic-bezier(.2,.8,.2,1) var(--rv-d,0ms),transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s}
   .cwg .cap-grid li{transition:background .25s,transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s,opacity .9s cubic-bezier(.2,.8,.2,1) var(--rv-d,0ms),translate .9s cubic-bezier(.2,.8,.2,1) var(--rv-d,0ms)}
-  .cwg .cap-grid li:hover{transform:translateY(-4px);box-shadow:0 22px 40px -28px rgba(80,45,20,.45);position:relative;z-index:1}
+  /* word reveal */
+  .aisa-w{display:inline-block;opacity:0;filter:blur(10px);translate:0 .45em;transition:opacity .8s cubic-bezier(.2,.8,.2,1),filter .8s cubic-bezier(.2,.8,.2,1),translate .8s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--wi,0) * 55ms)}
+  .aisa-words.aisa-in .aisa-w,.aisa-words.aisa-now .aisa-w{opacity:1;filter:none;translate:0 0}
+  .aisa-words.aisa-rv{opacity:1;translate:0 0}
+  /* tilt + glare */
+  .aisa-tilt{transform-style:preserve-3d;will-change:transform}
+  .aisa-glare{position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .4s;background:radial-gradient(420px circle at var(--gx,50%) var(--gy,50%),rgba(255,255,255,.35),rgba(255,255,255,0) 45%);mix-blend-mode:soft-light;z-index:3}
+  .aisa-tilt:hover .aisa-glare{opacity:1}
+  /* magnetic */
+  .aih .btn.aisa-mag,.cwg .btn.aisa-mag{transition:background .25s,color .25s,transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s,translate .45s cubic-bezier(.2,.8,.2,1)}
+  /* spotlight */
+  .aisa-spot{background-image:radial-gradient(560px circle at var(--mx,-999px) var(--my,-999px),rgba(232,148,111,.11),rgba(232,148,111,0) 60%)!important}
+  /* line draw */
+  .aisa-draw path,.aisa-draw circle,.aisa-draw rect,.aisa-draw polyline,.aisa-draw line{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.4s cubic-bezier(.65,0,.35,1) calc(var(--rv-d,0ms) + 200ms)}
+  .aisa-in .aisa-draw path,.aisa-in .aisa-draw circle,.aisa-in .aisa-draw rect,.aisa-in .aisa-draw polyline,.aisa-in .aisa-draw line,.aisa-draw.aisa-in path,.aisa-draw.aisa-in circle,.aisa-draw.aisa-in rect{stroke-dashoffset:0}
+  /* parallax */
+  [data-aisa-par]{will-change:translate}
+  /* buttons */
   .aih .btn,.cwg .btn{position:relative;overflow:hidden}
   .aih .btn::after,.cwg .btn::after{content:'';position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.28) 50%,transparent 70%);transform:translateX(-120%);transition:transform .8s ease}
   .aih .btn:hover::after,.cwg .btn:hover::after{transform:translateX(120%)}
-  @keyframes aisaFloat{0%,100%{translate:0 0}50%{translate:0 -8px}}
-  @media (prefers-reduced-motion:reduce){.aisa-rv{opacity:1!important;translate:none!important;transition:none!important}}
+  /* decode */
+  .aisa-dec{font-variant-numeric:tabular-nums}
+  @media (prefers-reduced-motion:reduce){.aisa-rv,.aisa-w{opacity:1!important;translate:none!important;filter:none!important;transition:none!important}.aisa-draw *{stroke-dashoffset:0!important}}
 </style>
 <script>
   (function () {
-    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    if (!('IntersectionObserver' in window)) return;
-    var sel = [
-      '[data-rv]', '.aih section .h2', '.aih section .sub', '.aih .notify h2', '.cwg-scene', '.cwg-anywhere .anyw-img', '.cwg-anywhere .anyw-copy',
-      '.cwg section .h2', '.cwg section .sub', '.cwg .facts>div', '.cwg .cap-grid li', '.cwg .cap-foot',
-      '.cwg .stat', '.cwg .losses li', '.cwg .turn', '.cwg .readout', '.cwg .sliders', '.cwg .panel',
-      '.cwg .also', '.cwg .vtable', '.cwg .ptable', '.cwg .parts li', '.cwg .offer-card', '.cwg .fit>div',
-      '.cwg .faq', '.cwg .final h2'
-    ].join(',');
-    var els = Array.prototype.slice.call(document.querySelectorAll(sel));
-    if (!els.length) return;
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (!e.isIntersecting) return;
-        e.target.classList.add('aisa-in');
-        io.unobserve(e.target);
-        var b = e.target.querySelector && e.target.querySelector('b[data-aisa-count]');
-        if (b) count(b);
+    var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var fine = window.matchMedia && matchMedia('(hover: hover) and (pointer: fine)').matches;
+    var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+    var raf = window.requestAnimationFrame.bind(window);
+
+    /* scroll progress */
+    var bar = document.createElement('div'); bar.className = 'aisa-bar'; document.body.appendChild(bar);
+    function prog() { var h = document.documentElement.scrollHeight - innerHeight; bar.style.transform = 'scaleX(' + (h > 0 ? Math.min(1, scrollY / h) : 0) + ')'; }
+    addEventListener('scroll', prog, { passive: true }); prog();
+
+    /* word-by-word headlines */
+    function splitWords(el) {
+      if (el.dataset.aisaSplit) return; el.dataset.aisaSplit = '1';
+      var i = 0;
+      Array.prototype.slice.call(el.childNodes).forEach(function (n) {
+        if (n.nodeType === 3) {
+          var frag = document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach(function (w) {
+            if (!w) return;
+            if (/^\s+$/.test(w)) { frag.appendChild(document.createTextNode(w)); return; }
+            var s = document.createElement('span'); s.className = 'aisa-w'; s.style.setProperty('--wi', i++); s.textContent = w; frag.appendChild(s);
+          });
+          n.parentNode.replaceChild(frag, n);
+        } else if (n.nodeType === 1 && n.tagName !== 'BR') {
+          n.classList.add('aisa-w'); n.style.setProperty('--wi', i++);
+        }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
-    els.forEach(function (el) {
-      var sibs = el.parentElement ? Array.prototype.indexOf.call(el.parentElement.children, el) : 0;
-      el.style.setProperty('--rv-d', (Math.min(sibs, 6) * 80) + 'ms');
-      el.classList.add('aisa-rv');
-      io.observe(el);
-    });
-    document.querySelectorAll('.cwg .facts b, .cwg .stat b, .aih .stat b, .aih .num-grid b').forEach(function (b) {
-      var m = b.textContent.trim().match(/^(\d+)(%?)$/);
-      if (!m) return;
-      b.setAttribute('data-aisa-count', m[1]);
-      b.setAttribute('data-aisa-suffix', m[2]);
+      el.classList.add('aisa-words');
+    }
+    var heads = $$('.aih .h2, .aih .notify h2, .aih .feat h2, .cwg .h2, .cwg .final h2, .cwg .hero h1, .aih .hero h1, .cwg .cwg-scene figcaption');
+    if (!reduce) heads.forEach(splitWords);
+    var hero = document.querySelector('.aih .hero h1, .cwg .hero h1');
+    if (hero && !reduce) setTimeout(function () { hero.classList.add('aisa-now'); }, 150);
+
+    /* text decode for eyebrows */
+    var glyphs = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/<>_+';
+    function decode(el) {
+      if (el.dataset.dec) return; el.dataset.dec = '1';
+      var final = el.textContent, len = final.length, f = 0, total = 22;
+      (function tick() {
+        f++; var out = '';
+        for (var k = 0; k < len; k++) {
+          var c = final[k];
+          out += (c === ' ' || c === '·' || k < (f / total) * len) ? c : glyphs[(Math.random() * glyphs.length) | 0];
+        }
+        el.textContent = out;
+        if (f < total) setTimeout(tick, 34); else el.textContent = final;
+      })();
+    }
+
+    /* reveal observer */
+    if ('IntersectionObserver' in window && !reduce) {
+      var sel = [
+        '[data-rv]', '.aih section .sub', '.cwg-scene', '.cwg .anyw-img', '.cwg .anyw-copy',
+        '.cwg section .sub', '.cwg .facts>div', '.cwg .cap-grid li', '.cwg .cap-foot',
+        '.cwg .stat', '.cwg .losses li', '.cwg .turn', '.cwg .readout', '.cwg .sliders', '.cwg .panel',
+        '.cwg .also', '.cwg .vtable', '.cwg .ptable', '.cwg .parts li', '.cwg .offer-card', '.cwg .fit>div', '.cwg .faq',
+        '.aisa-words', '.eyebrow', '.cwg .kicker'
+      ].join(',');
+      var els = $$(sel).filter(function (el) { return !el.closest('.hero') || el.classList.contains('eyebrow') || el.classList.contains('kicker'); });
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          var t = e.target; t.classList.add('aisa-in'); io.unobserve(t);
+          if (t.classList.contains('eyebrow') || t.classList.contains('kicker')) decode(t);
+          $$('b[data-aisa-count]', t).forEach(count);
+          if (t.matches && t.matches('b[data-aisa-count]')) count(t);
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+      els.forEach(function (el) {
+        if (!el.classList.contains('aisa-words') && !el.classList.contains('eyebrow') && !el.classList.contains('kicker')) {
+          var sibs = el.parentElement ? Array.prototype.indexOf.call(el.parentElement.children, el) : 0;
+          el.style.setProperty('--rv-d', (Math.min(sibs, 6) * 80) + 'ms');
+          el.classList.add('aisa-rv');
+        }
+        io.observe(el);
+      });
+    }
+
+    /* count-ups */
+    $$('.cwg .facts b, .cwg .stat b, .aih .stat b, .aih .num-grid b').forEach(function (b) {
+      var m = b.textContent.trim().match(/^(\d+)(%?)$/); if (!m) return;
+      b.setAttribute('data-aisa-count', m[1]); b.setAttribute('data-aisa-suffix', m[2]);
     });
     function count(b) {
-      var end = +b.getAttribute('data-aisa-count'), suf = b.getAttribute('data-aisa-suffix') || '', t0 = null, dur = 1400;
-      function step(t) {
-        if (!t0) t0 = t;
-        var p = Math.min((t - t0) / dur, 1), v = Math.round(end * (1 - Math.pow(1 - p, 3)));
-        b.textContent = v + suf;
-        if (p < 1) requestAnimationFrame(step);
-      }
-      requestAnimationFrame(step);
+      if (b.dataset.counted) return; b.dataset.counted = '1';
+      var end = +b.getAttribute('data-aisa-count'), suf = b.getAttribute('data-aisa-suffix') || '', t0 = null, dur = 1600;
+      (function step(t) { if (!t0) t0 = t; var p = Math.min((t - t0) / dur, 1); b.textContent = Math.round(end * (1 - Math.pow(1 - p, 4))) + suf; if (p < 1) raf(step); })(performance.now());
     }
+
+    /* icon line-draw */
+    $$('.aih .prin svg, .aih .pack-list .ic svg, .aih .trust svg').forEach(function (svg) {
+      $$('path,circle,rect,polyline,line', svg).forEach(function (p) { p.setAttribute('pathLength', '1'); });
+      if (!reduce) svg.classList.add('aisa-draw');
+    });
+    var heroTrust = document.querySelector('.aih .trust');
+    if (heroTrust) setTimeout(function () { heroTrust.classList.add('aisa-in'); }, 700);
+
+    if (reduce) return;
+
+    /* tilt + glare */
+    if (fine) {
+      $$('.aih .card, .aih .feat, .aih .pack-img, .cwg .cap-grid li, .cwg .panel, .cwg .offer-card, .cwg .cwg-scene, .aih .ws').forEach(function (el) {
+        var max = el.classList.contains('card') || el.tagName === 'LI' ? 7 : 2.5;
+        if (getComputedStyle(el).position === 'static') el.style.position = 'relative';
+        var g = document.createElement('span'); g.className = 'aisa-glare'; el.appendChild(g); el.classList.add('aisa-tilt');
+        var rect, pend = false, lx = 0, ly = 0;
+        el.addEventListener('pointerenter', function () { rect = el.getBoundingClientRect(); el.style.transition = 'transform .2s ease-out, box-shadow .5s'; });
+        el.addEventListener('pointermove', function (e) {
+          lx = e.clientX; ly = e.clientY; if (pend) return; pend = true;
+          raf(function () {
+            pend = false; if (!rect) rect = el.getBoundingClientRect();
+            var x = (lx - rect.left) / rect.width, y = (ly - rect.top) / rect.height;
+            var lift = el.classList.contains('card') ? ' translateY(-6px)' : '';
+            el.style.transform = 'perspective(1000px) rotateX(' + ((0.5 - y) * max).toFixed(2) + 'deg) rotateY(' + ((x - 0.5) * max).toFixed(2) + 'deg)' + lift;
+            el.style.setProperty('--gx', (x * 100) + '%'); el.style.setProperty('--gy', (y * 100) + '%');
+          });
+        });
+        el.addEventListener('pointerleave', function () { el.style.transition = 'transform .7s cubic-bezier(.2,.8,.2,1), box-shadow .5s'; el.style.transform = ''; rect = null; });
+      });
+
+      /* magnetic buttons */
+      $$('.aih .btn, .cwg .btn').forEach(function (b) {
+        b.classList.add('aisa-mag');
+        b.addEventListener('pointermove', function (e) {
+          var r = b.getBoundingClientRect(), dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2);
+          b.style.translate = (dx * 0.18).toFixed(1) + 'px ' + (dy * 0.28).toFixed(1) + 'px';
+        });
+        b.addEventListener('pointerleave', function () { b.style.translate = '0 0'; });
+      });
+
+      /* cursor spotlight on dark sections */
+      $$('.aih .why, .aih .notify, .aih .demo, .cwg .why, .cwg .calc, .cwg .final').forEach(function (s) {
+        s.classList.add('aisa-spot');
+        s.addEventListener('pointermove', function (e) { var r = s.getBoundingClientRect(); s.style.setProperty('--mx', (e.clientX - r.left) + 'px'); s.style.setProperty('--my', (e.clientY - r.top) + 'px'); });
+        s.addEventListener('pointerleave', function () { s.style.setProperty('--mx', '-999px'); });
+      });
+    }
+
+    /* parallax */
+    var par = $$('.aih .feat-img, .aih .pack-img img, .cwg .cwg-scene img, .cwg .anyw-img img, .aih .card img').map(function (el) {
+      el.setAttribute('data-aisa-par', ''); return { el: el, k: el.closest('.card') ? 0.05 : 0.08 };
+    });
+    var pp = false;
+    function parallax() {
+      pp = false; var vh = innerHeight;
+      par.forEach(function (o) {
+        var r = o.el.parentElement.getBoundingClientRect(); if (r.bottom < -100 || r.top > vh + 100) return;
+        var c = (r.top + r.height / 2 - vh / 2); o.el.style.translate = '0 ' + (-c * o.k).toFixed(1) + 'px';
+        if (!o.scaled) { o.el.style.scale = '1.12'; o.scaled = true; }
+      });
+    }
+    if (par.length) { addEventListener('scroll', function () { if (!pp) { pp = true; raf(parallax); } }, { passive: true }); parallax(); }
   })();
 </script>

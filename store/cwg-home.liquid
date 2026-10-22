@@ -2,8 +2,8 @@
 {%- if cwg.price -%}{%- capture cwg_price -%}{{ cwg.price | money_without_trailing_zeros }}{%- endcapture -%}{%- else -%}{%- assign cwg_price = '$39' -%}{%- endif -%}
 {%- assign book_url = '/pages/claude-without-guesswork' -%}
 {%- assign buy_url = '/cart/55357621338449:1' -%}
-{%- capture vid1080 -%}{{ 'aisa-hero-arrow-1080.mp4' | file_url }}{%- endcapture -%}
-{%- capture vid720 -%}{{ 'aisa-hero-arrow-720.mp4' | file_url }}{%- endcapture -%}
+{%- capture vid1080 -%}{{ 'aisa-hero-1080.mp4' | asset_url }}{%- endcapture -%}
+{%- capture vid720 -%}{{ 'aisa-hero-720.mp4' | asset_url }}{%- endcapture -%}
 <style>
 .aih{--bg:#F4EFE6;--paper:#FBF8F2;--ink:#1C1A17;--soft:#3D3A34;--muted:#6A645A;--line:#E2DACB;--clay:#B4532F;--clay-hi:#9E4526;--clay-lt:#E8946F;--clay-t:#F3E3D9;--night:#16130F;--night-2:#211D19;--night-ln:#36312A;--night-tx:#EFE8DC;--night-mu:#B3AA9C;
 --serif:'Newsreader',Georgia,serif;--sans:'IBM Plex Sans',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace;--ease:cubic-bezier(.2,.8,.2,1);
@@ -31,14 +31,17 @@ background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:18px;lin
 .aih .btn:focus-visible,.aih input:focus-visible,.aih a:focus-visible{outline:3px solid var(--clay-lt);outline-offset:3px}
 /* hero */
 .aih .hero{position:relative;padding:0;background:var(--night);color:var(--night-tx);min-height:min(88vh,860px);display:flex;align-items:center;overflow:hidden;isolation:isolate}
-.aih .hero-media{position:absolute;inset:0;z-index:-1}
+.aih .hero-media{position:absolute;inset:0;z-index:-1;overflow:hidden}
 .aih .hero-media video,.aih .hero-media img{width:100%;height:100%!important;object-fit:cover;object-position:62% 50%;animation:aihDrift 22s ease-out both}
+.aih .hero-sweep{position:absolute;inset:0;pointer-events:none;background:linear-gradient(105deg,transparent 35%,rgba(255,226,200,.10) 48%,transparent 60%);transform:translateX(-100%);animation:aihSweep 9s 3s ease-in-out infinite}
+.aih .hero-grain{position:absolute;inset:-50%;pointer-events:none;opacity:.08;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:aihGrain 1.2s steps(6) infinite}
+.aih .hero h1 em{background:linear-gradient(100deg,#E8946F 0%,#F6D2B8 30%,#E8946F 55%,#C96B42 100%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:aihShine 6s ease-in-out infinite;padding-right:.06em}
 .aih .hero::after{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(22,19,15,.96) 0%,rgba(22,19,15,.86) 34%,rgba(22,19,15,.25) 62%,rgba(22,19,15,0) 80%),linear-gradient(0deg,rgba(22,19,15,.85) 0%,rgba(22,19,15,0) 30%)}
 .aih .hero .wrap{width:100%;padding-top:96px;padding-bottom:96px}
 .aih .hero-copy{max-width:600px}
 .aih .hero .eyebrow{color:var(--clay-lt)}
 .aih .hero h1{font-size:clamp(48px,6.6vw,96px);line-height:.96;letter-spacing:-.035em;color:#fff;margin-top:22px}
-.aih .hero h1 em{font-style:italic;color:var(--clay-lt)}
+.aih .hero h1 em{font-style:italic}
 .aih .lede{font-size:20px;line-height:1.6;color:var(--night-mu);margin:28px 0 38px;max-width:30em}
 .aih .ctas{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
 .aih .trust{display:flex;flex-wrap:wrap;gap:12px 26px;margin-top:44px;padding-top:26px;border-top:1px solid rgba(255,255,255,.12)}
@@ -55,7 +58,7 @@ background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:18px;lin
 .aih .num-grid b{display:block;font-family:var(--serif);font-weight:500;font-size:clamp(42px,4.4vw,58px);line-height:1;letter-spacing:-.03em}
 .aih .num-grid span{display:block;font-size:15px;color:var(--muted);margin-top:10px;line-height:1.4}
 /* featured */
-.aih .featured{padding-top:110px}
+.aih .featured{padding-top:110px;padding-bottom:0}
 .aih .feat{position:relative;border-radius:30px;overflow:hidden;background:#EDE5D8;box-shadow:0 60px 120px -70px rgba(60,35,15,.6);isolation:isolate}
 .aih .feat-img{display:block;width:100%;aspect-ratio:2000/1116;object-fit:cover;transition:transform 1.6s var(--ease)}
 .aih .feat:hover .feat-img{transform:scale(1.025)}
@@ -68,6 +71,77 @@ background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:18px;lin
 .aih .pricerow{display:flex;flex-wrap:wrap;align-items:center;gap:14px 20px}
 .aih .pricerow b{font-family:var(--serif);font-weight:500;font-size:46px;line-height:1;letter-spacing:-.03em}
 .aih .pricerow small{display:block;font-size:13px;color:var(--muted);margin-top:4px}
+
+/* ribbon */
+.aih .ribbon{background:var(--night);color:var(--night-tx);overflow:hidden;border-top:1px solid var(--night-ln);border-bottom:1px solid var(--night-ln);padding:22px 0;margin-top:110px}
+.aih .ribbon-track{display:flex;align-items:center;gap:36px;width:max-content;animation:aihMarq 38s linear infinite}
+.aih .ribbon span{font-family:var(--serif);font-size:clamp(22px,2.4vw,32px);white-space:nowrap;letter-spacing:-.01em}
+.aih .ribbon span:nth-child(4n+1){font-style:italic;color:var(--clay-lt)}
+.aih .ribbon i{width:14px;height:14px;flex:none;background:linear-gradient(135deg,#F1E3CC,#B4532F);clip-path:polygon(50% 0,100% 50%,78% 62%,50% 34%,22% 62%,0 50%)}
+.aih .ribbon:hover .ribbon-track{animation-play-state:paused}
+@keyframes aihMarq{to{transform:translateX(-50%)}}
+/* demo */
+.aih .demo{background:var(--night);color:var(--night-tx);position:relative;overflow:hidden;padding-top:110px}
+.aih .demo::before{content:'';position:absolute;left:50%;top:38%;width:1100px;height:700px;transform:translateX(-50%);background:radial-gradient(closest-side,rgba(232,148,111,.13),rgba(232,148,111,0));pointer-events:none}
+.aih .demo .eyebrow{color:var(--clay-lt)}
+.aih .demo .sub{color:var(--night-mu)}
+.aih .demo-head{position:relative}
+.aih .ws{position:relative;margin-top:56px;border-radius:24px;background:linear-gradient(180deg,#221E19,#1A1713);border:1px solid #3A342C;box-shadow:0 0 0 1px rgba(255,255,255,.03) inset,0 60px 120px -40px rgba(0,0,0,.7),0 0 80px -20px rgba(232,148,111,.18);overflow:hidden}
+.aih .ws::after{content:'';position:absolute;inset:0;border-radius:24px;padding:1px;background:linear-gradient(120deg,rgba(232,148,111,.6),rgba(232,148,111,0) 30%,rgba(232,148,111,0) 70%,rgba(241,227,204,.4));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;opacity:.7}
+.aih .ws-bar{display:flex;align-items:center;gap:18px;padding:14px 18px;border-bottom:1px solid #332E27;background:rgba(255,255,255,.02)}
+.aih .dots{display:flex;gap:7px}.aih .dots i{width:11px;height:11px;border-radius:50%;background:#3E382F}
+.aih .ws-tabs{display:flex;gap:6px;flex:1;overflow-x:auto;scrollbar-width:none}
+.aih .ws-tabs button{font:500 14px var(--sans);color:var(--night-mu);background:transparent;border:1px solid transparent;border-radius:999px;padding:8px 14px;cursor:pointer;white-space:nowrap;transition:all .25s}
+.aih .ws-tabs button:hover{color:#fff}
+.aih .ws-tabs button.on{color:#fff;background:rgba(232,148,111,.14);border-color:rgba(232,148,111,.4)}
+.aih .ws-live{display:flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--night-mu);white-space:nowrap}
+.aih .ws-live b{width:8px;height:8px;border-radius:50%;background:#6FCF97;box-shadow:0 0 0 0 rgba(111,207,151,.6);animation:aihPulse 1.8s infinite}
+@keyframes aihPulse{70%{box-shadow:0 0 0 8px rgba(111,207,151,0)}100%{box-shadow:0 0 0 0 rgba(111,207,151,0)}}
+.aih .ws-body{display:grid;grid-template-columns:1fr 1.15fr;min-height:430px}
+.aih .ws-left{padding:28px;border-right:1px solid #332E27}
+.aih .ws-right{padding:28px;background:radial-gradient(600px 300px at 70% 0%,rgba(232,148,111,.06),transparent)}
+.aih .ws-lbl{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#8E8578;margin-bottom:12px}
+.aih .ws-prompt{font-family:var(--mono);font-size:14.5px;line-height:1.65;color:#EDE6DA;background:#15120F;border:1px solid #332E27;border-radius:14px;padding:16px 18px;min-height:168px;white-space:pre-wrap}
+.aih .ws-prompt .k{color:#E8946F}
+.aih .ws-car{display:inline-block;width:.55em;height:1.1em;background:var(--clay-lt);vertical-align:-.2em;margin-left:1px;animation:aihBlink 1s steps(1) infinite}
+@keyframes aihBlink{50%{opacity:0}}
+.aih .ws-status{display:flex;align-items:center;gap:10px;margin-top:18px;font-size:14px;color:var(--night-mu);min-height:22px}
+.aih .ws-spin{width:16px;height:16px;border-radius:50%;border:2px solid rgba(232,148,111,.25);border-top-color:var(--clay-lt);opacity:0}
+.aih .ws.thinking .ws-spin{opacity:1;animation:aihSpin .8s linear infinite}
+.aih .ws.done .ws-spin{opacity:1;border:0;background:#6FCF97 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2316130F' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center/10px no-repeat}
+@keyframes aihSpin{to{transform:rotate(360deg)}}
+.aih .ws.thinking .ws-st{background:linear-gradient(90deg,#8E8578 0%,#fff 50%,#8E8578 100%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:aihShim 1.4s linear infinite}
+@keyframes aihShim{to{background-position:-200% 0}}
+.aih .ws-steps{margin-top:14px;display:grid;gap:8px}
+.aih .ws-steps div{display:flex;gap:10px;align-items:center;font-size:13.5px;color:#C9C0B2;opacity:0;transform:translateX(-8px);transition:all .45s var(--ease)}
+.aih .ws-steps div.in{opacity:1;transform:none}
+.aih .ws-steps div::before{content:'';width:14px;height:14px;flex:none;border-radius:4px;border:1.5px solid #6FCF97;background:rgba(111,207,151,.15) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236FCF97' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center/9px no-repeat}
+.aih .ws-out{display:grid;gap:14px}
+.aih .o{opacity:0;transform:translateY(10px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
+.aih .o.in{opacity:1;transform:none}
+.aih .o-title{font-family:var(--serif);font-size:24px;color:#fff;line-height:1.2}
+.aih .o-chart{display:flex;align-items:flex-end;gap:10px;height:150px;padding:14px 14px 0;border:1px solid #332E27;border-radius:14px;background:#15120F}
+.aih .o-chart div{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end}
+.aih .o-chart b{display:block;width:100%;border-radius:6px 6px 0 0;height:0;background:linear-gradient(180deg,#F1D3BC,#C96B42);transition:height 1s var(--ease)}
+.aih .o-chart div:nth-child(1) b{background:linear-gradient(180deg,#E8946F,#9E4526)}
+.aih .o-chart span{font:11px var(--mono);color:#8E8578;padding-bottom:8px}
+.aih .o-row{display:flex;gap:10px;align-items:baseline;font-size:15px;color:#E4DCCF;line-height:1.5}
+.aih .o-row em{font-style:normal;font-family:var(--mono);font-size:12px;color:#16130F;background:var(--clay-lt);border-radius:6px;padding:1px 7px;flex:none}
+.aih .o-src{display:inline-flex;font:600 11px var(--mono);color:var(--clay-lt);border:1px solid rgba(232,148,111,.45);border-radius:6px;padding:0 5px;margin-left:4px;vertical-align:2px}
+.aih .o-badge{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:#6FCF97;background:rgba(111,207,151,.1);border:1px solid rgba(111,207,151,.35);border-radius:999px;padding:6px 12px;width:max-content}
+.aih .o-card{border:1px solid #332E27;border-radius:14px;background:#15120F;padding:16px 18px;display:grid;gap:12px}
+.aih .o-sched{display:flex;justify-content:space-between;align-items:center;font-size:15px;color:#fff}
+.aih .o-sched small{display:block;font-size:12.5px;color:#8E8578;margin-top:2px}
+.aih .tog{width:46px;height:26px;border-radius:999px;background:#3A342C;position:relative;transition:background .4s}
+.aih .tog::after{content:'';position:absolute;left:3px;top:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:transform .4s var(--ease)}
+.aih .tog.on{background:var(--clay)}.aih .tog.on::after{transform:translateX(20px)}
+.aih .o-line{display:grid;grid-template-columns:60px 1fr auto;gap:10px;align-items:center;font-size:14px;color:#C9C0B2;padding-top:10px;border-top:1px solid #2A2520}
+.aih .o-line span:first-child{font-family:var(--mono);font-size:12px;color:#8E8578}
+.aih .o-line i{font-style:normal;font-size:12px;color:#6FCF97}
+.aih .ws-prog{height:2px;background:#2A2520}.aih .ws-prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,#B4532F,#F1D3BC)}
+.aih .demo-note{margin-top:20px;font-size:14px;color:#8E8578;text-align:center}
+@media (max-width:900px){.aih .ws-body{grid-template-columns:1fr}.aih .ws-left{border-right:0;border-bottom:1px solid #332E27}.aih .ws-live{display:none}.aih .ws-prompt{min-height:150px;font-size:13.5px}.aih .ribbon{margin-top:84px}}
+@media (max-width:600px){.aih .ws-left,.aih .ws-right{padding:20px}.aih .ws-bar{padding:10px}.aih .dots{display:none}.aih .ws-tabs button{font-size:12.5px;padding:7px 10px}}
 /* use cards */
 .aih .uses{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .aih .uses-head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap}
@@ -133,6 +207,9 @@ background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:18px;lin
 .aih .legal{background:var(--night);color:#8E8578;font-size:13px;padding:0 0 44px}
 .aih .legal p{border-top:1px solid var(--night-ln);padding-top:22px;max-width:90ch}
 @keyframes aihUp{to{opacity:1;transform:none}}
+@keyframes aihSweep{0%{transform:translateX(-100%)}45%,100%{transform:translateX(100%)}}
+@keyframes aihGrain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-1%)}80%{transform:translate(3%,3%)}100%{transform:translate(0,0)}}
+@keyframes aihShine{0%,100%{background-position:0% 0}50%{background-position:100% 0}}
 @keyframes aihDrift{from{transform:scale(1.06)}to{transform:scale(1)}}
 @keyframes aihCue{0%{transform:translateX(-50%) scaleY(0);transform-origin:top}45%{transform:translateX(-50%) scaleY(1);transform-origin:top}55%{transform:translateX(-50%) scaleY(1);transform-origin:bottom}100%{transform:translateX(-50%) scaleY(0);transform-origin:bottom}}
 @media (prefers-reduced-motion:reduce){.aih *,.aih *::before,.aih *::after{animation:none!important;transition:none!important}.aih .hero-in>*{opacity:1;transform:none}}
@@ -173,10 +250,8 @@ background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:18px;lin
 
 <section class='hero' aria-labelledby='aih-h1'>
   <div class='hero-media' aria-hidden='true'>
-    <video id='aih-vid' muted playsinline autoplay preload='auto' poster='{{ 'aisa-hero-arrow-poster.jpg' | file_img_url: '1920x' }}'>
-      <source src='{{ vid720 }}' type='video/mp4' media='(max-width: 900px)'>
-      <source src='{{ vid1080 }}' type='video/mp4'>
-    </video>
+    <video id='aih-vid' muted playsinline webkit-playsinline autoplay preload='auto' disablepictureinpicture data-src-lg='{{ vid1080 }}' data-src-sm='{{ vid720 }}' poster='{{ 'aisa-hero-arrow-poster.jpg' | file_img_url: '1920x' }}'></video>
+    <span class='hero-sweep'></span><span class='hero-grain'></span>
   </div>
   <div class='wrap'>
     <div class='hero-copy hero-in'>
@@ -224,6 +299,49 @@ background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:18px;lin
         <div class='pricerow'><div><b>{{ cwg_price }}</b><small>One payment. Instant PDF download.</small></div><a class='btn' href='{{ book_url }}'>See inside the book</a></div>
       </div>
     </article>
+  </div>
+</section>
+
+<div class='ribbon' aria-hidden='true'>
+  <div class='ribbon-track'>
+    {%- for i in (1..2) -%}
+    <span>Sourced research</span><i></i><span>Data you can prove</span><i></i><span>Documents and decks</span><i></i><span>Tools without code</span><i></i><span>Automation</span><i></i><span>Claude Code</span><i></i><span>Prompting that works</span><i></i><span>Verification</span><i></i>
+    {%- endfor -%}
+  </div>
+</div>
+
+<section class='demo' id='aih-demo' aria-labelledby='aih-demo-h'>
+  <div class='wrap'>
+    <div class='demo-head'>
+      <span class='eyebrow'>See the method in action</span>
+      <h2 class='h2' id='aih-demo-h'>Watch a clear brief become finished work.</h2>
+      <p class='sub'>The book teaches one method for briefing AI and checking what comes back. Here is what that looks like on three real tasks from its chapters.</p>
+    </div>
+    <div class='ws' data-rv>
+      <div class='ws-bar'>
+        <span class='dots'><i></i><i></i><i></i></span>
+        <div class='ws-tabs' role='tablist'>
+          <button role='tab' class='on' data-t='0'>Data analysis</button>
+          <button role='tab' data-t='1'>Sourced research</button>
+          <button role='tab' data-t='2'>Weekly automation</button>
+        </div>
+        <span class='ws-live'><b></b>Live demo</span>
+      </div>
+      <div class='ws-body'>
+        <div class='ws-left'>
+          <p class='ws-lbl'>Your brief</p>
+          <div class='ws-prompt'><span class='ws-type'></span><span class='ws-car'></span></div>
+          <div class='ws-status'><span class='ws-spin'></span><span class='ws-st'>Waiting for your brief</span></div>
+          <div class='ws-steps'></div>
+        </div>
+        <div class='ws-right'>
+          <p class='ws-lbl'>Result</p>
+          <div class='ws-out'></div>
+        </div>
+      </div>
+      <div class='ws-prog'><i></i></div>
+    </div>
+    <p class='demo-note'>Illustrative examples based on worked chapters in the book, shortened for this page.</p>
   </div>
 </section>
 
@@ -319,9 +437,61 @@ background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:18px;lin
 <script>
 (function(){
   var v=document.getElementById('aih-vid');if(!v)return;
+  var src=(window.innerWidth<=900?v.dataset.srcSm:v.dataset.srcLg)||v.dataset.srcLg;
+  v.muted=true;v.defaultMuted=true;v.playsInline=true;v.setAttribute('muted','');
+  v.src=src;
+  var tried=false;
+  function go(){var p=v.play();if(p&&p.catch)p.catch(function(){if(!tried){tried=true;['touchstart','pointerdown','scroll','keydown'].forEach(function(e){window.addEventListener(e,once,{passive:true,once:true})})}})}
+  function once(){v.muted=true;var p=v.play();if(p&&p.catch)p.catch(function(){})}
+  v.addEventListener('canplay',go,{once:true});
+  v.addEventListener('ended',function(){v.classList.add('done')});
+  v.load();go();
+  document.addEventListener('visibilitychange',function(){if(!document.hidden&&v.paused&&!v.ended)go()});
+})();
+</script>
+
+<script>
+(function(){
+  var root=document.getElementById('aih-demo');if(!root)return;
+  var ws=root.querySelector('.ws'),typ=root.querySelector('.ws-type'),st=root.querySelector('.ws-st'),steps=root.querySelector('.ws-steps'),out=root.querySelector('.ws-out'),bar=root.querySelector('.ws-prog i'),tabs=root.querySelectorAll('.ws-tabs button');
   var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(reduce){v.removeAttribute('autoplay');v.pause();return;}
-  var p=v.play&&v.play();if(p&&p.catch)p.catch(function(){});
+  var T=[
+   {p:"Aim: margin by product, Aug to Oct.\nReality: Nada Roastery sales export, 1,206 rows, messy dates and duplicates.\nRequest: clean it, compute margin with code, flag anything odd.\nStandard: show every number's formula.",
+    s:["Removed duplicate orders","Standardized mixed date formats","Joined product costs, computed margin in code"],
+    o:function(){return "<p class='o o-title'>Margin by product, Aug to Oct</p><div class='o o-chart'>"+[['Huila',92],['Yirga',74],['Kenya',66],['House',51],['Decaf',38],['Cold',24]].map(function(b){return "<div><b data-h='"+b[1]+"'></b><span>"+b[0]+"</span></div>"}).join('')+"</div><p class='o o-row'><em>FIND</em><span>Huila leads on margin, not on volume.</span></p><p class='o o-row'><em>FLAG</em><span>Cold brew margin fell after the October cost change.</span></p><p class='o o-badge'>Every figure computed by code</p>"}},
+   {p:"Aim: should we launch an office coffee subscription in Amman?\nRequest: research demand, competitors, and pricing.\nWalls: cite every claim, prefer primary sources.\nOutput: one-page brief with a recommendation.",
+    s:["Compared sources, kept the primary ones","Matched every claim to a source","Re-checked key citations against the originals"],
+    o:function(){return "<p class='o o-title'>Office subscription: market brief</p><p class='o o-row'><em>1</em><span>Likely first buyers: co-working spaces and tech offices.<span class='o-src'>[1]</span><span class='o-src'>[4]</span></span></p><p class='o o-row'><em>2</em><span>Competitor office plans compared on price and contract length.<span class='o-src'>[2]</span></span></p><p class='o o-row'><em>3</em><span>Recommendation: pilot with 5 offices before setting a price.<span class='o-src'>[6]</span></span></p><p class='o o-badge'>Every key claim linked to a source</p>"}},
+   {p:"Every Friday at 3 pm:\nRead this week's wholesale orders.\nSummarize totals, late payers, and stock below 10 days.\nSend me a one-page report. Never send anything to customers.",
+    s:["Connected the orders sheet","Saved the brief as a reusable skill","Scheduled weekly, with a test run"],
+    o:function(){return "<p class='o o-title'>Weekly wholesale summary</p><div class='o o-card'><div class='o-sched'><div>Runs every Friday, 3:00 pm<small>Next run in 2 days</small></div><span class='tog'></span></div><div class='o-line'><span>Fri 15:00</span><span>Orders read, totals computed</span><i>Done</i></div><div class='o-line'><span>Fri 15:01</span><span>Late payers flagged</span><i>Done</i></div><div class='o-line'><span>Fri 15:02</span><span>Report sent to you only</span><i>Done</i></div></div><p class='o o-badge'>Test run passed</p>"}}
+  ];
+  var cur=0,timer=[],running=false,userPick=false;
+  function later(f,ms){timer.push(setTimeout(f,ms))}
+  function clear(){timer.forEach(clearTimeout);timer=[]}
+  function hl(t){return t.replace(/^(Aim|Reality|Request|Walls|Output|Standard):/gm,"<span class='k'>$1:</span>")}
+  function play(i){
+    clear();cur=i;tabs.forEach(function(b,k){b.classList.toggle('on',k===i);b.setAttribute('aria-selected',k===i)});
+    var t=T[i];ws.classList.remove('thinking','done');out.innerHTML='';steps.innerHTML='';st.textContent='Writing the brief';bar.style.transition='none';bar.style.width='0';
+    if(reduce){typ.innerHTML=hl(t.p);finish(t,true);return}
+    var n=0;typ.innerHTML='';
+    (function type(){n+=2;typ.innerHTML=hl(t.p.slice(0,n));if(n<t.p.length)later(type,22);else later(function(){think(t)},350)})();
+  }
+  function think(t){
+    ws.classList.add('thinking');st.textContent='Working on it';
+    t.s.forEach(function(x,k){later(function(){var d=document.createElement('div');d.textContent=x;steps.appendChild(d);requestAnimationFrame(function(){d.classList.add('in')})},500+k*650)});
+    later(function(){finish(t,false)},500+t.s.length*650+300);
+  }
+  function finish(t,instant){
+    ws.classList.remove('thinking');ws.classList.add('done');st.textContent='Done. Checked before delivery';
+    if(instant){steps.innerHTML=t.s.map(function(x){return '<div class="in">'+x+'</div>'}).join('')}
+    out.innerHTML=t.o();
+    var items=out.querySelectorAll('.o');
+    items.forEach(function(el,k){later(function(){el.classList.add('in');el.querySelectorAll('b[data-h]').forEach(function(b,j){setTimeout(function(){b.style.height=b.dataset.h+'%'},120+j*90)});var tg=el.querySelector('.tog');if(tg)setTimeout(function(){tg.classList.add('on')},500)},instant?0:k*260)});
+    if(!instant){requestAnimationFrame(function(){bar.style.transition='width 6.5s linear';bar.style.width='100%'});later(function(){if(!userPick)play((cur+1)%T.length)},6800)}
+  }
+  tabs.forEach(function(b,k){b.addEventListener('click',function(){userPick=true;play(k)})});
+  if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!running){running=true;play(0)}})},{threshold:.35});io.observe(ws)}else play(0);
 })();
 </script>
 
