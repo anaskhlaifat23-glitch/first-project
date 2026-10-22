@@ -1,0 +1,330 @@
+{%- assign cwg = all_products['claude-without-guesswork'] -%}
+{%- if cwg.price -%}{%- capture cwg_price -%}{{ cwg.price | money_without_trailing_zeros }}{%- endcapture -%}{%- else -%}{%- assign cwg_price = '$39' -%}{%- endif -%}
+{%- assign book_url = '/pages/claude-without-guesswork' -%}
+{%- assign buy_url = '/cart/55357621338449:1' -%}
+{%- capture vid1080 -%}{{ 'aisa-hero-arrow-1080.mp4' | file_url }}{%- endcapture -%}
+{%- capture vid720 -%}{{ 'aisa-hero-arrow-720.mp4' | file_url }}{%- endcapture -%}
+<style>
+.aih{--bg:#F4EFE6;--paper:#FBF8F2;--ink:#1C1A17;--soft:#3D3A34;--muted:#6A645A;--line:#E2DACB;--clay:#B4532F;--clay-hi:#9E4526;--clay-lt:#E8946F;--clay-t:#F3E3D9;--night:#16130F;--night-2:#211D19;--night-ln:#36312A;--night-tx:#EFE8DC;--night-mu:#B3AA9C;
+--serif:'Newsreader',Georgia,serif;--sans:'IBM Plex Sans',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace;--ease:cubic-bezier(.2,.8,.2,1);
+background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:18px;line-height:1.6;overflow-x:clip;-webkit-font-smoothing:antialiased}
+.aih *,.aih *::before,.aih *::after{box-sizing:border-box}
+.aih h1,.aih h2,.aih h3,.aih p,.aih ul,.aih ol{margin:0;padding:0}
+.aih ul,.aih ol{list-style:none}
+.aih h1,.aih h2,.aih h3{font-family:var(--serif);font-weight:500;color:inherit;letter-spacing:-.015em;text-transform:none;text-wrap:balance}
+.aih a{color:inherit}
+.aih img,.aih video{display:block;max-width:100%;height:auto}
+.aih .wrap{max-width:1200px;margin:0 auto;padding:0 32px}
+.aih section{padding:120px 0}
+.aih .eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--clay)}
+.aih .eyebrow::before{content:'';width:22px;height:1.5px;background:currentColor}
+.aih .h2{font-size:clamp(36px,4.8vw,60px);line-height:1.04;letter-spacing:-.025em;max-width:18ch;margin-top:18px}
+.aih .sub{font-size:20px;color:var(--soft);margin-top:20px;max-width:56ch}
+.aih .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--clay);color:#fff;font-family:var(--sans);font-weight:600;font-size:17px;line-height:1;padding:20px 30px;border-radius:999px;text-decoration:none;box-shadow:0 1px 0 rgba(255,255,255,.25) inset,0 14px 30px -12px rgba(180,83,47,.75);transition:background .25s,transform .25s var(--ease),box-shadow .25s}
+.aih .btn:hover{background:var(--clay-hi);transform:translateY(-2px);color:#fff}
+.aih .btn svg{width:18px;height:18px;transition:transform .3s var(--ease)}
+.aih .btn:hover svg{transform:translateX(4px)}
+.aih .btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.aih .btn.ghost:hover{background:var(--ink);color:var(--bg)}
+.aih .btn.light{background:rgba(255,255,255,.06);color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.55);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.aih .btn.light:hover{background:#fff;color:var(--ink)}
+.aih .btn:focus-visible,.aih input:focus-visible,.aih a:focus-visible{outline:3px solid var(--clay-lt);outline-offset:3px}
+/* hero */
+.aih .hero{position:relative;padding:0;background:var(--night);color:var(--night-tx);min-height:min(88vh,860px);display:flex;align-items:center;overflow:hidden;isolation:isolate}
+.aih .hero-media{position:absolute;inset:0;z-index:-1}
+.aih .hero-media video,.aih .hero-media img{width:100%;height:100%!important;object-fit:cover;object-position:62% 50%;animation:aihDrift 22s ease-out both}
+.aih .hero::after{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(22,19,15,.96) 0%,rgba(22,19,15,.86) 34%,rgba(22,19,15,.25) 62%,rgba(22,19,15,0) 80%),linear-gradient(0deg,rgba(22,19,15,.85) 0%,rgba(22,19,15,0) 30%)}
+.aih .hero .wrap{width:100%;padding-top:96px;padding-bottom:96px}
+.aih .hero-copy{max-width:600px}
+.aih .hero .eyebrow{color:var(--clay-lt)}
+.aih .hero h1{font-size:clamp(48px,6.6vw,96px);line-height:.96;letter-spacing:-.035em;color:#fff;margin-top:22px}
+.aih .hero h1 em{font-style:italic;color:var(--clay-lt)}
+.aih .lede{font-size:20px;line-height:1.6;color:var(--night-mu);margin:28px 0 38px;max-width:30em}
+.aih .ctas{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.aih .trust{display:flex;flex-wrap:wrap;gap:12px 26px;margin-top:44px;padding-top:26px;border-top:1px solid rgba(255,255,255,.12)}
+.aih .trust li{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--night-tx)}
+.aih .trust svg{width:18px;height:18px;color:var(--clay-lt);flex:none}
+.aih .hero-in>*{opacity:0;transform:translateY(22px);animation:aihUp 1s var(--ease) forwards}
+.aih .hero-in>*:nth-child(2){animation-delay:.12s}.aih .hero-in>*:nth-child(3){animation-delay:.24s}.aih .hero-in>*:nth-child(4){animation-delay:.36s}.aih .hero-in>*:nth-child(5){animation-delay:.5s}
+.aih .scroll-cue{position:absolute;left:50%;bottom:26px;width:1px;height:46px;background:linear-gradient(rgba(255,255,255,0),rgba(255,255,255,.6));transform:translateX(-50%);animation:aihCue 2.4s ease-in-out infinite}
+/* numbers */
+.aih .numbers{padding:0;background:var(--bg);border-bottom:1px solid var(--line)}
+.aih .num-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+.aih .num-grid div{padding:40px 28px 42px;border-left:1px solid var(--line)}
+.aih .num-grid div:first-child{border-left:0;padding-left:0}
+.aih .num-grid b{display:block;font-family:var(--serif);font-weight:500;font-size:clamp(42px,4.4vw,58px);line-height:1;letter-spacing:-.03em}
+.aih .num-grid span{display:block;font-size:15px;color:var(--muted);margin-top:10px;line-height:1.4}
+/* featured */
+.aih .featured{padding-top:110px}
+.aih .feat{position:relative;border-radius:30px;overflow:hidden;background:#EDE5D8;box-shadow:0 60px 120px -70px rgba(60,35,15,.6);isolation:isolate}
+.aih .feat-img{display:block;width:100%;aspect-ratio:2000/1116;object-fit:cover;transition:transform 1.6s var(--ease)}
+.aih .feat:hover .feat-img{transform:scale(1.025)}
+.aih .feat-copy{position:absolute;left:0;top:0;bottom:0;width:44%;display:flex;flex-direction:column;justify-content:center;padding:56px;background:linear-gradient(90deg,rgba(244,239,230,.94) 0%,rgba(244,239,230,.82) 70%,rgba(244,239,230,0) 100%)}
+.aih .feat h2{font-size:clamp(34px,3.6vw,52px);line-height:1.02;letter-spacing:-.025em;margin-top:16px}
+.aih .feat .desc{font-size:18px;color:var(--soft);margin:16px 0 22px;max-width:34ch}
+.aih .checks{display:grid;gap:10px;margin-bottom:28px}
+.aih .checks li{display:grid;grid-template-columns:24px 1fr;gap:10px;font-size:16px;line-height:1.45}
+.aih .checks li::before{content:'';width:20px;height:20px;border-radius:50%;margin-top:2px;background:var(--clay) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center/12px no-repeat}
+.aih .pricerow{display:flex;flex-wrap:wrap;align-items:center;gap:14px 20px}
+.aih .pricerow b{font-family:var(--serif);font-weight:500;font-size:46px;line-height:1;letter-spacing:-.03em}
+.aih .pricerow small{display:block;font-size:13px;color:var(--muted);margin-top:4px}
+/* use cards */
+.aih .uses{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.aih .uses-head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap}
+.aih .use-grid{margin-top:56px;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.aih .card{background:#fff;border:1px solid var(--line);border-radius:22px;overflow:hidden;display:flex;flex-direction:column;transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
+.aih .card:hover{transform:translateY(-6px);box-shadow:0 40px 70px -40px rgba(80,45,20,.45)}
+.aih .card figure{margin:0;overflow:hidden;aspect-ratio:4/3;background:#E8DFD1}
+.aih .card img{width:100%;height:100%!important;object-fit:cover;transition:transform 1.4s var(--ease)}
+.aih .card:hover img{transform:scale(1.06)}
+.aih .card-body{padding:24px 24px 26px;display:grid;gap:8px;flex:1;align-content:start}
+.aih .card .tag{font-family:var(--mono);font-size:12px;color:var(--clay);letter-spacing:.04em}
+.aih .card h3{font-size:25px;line-height:1.15}
+.aih .card p{font-size:16px;color:var(--soft);line-height:1.5}
+.aih .more{margin-top:40px;display:flex;flex-wrap:wrap;gap:10px 12px;align-items:center}
+.aih .more span{font-size:15px;color:var(--muted);margin-right:4px}
+.aih .more b{font-weight:500;font-size:15px;border:1px solid var(--line);background:var(--bg);border-radius:999px;padding:7px 14px}
+/* why */
+.aih .why{background:var(--night);color:var(--night-tx);position:relative;overflow:hidden}
+.aih .why .eyebrow{color:var(--clay-lt)}
+.aih .why .sub{color:var(--night-mu)}
+.aih .why-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:72px;margin-top:64px;align-items:start}
+.aih .stat b{display:block;font-family:var(--serif);font-weight:500;font-size:clamp(120px,16vw,210px);line-height:.82;letter-spacing:-.05em;color:var(--clay-lt)}
+.aih .stat p{font-size:19px;margin-top:24px;max-width:30ch}
+.aih .stat .src{display:block;font-size:13px;color:var(--night-mu);margin-top:14px}
+.aih .points{border-top:1px solid var(--night-ln)}
+.aih .points li{padding:26px 0;border-bottom:1px solid var(--night-ln);display:grid;grid-template-columns:44px 1fr;gap:6px 14px}
+.aih .points i{font-style:normal;font-family:var(--serif);font-size:20px;color:var(--clay-lt);grid-row:span 2;line-height:1.4}
+.aih .points h3{font-size:26px;line-height:1.2;color:#fff}
+.aih .points p{font-size:17px;color:var(--night-mu)}
+/* package */
+.aih .pack-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.aih .pack-img{border-radius:28px;overflow:hidden;box-shadow:0 60px 110px -70px rgba(60,35,15,.7)}
+.aih .pack-img img{width:100%;aspect-ratio:1/1;object-fit:cover;transition:transform 1.6s var(--ease)}
+.aih .pack-img:hover img{transform:scale(1.03)}
+.aih .pack-list{margin-top:36px;border-top:1px solid var(--line)}
+.aih .pack-list li{display:grid;grid-template-columns:56px 1fr;gap:4px 18px;padding:22px 0;border-bottom:1px solid var(--line)}
+.aih .pack-list .ic{grid-row:span 2;width:48px;height:48px;border-radius:14px;background:var(--clay-t);display:grid;place-items:center;color:var(--clay)}
+.aih .pack-list .ic svg{width:22px;height:22px}
+.aih .pack-list b{font-size:19px;font-weight:600}
+.aih .pack-list span{font-size:16px;color:var(--soft);line-height:1.5}
+.aih .pack-list em{font-style:normal;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--clay);border-radius:999px;padding:3px 9px;margin-left:8px;vertical-align:2px}
+.aih .pack .ctas{margin-top:34px}
+/* principles */
+.aih .how{background:var(--paper);border-top:1px solid var(--line)}
+.aih .prin{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:56px;border-top:1px solid var(--ink)}
+.aih .prin li{padding:28px 26px 0 0;display:grid;gap:10px;align-content:start}
+.aih .prin li+li{padding-left:26px;border-left:1px solid var(--line)}
+.aih .prin svg{width:28px;height:28px;color:var(--clay)}
+.aih .prin h3{font-size:23px;line-height:1.2}
+.aih .prin p{font-size:16px;color:var(--soft)}
+/* notify */
+.aih .notify{background:var(--night);color:var(--night-tx);text-align:center;position:relative;overflow:hidden}
+.aih .notify .glow{position:absolute;left:50%;top:-40%;width:900px;height:900px;transform:translateX(-50%);background:radial-gradient(closest-side,rgba(232,148,111,.16),rgba(232,148,111,0));pointer-events:none}
+.aih .notify .eyebrow{color:var(--clay-lt)}
+.aih .notify h2{font-size:clamp(36px,5vw,62px);line-height:1.05;max-width:20ch;margin:18px auto 0}
+.aih .notify .sub{color:var(--night-mu);margin:20px auto 38px}
+.aih .nform{display:flex;gap:10px;max-width:540px;margin:0 auto;flex-wrap:wrap;justify-content:center;position:relative}
+.aih .nform input[type=email]{flex:1 1 260px;min-width:0;font:inherit;font-size:17px;padding:18px 24px;border-radius:999px;border:1px solid var(--night-ln);background:var(--night-2);color:#fff}
+.aih .nform input::placeholder{color:var(--night-mu)}
+.aih .nform .btn{border:0;cursor:pointer}
+.aih .visually-hidden{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.aih .okmsg{margin-top:18px;color:var(--clay-lt);font-weight:500}
+.aih .legal{background:var(--night);color:#8E8578;font-size:13px;padding:0 0 44px}
+.aih .legal p{border-top:1px solid var(--night-ln);padding-top:22px;max-width:90ch}
+@keyframes aihUp{to{opacity:1;transform:none}}
+@keyframes aihDrift{from{transform:scale(1.06)}to{transform:scale(1)}}
+@keyframes aihCue{0%{transform:translateX(-50%) scaleY(0);transform-origin:top}45%{transform:translateX(-50%) scaleY(1);transform-origin:top}55%{transform:translateX(-50%) scaleY(1);transform-origin:bottom}100%{transform:translateX(-50%) scaleY(0);transform-origin:bottom}}
+@media (prefers-reduced-motion:reduce){.aih *,.aih *::before,.aih *::after{animation:none!important;transition:none!important}.aih .hero-in>*{opacity:1;transform:none}}
+@media (max-width:1080px){.aih .use-grid{grid-template-columns:1fr 1fr}.aih .feat-copy{width:56%}}
+@media (max-width:900px){
+.aih section{padding:84px 0}
+.aih .hero{display:block;min-height:0}
+.aih .hero-media{position:relative;inset:auto;aspect-ratio:4/3}
+.aih .hero-media video,.aih .hero-media img{object-position:66% 50%}
+.aih .hero::after{display:none}
+.aih .hero-media::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,var(--night) 0%,rgba(22,19,15,0) 40%)}
+.aih .hero .wrap{padding-top:8px;padding-bottom:64px}
+.aih .scroll-cue{display:none}
+.aih .num-grid{grid-template-columns:1fr 1fr}
+.aih .num-grid div{padding:28px 18px 30px}
+.aih .num-grid div:nth-child(odd){border-left:0;padding-left:0}
+.aih .num-grid div:nth-child(n+3){border-top:1px solid var(--line)}
+.aih .feat-img{aspect-ratio:16/10;object-position:70% 50%}
+.aih .feat-copy{position:relative;width:auto;padding:32px 24px 36px;background:var(--bg)}
+.aih .why-grid,.aih .pack-grid{grid-template-columns:1fr;gap:44px}
+.aih .prin{grid-template-columns:1fr 1fr;row-gap:30px}
+.aih .prin li:nth-child(3){padding-left:0;border-left:0}
+}
+@media (max-width:600px){
+.aih{font-size:17px}
+.aih .wrap{padding:0 20px}
+.aih .hero h1{font-size:46px}
+.aih .lede{font-size:18px}
+.aih .ctas .btn{width:100%}
+.aih .use-grid{grid-template-columns:1fr}
+.aih .prin{grid-template-columns:1fr}
+.aih .prin li+li{padding-left:0;border-left:0}
+.aih .feat{border-radius:22px}
+}
+</style>
+
+<div class='aih' id='aih'>
+
+<section class='hero' aria-labelledby='aih-h1'>
+  <div class='hero-media' aria-hidden='true'>
+    <video id='aih-vid' muted playsinline autoplay preload='auto' poster='{{ 'aisa-hero-arrow-poster.jpg' | file_img_url: '1920x' }}'>
+      <source src='{{ vid720 }}' type='video/mp4' media='(max-width: 900px)'>
+      <source src='{{ vid1080 }}' type='video/mp4'>
+    </video>
+  </div>
+  <div class='wrap'>
+    <div class='hero-copy hero-in'>
+      <p class='eyebrow'>Practical AI guides &middot; October 2026</p>
+      <h1 id='aih-h1'>Learn AI the way you'll <em>actually</em> use it.</h1>
+      <p class='lede'>Clear, sourced guides for people who want AI to do real work: research, data, documents, tools, and automation. Start with the most complete practical guide to Claude.</p>
+      <div class='ctas'>
+        <a class='btn' href='{{ book_url }}'>Explore the Claude book <svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M5 12h14M13 6l6 6-6 6'/></svg></a>
+        <a class='btn light' href='{{ buy_url }}'>Buy now &middot; {{ cwg_price }}</a>
+      </div>
+      <ul class='trust'>
+        <li><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M9 12l2 2 4-4'/><circle cx='12' cy='12' r='9'/></svg>Every changing fact dated and sourced</li>
+        <li><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 3v12M7 10l5 5 5-5M5 21h14'/></svg>Instant download</li>
+        <li><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='4' y='10' width='16' height='11' rx='2'/><path d='M8 10V7a4 4 0 0 1 8 0v3'/></svg>Secure checkout by Shopify</li>
+      </ul>
+    </div>
+  </div>
+  <span class='scroll-cue' aria-hidden='true'></span>
+</section>
+
+<section class='numbers' aria-label='The book in numbers'>
+  <div class='wrap'>
+    <div class='num-grid'>
+      <div data-rv><b>279</b><span>pages of practical method</span></div>
+      <div data-rv><b>33</b><span>chapters, beginner to expert</span></div>
+      <div data-rv><b>120</b><span>copy-ready prompts in the Playbook</span></div>
+      <div data-rv><b>5</b><span>real projects with scoring rubrics</span></div>
+    </div>
+  </div>
+</section>
+
+<section class='featured' aria-labelledby='aih-feat'>
+  <div class='wrap'>
+    <article class='feat' data-rv>
+      <img class='feat-img' src='{{ 'aisa-scene-book-tablet.jpg' | file_img_url: '2000x' }}' srcset='{{ 'aisa-scene-book-tablet.jpg' | file_img_url: '900x' }} 900w, {{ 'aisa-scene-book-tablet.jpg' | file_img_url: '1400x' }} 1400w, {{ 'aisa-scene-book-tablet.jpg' | file_img_url: '2000x' }} 2000w' sizes='(max-width: 1200px) 100vw, 1140px' width='2000' height='1116' alt='Claude Without Guesswork standing on a desk next to the 120-Prompt Playbook on a tablet' loading='lazy'>
+      <div class='feat-copy'>
+        <span class='eyebrow'>Featured guide</span>
+        <h2 id='aih-feat'>Claude Without Guesswork</h2>
+        <p class='desc'>From your first prompt to expert workflows you can trust. The complete professional guide, plus a free 120-Prompt Playbook.</p>
+        <ul class='checks'>
+          <li><span>Research, data, documents, apps, and automation, each with its own chapter</span></li>
+          <li><span>Bonus 120-Prompt Playbook and real practice files</span></li>
+          <li><span>Every changing fact dated, with a monthly update routine</span></li>
+        </ul>
+        <div class='pricerow'><div><b>{{ cwg_price }}</b><small>One payment. Instant PDF download.</small></div><a class='btn' href='{{ book_url }}'>See inside the book</a></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class='uses' aria-labelledby='aih-uses'>
+  <div class='wrap'>
+    <div class='uses-head'>
+      <div>
+        <span class='eyebrow'>What you'll be able to do</span>
+        <h2 class='h2' id='aih-uses'>Real work, handed to AI, checked by you.</h2>
+      </div>
+      <p class='sub' style='max-width:40ch'>Each skill has its own chapter, worked through on a real example with files you can open.</p>
+    </div>
+    <ul class='use-grid'>
+      <li class='card' data-rv><figure><img src='{{ 'aisa-use-research.jpg' | file_img_url: '800x' }}' srcset='{{ 'aisa-use-research.jpg' | file_img_url: '600x' }} 600w, {{ 'aisa-use-research.jpg' | file_img_url: '1000x' }} 1000w' sizes='(max-width: 600px) 100vw, (max-width: 1080px) 50vw, 300px' width='1400' height='1045' alt='Highlighting a printed source' loading='lazy'></figure><div class='card-body'><span class='tag'>CH. 13–14</span><h3>Research you can cite</h3><p>Turn a real question into a sourced report, and check every citation before you rely on it.</p></div></li>
+      <li class='card' data-rv><figure><img src='{{ 'aisa-use-data.jpg' | file_img_url: '800x' }}' srcset='{{ 'aisa-use-data.jpg' | file_img_url: '600x' }} 600w, {{ 'aisa-use-data.jpg' | file_img_url: '1000x' }} 1000w' sizes='(max-width: 600px) 100vw, (max-width: 1080px) 50vw, 300px' width='1400' height='1045' alt='Charts on a laptop' loading='lazy'></figure><div class='card-body'><span class='tag'>CH. 16</span><h3>Data you can prove</h3><p>Clean and analyze spreadsheets with figures computed by code, not guessed.</p></div></li>
+      <li class='card' data-rv><figure><img src='{{ 'aisa-use-documents.jpg' | file_img_url: '800x' }}' srcset='{{ 'aisa-use-documents.jpg' | file_img_url: '600x' }} 600w, {{ 'aisa-use-documents.jpg' | file_img_url: '1000x' }} 1000w' sizes='(max-width: 600px) 100vw, (max-width: 1080px) 50vw, 300px' width='1400' height='1045' alt='A printed report with charts' loading='lazy'></figure><div class='card-body'><span class='tag'>CH. 15, 19</span><h3>Documents and decks</h3><p>Reports, slide decks, one-pagers, and dashboards that live beyond the chat.</p></div></li>
+      <li class='card' data-rv><figure><img src='{{ 'aisa-use-automation.jpg' | file_img_url: '800x' }}' srcset='{{ 'aisa-use-automation.jpg' | file_img_url: '600x' }} 600w, {{ 'aisa-use-automation.jpg' | file_img_url: '1000x' }} 1000w' sizes='(max-width: 600px) 100vw, (max-width: 1080px) 50vw, 300px' width='1400' height='1045' alt='A calm desk with a clock at golden hour' loading='lazy'></figure><div class='card-body'><span class='tag'>CH. 27–28</span><h3>Work that runs itself</h3><p>Connect your apps, write reusable skills, and schedule tasks that run on time without you.</p></div></li>
+    </ul>
+    <div class='more' data-rv><span>Also inside:</span><b>Tools without coding</b><b>Claude Code and the API</b><b>Business and career</b><b>Content systems</b><b>Learning and languages</b></div>
+  </div>
+</section>
+
+<section class='why' aria-labelledby='aih-why'>
+  <div class='wrap'>
+    <span class='eyebrow'>Why now</span>
+    <h2 class='h2' id='aih-why'>Why learning AI now matters more than ever.</h2>
+    <p class='sub'>Work is changing faster than most training can keep up with. The people who learn to hand AI real work, and check what comes back, are the ones who move ahead.</p>
+    <div class='why-grid'>
+      <div class='stat' data-rv>
+        <b>39%</b>
+        <p>of workers' core skills are expected to change by 2030, and AI and big data top the list of fastest-growing skills.</p>
+        <span class='src'>World Economic Forum, Future of Jobs Report 2025</span>
+      </div>
+      <ul class='points'>
+        <li data-rv><i>01</i><h3>It's a skill, not a talent</h3><p>Getting reliable work out of AI is a method you can learn: how to brief it, how to check it, and how to test it.</p></li>
+        <li data-rv><i>02</i><h3>The gap compounds</h3><p>Every month you hand AI more of your work, the next task gets faster. Starting later means catching up longer.</p></li>
+        <li data-rv><i>03</i><h3>Trust is the real edge</h3><p>Anyone can get an answer. Knowing which answers to trust, and proving it, is what clients and managers pay for.</p></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class='pack' aria-labelledby='aih-pack'>
+  <div class='wrap pack-grid'>
+    <div class='pack-img' data-rv><img src='{{ 'aisa-scene-flatlay.jpg' | file_img_url: '1200x' }}' srcset='{{ 'aisa-scene-flatlay.jpg' | file_img_url: '700x' }} 700w, {{ 'aisa-scene-flatlay.jpg' | file_img_url: '1200x' }} 1200w, {{ 'aisa-scene-flatlay.jpg' | file_img_url: '1600x' }} 1600w' sizes='(max-width: 900px) 100vw, 560px' width='1600' height='1600' alt='The book and the 120-Prompt Playbook on a linen desk' loading='lazy'></div>
+    <div>
+      <span class='eyebrow'>Everything in one download</span>
+      <h2 class='h2' id='aih-pack'>One purchase. Three files you'll use for years.</h2>
+      <ul class='pack-list'>
+        <li data-rv><span class='ic'><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'><path d='M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z'/><path d='M4 19V5M8 7h7'/></svg></span><b>The book</b><span>279 pages, 33 chapters, PDF. Readable on any phone, tablet, or computer.</span></li>
+        <li data-rv><span class='ic'><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'><rect x='4' y='3' width='16' height='18' rx='2'/><path d='M8 8h8M8 12h8M8 16h5'/></svg></span><b>The 120-Prompt Playbook <em>Free bonus</em></b><span>A separate designed PDF of copy-ready prompts, sorted by the job you need done.</span></li>
+        <li data-rv><span class='ic'><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'><path d='M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'/></svg></span><b>Practice files</b><span>A messy sales export, a supplier price PDF, a delivery-note photo, templates, and a tested script.</span></li>
+      </ul>
+      <div class='ctas'><a class='btn' href='{{ buy_url }}'>Get everything for {{ cwg_price }}</a><a class='btn ghost' href='{{ book_url }}'>See what's inside</a></div>
+    </div>
+  </div>
+</section>
+
+<section class='how' aria-labelledby='aih-how'>
+  <div class='wrap'>
+    <span class='eyebrow'>Our standard</span>
+    <h2 class='h2' id='aih-how'>How we write every guide.</h2>
+    <ul class='prin'>
+      <li data-rv><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='5' width='18' height='16' rx='2'/><path d='M3 10h18M8 3v4M16 3v4'/></svg><h3>Dated and sourced</h3><p>Prices, plans, and features are dated and linked to official sources, so you know what to re-check.</p></li>
+      <li data-rv><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'><path d='M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z'/><path d='M14 3v6h6M8 14h8M8 18h5'/></svg><h3>Real practice</h3><p>You learn on real-looking files: messy spreadsheets, supplier PDFs, scanned notes.</p></li>
+      <li data-rv><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'><path d='M9 12l2 2 4-4'/><path d='M12 3l7 3v6c0 4.5-3 7.7-7 9-4-1.3-7-4.5-7-9V6z'/></svg><h3>Tested, not hyped</h3><p>Methods come with test sets and checklists. No secret prompts, no magic promises.</p></li>
+      <li data-rv><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='9'/><path d='M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18'/></svg><h3>Independent</h3><p>Written to be accurate and practical. Not affiliated with or endorsed by any AI company.</p></li>
+    </ul>
+  </div>
+</section>
+
+<section class='notify' aria-labelledby='aih-notify'>
+  <span class='glow' aria-hidden='true'></span>
+  <div class='wrap'>
+    <span class='eyebrow'>Stay a step ahead</span>
+    <h2 id='aih-notify'>More AI guides are on the way.</h2>
+    <p class='sub'>Get one email when the next guide launches. No spam, unsubscribe anytime.</p>
+    {%- form 'customer', id: 'aih-news' -%}
+      <input type='hidden' name='contact[tags]' value='newsletter,ai-guides'>
+      <div class='nform'>
+        <label for='aih-email' class='visually-hidden'>Email address</label>
+        <input id='aih-email' type='email' name='contact[email]' placeholder='you@example.com' autocomplete='email' required>
+        <button class='btn' type='submit'>Notify me</button>
+      </div>
+      {%- if form.posted_successfully? -%}<p class='okmsg'>You're on the list. We'll email you when the next guide is ready.</p>{%- endif -%}
+      {%- if form.errors -%}<p class='okmsg'>Check the email address and try again.</p>{%- endif -%}
+    {%- endform -%}
+  </div>
+</section>
+<div class='legal'><div class='wrap'><p>Our guides are independent educational resources. They are not affiliated with, endorsed by, or sponsored by Anthropic or any other AI company. “Claude” and “Anthropic” are trademarks of their respective owners. Source for the 39% figure: World Economic Forum, The Future of Jobs Report 2025. Product images show the actual book cover and Playbook pages.</p></div></div>
+</div>
+
+<script>
+(function(){
+  var v=document.getElementById('aih-vid');if(!v)return;
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce){v.removeAttribute('autoplay');v.pause();return;}
+  var p=v.play&&v.play();if(p&&p.catch)p.catch(function(){});
+})();
+</script>
+
+{% schema %}
+{"name":"AI home","settings":[],"presets":[{"name":"AI home"}]}
+{% endschema %}
