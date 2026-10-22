@@ -1,25 +1,22 @@
 {% comment %} AI Step Ahead motion layer: scroll reveals, count-ups, hover lift. Content stays visible if JS is off. {% endcomment %}
 <style>
-  .aisa-rv{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1);transition-delay:var(--rv-d,0ms);will-change:opacity,transform}
-  .aisa-rv.aisa-in{opacity:1;transform:none}
-  .aih .use-grid li,.aih .prin li,.cwg .cap-grid li,.cwg .parts li,.cwg .fit>div{transition:background .25s,transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s}
-  .aih .use-grid li:hover,.cwg .cap-grid li:hover{transform:translateY(-4px);box-shadow:0 22px 40px -28px rgba(80,45,20,.45);position:relative;z-index:1}
-  .aih .feat-card,.cwg .offer-card,.cwg .panel.strong{transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s}
-  .aih .feat-card:hover,.cwg .offer-card:hover{transform:translateY(-4px);box-shadow:0 50px 90px -50px rgba(80,45,20,.5)}
+  .aisa-rv{opacity:0;translate:0 28px;transition:opacity .9s cubic-bezier(.2,.8,.2,1) var(--rv-d,0ms),translate .9s cubic-bezier(.2,.8,.2,1) var(--rv-d,0ms)}
+  .aisa-rv.aisa-in{opacity:1;translate:0 0}
+  .aih .card.aisa-rv{transition:opacity .9s cubic-bezier(.2,.8,.2,1) var(--rv-d,0ms),translate .9s cubic-bezier(.2,.8,.2,1) var(--rv-d,0ms),transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s}
+  .cwg .cap-grid li{transition:background .25s,transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s,opacity .9s cubic-bezier(.2,.8,.2,1) var(--rv-d,0ms),translate .9s cubic-bezier(.2,.8,.2,1) var(--rv-d,0ms)}
+  .cwg .cap-grid li:hover{transform:translateY(-4px);box-shadow:0 22px 40px -28px rgba(80,45,20,.45);position:relative;z-index:1}
   .aih .btn,.cwg .btn{position:relative;overflow:hidden}
   .aih .btn::after,.cwg .btn::after{content:'';position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.28) 50%,transparent 70%);transform:translateX(-120%);transition:transform .8s ease}
   .aih .btn:hover::after,.cwg .btn:hover::after{transform:translateX(120%)}
-  .cwg .mini,.aih .mini{animation:aisaFloat 6s ease-in-out infinite}
   @keyframes aisaFloat{0%,100%{translate:0 0}50%{translate:0 -8px}}
-  @media (prefers-reduced-motion:reduce){.aisa-rv{opacity:1!important;transform:none!important;transition:none!important}.cwg .mini,.aih .mini{animation:none}}
+  @media (prefers-reduced-motion:reduce){.aisa-rv{opacity:1!important;translate:none!important;transition:none!important}}
 </style>
 <script>
   (function () {
     if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     if (!('IntersectionObserver' in window)) return;
     var sel = [
-      '.aih section .h2', '.aih section .sub', '.aih .stat', '.aih .points li', '.aih .feat-card',
-      '.aih .use-grid li', '.aih .prin li', '.aih .notify h2', '.aih .more',
+      '[data-rv]', '.aih section .h2', '.aih section .sub', '.aih .notify h2', '.cwg-scene', '.cwg-anywhere .anyw-img', '.cwg-anywhere .anyw-copy',
       '.cwg section .h2', '.cwg section .sub', '.cwg .facts>div', '.cwg .cap-grid li', '.cwg .cap-foot',
       '.cwg .stat', '.cwg .losses li', '.cwg .turn', '.cwg .readout', '.cwg .sliders', '.cwg .panel',
       '.cwg .also', '.cwg .vtable', '.cwg .ptable', '.cwg .parts li', '.cwg .offer-card', '.cwg .fit>div',
@@ -42,7 +39,7 @@
       el.classList.add('aisa-rv');
       io.observe(el);
     });
-    document.querySelectorAll('.cwg .facts b, .cwg .stat b, .aih .stat b').forEach(function (b) {
+    document.querySelectorAll('.cwg .facts b, .cwg .stat b, .aih .stat b, .aih .num-grid b').forEach(function (b) {
       var m = b.textContent.trim().match(/^(\d+)(%?)$/);
       if (!m) return;
       b.setAttribute('data-aisa-count', m[1]);
