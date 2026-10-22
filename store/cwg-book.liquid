@@ -582,6 +582,9 @@ new IntersectionObserver(function(es){atEnd=es[0].isIntersecting;upd()}).observe
 })();
 </script>
 
+{%- if template.name == 'product' and product -%}
+<script type="application/ld+json">{{ product | structured_data }}</script>
+{%- endif -%}
 {% schema %}
 {"name":"Claude book page","settings":[],"presets":[{"name":"Claude book page"}]}
 {% endschema %}

@@ -1,6 +1,6 @@
 {%- assign cwg = all_products['claude-without-guesswork'] -%}
 {%- if cwg.price -%}{%- capture cwg_price -%}{{ cwg.price | money_without_trailing_zeros }}{%- endcapture -%}{%- else -%}{%- assign cwg_price = '$39' -%}{%- endif -%}
-{%- assign book_url = '/pages/claude-without-guesswork' -%}
+{%- assign book_url = '/products/claude-without-guesswork' -%}
 {%- assign buy_url = '/cart/55357621338449:1' -%}
 {%- capture vid1080 -%}{{ 'aisa-hero-1080.mp4' | asset_url }}{%- endcapture -%}
 {%- capture vid720 -%}{{ 'aisa-hero-720.mp4' | asset_url }}{%- endcapture -%}
