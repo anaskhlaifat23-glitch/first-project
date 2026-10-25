@@ -1,3 +1,4 @@
+{%- if product -%}{%- assign cwg_price = product.price | money_without_trailing_zeros | strip_html -%}{%- else -%}{%- assign cwg_price = '$39' -%}{%- endif -%}
 <style>
 .section-content-wrapper:has(#cwg){padding:0!important;gap:0!important;max-width:none!important}
 .section-content-wrapper:has(#cwg)>:not(:has(#cwg)){display:none!important}
@@ -215,6 +216,36 @@ background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:18px;lin
 .cwg .anyw-img{max-width:none}
 .cwg .anyw-img img{aspect-ratio:4/5}
 }
+
+/* v6: trust + look inside */
+.cwg .trust-row{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:22px;font-size:14px;color:var(--muted)}
+.cwg .trust-row span{display:inline-flex;align-items:center;gap:7px}
+.cwg .trust-row svg{width:16px;height:16px;color:var(--clay);flex:none}
+.cwg .pay{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.cwg .pay svg{width:38px;height:24px}
+.cwg .look{background:var(--paper);border-top:1px solid var(--line)}
+.cwg .look-strip{margin:48px -28px 0;padding:8px 28px 26px;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(210px,250px);gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 28px;scrollbar-width:thin;list-style:none}
+.cwg .look-strip li{scroll-snap-align:start}
+.cwg .look-strip button{all:unset;cursor:zoom-in;display:block;width:100%}
+.cwg .look-strip button:focus-visible{outline:3px solid var(--ink);outline-offset:4px;border-radius:6px}
+.cwg .look-strip img{width:100%;aspect-ratio:1100/1557;object-fit:cover;border-radius:6px;border:1px solid var(--line);background:#fff;box-shadow:0 26px 40px -28px rgba(60,35,15,.55);transition:transform .3s}
+.cwg .look-strip button:hover img{transform:translateY(-4px)}
+.cwg .look-strip b{display:block;font-size:16px;font-weight:600;line-height:1.35;margin-top:14px}
+.cwg .look-strip small{display:block;font-family:var(--mono);font-size:13px;color:var(--clay);margin-top:4px}
+.cwg .look-hint{font-size:14px;color:var(--muted);margin-top:4px}
+.cwg .look-trust{margin-top:40px;display:grid;grid-template-columns:repeat(4,1fr);gap:22px;border-top:1px solid var(--line);padding-top:30px;list-style:none}
+.cwg .look-trust b{display:block;font-family:var(--serif);font-weight:500;font-size:21px;line-height:1.25;margin-bottom:6px}
+.cwg .look-trust span{font-size:16px;color:var(--soft);line-height:1.5}
+.cwg .promise{margin-top:22px;display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:start;background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 20px;font-size:16px;line-height:1.5;color:var(--soft)}
+.cwg .promise svg{width:40px;height:40px;color:var(--teal)}
+.cwg .promise b{display:block;color:var(--ink);font-weight:600;margin-bottom:2px}
+.cwg-lb{border:0;padding:0;background:transparent;max-width:min(94vw,860px);max-height:94vh;overflow:visible}
+.cwg-lb::backdrop{background:rgba(20,16,12,.84)}
+.cwg-lb img{display:block;max-width:100%;max-height:88vh;width:auto;height:auto;border-radius:6px;box-shadow:0 40px 80px rgba(0,0,0,.5)}
+.cwg-lb p{color:#EFE8DC;font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:15px;margin:12px 0 0;text-align:center}
+.cwg-lb button{position:absolute;top:-14px;right:-14px;width:40px;height:40px;border-radius:50%;border:0;background:#fff;color:#1C1A17;font-size:24px;line-height:40px;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.35)}
+@media (max-width:960px){.cwg .look-trust{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.cwg .look-strip{margin:40px -20px 0;padding:8px 20px 22px;grid-auto-columns:72%;scroll-padding:0 20px}.cwg .look-trust{grid-template-columns:1fr}.cwg .cwg-lb button{right:4px;top:4px}}
 /* motion */
 @keyframes cwgBook{from{opacity:0;transform:translateY(40px) rotateY(-44deg) rotateX(10deg)}to{opacity:1}}
 @keyframes cwgFade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
@@ -266,13 +297,15 @@ background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:18px;lin
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <p class="kicker">The complete guide to Claude, October 2026 edition</p>
-      <h1>Most people only chat with Claude. Learn to put it to work.</h1>
-      <p class="lede">Research you can cite. Spreadsheets cleaned and analyzed. Documents, decks, tools, and automations built with you. This 279-page book takes you from your first prompt to running real work with Claude, step by step, with practice files.</p>
+      <p class="kicker" id="cwg-kick">The complete guide to Claude, October 2026 edition</p>
+      <h1 id="cwg-h1">Most people only chat with Claude. Learn to put it to work.</h1>
+      <p class="lede" id="cwg-lede">Research you can cite. Spreadsheets cleaned and analyzed. Documents, decks, tools, and automations built with you. This 279-page book takes you from your first prompt to running real work with Claude, step by step, with practice files.</p>
       <div class="cta-row">
-        <a class="btn" id="cwg-top" href="/cart/55357621338449:1">Get the book for $39</a>
-        <span class="note">Instant download. Book + free 120-Prompt Playbook.</span>
+        <a class="btn" id="cwg-top" href="/cart/55357621338449:1">Get the book for {{ cwg_price }}</a>
+        <span class="note">Book + free 120-Prompt Playbook. One payment, yours to keep.</span>
       </div>
+      <p class="trust-row"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Secure checkout by Shopify</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Instant PDF download</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>Real help within 1 business day</span></p>
+      <div class="pay" aria-label="Payment methods accepted">{%- for type in shop.enabled_payment_types -%}{{ type | payment_type_svg_tag }}{%- endfor -%}</div>
     </div>
     <div class="stage" aria-hidden="true">
       <div class="book">
@@ -293,12 +326,52 @@ background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:18px;lin
   </div>
 </section>
 
+<script>
+(function(){try{
+var V={
+AD11:["For anyone who signs off on AI-assisted work","Use AI at work. Keep your name off its mistakes.","AI writes fast, and it can be confidently wrong. This 279-page book teaches you to brief Claude properly, then check every number, source, and quote before anything leaves your desk, with a verification protocol you can use every day."],
+AD04:["For small business owners who do every job","You run every part of the business. Let Claude draft half of it.","Support replies, product pages, admin, content, and the numbers. This 279-page book shows you what to hand to Claude, how to brief it, and how to check what comes back, through one running small-business case with practice files."],
+AD08:["For anyone tired of random AI answers","Stop guessing with AI. Use a method.","If your results feel random, the brief is the problem. Learn ARROWS, the six-part brief behind every prompt in this 279-page book, then use it for research, data, documents, and automation."]
+};
+var c=(new URLSearchParams(location.search).get('utm_content')||'').toUpperCase().slice(0,4),v=V[c];
+try{if(v){sessionStorage.setItem('cwgv',c)}else{v=V[sessionStorage.getItem('cwgv')]}}catch(e){}
+if(!v)return;
+document.getElementById('cwg-kick').textContent=v[0];
+document.getElementById('cwg-h1').textContent=v[1];
+document.getElementById('cwg-lede').textContent=v[2];
+}catch(e){}})();
+</script>
+
 <section class="scene" aria-label="The book and the Playbook">
   <div class="wrap">
     <figure class="cwg-scene">
       <img src="{{ 'aisa-scene-book-tablet.jpg' | file_img_url: '2000x' }}" srcset="{{ 'aisa-scene-book-tablet.jpg' | file_img_url: '900x' }} 900w, {{ 'aisa-scene-book-tablet.jpg' | file_img_url: '1400x' }} 1400w, {{ 'aisa-scene-book-tablet.jpg' | file_img_url: '2000x' }} 2000w" sizes="(max-width: 1220px) 100vw, 1160px" width="2000" height="1116" alt="Claude Without Guesswork standing on a desk next to the 120-Prompt Playbook on a tablet" loading="lazy">
       <figcaption>The book, plus the 120-Prompt Playbook as its own designed PDF.<span>Read the method in the book. Keep the Playbook open while you work.</span></figcaption>
     </figure>
+  </div>
+</section>
+
+<section class="look" id="cwg-look" aria-labelledby="cwg-look-h">
+  <div class="wrap">
+    <span class="eyebrow">Look inside</span>
+    <h2 class="h2" id="cwg-look-h" style="margin-top:18px">See real pages before you buy.</h2>
+    <p class="sub">Exactly as you'll download them. Tap any page to read it full size.</p>
+    <ul class="look-strip">
+      <li><button type="button" data-full="{{ 'cwg-look-1-p6.jpg' | file_img_url: '1100x' }}" data-cap="Contents, p. 6"><img src="{{ 'cwg-look-1-p6.jpg' | file_img_url: '500x' }}" srcset="{{ 'cwg-look-1-p6.jpg' | file_img_url: '500x' }} 500w, {{ 'cwg-look-1-p6.jpg' | file_img_url: '800x' }} 800w" sizes="(max-width: 600px) 72vw, 250px" width="1100" height="1557" alt="Contents: Fifteen parts, 33 chapters" loading="lazy"></button><b>Fifteen parts, 33 chapters</b><small>p. 6</small></li>
+      <li><button type="button" data-full="{{ 'cwg-look-2-p33.jpg' | file_img_url: '1100x' }}" data-cap="The ARROWS method, p. 33"><img src="{{ 'cwg-look-2-p33.jpg' | file_img_url: '500x' }}" srcset="{{ 'cwg-look-2-p33.jpg' | file_img_url: '500x' }} 500w, {{ 'cwg-look-2-p33.jpg' | file_img_url: '800x' }} 800w" sizes="(max-width: 600px) 72vw, 250px" width="1100" height="1557" alt="The ARROWS method: The six-part brief behind every prompt" loading="lazy"></button><b>The six-part brief behind every prompt</b><small>p. 33</small></li>
+      <li><button type="button" data-full="{{ 'cwg-look-3-p65.jpg' | file_img_url: '1100x' }}" data-cap="The verification protocol, p. 65"><img src="{{ 'cwg-look-3-p65.jpg' | file_img_url: '500x' }}" srcset="{{ 'cwg-look-3-p65.jpg' | file_img_url: '500x' }} 500w, {{ 'cwg-look-3-p65.jpg' | file_img_url: '800x' }} 800w" sizes="(max-width: 600px) 72vw, 250px" width="1100" height="1557" alt="The verification protocol: How to check each kind of claim" loading="lazy"></button><b>How to check each kind of claim</b><small>p. 65</small></li>
+      <li><button type="button" data-full="{{ 'cwg-look-4-p113.jpg' | file_img_url: '1100x' }}" data-cap="Clean data, with a log, p. 113"><img src="{{ 'cwg-look-4-p113.jpg' | file_img_url: '500x' }}" srcset="{{ 'cwg-look-4-p113.jpg' | file_img_url: '500x' }} 500w, {{ 'cwg-look-4-p113.jpg' | file_img_url: '800x' }} 800w" sizes="(max-width: 600px) 72vw, 250px" width="1100" height="1557" alt="Clean data, with a log: Prove the spreadsheet still ties out" loading="lazy"></button><b>Prove the spreadsheet still ties out</b><small>p. 113</small></li>
+      <li><button type="button" data-full="{{ 'cwg-look-5-p141.jpg' | file_img_url: '1100x' }}" data-cap="Build a pricing tool, p. 141"><img src="{{ 'cwg-look-5-p141.jpg' | file_img_url: '500x' }}" srcset="{{ 'cwg-look-5-p141.jpg' | file_img_url: '500x' }} 500w, {{ 'cwg-look-5-p141.jpg' | file_img_url: '800x' }} 800w" sizes="(max-width: 600px) 72vw, 250px" width="1100" height="1557" alt="Build a pricing tool: Test cases written before the build" loading="lazy"></button><b>Test cases written before the build</b><small>p. 141</small></li>
+      <li><button type="button" data-full="{{ 'cwg-look-6-p276.jpg' | file_img_url: '1100x' }}" data-cap="The verification log, p. 276"><img src="{{ 'cwg-look-6-p276.jpg' | file_img_url: '500x' }}" srcset="{{ 'cwg-look-6-p276.jpg' | file_img_url: '500x' }} 500w, {{ 'cwg-look-6-p276.jpg' | file_img_url: '800x' }} 800w" sizes="(max-width: 600px) 72vw, 250px" width="1100" height="1557" alt="The verification log: Every changing fact, dated and sourced" loading="lazy"></button><b>Every changing fact, dated and sourced</b><small>p. 276</small></li>
+      <li><button type="button" data-full="{{ 'cwg-look-7-playbook.jpg' | file_img_url: '1100x' }}" data-cap="The 120-Prompt Playbook, Playbook p. 4"><img src="{{ 'cwg-look-7-playbook.jpg' | file_img_url: '500x' }}" srcset="{{ 'cwg-look-7-playbook.jpg' | file_img_url: '500x' }} 500w, {{ 'cwg-look-7-playbook.jpg' | file_img_url: '800x' }} 800w" sizes="(max-width: 600px) 72vw, 250px" width="1100" height="1557" alt="The 120-Prompt Playbook: Copy-ready prompts, sorted by job" loading="lazy"></button><b>Copy-ready prompts, sorted by job</b><small>Playbook p. 4</small></li>
+    </ul>
+    <p class="look-hint">Swipe or scroll for more pages.</p>
+    <ul class="look-trust">
+      <li><b>Dated and sourced</b><span>Every fact that can change is dated October 2026 and listed in a verification log.</span></li>
+      <li><b>Computed, not guessed</b><span>Numbers in the data and pricing chapters are worked out by code you can re-run.</span></li>
+      <li><b>Checked as you go</b><span>Every chapter ends with an exercise and a mastery check, with answers.</span></li>
+      <li><b>Practice on real files</b><span>A messy sales export, a supplier PDF, and a delivery-note photo to work on.</span></li>
+    </ul>
   </div>
 </section>
 
@@ -497,9 +570,11 @@ Rana, Nada Roastery, Amman</div>
           <li><span><b>Practice files (ZIP):</b> a messy 1,206-row sales export, a supplier price PDF, a delivery-note photo, and fill-in templates for briefs, research, and test logs.</span></li>
           <li><span><b>A tested script</b> that merges files safely, with a dry run by default.</span></li>
         </ul>
-        <div class="price"><b>$39</b><span>One payment. About what two months of Claude Pro costs, and it makes every month after worth more.</span></div>
-        <a class="btn" href="/cart/55357621338449:1">Get the book for $39</a>
+        <div class="price"><b>{{ cwg_price }}</b><span>One payment. About what two months of Claude Pro costs, and it makes every month after worth more.</span></div>
+        <a class="btn" href="/cart/55357621338449:1">Get the book for {{ cwg_price }}</a>
 <p class="secure"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Secure checkout by Shopify</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Instant download</span></p>
+        <div class="promise"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.4-3 7.9-7 9-4-1.1-7-4.6-7-9V6l7-3z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg><p><b>Our promise</b>If a file won't open, never arrives, or isn't what this page describes, email us within 14 days. We'll fix it, or refund you if we can't. We reply within one business day.</p></div>
+        <div class="pay" aria-label="Payment methods accepted">{%- for type in shop.enabled_payment_types -%}{{ type | payment_type_svg_tag }}{%- endfor -%}</div>
       </div>
     </div>
   </div>
@@ -528,6 +603,9 @@ Rana, Nada Roastery, Amman</div>
       <details><summary>I'm a complete beginner. Is this too advanced?</summary><p>The book starts from zero and gives you a beginner reading path. Part Two builds the core skill one step at a time before anything advanced.</p></details>
       <details><summary>What exactly do I receive?</summary><p>Three files: the full book as a PDF (279 pages, A4), the 120-Prompt Playbook as a separate PDF, and a ZIP of practice files, templates, and the script. Your download link arrives as soon as checkout is complete.</p></details>
       <details><summary>AI changes fast. Will this be out of date?</summary><p>The core skills (briefing, verifying, testing) don't expire. Facts that do change are dated October 2026 and collected in a verification log, and the last chapter gives you a 30-minute monthly routine to stay current.</p></details>
+      <details><summary>What if a file doesn't open or never arrives?</summary><p>Email support@aistepahead.com with your order number. We reply within one business day and send you a working copy. If we can't fix it, or the files aren't what this page describes, we refund you. Claims within 14 days of purchase.</p></details>
+      <details><summary>Can I use the prompts and templates in my business?</summary><p>Yes. Your license covers your own work and your own business, so use the prompts, templates, and files as often as you like. Just don't resell or share the files themselves.</p></details>
+      <details><summary>Can I get an invoice for my company?</summary><p>Yes. Email support@aistepahead.com with your order number and we'll send a VAT invoice for business purchases.</p></details>
       <details><summary>Is this an official Anthropic book?</summary><p>No. It's an independent guide, written to be accurate and practical. It isn't affiliated with or endorsed by Anthropic.</p></details>
     </div>
   </div>
@@ -537,15 +615,17 @@ Rana, Nada Roastery, Amman</div>
   <div class="wrap">
     <h2>A year from now, you'll either work with AI or compete with people who do.</h2>
     <p>Learn Claude properly once, and use it in every part of your work and life after. The method starts on page one.</p>
-    <a class="btn" href="/cart/55357621338449:1">Get the book for $39</a>
-    <p class="note">Instant download. Book + free 120-Prompt Playbook.</p>
+    <a class="btn" href="/cart/55357621338449:1">Get the book for {{ cwg_price }}</a>
+    <p class="note">Instant download. Book + free 120-Prompt Playbook. Secure checkout by Shopify.</p>
   </div>
 </section>
 <div class="legal"><div class="wrap"><p>Claude Without Guesswork is an independent educational guide. It is not affiliated with, endorsed by, or sponsored by Anthropic. "Claude" and "Anthropic" are trademarks of their respective owners. The running business example in the book is fictional, created for teaching.</p><p>Sources: World Economic Forum, The Future of Jobs Report 2025, chapter 3. Claude Pro at $20 a month, from Anthropic's pricing page, checked October 2026. Bootcamp price from ledet.com, checked 18 October 2026.</p></div></div>
 
+<dialog class="cwg-lb" id="cwg-lb" aria-label="Page preview"><button type="button" aria-label="Close">&times;</button><img alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" width="1100" height="1557"><p></p></dialog>
+
 <div class="bar" id="cwg-bar" aria-hidden="true">
   <div class="wrap">
-    <p><b>Claude Without Guesswork</b><span class="note">Book + bonus Playbook, $39</span></p>
+    <p><b>Claude Without Guesswork</b><span class="note">Book + bonus Playbook, {{ cwg_price }}. Instant download.</span></p>
     <a class="btn" href="/cart/55357621338449:1" tabindex="-1">Get the book</a>
   </div>
 </div>
@@ -574,6 +654,12 @@ var io=new IntersectionObserver(function(es){if(!es[0].isIntersecting)return;io.
 (function t(){tp.textContent=full.slice(0,++i);if(i<full.length)setTimeout(t,28);else{tp.classList.remove('caret');panels[0].classList.remove('typing');
 lines.forEach(function(l,k){setTimeout(function(){l.style.opacity=1;l.style.transform='none';if(k===lines.length-1)setTimeout(function(){panels[1].classList.remove('typing')},450)},300+k*260)})}})()},{threshold:.35});
 io.observe(demo)}
+var lb=q('cwg-lb');
+if(lb&&typeof lb.showModal==='function'){var li=lb.querySelector('img'),lc=lb.querySelector('p');
+root.querySelectorAll('.look-strip button').forEach(function(b){b.addEventListener('click',function(){li.src=b.getAttribute('data-full');li.alt=b.getAttribute('data-cap');lc.textContent=b.getAttribute('data-cap');lb.showModal()})});
+lb.querySelector('button').addEventListener('click',function(){lb.close()});
+lb.addEventListener('click',function(e){if(e.target===lb)lb.close()})}
+else{root.querySelectorAll('.look-strip button').forEach(function(b){b.addEventListener('click',function(){window.open(b.getAttribute('data-full'),'_blank')})})}
 var bar=q('cwg-bar'),top=q('cwg-top'),fin=q('cwg-final'),offTop=false,atEnd=false;
 function upd(){bar.classList.toggle('on',offTop&&!atEnd)}
 if('IntersectionObserver' in window){
