@@ -1,4 +1,4 @@
-{%- if product -%}{%- assign cwg_price = product.price | money_without_trailing_zeros | strip_html -%}{%- else -%}{%- assign cwg_price = '$39' -%}{%- endif -%}
+{%- assign cwg_p = product -%}{%- unless cwg_p -%}{%- assign cwg_p = all_products['claude-without-guesswork'] -%}{%- endunless -%}{%- if cwg_p -%}{%- assign cwg_price = cwg_p.price | money_without_trailing_zeros | strip_html -%}{%- else -%}{%- assign cwg_price = '$24' -%}{%- endif -%}{%- assign cwg_bump = all_products['the-ai-desk-cards-12-printable-checklists'] -%}{%- if cwg_bump and cwg_bump.available -%}{%- assign cwg_bump_on = true -%}{%- assign cwg_bump_price = cwg_bump.price | money_without_trailing_zeros | strip_html -%}{%- else -%}{%- assign cwg_bump_on = false -%}{%- endif -%}
 <style>
 .section-content-wrapper:has(#cwg){padding:0!important;gap:0!important;max-width:none!important}
 .section-content-wrapper:has(#cwg)>:not(:has(#cwg)){display:none!important}
@@ -290,6 +290,31 @@ background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:18px;lin
 .cwg .bar .note{display:none}
 .cwg .bar p b{font-size:17px}
 }
+
+/* v8: order bump, guarantee, starter */
+.cwg .bump{display:grid;grid-template-columns:auto 64px 1fr;gap:14px;align-items:center;margin:0 0 20px;padding:16px 18px;border:2px dashed var(--clay);border-radius:16px;background:#FFF9F3;cursor:pointer;font-size:15px;line-height:1.45;color:var(--soft)}
+.cwg .bump input{width:22px;height:22px;accent-color:var(--clay);margin:0;cursor:pointer}
+.cwg .bump img{width:64px;height:64px;object-fit:cover;border-radius:8px;display:block}
+.cwg .bump b{display:block;color:var(--ink);font-size:16px;margin-bottom:2px}
+.cwg .bump.mini2{grid-template-columns:auto 1fr;padding:10px 14px;margin:16px 0 0;border-width:1.5px;font-size:14px;max-width:34em}
+.cwg .bump.mini2 b{display:inline;font-size:14px}
+.cwg .gbadge{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:600;color:var(--teal)}
+.cwg .gbadge svg{width:20px;height:20px}
+.cwg .starter{background:var(--paper);border-top:1px solid var(--line)}
+.cwg .starter-in{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.cwg .starter-form{display:grid;gap:12px}
+.cwg .starter-form input[type=email]{font:inherit;font-size:18px;padding:18px 20px;border:1px solid #CBBFAD;border-radius:999px;background:#fff;color:var(--ink);width:100%}
+.cwg .starter-form .btn{width:100%}
+.cwg button.btn{border:0;cursor:pointer}
+.cwg .starter-form .fine2{font-size:14px;color:var(--muted)}
+.cwg .starter-form .fine2 a{color:var(--muted)}
+.cwg .starter-form .err{color:#8A2E14;font-size:15px}
+.cwg .starter-ok{background:#fff;border:1px solid var(--line);border-radius:22px;padding:28px}
+.cwg .starter-ok b{display:block;font-family:var(--serif);font-weight:500;font-size:28px;margin-bottom:8px}
+.cwg .starter-ok .btn{margin-top:18px}
+.cwg .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media (max-width:960px){.cwg .starter-in{grid-template-columns:1fr;gap:28px}}
+@media (max-width:600px){.cwg .bump{grid-template-columns:auto 1fr;padding:14px}.cwg .bump img{display:none}}
 </style>
 
 <div class="cwg" id="cwg">
@@ -302,9 +327,10 @@ background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:18px;lin
       <p class="lede" id="cwg-lede">Research you can cite. Spreadsheets cleaned and analyzed. Documents, decks, tools, and automations built with you. This 279-page book takes you from your first prompt to running real work with Claude, step by step, with practice files.</p>
       <div class="cta-row">
         <a class="btn" id="cwg-top" href="/cart/55357621338449:1">Get the book for {{ cwg_price }}</a>
-        <span class="note">Book + free 120-Prompt Playbook. One payment, yours to keep.</span>
+        <span class="note">Book + free 120-Prompt Playbook. 30-day money-back guarantee.</span>
       </div>
-      <p class="trust-row"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Secure checkout by Shopify</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Instant PDF download</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>Real help within 1 business day</span></p>
+      {%- if cwg_bump_on -%}<label class="bump mini2"><input type="checkbox" class="cwg-bump-cb"><span><b>Add the AI Desk Cards (+{{ cwg_bump_price }})</b> 12 printable one-page checklists from the book.</span></label>{%- endif -%}
+      <p class="trust-row"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Secure checkout by Shopify</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Instant PDF download</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>Real help within 1 business day</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.4-3 7.9-7 9-4-1.1-7-4.6-7-9V6l7-3z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>30-day money-back guarantee</span></p>
       <div class="pay" aria-label="Payment methods accepted">{%- for type in shop.enabled_payment_types -%}{{ type | payment_type_svg_tag }}{%- endfor -%}</div>
     </div>
     <div class="stage" aria-hidden="true">
@@ -434,8 +460,8 @@ document.getElementById('cwg-lede').textContent=v[2];
         <p class="big"><span id="cwg-h">110</span> hrs</p>
         <p>That's <strong id="cwg-wd">14 working days</strong>, worth about <strong id="cwg-v">$3,850</strong> of your time.</p>
         <hr>
-        <p>The book costs <strong>$39</strong>. At your rate, that's <strong id="cwg-pm">67 minutes</strong> of your time, once.</p>
-        <a class="btn" href="/cart/55357621338449:1">Get the book for $39</a>
+        <p>The book costs <strong>{{ cwg_price }}</strong>. At your rate, that's <strong id="cwg-pm">67 minutes</strong> of your time, once.</p>
+        <a class="btn" href="/cart/55357621338449:1">Get the book for {{ cwg_price }}</a>
         <p class="fine">An estimate from your own numbers, not a promise of results.</p>
       </div>
     </div>
@@ -495,7 +521,7 @@ Rana, Nada Roastery, Amman</div>
     <p class="sub">A live course gives you a teacher and a schedule. This book gives you the full method to keep, at your own pace, for a fraction of the price.</p>
     <div class="vtable">
       <div class="hd rk"></div><div class="hd cr">A 5-day AI bootcamp</div><div class="hd bk">Claude Without Guesswork</div>
-      <div class="rk">Price</div><div class="cr"><span class="big2">$2,399</span></div><div class="bk"><span class="big2">$39</span></div>
+      <div class="rk">Price</div><div class="cr"><span class="big2">$2,399</span></div><div class="bk"><span class="big2">{{ cwg_price }}</span></div>
       <div class="rk">Pace</div><div class="cr">Fixed dates, five days</div><div class="bk">Yours. Start tonight</div>
       <div class="rk">Focus</div><div class="cr">AI tools in general</div><div class="bk">Claude in depth, from chat to Claude Code and the API</div>
       <div class="rk">What you keep</div><div class="cr">Your notes</div><div class="bk">279 pages, 120 prompts, templates, practice files</div>
@@ -572,10 +598,11 @@ Rana, Nada Roastery, Amman</div>
           <li><span><b>Practice files (ZIP):</b> a messy 1,206-row sales export, a supplier price PDF, a delivery-note photo, and fill-in templates for briefs, research, and test logs.</span></li>
           <li><span><b>A tested script</b> that merges files safely, with a dry run by default.</span></li>
         </ul>
-        <div class="price"><b>{{ cwg_price }}</b><span>One payment. About what two months of Claude Pro costs, and it makes every month after worth more.</span></div>
+        <div class="price"><b>{{ cwg_price }}</b><span>One payment, about the price of one month of Claude Pro. Yours to keep, with a 30-day money-back guarantee.</span></div>
+        {%- if cwg_bump_on -%}<label class="bump"><input type="checkbox" class="cwg-bump-cb"><img src="{{ cwg_bump.featured_image | image_url: width: 200 }}" alt="" width="64" height="64" loading="lazy"><span><b>Yes, add the AI Desk Cards for {{ cwg_bump_price }}</b>Twelve printable one-page checklists from the book: the ARROWS brief, the verification protocol, the before-you-send checklist, and nine more. Keep them by your keyboard.</span></label>{%- endif -%}
         <a class="btn" href="/cart/55357621338449:1">Get the book for {{ cwg_price }}</a>
 <p class="secure"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Secure checkout by Shopify</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Instant download</span></p>
-        <div class="promise"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.4-3 7.9-7 9-4-1.1-7-4.6-7-9V6l7-3z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg><p><b>Our promise</b>If a file won't open, never arrives, or isn't what this page describes, email us within 14 days. We'll fix it, or refund you if we can't. We reply within one business day.</p></div>
+        <div class="promise"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.4-3 7.9-7 9-4-1.1-7-4.6-7-9V6l7-3z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg><p><b>30-day money-back guarantee</b>Read it, try the methods on your own work. If it isn't right for you, email us within 30 days of purchase and we'll refund the full price. No reason needed.</p></div>
         <div class="pay" aria-label="Payment methods accepted">{%- for type in shop.enabled_payment_types -%}{{ type | payment_type_svg_tag }}{%- endfor -%}</div>
       </div>
     </div>
@@ -600,15 +627,41 @@ Rana, Nada Roastery, Amman</div>
       </ul></div>
     </div>
     <div class="faq">
+      <details><summary>I use ChatGPT, not Claude. Is this for me?</summary><p>The core method works in any AI chat tool: the ARROWS brief, the checking routine, and the before-you-send checklist. The step-by-step chapters use Claude, which has a free plan, so you can follow along without paying anything extra.</p></details>
       <details><summary>Do I need a paid Claude plan?</summary><p>No. Most of the book works on the free plan. Chapters that use paid-only features say so, so you can decide whether an upgrade is worth it for you.</p></details>
       <details><summary>I'm not technical. Can I really build tools and automations?</summary><p>Yes. Part Ten starts with code for non-coders: how to ask for a script, read code you didn't write, and test it like someone who expects it to be wrong. The pricing-tool project needs no coding background.</p></details>
       <details><summary>I'm a complete beginner. Is this too advanced?</summary><p>The book starts from zero and gives you a beginner reading path. Part Two builds the core skill one step at a time before anything advanced.</p></details>
       <details><summary>What exactly do I receive?</summary><p>Three files: the full book as a PDF (279 pages, A4), the 120-Prompt Playbook as a separate PDF, and a ZIP of practice files, templates, and the script. Your download link arrives as soon as checkout is complete.</p></details>
       <details><summary>AI changes fast. Will this be out of date?</summary><p>The core skills (briefing, verifying, testing) don't expire. Facts that do change are dated October 2026 and collected in a verification log, and the last chapter gives you a 30-minute monthly routine to stay current.</p></details>
-      <details><summary>What if a file doesn't open or never arrives?</summary><p>Email support@aistepahead.com with your order number. We reply within one business day and send you a working copy. If we can't fix it, or the files aren't what this page describes, we refund you. Claims within 14 days of purchase.</p></details>
+      <details><summary>What if it isn't right for me?</summary><p>Email support@aistepahead.com within 30 days of purchase with your order number, and we'll refund the full price. No reason needed. If a file won't open or never arrives, we reply within one business day with a working copy.</p></details>
+      <details><summary>What are the AI Desk Cards?</summary><p>An optional add-on: twelve printable one-page checklists drawn from the book (the ARROWS brief, the verification protocol, the evidence ladder, the before-you-send checklist, and more), designed to sit by your keyboard. One 14-page PDF in A5. Tick the box before checkout if you want them.</p></details>
       <details><summary>Can I use the prompts and templates in my business?</summary><p>Yes. Your license covers your own work and your own business, so use the prompts, templates, and files as often as you like. Just don't resell or share the files themselves.</p></details>
       <details><summary>Can I get an invoice for my company?</summary><p>Yes. Email support@aistepahead.com with your order number and we'll send a VAT invoice for business purchases.</p></details>
       <details><summary>Is this an official Anthropic book?</summary><p>No. It's an independent guide, written to be accurate and practical. It isn't affiliated with or endorsed by Anthropic.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="starter" id="cwg-starter">
+  <div class="wrap starter-in">
+    <div>
+      <span class="eyebrow">Not ready to buy?</span>
+      <h2 class="h2" style="margin-top:18px">Start with 20 prompts, free.</h2>
+      <p class="sub">The 20-Prompt Starter: twenty of the Playbook's prompts for email, research, data, and planning, in a 12-page PDF. Try the method on your own work tonight.</p>
+    </div>
+    <div>
+    {%- form 'customer', id: 'cwg-starter-form' -%}<div class="starter-form">
+      {%- if form.posted_successfully? -%}
+        <div class="starter-ok"><b>You're in.</b><p>Your free Starter is ready. Save it, then try one prompt on a real task today.</p><a class="btn" href="https://cdn.shopify.com/s/files/1/1041/0557/4737/files/The-20-Prompt-Starter-FREE.pdf?v=1793180897" target="_blank" rel="noopener">Download the 20-Prompt Starter (PDF)</a></div>
+      {%- else -%}
+        <input type="hidden" name="contact[tags]" value="newsletter,starter-20">
+        <label class="vh" for="cwg-se">Email address</label>
+        <input id="cwg-se" type="email" name="contact[email]" required placeholder="Your email address" autocomplete="email">
+        <button class="btn" type="submit">Send me the free Starter</button>
+        <p class="fine2">You'll get the PDF on the next screen, plus occasional practical AI tips by email. Unsubscribe in one click. <a href="/policies/privacy-policy">Privacy policy</a></p>
+        {%- if form.errors -%}<p class="err">{{ form.errors | default_errors }}</p>{%- endif -%}
+      {%- endif -%}
+    </div>{%- endform -%}
     </div>
   </div>
 </section>
@@ -618,7 +671,7 @@ Rana, Nada Roastery, Amman</div>
     <h2>A year from now, you'll either work with AI or compete with people who do.</h2>
     <p>Learn Claude properly once, and use it in every part of your work and life after. The method starts on page one.</p>
     <a class="btn" href="/cart/55357621338449:1">Get the book for {{ cwg_price }}</a>
-    <p class="note">Instant download. Book + free 120-Prompt Playbook. Secure checkout by Shopify.</p>
+    <p class="note">Instant download. Book + free 120-Prompt Playbook. 30-day money-back guarantee.</p>
   </div>
 </section>
 <div class="legal"><div class="wrap"><p>Claude Without Guesswork is an independent educational guide. It is not affiliated with, endorsed by, or sponsored by Anthropic. "Claude" and "Anthropic" are trademarks of their respective owners. The running business example in the book is fictional, created for teaching.</p><p>Sources: World Economic Forum, The Future of Jobs Report 2025, chapter 3. Claude Pro at $20 a month, from Anthropic's pricing page, checked October 2026. Bootcamp price from ledet.com, checked 18 October 2026.</p></div></div>
@@ -627,7 +680,7 @@ Rana, Nada Roastery, Amman</div>
 
 <div class="bar" id="cwg-bar" aria-hidden="true">
   <div class="wrap">
-    <p><b>Claude Without Guesswork</b><span class="note">Book + bonus Playbook, {{ cwg_price }}. Instant download.</span></p>
+    <p><b>Claude Without Guesswork</b><span class="note">Book + bonus Playbook, {{ cwg_price }}. 30-day money-back guarantee.</span></p>
     <a class="btn" href="/cart/55357621338449:1" tabindex="-1">Get the book</a>
   </div>
 </div>
@@ -636,7 +689,12 @@ Rana, Nada Roastery, Amman</div>
 <script>
 (function(){
 var root=document.getElementById('cwg');if(!root)return;root.classList.add('js');
-var cur=root.querySelector('#cwg-ro').textContent.replace(/[0-9., ]/g,'')||'$',price=39;
+var BV={%- if cwg_bump_on -%}{{ cwg_bump.selected_or_first_available_variant.id }}{%- else -%}0{%- endif -%},MV=55357621338449;
+var cbs=root.querySelectorAll('.cwg-bump-cb'),buys=root.querySelectorAll('a.btn[href^="/cart/"]');
+function setBump(on){cbs.forEach(function(c){c.checked=on});buys.forEach(function(a){a.href='/cart/'+MV+':1'+(on&&BV?','+BV+':1':'')})}
+cbs.forEach(function(c){c.addEventListener('change',function(){setBump(c.checked)})});
+
+var cur=root.querySelector('#cwg-ro').textContent.replace(/[0-9., ]/g,'')||'$',price={%- if cwg_p -%}{{ cwg_p.price | divided_by: 100.0 }}{%- else -%}24{%- endif -%};
 function f(n){return Math.round(n).toLocaleString('en-US')}
 function q(id){return root.querySelector('#'+id)}
 var m=q('cwg-m'),d=q('cwg-d'),r=q('cwg-r');
