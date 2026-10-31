@@ -24,6 +24,14 @@
   /* Sales pages (.cwar) re-toned to Night Majlis */
   /* RTL full-bleed fix: left:50%+margin-left:-50vw shifts page sideways in RTL on mobile */
   body .cwar.cwar{position:relative!important;left:auto!important;right:auto!important;width:100vw!important;max-width:100vw!important;margin-left:calc(50% - 50vw)!important;margin-right:calc(50% - 50vw)!important;box-sizing:border-box}
+  /* no-vw full-bleed (robust in Facebook/Instagram in-app browsers): widen the grid cell instead of using 100vw */
+  @supports selector(:has(a)){
+    .section:has(.cwar)>*:has(.cwar){grid-column:1 / -1!important;max-width:none!important;width:auto!important;padding-inline:0!important}
+    body .cwar.cwar{width:auto!important;max-width:none!important;margin-left:0!important;margin-right:0!important;left:auto!important;right:auto!important}
+  }
+  /* RTL: theme skip-link sits at left:-99999px, which makes a ~100,000px-wide scroll area in RTL when overflow:clip is unsupported */
+  .skip-to-content-link:not(:focus){left:0!important;right:auto!important;width:1px!important;height:1px!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;clip-path:inset(50%)!important;white-space:nowrap!important}
+  @supports not (overflow:clip){html,body{overflow-x:hidden}}
   body .cwar.cwar{--ink:#0A1324;--ink2:#0F1B31;--bg:#F7F2E8;--line:#E3D5B8;--sand:#EFE5D2;--clay:#9C7632;--clay2:#E9D29B;--teal:#1C2E4F;--mute:#56607A}
   .cwar h1,.cwar h2,.cwar h3{font-family:'Noto Kufi Arabic','IBM Plex Sans Arabic',sans-serif!important;letter-spacing:0}
   .cwar .hero{position:relative;overflow:hidden;background:radial-gradient(120% 90% at 85% 0%,#1A2B4A 0%,#0A1324 60%)!important;border-bottom:1px solid rgba(201,164,92,.35)}
