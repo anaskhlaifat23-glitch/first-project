@@ -1,0 +1,43 @@
+{% comment %} Global Night Majlis brand layer: navy header/footer, gold accents. Rendered from header group on every page. {% endcomment %}
+<style>
+  :root{--nm-ink:#0A1324;--nm-ink2:#0F1B31;--nm-gold:#C9A45C;--nm-gold2:#E9D29B;--nm-sand:#F4ECDD}
+  #header-group,#header-group .header-section,#header-group header-component,#header-group .header,#header-group .header__row,#header-group [class*="color-scheme"],#header-group .menu-list__list{background:var(--nm-ink)!important;color:var(--nm-sand)!important}
+  #header-group a,#header-group button,#header-group .menu-list__link,#header-group summary,#header-group span,#header-group svg{color:var(--nm-sand)!important}
+  #header-group .menu-list__link:hover,#header-group a:hover{color:var(--nm-gold2)!important}
+  #header-group .header__row{border-bottom:1px solid rgba(201,164,92,.25)!important}
+  #header-group .shopify-section:has(announcement-bar-component),#header-group .header-announcements{background:linear-gradient(90deg,#B98F45,var(--nm-gold),#B98F45)!important;color:#121A2B!important}
+  #header-group [class*="announcement"]{background:transparent!important;color:#121A2B!important}
+  #header-group .announcement-bar__text{font-size:13px!important;font-family:'IBM Plex Sans Arabic',sans-serif!important}
+  #header-group img[src*="aistepahead-logo"]{filter:invert(1) hue-rotate(180deg) brightness(1.1)}
+  #header-group [class*="announcement"] a,#header-group [class*="announcement"] p,#header-group [class*="announcement"] span{color:#121A2B!important;font-weight:600}
+  #header-group img{filter:none}
+  footer,footer .shopify-section,footer [class*="color-scheme"]{background:var(--nm-ink)!important;color:var(--nm-sand)!important}
+  footer a,footer h2,footer p,footer span,footer button,footer svg{color:var(--nm-sand)!important}
+  footer h2{font-family:'Noto Kufi Arabic','IBM Plex Sans Arabic',sans-serif!important}
+  footer input{background:rgba(255,255,255,.06)!important;color:var(--nm-sand)!important;border-color:rgba(201,164,92,.35)!important}
+  footer .footer-utilities,footer [class*="utilities"]{border-top:1px solid rgba(201,164,92,.2)!important}
+  .aisa-bar{background:linear-gradient(90deg,#8C6A2E,var(--nm-gold),var(--nm-gold2))!important}
+  body{background:var(--nm-ink)}
+  main#MainContent{background:#fff}
+  .template-index main#MainContent,main#MainContent:has(.nm){background:var(--nm-ink)}
+
+  /* Sales pages (.cwar) re-toned to Night Majlis */
+  /* RTL full-bleed fix: left:50%+margin-left:-50vw shifts page sideways in RTL on mobile */
+  body .cwar.cwar{position:relative!important;left:auto!important;right:auto!important;width:100vw!important;max-width:100vw!important;margin-left:calc(50% - 50vw)!important;margin-right:calc(50% - 50vw)!important;box-sizing:border-box}
+  body .cwar.cwar{--ink:#0A1324;--ink2:#0F1B31;--bg:#F7F2E8;--line:#E3D5B8;--sand:#EFE5D2;--clay:#9C7632;--clay2:#E9D29B;--teal:#1C2E4F;--mute:#56607A}
+  .cwar h1,.cwar h2,.cwar h3{font-family:'Noto Kufi Arabic','IBM Plex Sans Arabic',sans-serif!important;letter-spacing:0}
+  .cwar .hero{position:relative;overflow:hidden;background:radial-gradient(120% 90% at 85% 0%,#1A2B4A 0%,#0A1324 60%)!important;border-bottom:1px solid rgba(201,164,92,.35)}
+  .cwar .hero::before{content:'';position:absolute;inset:0;opacity:.07;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cg fill='none' stroke='%23C9A45C'%3E%3Cpath d='M60 8 L74 46 L112 60 L74 74 L60 112 L46 74 L8 60 L46 46 Z'/%3E%3Cpath d='M23 23 L60 38 L97 23 L82 60 L97 97 L60 82 L23 97 L38 60 Z'/%3E%3Ccircle cx='60' cy='60' r='14'/%3E%3C/g%3E%3C/svg%3E")}
+  .cwar .hero>*{position:relative}
+  .cwar .hero h1 em{font-style:normal;background:linear-gradient(90deg,#E9D29B,#C9A45C,#E9D29B);-webkit-background-clip:text!important;background-clip:text!important;color:transparent!important;-webkit-text-fill-color:transparent}
+  .cwar .hero .eb{background:rgba(201,164,92,.14)!important;color:#E9D29B!important;border:1px solid rgba(201,164,92,.35)}
+  .cwar .eb{background:#F1E6CF!important;color:#7A5A22!important}
+  .cwar .btn{background:linear-gradient(135deg,#E9D29B,#C9A45C)!important;color:#121A2B!important;border-radius:999px!important;box-shadow:0 10px 28px rgba(201,164,92,.35)!important}
+  .cwar .btn .p{background:rgba(10,19,36,.12)!important}
+  .cwar .launch{background:rgba(201,164,92,.14)!important;color:#E9D29B!important;border-color:rgba(201,164,92,.4)!important}
+  .cwar .sticky{background:rgba(10,19,36,.96)!important;border-top:1px solid rgba(201,164,92,.35)!important;color:#F4ECDD!important}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@500;700;800&display=swap" rel="stylesheet">
+{% schema %}
+{ "name": "AISA brand layer", "settings": [] }
+{% endschema %}
