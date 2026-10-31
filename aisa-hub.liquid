@@ -95,7 +95,7 @@
               {%- form 'customer', class: 'nm-wait', id: fid -%}
                 <input type="hidden" name="contact[tags]" value="waitlist,waitlist-{{ s }}">
                 {%- if form.posted_successfully? -%}<span class="nm-ok">سجّلناك، وسنراسلك عند الإطلاق.</span>{%- else -%}
-                <input type="email" name="contact[email]" required placeholder="بريدك للإشعار عند الإطلاق" aria-label="البريد الإلكتروني">
+                <input type="email" name="contact[email]" required placeholder="بريدك الإلكتروني" aria-label="البريد الإلكتروني">
                 <button type="submit">أبلغني</button>{%- endif -%}
               {%- endform -%}
             </div>
