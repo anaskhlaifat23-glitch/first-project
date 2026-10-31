@@ -1,0 +1,20 @@
+{%- assign parts = page.content | split: '<!--LM-->' -%}
+{{ parts[0] }}
+{%- form 'customer', id: 'lm-form', class: 'lm' -%}
+  <input type="hidden" name="contact[tags]" value="newsletter,lead-free-gpt">
+  {%- if form.posted_successfully? -%}
+    <div class="ok on"><b style="font-size:20px;color:#E9D29B">هديّتك جاهزة 🎁</b><br>
+      <a class="btn" style="margin-top:12px" href="{{ section.settings.file_url }}" target="_blank" rel="noopener">حمّل الملف الآن</a>
+      <p style="margin:12px 0 0;font-size:15px;color:#D9D2C5">وفي آخر الملف رمز خصم 10% خاص بك.</p></div>
+    <script>try{fbq('track','Lead')}catch(e){}</script>
+  {%- else -%}
+    {%- if form.errors -%}<p style="color:#F2B8A2;width:100%">تحقّق من البريد الإلكتروني وحاول مرة أخرى.</p>{%- endif -%}
+    <input type="email" name="contact[email]" required placeholder="بريدك الإلكتروني" aria-label="البريد الإلكتروني" autocomplete="email">
+    <button class="btn" type="submit">أرسل لي الهدية</button>
+  {%- endif -%}
+{%- endform -%}
+{{ parts[1] }}
+<style>.cwar form.lm input[type=email]{background:rgba(255,255,255,.08)!important;color:#F4ECDD!important;-webkit-text-fill-color:#F4ECDD}.cwar form.lm input::placeholder{color:#B9C2D3!important;opacity:1}</style>
+{% schema %}
+{ "name": "AISA lead magnet", "settings": [ { "type": "text", "id": "file_url", "label": "Free file URL", "default": "https://cdn.shopify.com/s/files/1/1041/0557/4737/files/AISA-free-ChatGPT-starter.pdf" } ] }
+{% endschema %}
