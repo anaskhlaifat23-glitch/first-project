@@ -76,7 +76,7 @@
 .ab-w{max-width:1120px;margin:0 auto;padding:0 20px;position:relative}
 .ab-kick{display:inline-block;color:var(--gold2);border:1px solid rgba(201,164,92,.45);border-radius:999px;padding:3px 14px;font-size:14px;font-weight:600;margin-bottom:14px}
 .ab-why h2,.ab-pick h2{font-family:'Noto Kufi Arabic','IBM Plex Sans Arabic',sans-serif;font-size:clamp(24px,3.6vw,36px);line-height:1.55;margin:0 0 12px;font-weight:700}
-.ab-why h2{color:#fff}.ab-why h2 em,.ab-pick h2 em{font-style:normal;color:var(--gold)}
+.ab-why h2{color:#fff!important}.cwar .ab-why{margin-inline:0!important;width:auto!important}.ab-pick h2{color:#0A1324!important}.ab-hot h3{color:#fff!important}.ab-why h2 em,.ab-pick h2 em{font-style:normal;color:var(--gold)}
 .ab-why h2 em{color:var(--gold2)}
 .ab-sub{color:#C9D1DF;font-size:17px;margin:0 0 26px}
 .ab-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
@@ -137,7 +137,7 @@
     card.querySelector('[data-c=single]').setAttribute('href','/cart/'+mainVar+':1');
     // live prices
     var S=window.Shopify||{}, cur=(S.currency&&S.currency.active)||'USD', rate=parseFloat(S.currency&&S.currency.rate)||1, R=(S.routes&&S.routes.root)||'/';
-    var nf; try{nf=new Intl.NumberFormat('ar-u-nu-latn',{style:'currency',currency:cur,minimumFractionDigits:0,maximumFractionDigits:2})}catch(e){nf={format:function(x){return '$'+x}}}
+    var nf; try{nf=new Intl.NumberFormat('en-US',{style:'currency',currency:cur,minimumFractionDigits:0,maximumFractionDigits:2})}catch(e){nf={format:function(x){return '$'+x}}}
     function get(h){return fetch(R+'products/'+encodeURIComponent(h)+'.js',{credentials:'same-origin'}).then(function(r){return r.json()})}
     Promise.all([get(GPT),get(CLAUDE)]).then(function(a){
       var g=a[0].price/100, c=a[1].price/100, m=isG?g:c, sum=g+c, d=Math.round(DISC*rate*100)/100, b=Math.max(sum-d,0);
