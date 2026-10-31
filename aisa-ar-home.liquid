@@ -48,7 +48,7 @@
         {%- else -%}{%- assign p = cld -%}{%- assign url = '/pages/claude-arabic' -%}{%- assign name = 'Claude بلا تخمين' -%}{%- assign tag = '' -%}{%- endif -%}
         <article class="aih-book">
           {%- if tag != '' -%}<span class="aih-tag">{{ tag }}</span>{%- endif -%}
-          <a href="{{ url }}" class="aih-book__img">{%- if p.featured_image -%}{{ p.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: p.title, widths: '350,700', sizes: '(min-width: 750px) 40vw, 90vw' }}{%- endif -%}</a>
+          <a href="{{ url }}" class="aih-book__img">{%- if b == 1 -%}<img src="{{ 'gpt-product-square.jpg' | file_url }}&width=700" width="700" height="700" loading="lazy" alt="ChatGPT بلا تخمين">{%- elsif p.featured_image -%}{{ p.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: p.title, widths: '350,700', sizes: '(min-width: 750px) 40vw, 90vw' }}{%- endif -%}</a>
           <h3>{{ name }}</h3>
           {%- if b == 1 -%}
             <ul><li>298 صفحة و32 فصلًا، ونسخة للجوّال</li><li>طريقة «المِقاس» وبروتوكول «تأكَّد»</li><li>كلّ طلب في الكتاب مجرَّب على ChatGPT نفسه</li><li>هدية: 120 طلبًا جاهزًا وملفات تدريب</li></ul>
