@@ -1,0 +1,131 @@
+{% comment %}
+  Section contract.
+  Arabic RTL home page for AI Step Ahead: the two Arabic books (ChatGPT, Claude) and the two-book bundle.
+  @example
+  <!-- templates/index.json uses this section -->
+{% endcomment %}
+{%- liquid
+  assign gpt = all_products['chatgpt-arabic']
+  assign cld = all_products[section.settings.claude_handle]
+  assign bundle_disc = gpt.price | times: 4 | divided_by: 9
+  assign bundle_total = gpt.price | plus: cld.price | minus: bundle_disc
+  assign bundle_full = gpt.price | plus: cld.price
+-%}
+<div class="aih" dir="rtl" lang="ar">
+  <section class="aih-hero"><div class="aih-w aih-g">
+    <div>
+      <span class="aih-eb">كتب عربية عملية للذكاء الاصطناعي · AI Step Ahead</span>
+      <h1>اعمل مع الذكاء الاصطناعي <em>بلا تخمين</em></h1>
+      <p class="aih-sub">دليلان عربيان عمليان: واحد لـChatGPT وواحد لـClaude. في كلّ منهما طريقة تكتب بها طلبك فيصيب من المرة الأولى، وطريقة تتأكّد بها من الإجابة قبل أن تعتمد عليها، ثم تطبيق كامل على عملك الحقيقي.</p>
+      <div class="aih-ctas">
+        <a class="aih-btn" href="/cart/{{ gpt.selected_or_first_available_variant.id }}:1,{{ cld.selected_or_first_available_variant.id }}:1">الكتابان معًا بـ{{ bundle_total | money_without_trailing_zeros }}</a>
+        <a class="aih-btn aih-btn--ghost" href="#books">اختر كتابك</a>
+      </div>
+      <div class="aih-trust"><span>تنزيل فوري بعد الدفع</span><span>ضمان استرداد 30 يومًا</span><span>بالعربية، من الصفر إلى الاحتراف</span></div>
+    </div>
+    <div class="aih-covers">
+      {%- if cld.featured_image -%}{{ cld.featured_image | image_url: width: 900 | image_tag: class: 'aih-cv aih-cv--b', loading: 'eager', alt: cld.title, widths: '450,900', sizes: '(min-width: 750px) 40vw, 80vw' }}{%- endif -%}
+      <img class="aih-cv aih-cv--a" src="{{ 'gpt-product-square.jpg' | file_url }}&width=900" width="900" height="900" loading="eager" alt="ChatGPT بلا تخمين — الدليل العربي العملي">
+    </div>
+  </div></section>
+
+  <section class="aih-sec"><div class="aih-w">
+    <h2>تستخدم الذكاء الاصطناعي، لكنك لا تثق بنتائجه؟</h2>
+    <div class="aih-pains">
+      <div><b>نتيجة عامة</b>نصّ يصلح لأيّ أحد، ولا يشبهك، ولا يصلح للإرسال.</div>
+      <div><b>يفترض ما لم تقله</b>مدينة غير مدينتك، وعملة غير عملتك، وجمهور غير جمهورك.</div>
+      <div><b>خطأ بثقة تامة</b>رقم أو مصدر أو وعد للعميل، يبدو صحيحًا حتى تكتشف الخطأ.</div>
+      <div><b>وقت ضائع</b>تعيد صياغة طلبك خمس مرات، وفي كلّ مرة يقترب ولا يصل.</div>
+    </div>
+    <p class="aih-punch">المشكلة ليست في الأداة. المشكلة أن أحدًا لم يعلّمك طريقة العمل معها.</p>
+  </div></section>
+
+  <section class="aih-sec aih-alt" id="books"><div class="aih-w">
+    <h2>اختر الكتاب الذي يناسب أداتك</h2>
+    <div class="aih-books">
+      {%- for b in (1..2) -%}
+        {%- if b == 1 -%}{%- assign p = gpt -%}{%- assign url = '/pages/chatgpt-arabic' -%}{%- assign name = 'ChatGPT بلا تخمين' -%}{%- assign tag = 'جديد' -%}
+        {%- else -%}{%- assign p = cld -%}{%- assign url = '/pages/claude-arabic' -%}{%- assign name = 'Claude بلا تخمين' -%}{%- assign tag = '' -%}{%- endif -%}
+        <article class="aih-book">
+          {%- if tag != '' -%}<span class="aih-tag">{{ tag }}</span>{%- endif -%}
+          <a href="{{ url }}" class="aih-book__img">{%- if p.featured_image -%}{{ p.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: p.title, widths: '350,700', sizes: '(min-width: 750px) 40vw, 90vw' }}{%- endif -%}</a>
+          <h3>{{ name }}</h3>
+          {%- if b == 1 -%}
+            <ul><li>298 صفحة و32 فصلًا، ونسخة للجوّال</li><li>طريقة «المِقاس» وبروتوكول «تأكَّد»</li><li>كلّ طلب في الكتاب مجرَّب على ChatGPT نفسه</li><li>هدية: 120 طلبًا جاهزًا وملفات تدريب</li></ul>
+          {%- else -%}
+            <ul><li>299 صفحة و33 فصلًا</li><li>إطار ARROWS وبروتوكول تحقّق</li><li>مشاريع وذاكرة وأتمتة وبرمجة للمبتدئين</li><li>هدية: 120 برومبت جاهزًا وملفات تدريب</li></ul>
+          {%- endif -%}
+          <div class="aih-price">{{ p.price | money_without_trailing_zeros }}{%- if p.compare_at_price > p.price -%} <s>{{ p.compare_at_price | money_without_trailing_zeros }}</s>{%- endif -%}</div>
+          <div class="aih-book__ctas">
+            <a class="aih-btn" href="/cart/{{ p.selected_or_first_available_variant.id }}:1">اشترِ الآن</a>
+            <a class="aih-link" href="{{ url }}">تفاصيل الكتاب ←</a>
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+    <div class="aih-bundle">
+      <div><span class="aih-eb">الأوفر</span><h3>الكتابان معًا: ChatGPT + Claude</h3><p>تستخدم الأداتين؟ خذ الدليلين بهديّتيهما وملفات تدريبهما، والخصم يُطبَّق تلقائيًّا عند الدفع.</p></div>
+      <div class="aih-bundle__buy"><div class="aih-price">{{ bundle_total | money_without_trailing_zeros }} <s>{{ bundle_full | money_without_trailing_zeros }}</s></div><a class="aih-btn" href="/cart/{{ gpt.selected_or_first_available_variant.id }}:1,{{ cld.selected_or_first_available_variant.id }}:1">أريد الكتابين</a></div>
+    </div>
+  </div></section>
+
+  <section class="aih-sec"><div class="aih-w">
+    <h2>طريقة واحدة، في كلّ كتاب</h2>
+    <div class="aih-steps">
+      <div><span>1</span><h3>اكتب الطلب كاملًا</h3><p>الهدف، والسياق، والجمهور، والحدود، والشكل. فلا يبقى ما يخمّنه.</p></div>
+      <div><span>2</span><h3>تأكّد قبل أن تعتمد</h3><p>التاريخ، والأصل، والأرقام، والدليل. أربعة أسئلة قبل أن ترسل أيّ شيء.</p></div>
+      <div><span>3</span><h3>طبّق على عملك</h3><p>البريد، والتقارير، والعقود، والجداول، والمحتوى، بملفات تدريب تفتحها بنفسك.</p></div>
+    </div>
+  </div></section>
+
+  <section class="aih-sec aih-alt"><div class="aih-w aih-faq">
+    <h2>أسئلة شائعة</h2>
+    <details><summary>أيّ الكتابين أختار؟</summary><p>اختر كتاب الأداة التي تستخدمها كلّ يوم. الطريقة متشابهة في روحها، لكن الإعدادات والخطط والميزات والأمثلة مبنية على أداة كلّ كتاب. وإن كنت تستخدم الاثنين، فالباقة أوفر.</p></details>
+    <details><summary>هل يناسبان المبتدئين؟</summary><p>نعم. كلّ كتاب يبدأ من أوّل محادثة، ثم يتدرّج حتى المشاريع الكاملة.</p></details>
+    <details><summary>كيف أستلم الكتب؟</summary><p>روابط التنزيل تظهر فور الدفع في صفحة تأكيد الطلب، وتصلك على بريدك الإلكتروني.</p></details>
+    <details><summary>ماذا لو لم يعجبني؟</summary><p>راسلنا على support@aistepahead.com خلال 30 يومًا من الشراء، ونعيد لك المبلغ كاملًا. التفاصيل في <a href="/policies/refund-policy">سياسة الاسترداد</a>.</p></details>
+    <p class="aih-fine">كتب تعليمية مستقلة، غير تابعة لشركتَي OpenAI وAnthropic ولا معتمدة منهما. «ChatGPT» و«Claude» علامتان تجاريتان لمالكيهما.</p>
+  </div></section>
+</div>
+{% stylesheet %}
+.aih{--aih-ink:#1F2430;--aih-sand:#F4ECDD;--aih-sand2:#E9DCC4;--aih-line:#D8C8AA;--aih-clay:#B4553A;font-family:'IBM Plex Sans Arabic',system-ui,sans-serif;color:var(--aih-ink);background:var(--aih-sand);line-height:1.8}
+.aih h1,.aih h2,.aih h3{font-family:inherit;color:var(--aih-ink);margin:0 0 .5em;line-height:1.35}
+.aih h1{font-size:clamp(34px,5vw,56px);font-weight:700}.aih h1 em{font-style:normal;color:var(--aih-clay)}
+.aih h2{font-size:clamp(26px,3.2vw,38px);text-align:center;margin-bottom:28px}.aih h3{font-size:21px}
+.aih-w{max-width:1140px;margin:0 auto;padding:0 20px}.aih-g{display:grid;gap:40px;align-items:center;grid-template-columns:1.05fr .95fr}
+.aih-hero{padding:56px 0 40px}.aih-sec{padding:56px 0}.aih-alt{background:#FBF6EC}
+.aih-eb{display:inline-block;background:var(--aih-sand2);border-radius:999px;padding:4px 14px;font-size:14px;font-weight:600;margin-bottom:14px}
+.aih-sub{font-size:19px;max-width:560px}
+.aih-ctas{display:flex;flex-wrap:wrap;gap:12px;margin:22px 0 14px}
+.aih-btn{display:inline-block;background:var(--aih-clay);color:#fff!important;text-decoration:none;font-weight:700;font-size:18px;padding:13px 26px;border-radius:999px;transition:transform .15s}
+.aih-btn:hover{transform:translateY(-2px)}.aih-btn--ghost{background:transparent;color:var(--aih-ink)!important;border:2px solid var(--aih-ink)}
+.aih-trust{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:14px;opacity:.85}.aih-trust span::before{content:'✓ ';color:var(--aih-clay);font-weight:700}
+.aih-covers{position:relative;min-height:420px}.aih-cv{position:absolute;width:62%;height:auto;border-radius:12px;box-shadow:0 26px 50px rgba(31,36,48,.25)}
+.aih-cv--a{inset-inline-start:0;top:6%;z-index:2;transform:rotate(-3deg)}.aih-cv--b{inset-inline-end:0;top:0;transform:rotate(4deg)}
+.aih-pains{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.aih-pains div{background:#fff;border:1px solid var(--aih-line);border-radius:14px;padding:18px}.aih-pains b{display:block;font-size:18px;margin-bottom:4px;color:var(--aih-clay)}
+.aih-punch{text-align:center;font-size:20px;font-weight:700;margin:26px 0 0}
+.aih-books{display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.aih-book{position:relative;background:#fff;border:1px solid var(--aih-line);border-radius:18px;padding:20px;display:flex;flex-direction:column}
+.aih-book__img img{width:100%;height:auto;border-radius:12px;display:block;margin-bottom:14px}
+.aih-book ul{padding-inline-start:20px;margin:0 0 12px}.aih-tag{position:absolute;top:14px;inset-inline-start:14px;background:var(--aih-clay);color:#fff;border-radius:999px;padding:2px 12px;font-size:13px;font-weight:700;z-index:2}
+.aih-price{font-size:30px;font-weight:700;margin:auto 0 12px}.aih-price s{font-size:.55em;opacity:.55;font-weight:400}
+.aih-book__ctas{display:flex;align-items:center;gap:16px;flex-wrap:wrap}.aih-link{color:var(--aih-clay);font-weight:700;text-decoration:none}
+.aih-bundle{margin-top:26px;display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap;border:2px dashed var(--aih-clay);border-radius:18px;padding:22px;background:#fff}
+.aih-bundle p{margin:0;max-width:600px}.aih-bundle__buy{text-align:center}
+.aih-steps{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.aih-steps>div{background:#fff;border-radius:16px;padding:20px;border:1px solid var(--aih-line)}
+.aih-steps span{display:inline-grid;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--aih-ink);color:#fff;font-weight:700;margin-bottom:8px}
+.aih-faq{max-width:820px}.aih-faq details{background:#fff;border:1px solid var(--aih-line);border-radius:12px;padding:14px 18px;margin-bottom:10px}
+.aih-faq summary{font-weight:700;cursor:pointer}.aih-fine{font-size:13px;opacity:.7;text-align:center;margin-top:20px}
+@media (max-width:749px){.aih-g{grid-template-columns:1fr}.aih-covers{min-height:300px;order:-1}.aih-hero{padding-top:28px}}
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "AI Step Ahead home (AR)",
+  "settings": [
+    { "type": "text", "id": "claude_handle", "label": "Claude book handle", "default": "claude-بلا-تخمين-الدليل-العربي-العملي" }
+  ],
+  "presets": [{ "name": "AI Step Ahead home (AR)" }]
+}
+{% endschema %}
