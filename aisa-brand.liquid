@@ -1,0 +1,23 @@
+{% comment %} Global Night Majlis brand layer: navy header/footer, gold accents. Rendered from header group on every page. {% endcomment %}
+<style>
+  :root{--nm-ink:#0A1324;--nm-ink2:#0F1B31;--nm-gold:#C9A45C;--nm-gold2:#E9D29B;--nm-sand:#F4ECDD}
+  #header-group,#header-group .header-section,#header-group header-component,#header-group .header,#header-group .header__row,#header-group [class*="color-scheme"],#header-group .menu-list__list{background:var(--nm-ink)!important;color:var(--nm-sand)!important}
+  #header-group a,#header-group button,#header-group .menu-list__link,#header-group summary,#header-group span,#header-group svg{color:var(--nm-sand)!important}
+  #header-group .menu-list__link:hover,#header-group a:hover{color:var(--nm-gold2)!important}
+  #header-group .header__row{border-bottom:1px solid rgba(201,164,92,.25)!important}
+  #header-group .header-announcements,#header-group .announcement-bar,#header-group [class*="announcement"]{background:linear-gradient(90deg,#B98F45,var(--nm-gold),#B98F45)!important;color:#121A2B!important}
+  #header-group [class*="announcement"] a,#header-group [class*="announcement"] p,#header-group [class*="announcement"] span{color:#121A2B!important;font-weight:600}
+  #header-group img{filter:none}
+  footer,footer .shopify-section,footer [class*="color-scheme"]{background:var(--nm-ink)!important;color:var(--nm-sand)!important}
+  footer a,footer h2,footer p,footer span,footer button,footer svg{color:var(--nm-sand)!important}
+  footer h2{font-family:'Noto Kufi Arabic','IBM Plex Sans Arabic',sans-serif!important}
+  footer input{background:rgba(255,255,255,.06)!important;color:var(--nm-sand)!important;border-color:rgba(201,164,92,.35)!important}
+  footer .footer-utilities,footer [class*="utilities"]{border-top:1px solid rgba(201,164,92,.2)!important}
+  .aisa-bar{background:linear-gradient(90deg,#8C6A2E,var(--nm-gold),var(--nm-gold2))!important}
+  body{background:var(--nm-ink)}
+  main#MainContent{background:#fff}
+  .template-index main#MainContent,main#MainContent:has(.nm){background:var(--nm-ink)}
+</style>
+{% schema %}
+{ "name": "AISA brand layer", "settings": [] }
+{% endschema %}
