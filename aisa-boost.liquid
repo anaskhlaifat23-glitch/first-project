@@ -1,0 +1,156 @@
+{%- comment -%}
+  AISA conversion layer: "why now" research band + package chooser (single vs bundle).
+  Injected by JS into the sales pages (before the offer section) and into the home page (before the tracks).
+  Prices are read live from /products/*.js so they stay correct through the price ladder.
+{%- endcomment -%}
+{%- liquid
+  assign show = false
+  if request.page_type == 'index'
+    assign show = true
+    assign mode = 'home'
+  elsif request.page_type == 'page'
+    if page.handle == 'chatgpt-arabic' or page.handle == 'claude-arabic'
+      assign show = true
+      assign mode = page.handle
+    endif
+  endif
+-%}
+{%- if show -%}
+<template id="aisa-why-tpl">
+  <section class="ab-why" dir="rtl" lang="ar">
+    <div class="ab-w">
+      <span class="ab-kick">لماذا الآن؟</span>
+      <h2>بعد سنة من الآن، سينقسم زملاؤك إلى فريقين:<br><em>من يُتقن الذكاء الاصطناعي، ومن يُقارَن به.</em></h2>
+      <p class="ab-sub">لسنا من يقول هذا. هذه أرقام من تقارير عالمية منشورة:</p>
+      <div class="ab-stats">
+        <div class="ab-st"><b data-n="22">22%</b><p>من الوظائف حول العالم ستتغيّر بحلول 2030: <strong>92 مليون وظيفة ستُزاح</strong>، و170 مليونًا جديدة ستذهب لمن يملك المهارات الجديدة.</p><small>المنتدى الاقتصادي العالمي، تقرير مستقبل الوظائف 2025</small></div>
+        <div class="ab-st"><b data-n="39">39%</b><p>من المهارات الأساسية المطلوبة في العمل ستتغيّر خلال خمس سنوات، والذكاء الاصطناعي في صدارة المهارات الأسرع نموًّا.</p><small>المنتدى الاقتصادي العالمي، تقرير مستقبل الوظائف 2025</small></div>
+        <div class="ab-st"><b data-n="66">66%</b><p>من القادة قالوا إنهم <strong>لن يوظّفوا</strong> شخصًا بلا مهارات ذكاء اصطناعي، و71% يفضّلون مرشحًا أقل خبرة يُتقنها.</p><small>Microsoft وLinkedIn، مؤشر اتجاهات العمل 2024</small></div>
+        <div class="ab-st"><b data-n="56">56%</b><p>علاوة في الراتب للوظائف التي تتطلب مهارات الذكاء الاصطناعي، مقارنة بوظائف مماثلة لا تتطلبها.</p><small>PwC، مقياس وظائف الذكاء الاصطناعي العالمي 2025</small></div>
+      </div>
+      <div class="ab-punch"><span>الأداة متاحة للجميع، ومجانًا تقريبًا.</span> <strong>الفرق الوحيد: من تعلّم أن يستخدمها بطريقة صحيحة.</strong></div>
+      <a class="ab-btn" href="#aisa-pick">ابدأ اليوم بأقل من سعر وجبة ←</a>
+    </div>
+  </section>
+</template>
+
+<template id="aisa-pick-tpl">
+  <section class="ab-pick" id="aisa-pick" dir="rtl" lang="ar">
+    <div class="ab-w">
+      <span class="ab-kick">اختر باقتك</span>
+      <h2>كتاب واحد يكفيك لتبدأ. <em>والكتابان معًا يجعلانك الأكثر جاهزية.</em></h2>
+      <div class="ab-cards">
+        <div class="ab-card" data-role="single">
+          <h3 data-t="single-title">الكتاب وحده</h3>
+          <div class="ab-price"><span data-p="single">$9</span></div>
+          <ul data-l="single">
+            <li>الكتاب كاملًا: PDF للحاسوب ونسخة للجوّال</li>
+            <li>هدية: 120 طلبًا جاهزًا للنسخ</li>
+            <li>ملفات التدريب والقوالب</li>
+          </ul>
+          <a class="ab-btn ab-ghost" data-c="single" href="#">اشترِ الكتاب</a>
+        </div>
+        <div class="ab-card ab-hot" data-role="bundle">
+          <span class="ab-flag">الأكثر توفيرًا</span>
+          <h3>الكتابان معًا: ChatGPT + Claude</h3>
+          <div class="ab-price"><span data-p="bundle">$14</span> <s data-p="sum">$18</s> <em class="ab-save" data-p="save">وفّر $4</em></div>
+          <ul>
+            <li><strong>أشهر أداتين</strong> بطريقة واحدة: اطلب بوضوح، وتأكّد قبل أن تعتمد</li>
+            <li>كتابان كاملان (أكثر من 590 صفحة) ونسختان للجوّال</li>
+            <li>هديتان: 240 طلبًا جاهزًا وملفات تدريب لكل كتاب</li>
+            <li>تعرف متى تستخدم كل أداة، فلا تدفع اشتراكًا لا تحتاجه</li>
+          </ul>
+          <a class="ab-btn" data-c="bundle" href="/cart/55563696013649:1,55538560631121:1">أريد الكتابين</a>
+          <p class="ab-note">الخصم يُطبَّق تلقائيًا عند الدفع</p>
+        </div>
+      </div>
+      <div class="ab-trust"><span>⚡ تنزيل فوري بعد الدفع</span><span>🛡️ ضمان استرداد كامل 30 يومًا</span><span>🔒 دفع آمن: بطاقة، Apple Pay، PayPal</span></div>
+    </div>
+  </section>
+</template>
+
+<style>
+.ab-why,.ab-pick{--ink:#0A1324;--ink2:#0F1B31;--gold:#C9A45C;--gold2:#E9D29B;--sand:#F4ECDD;font-family:'IBM Plex Sans Arabic',system-ui,sans-serif;direction:rtl;text-align:right}
+.ab-why{background:radial-gradient(110% 90% at 85% 0%,#1A2B4A 0%,#0A1324 62%);color:var(--sand);padding:72px 0;position:relative;overflow:hidden;width:100vw;margin-inline:calc(50% - 50vw)}
+.ab-why::before{content:'';position:absolute;inset:0;opacity:.06;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cg fill='none' stroke='%23C9A45C'%3E%3Cpath d='M60 8 L74 46 L112 60 L74 74 L60 112 L46 74 L8 60 L46 46 Z'/%3E%3Ccircle cx='60' cy='60' r='14'/%3E%3C/g%3E%3C/svg%3E")}
+.ab-w{max-width:1120px;margin:0 auto;padding:0 20px;position:relative}
+.ab-kick{display:inline-block;color:var(--gold2);border:1px solid rgba(201,164,92,.45);border-radius:999px;padding:3px 14px;font-size:14px;font-weight:600;margin-bottom:14px}
+.ab-why h2,.ab-pick h2{font-family:'Noto Kufi Arabic','IBM Plex Sans Arabic',sans-serif;font-size:clamp(24px,3.6vw,36px);line-height:1.55;margin:0 0 12px;font-weight:700}
+.ab-why h2{color:#fff}.ab-why h2 em,.ab-pick h2 em{font-style:normal;color:var(--gold)}
+.ab-why h2 em{color:var(--gold2)}
+.ab-sub{color:#C9D1DF;font-size:17px;margin:0 0 26px}
+.ab-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.ab-st{background:rgba(255,255,255,.04);border:1px solid rgba(201,164,92,.28);border-radius:18px;padding:22px 20px;display:flex;flex-direction:column}
+.ab-st b{font-size:46px;line-height:1;color:var(--gold2);font-weight:700;direction:ltr;text-align:right;margin-bottom:12px;font-family:'Noto Kufi Arabic',sans-serif}
+.ab-st p{color:#E3E8F0;font-size:15.5px;line-height:1.85;margin:0 0 12px;flex:1}
+.ab-st strong{color:#fff}
+.ab-st small{color:#8E9AB2;font-size:12.5px;line-height:1.6;border-top:1px solid rgba(255,255,255,.08);padding-top:10px}
+.ab-punch{margin:28px 0 22px;font-size:19px;line-height:1.8;color:#D5DCE8}.ab-punch strong{color:var(--gold2)}
+.ab-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,var(--gold2),var(--gold));color:#121A2B!important;text-decoration:none!important;font-weight:700;font-size:18px;padding:14px 28px;border-radius:999px;box-shadow:0 10px 28px rgba(201,164,92,.3);transition:transform .2s}
+.ab-btn:hover{transform:translateY(-2px)}
+.ab-ghost{background:transparent;border:1.5px solid var(--ink);color:var(--ink)!important;box-shadow:none}
+.ab-pick{background:#F7F2E8;color:var(--ink);padding:64px 0}
+.ab-cards{display:grid;grid-template-columns:1fr 1.15fr;gap:20px;align-items:stretch;margin-top:22px}
+.ab-card{position:relative;background:#fff;border:1px solid #E3D5B8;border-radius:22px;padding:28px 26px;display:flex;flex-direction:column}
+.ab-card h3{font-size:21px;margin:0 0 8px;font-weight:700;color:var(--ink)}
+.ab-card ul{list-style:none;padding:0;margin:16px 0 22px;flex:1}
+.ab-card li{position:relative;padding-right:26px;margin-bottom:10px;font-size:16px;line-height:1.75;color:#2B3646}
+.ab-card li::before{content:'✓';position:absolute;right:0;top:0;color:#9C7632;font-weight:700}
+.ab-price{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.ab-price span{font-size:40px;font-weight:700;color:var(--ink)}
+.ab-price s{color:#8C8576;font-size:20px}
+.ab-save{font-style:normal;background:var(--ink);color:var(--gold2);border-radius:999px;padding:3px 12px;font-size:14px;font-weight:700}
+.ab-hot{background:var(--ink);border:2px solid var(--gold);box-shadow:0 24px 60px rgba(10,19,36,.25)}
+.ab-hot h3,.ab-hot .ab-price span{color:#fff}.ab-hot li{color:#D5DCE8}.ab-hot li strong{color:var(--gold2)}.ab-hot li::before{color:var(--gold2)}
+.ab-hot .ab-save{background:var(--gold);color:#121A2B}
+.ab-flag{position:absolute;top:-14px;right:24px;background:linear-gradient(135deg,var(--gold2),var(--gold));color:#121A2B;font-weight:700;font-size:13px;border-radius:999px;padding:4px 14px}
+.ab-note{margin:10px 0 0;font-size:13px;color:#A3AEC4;text-align:center}
+.ab-trust{display:flex;flex-wrap:wrap;gap:10px 22px;justify-content:center;margin-top:24px;font-size:15px;color:#56607A}
+.ab-why[data-home] {margin-inline:0;width:auto}
+@media (max-width:900px){.ab-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.ab-cards{grid-template-columns:1fr}.ab-hot{order:-1}}
+@media (max-width:520px){.ab-stats{grid-template-columns:1fr}.ab-st b{font-size:40px}.ab-why{padding:54px 0}.ab-btn{width:100%}}
+</style>
+<script>
+(function(){
+  var MODE={{ mode | json }}, CLAUDE={{ 'claude-بلا-تخمين-الدليل-العربي-العملي' | json }}, GPT='chatgpt-arabic', DISC=4;
+  function ready(f){document.readyState!=='loading'?f():document.addEventListener('DOMContentLoaded',f)}
+  ready(function(){
+    var why=document.getElementById('aisa-why-tpl').content.cloneNode(true);
+    var pick=document.getElementById('aisa-pick-tpl').content.cloneNode(true);
+    if(MODE==='home'){
+      var t=document.getElementById('nm-tracks'); if(!t) return;
+      var w=why.querySelector('.ab-why'); w.setAttribute('data-home','');
+      w.querySelector('.ab-btn').setAttribute('href','#nm-library');
+      w.querySelector('.ab-btn').textContent='ابدأ من المكتبة ←';
+      t.parentNode.insertBefore(why,t);
+      return;
+    }
+    var cw=document.querySelector('.cwar'); if(!cw) return;
+    var off=cw.querySelector('#offer')||cw.querySelector('section.offer')||cw.querySelector('.final');
+    var pains=cw.querySelector('.pains'); var painSec=pains?pains.closest('section'):null;
+    if(painSec&&painSec.nextSibling){cw.insertBefore(why,painSec.nextSibling)}else if(off){cw.insertBefore(why,off)}
+    if(off){cw.insertBefore(pick,off)}else{cw.appendChild(pick)}
+    // single card content per page
+    var isG=MODE==='chatgpt-arabic', main=isG?GPT:CLAUDE, mainVar=isG?55563696013649:55538560631121;
+    var card=document.querySelector('[data-role=single]');
+    card.querySelector('[data-t=single-title]').textContent=isG?'كتاب ChatGPT وحده':'كتاب Claude وحده';
+    card.querySelector('[data-c=single]').setAttribute('href','/cart/'+mainVar+':1');
+    // live prices
+    var S=window.Shopify||{}, cur=(S.currency&&S.currency.active)||'USD', rate=parseFloat(S.currency&&S.currency.rate)||1, R=(S.routes&&S.routes.root)||'/';
+    var nf; try{nf=new Intl.NumberFormat('ar-u-nu-latn',{style:'currency',currency:cur,minimumFractionDigits:0,maximumFractionDigits:2})}catch(e){nf={format:function(x){return '$'+x}}}
+    function get(h){return fetch(R+'products/'+encodeURIComponent(h)+'.js',{credentials:'same-origin'}).then(function(r){return r.json()})}
+    Promise.all([get(GPT),get(CLAUDE)]).then(function(a){
+      var g=a[0].price/100, c=a[1].price/100, m=isG?g:c, sum=g+c, d=Math.round(DISC*rate*100)/100, b=Math.max(sum-d,0);
+      function set(k,v){var e=document.querySelector('[data-p='+k+']'); if(e) e.textContent=v}
+      set('single',nf.format(m)); set('bundle',nf.format(b)); set('sum',nf.format(sum)); set('save','وفّر '+nf.format(d));
+    }).catch(function(){});
+    // count-up
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;io.unobserve(e.target);var el=e.target,n=+el.getAttribute('data-n'),t0=null;function st(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/1100,1);el.textContent=Math.round(n*(1-Math.pow(1-p,3)))+'%';if(p<1)requestAnimationFrame(st)}requestAnimationFrame(st)})},{threshold:.4});
+    document.querySelectorAll('.ab-st b[data-n]').forEach(function(b){io.observe(b)});
+  });
+})();
+</script>
+{%- endif -%}
+{% schema %}
+{ "name": "AISA boost layer", "settings": [] }
+{% endschema %}
