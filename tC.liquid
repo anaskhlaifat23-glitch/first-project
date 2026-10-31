@@ -1,0 +1,337 @@
+{% comment %}
+  AI Step Ahead hub (Night Majlis). Arabic RTL home: video hero, animated arabesque, tracks (live + coming soon w/ waitlist), library, method, film band, principles, FAQ.
+{% endcomment %}
+{%- liquid
+  assign gpt = all_products['chatgpt-arabic']
+  assign cld = all_products[section.settings.claude_handle]
+  assign gpt_price = gpt.price | default: 900
+  assign cld_price = cld.price | default: 900
+  assign bundle_disc = 400
+  assign bundle_total = gpt_price | plus: cld_price | minus: bundle_disc
+  assign bundle_full = gpt_price | plus: cld_price
+  assign gpt_var = gpt.selected_or_first_available_variant.id | default: 55563696013649
+  assign cld_var = cld.selected_or_first_available_variant.id | default: 55538560631121
+-%}
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@500;700;800&display=swap" rel="stylesheet">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <pattern id="nm-star" width="120" height="120" patternUnits="userSpaceOnUse">
+      <g fill="none" stroke="currentColor" stroke-width="1">
+        <path d="M60 8 L74 46 L112 60 L74 74 L60 112 L46 74 L8 60 L46 46 Z"/>
+        <path d="M23 23 L60 38 L97 23 L82 60 L97 97 L60 82 L23 97 L38 60 Z"/>
+        <circle cx="60" cy="60" r="14"/>
+        <path d="M0 0 L23 23 M120 0 L97 23 M0 120 L23 97 M120 120 L97 97"/>
+      </g>
+    </pattern>
+  </defs>
+</svg>
+<div class="nm" dir="rtl" lang="ar">
+
+  <section class="nm-hero">
+    <video class="nm-hero__v nm-hero__v--d" autoplay muted loop playsinline preload="metadata" poster="{{ 'nm-work.jpg' | file_url }}&width=1600">
+      <source src="{{ section.settings.hero_desktop }}" type="video/mp4">
+    </video>
+    <video class="nm-hero__v nm-hero__v--m" autoplay muted loop playsinline preload="metadata" poster="{{ 'nm-work.jpg' | file_url }}&width=900">
+      <source src="{{ section.settings.hero_mobile }}" type="video/mp4">
+    </video>
+    <div class="nm-hero__shade"></div>
+    <svg class="nm-hero__pat" aria-hidden="true"><rect width="100%" height="100%" fill="url(#nm-star)"/></svg>
+    <div class="nm-w nm-hero__in">
+      <span class="nm-eb nm-rv">AI Step Ahead · خطوة سبّاقة في الذكاء الاصطناعي</span>
+      <h1 class="nm-rv">مرجعك العربي في<br><em>الذكاء الاصطناعي</em></h1>
+      <p class="nm-sub nm-rv">أدلّة عملية بالعربية، تُكتب لتُطبَّق في عملك من اليوم الأول. كلّ طلب فيها مجرَّب، وكلّ معلومة متغيّرة مؤرَّخة ومنسوبة إلى مصدرها الرسمي.</p>
+      <div class="nm-ctas nm-rv">
+        <a class="nm-btn" href="#nm-tracks">اختر مسارك</a>
+        <a class="nm-btn nm-btn--line" href="#nm-library">تصفّح المكتبة</a>
+      </div>
+      <ul class="nm-stats nm-rv">
+        <li><b data-count="2">2</b><span>دليلان منشوران</span></li>
+        <li><b data-count="600">600</b><span>صفحة عملية</span></li>
+        <li><b data-count="240">240</b><span>طلبًا جاهزًا للنسخ</span></li>
+        <li><b>100%</b><span>بالعربية أولًا</span></li>
+      </ul>
+    </div>
+    <a class="nm-scroll" href="#nm-tracks" aria-label="انزل"><span></span></a>
+  </section>
+
+  <div class="nm-ticker" aria-hidden="true"><div class="nm-ticker__t">
+    {%- for i in (1..2) -%}
+      <span>ChatGPT</span><i>✦</i><span>Claude</span><i>✦</i><span>الذكاء الاصطناعي في العمل</span><i>✦</i><span>الإعلانات والتسويق</span><i>✦</i><span>الإدارة والقيادة</span><i>✦</i><span>روّاد الأعمال</span><i>✦</i><span>المحتوى والكتابة</span><i>✦</i><span>البيانات وExcel</span><i>✦</i><span>الأتمتة</span><i>✦</i>
+    {%- endfor -%}
+  </div></div>
+
+  <section class="nm-sec" id="nm-tracks">
+    <div class="nm-w">
+      <div class="nm-head nm-rv">
+        <span class="nm-kick">المسارات</span>
+        <h2>طريقك إلى الذكاء الاصطناعي، حسب دورك</h2>
+        <p>كلّ مسار مكتبة متكاملة من الأدلّة والقوالب. نبدأ بالأدوات، ثم نبني لكلّ دور مساره الخاص.</p>
+      </div>
+      <div class="nm-tracks">
+        <a class="nm-track nm-track--live nm-rv" href="#nm-library">
+          <img src="{{ 'nm-work.jpg' | file_url }}&width=900" alt="موظفة تعمل على حاسوبها ليلًا في مكتب حديث" loading="lazy" width="900" height="1200">
+          <div class="nm-track__c">
+            <span class="nm-badge nm-badge--live">متاح الآن · دليلان</span>
+            <h3>الذكاء الاصطناعي في العمل</h3>
+            <p>ChatGPT وClaude من أوّل محادثة إلى مشاريع كاملة: البريد، والتقارير، والعقود، والجداول.</p>
+            <span class="nm-more">افتح المكتبة ←</span>
+          </div>
+        </a>
+        {%- assign soon = 'ads|managers|founders' | split: '|' -%}
+        {%- for s in soon -%}
+          {%- case s -%}
+            {%- when 'ads' -%}{%- assign img = 'nm-ads.jpg' -%}{%- assign t = 'الذكاء الاصطناعي للإعلانات' -%}{%- assign d = 'أفكار الإعلانات، والنصوص، والصور والفيديو، وتحليل النتائج، بطريقة تحمي ميزانيتك.' -%}{%- assign alt = 'مسوّق يراجع إعلان فيديو على جواله' -%}
+            {%- when 'managers' -%}{%- assign img = 'nm-manager.jpg' -%}{%- assign t = 'الذكاء الاصطناعي للمديرين' -%}{%- assign d = 'قرارات أسرع، وتقارير أوضح، وفريق يعمل مع الذكاء الاصطناعي بسياسة آمنة.' -%}{%- assign alt = 'مدير يقدّم عرضًا لفريقه في قاعة اجتماعات' -%}
+            {%- when 'founders' -%}{%- assign img = 'nm-entrepreneur.jpg' -%}{%- assign t = 'الذكاء الاصطناعي لروّاد الأعمال' -%}{%- assign d = 'متجرك، وعملاؤك، ومحتواك، وأرقامك: مساعد يعمل معك كأنه فريق كامل.' -%}{%- assign alt = 'صاحبة مشروع قهوة تعمل على حاسوبها في متجرها' -%}
+          {%- endcase -%}
+          {%- assign fid = 'nm-wait-' | append: s -%}
+          <div class="nm-track nm-rv">
+            <img src="{{ img | file_url }}&width=900" alt="{{ alt }}" loading="lazy" width="900" height="1200">
+            <div class="nm-track__c">
+              <span class="nm-badge">قريبًا</span>
+              <h3>{{ t }}</h3>
+              <p>{{ d }}</p>
+              
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  <section class="nm-sec nm-lib" id="nm-library">
+    <svg class="nm-pat2" aria-hidden="true"><rect width="100%" height="100%" fill="url(#nm-star)"/></svg>
+    <div class="nm-w">
+      <div class="nm-head nm-rv">
+        <span class="nm-kick">المكتبة</span>
+        <h2>ابدأ بأداتك</h2>
+        <p>دليلان مستقلّان، لكلّ أداة طريقتها وإعداداتها وأمثلتها. الطريقة نفسها في روحها: اطلب بوضوح، وتأكّد قبل أن تعتمد.</p>
+      </div>
+      <div class="nm-books">
+        {%- for b in (1..2) -%}
+          {%- if b == 1 -%}
+            {%- assign url = '/pages/chatgpt-arabic' -%}{%- assign name = 'ChatGPT بلا تخمين' -%}{%- assign price = gpt_price -%}{%- assign var = gpt_var -%}{%- assign img = 'gpt-product-square.jpg' -%}{%- assign tag = 'جديد' -%}
+          {%- else -%}
+            {%- assign url = '/pages/claude-arabic' -%}{%- assign name = 'Claude بلا تخمين' -%}{%- assign price = cld_price -%}{%- assign var = cld_var -%}{%- assign img = 'product-square.jpg' -%}{%- assign tag = 'الأكثر مبيعًا' -%}
+          {%- endif -%}
+          <article class="nm-book nm-rv">
+            <span class="nm-tag">{{ tag }}</span>
+            <a href="{{ url }}" class="nm-book__img"><img src="{{ img | file_url }}&width=800" alt="{{ name }}" loading="lazy" width="800" height="800"></a>
+            <div class="nm-book__b">
+              <h3><span class="nm-en">{{ name | split: ' ' | first }}</span> بلا تخمين</h3>
+              {%- if b == 1 -%}
+                <ul><li>298 صفحة و32 فصلًا، ونسخة مصمَّمة للجوّال</li><li>طريقة «المِقاس» وبروتوكول «تأكَّد»</li><li>كلّ طلب في الكتاب مجرَّب على ChatGPT نفسه</li><li>هدية: 120 طلبًا جاهزًا وملفات تدريب</li></ul>
+              {%- else -%}
+                <ul><li>299 صفحة و33 فصلًا</li><li>إطار ARROWS وبروتوكول تحقّق</li><li>مشاريع وذاكرة وأتمتة وبرمجة للمبتدئين</li><li>هدية: 120 برومبت جاهزًا وملفات تدريب</li></ul>
+              {%- endif -%}
+              <div class="nm-price">{{ price | money_without_trailing_zeros }}</div>
+              <div class="nm-book__ctas">
+                <a class="nm-btn" href="/cart/{{ var }}:1">اشترِ الآن</a>
+                <a class="nm-link" href="{{ url }}">تفاصيل الكتاب ←</a>
+              </div>
+            </div>
+          </article>
+        {%- endfor -%}
+      </div>
+      <div class="nm-bundle nm-rv">
+        <img src="{{ 'nm-books.jpg' | file_url }}&width=700" alt="الكتابان على مكتب خشبي تحت ضوء مشربية" loading="lazy" width="700" height="933">
+        <div class="nm-bundle__b">
+          <span class="nm-kick">الأوفر</span>
+          <h3>الكتابان معًا: <span class="nm-en">ChatGPT</span> + <span class="nm-en">Claude</span></h3>
+          <p>تستخدم الأداتين؟ خذ الدليلين بهديّتيهما وملفات تدريبهما. الخصم يُطبَّق تلقائيًّا عند الدفع.</p>
+          <div class="nm-price">{{ bundle_total | money_without_trailing_zeros }} <s>{{ bundle_full | money_without_trailing_zeros }}</s></div>
+          <a class="nm-btn" href="/cart/{{ gpt_var }}:1,{{ cld_var }}:1">أريد الكتابين</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="nm-sec">
+    <div class="nm-w">
+      <div class="nm-head nm-rv">
+        <span class="nm-kick">الطريقة</span>
+        <h2>طريقة واحدة، في كلّ ما ننشر</h2>
+      </div>
+      <ol class="nm-steps">
+        <li class="nm-rv"><span>١</span><h3>اطلب بوضوح</h3><p>الهدف، والسياق، والجمهور، والحدود، والشكل. فلا يبقى للأداة ما تخمّنه.</p></li>
+        <li class="nm-rv"><span>٢</span><h3>تأكّد قبل أن تعتمد</h3><p>التاريخ، والأصل، والأرقام، والدليل. أربعة أسئلة قبل أن ترسل أيّ شيء.</p></li>
+        <li class="nm-rv"><span>٣</span><h3>طبّق على عملك</h3><p>أمثلة من سوقنا وبلغتنا، وملفات تدريب تفتحها وتجرّب عليها بنفسك.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="nm-film">
+    <video autoplay muted loop playsinline preload="none" poster="{{ 'nm-manager.jpg' | file_url }}&width=1600"><source src="{{ section.settings.film }}" type="video/mp4"></video>
+    <div class="nm-film__shade"></div>
+    <blockquote class="nm-w nm-rv"><p>الأداة متاحة للجميع.<br><em>الطريقة هي الفرق.</em></p><cite>AI Step Ahead</cite></blockquote>
+  </section>
+
+  <section class="nm-sec">
+    <div class="nm-w">
+      <div class="nm-head nm-rv"><span class="nm-kick">مبادئنا</span><h2>لماذا تثق بما ننشر؟</h2></div>
+      <div class="nm-pr">
+        <div class="nm-rv"><i>✦</i><h3>مجرَّب قبل النشر</h3><p>نختبر الطلبات على الأدوات نفسها، ونكتب ما وجدناه فعلًا، لا ما نتوقّعه.</p></div>
+        <div class="nm-rv"><i>✦</i><h3>مؤرَّخ ومنسوب</h3><p>كلّ معلومة قد تتغيّر نذكر تاريخ التحقّق منها ومصدرها الرسمي.</p></div>
+        <div class="nm-rv"><i>✦</i><h3>عربي أولًا</h3><p>أمثلة من بيئة العمل العربية، ولغة واضحة، ومصطلحات مشروحة.</p></div>
+        <div class="nm-rv"><i>✦</i><h3>ضمان 30 يومًا</h3><p>إن لم يناسبك الدليل، راسلنا خلال 30 يومًا ونعيد لك المبلغ كاملًا.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="nm-sec nm-faqs">
+    <div class="nm-w nm-faq">
+      <div class="nm-head nm-rv"><span class="nm-kick">أسئلة</span><h2>أسئلة شائعة</h2></div>
+      <details class="nm-rv"><summary>أيّ الكتابين أختار؟</summary><p>اختر كتاب الأداة التي تستخدمها كلّ يوم. وإن كنت تستخدم الاثنين، فالباقة أوفر.</p></details>
+      <details class="nm-rv"><summary>هل تناسب المبتدئين؟</summary><p>نعم. كلّ دليل يبدأ من أوّل محادثة، ثم يتدرّج حتى المشاريع الكاملة.</p></details>
+      <details class="nm-rv"><summary>كيف أستلم الكتب؟</summary><p>روابط التنزيل تظهر فور الدفع في صفحة تأكيد الطلب، وتصلك على بريدك الإلكتروني.</p></details>
+      <details class="nm-rv"><summary>متى تصدر المسارات الجديدة؟</summary><p>سجّل بريدك في المسار الذي يهمّك، وسنراسلك عند إطلاقه أوّلًا، مع سعر خاص للمسجّلين.</p></details>
+      <details class="nm-rv"><summary>ماذا لو لم يعجبني؟</summary><p>راسلنا على support@aistepahead.com خلال 30 يومًا من الشراء، ونعيد لك المبلغ كاملًا. التفاصيل في <a href="/policies/refund-policy">سياسة الاسترداد</a>.</p></details>
+      <p class="nm-fine">أدلّة تعليمية مستقلّة، غير تابعة لشركتَي OpenAI وAnthropic ولا معتمدة منهما. «ChatGPT» و«Claude» علامتان تجاريتان لمالكيهما.</p>
+    </div>
+  </section>
+</div>
+<script>
+(function(){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-in');io.unobserve(e.target)}})},{threshold:.15});
+  document.querySelectorAll('.nm-rv').forEach(function(el,i){el.style.transitionDelay=(i%4)*90+'ms';io.observe(el)});
+  var done=false,st=document.querySelector('.nm-stats');
+  if(st){new IntersectionObserver(function(es,o){if(es[0].isIntersecting&&!done){done=true;o.disconnect();st.querySelectorAll('b[data-count]').forEach(function(b){var n=+b.dataset.count,t0=null;function f(t){t0=t0||t;var p=Math.min(1,(t-t0)/1400);b.textContent=Math.round(n*(1-Math.pow(1-p,3)))+(n>=100?'+':'');if(p<1)requestAnimationFrame(f)}requestAnimationFrame(f)})}},{threshold:.4}).observe(st)}
+  var mq=window.matchMedia('(max-width:749px)');function pick(){document.querySelectorAll('.nm-hero__v').forEach(function(v){var m=v.classList.contains('nm-hero__v--m');var on=mq.matches?m:!m;if(on){v.play&&v.play().catch(function(){})}else{v.pause&&v.pause()}})}pick();mq.addEventListener&&mq.addEventListener('change',pick);
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){document.querySelectorAll('.nm video').forEach(function(v){v.pause()})}
+})();
+</script>
+{% stylesheet %}
+.nm{--ink:#0A1324;--ink2:#0F1B31;--ink3:#16243F;--gold:#C9A45C;--gold2:#E9D29B;--sand:#F4ECDD;--mut:#A3AEC4;--line:rgba(201,164,92,.28);font-family:'IBM Plex Sans Arabic',system-ui,sans-serif;background:var(--ink);color:var(--sand);line-height:1.85;overflow:hidden}
+.nm *{box-sizing:border-box}
+.nm h1,.nm h2,.nm h3{font-family:'Noto Kufi Arabic','IBM Plex Sans Arabic',sans-serif;color:var(--sand);margin:0 0 .45em;line-height:1.35;letter-spacing:0}
+.nm a{color:inherit}
+.nm-en{direction:ltr;unicode-bidi:isolate;font-family:'IBM Plex Sans Arabic',system-ui,sans-serif}
+.nm-w{max-width:1200px;margin:0 auto;padding:0 22px;position:relative;z-index:2}
+.nm-hero{position:relative;min-height:min(92vh,860px);display:flex;align-items:center;isolation:isolate}
+.nm-hero__v{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-3}
+.nm-hero__v--m{display:none}
+.nm-hero__shade{position:absolute;inset:0;z-index:-2;background:linear-gradient(270deg,rgba(10,19,36,.92) 0%,rgba(10,19,36,.72) 42%,rgba(10,19,36,.25) 75%,rgba(10,19,36,.45) 100%),linear-gradient(0deg,var(--ink) 0%,rgba(10,19,36,0) 30%)}
+.nm-hero__pat{position:absolute;inset:0;width:100%;height:100%;z-index:-1;color:var(--gold);opacity:.13;animation:nmDrift 60s linear infinite;-webkit-mask-image:linear-gradient(270deg,#000 0%,transparent 60%);mask-image:linear-gradient(270deg,#000 0%,transparent 60%)}
+.nm-hero__pat path,.nm-hero__pat circle{stroke-dasharray:300;stroke-dashoffset:300;animation:nmDraw 6s ease forwards}
+@keyframes nmDraw{to{stroke-dashoffset:0}}
+@keyframes nmDrift{to{transform:translateY(-120px)}}
+.nm-hero__in{padding:120px 22px 90px;max-width:1200px}
+.nm-eb{display:inline-block;border:1px solid var(--line);color:var(--gold2);border-radius:999px;padding:6px 16px;font-size:14px;font-weight:600;background:rgba(10,19,36,.5);backdrop-filter:blur(6px)}
+.nm-hero h1{font-size:clamp(38px,6.2vw,78px);font-weight:800;margin-top:22px;max-width:780px}
+.nm-hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--gold2),var(--gold) 45%,#F6E6B8 55%,var(--gold));background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:nmShine 6s ease-in-out infinite}
+@keyframes nmShine{0%,100%{background-position:100% 0}50%{background-position:0 0}}
+.nm-sub{font-size:clamp(17px,1.6vw,20px);color:#D9DFEA;max-width:620px}
+.nm-ctas{display:flex;gap:14px;flex-wrap:wrap;margin:30px 0 40px}
+.nm-btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--gold2),var(--gold));color:#121A2B!important;text-decoration:none;font-weight:700;font-size:17px;padding:14px 28px;border-radius:999px;border:0;cursor:pointer;box-shadow:0 10px 30px rgba(201,164,92,.25);transition:transform .2s,box-shadow .2s}
+.nm-btn:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(201,164,92,.38)}
+.nm-btn--line{background:transparent;color:var(--sand)!important;border:1px solid var(--line);box-shadow:none}
+.nm-btn--line:hover{border-color:var(--gold);box-shadow:none}
+.nm-stats{list-style:none;padding:0;margin:0;display:flex;gap:34px;flex-wrap:wrap}
+.nm-stats li{display:flex;flex-direction:column;border-inline-start:1px solid var(--line);padding-inline-start:16px}
+.nm-stats b{font-family:'Noto Kufi Arabic',sans-serif;font-size:30px;color:var(--gold2);line-height:1.2;direction:ltr;text-align:right}
+.nm-stats span{font-size:14px;color:var(--mut)}
+.nm-scroll{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);width:26px;height:42px;border:1px solid var(--line);border-radius:14px;z-index:2}
+.nm-scroll span{position:absolute;top:8px;left:50%;width:4px;height:8px;margin-left:-2px;background:var(--gold);border-radius:2px;animation:nmScroll 1.8s infinite}
+@keyframes nmScroll{0%{opacity:0;transform:translateY(0)}40%{opacity:1}100%{opacity:0;transform:translateY(14px)}}
+.nm-ticker{border-block:1px solid var(--line);background:var(--ink2);overflow:hidden;white-space:nowrap;direction:ltr}
+.nm-ticker__t{display:inline-flex;gap:28px;padding:16px 0;animation:nmTick 38s linear infinite;font-family:'Noto Kufi Arabic',sans-serif;font-size:17px;color:var(--sand)}
+.nm-ticker i{color:var(--gold);font-style:normal}
+@keyframes nmTick{to{transform:translateX(-50%)}}
+.nm-sec{padding:100px 0;position:relative}
+.nm-head{text-align:center;max-width:760px;margin:0 auto 52px}
+.nm-head h2{font-size:clamp(28px,3.6vw,46px);font-weight:700}
+.nm-head p{color:var(--mut);font-size:18px;margin:0}
+.nm-kick{display:inline-flex;align-items:center;gap:10px;color:var(--gold);font-weight:700;font-size:14px;letter-spacing:.5px;margin-bottom:12px}
+.nm-kick::before,.nm-kick::after{content:'';width:26px;height:1px;background:var(--gold);opacity:.6}
+.nm-tracks{display:grid;gap:18px;grid-template-columns:repeat(4,1fr)}
+.nm-track{position:relative;border-radius:22px;overflow:hidden;min-height:520px;display:flex;align-items:flex-end;border:1px solid var(--line);text-decoration:none;background:var(--ink2);isolation:isolate}
+.nm-track img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.nm-track::after{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(10,19,36,.97) 12%,rgba(10,19,36,.55) 50%,rgba(10,19,36,.05) 80%)}
+.nm-track:hover img{transform:scale(1.06)}
+.nm-track__c{padding:22px}
+.nm-track h3{font-size:21px;margin-top:10px}
+.nm-track p{font-size:15px;color:#C9D1DF;margin:0 0 12px}
+.nm-track--live{grid-column:span 1;border-color:var(--gold)}
+.nm-badge{display:inline-block;font-size:12px;font-weight:700;padding:3px 12px;border-radius:999px;border:1px solid var(--line);color:var(--gold2);background:rgba(10,19,36,.6)}
+.nm-badge--live{background:var(--gold);color:#121A2B;border-color:var(--gold)}
+.nm-more{color:var(--gold2);font-weight:700}
+.nm-wait{display:flex;gap:6px;margin-top:4px}
+.nm-wait input[type=email]{flex:1;min-width:0;background:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:999px;color:var(--sand);padding:9px 14px;font:inherit;font-size:14px}
+.nm-wait input::placeholder{color:#8994AA}
+.nm-wait button{background:var(--gold);color:#121A2B;border:0;border-radius:999px;padding:0 16px;font:inherit;font-weight:700;font-size:14px;cursor:pointer}
+.nm-ok{color:var(--gold2);font-size:14px}
+.nm-lib{background:radial-gradient(1000px 500px at 50% 0%,rgba(201,164,92,.10),transparent 70%),var(--ink2)}
+.nm-pat2{position:absolute;inset:0;width:100%;height:100%;color:var(--gold);opacity:.05;z-index:0}
+.nm-books{display:grid;gap:22px;grid-template-columns:repeat(2,1fr)}
+.nm-book{position:relative;display:grid;grid-template-columns:.9fr 1.1fr;gap:20px;align-items:center;background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,.015));border:1px solid var(--line);border-radius:24px;padding:20px;backdrop-filter:blur(6px);transition:border-color .3s,transform .3s}
+.nm-book:hover{border-color:var(--gold);transform:translateY(-4px)}
+.nm-book__img img{width:100%;height:auto;border-radius:16px;display:block}
+.nm-book h3{font-size:24px}
+.nm-book ul{list-style:none;padding:0;margin:0 0 14px;font-size:15px;color:#C9D1DF}
+.nm-book li{padding-inline-start:18px;position:relative;margin-bottom:4px}.nm-book li::before{content:'✦';position:absolute;inset-inline-start:0;color:var(--gold);font-size:11px;top:5px}
+.nm-tag{position:absolute;top:16px;inset-inline-end:16px;background:var(--gold);color:#121A2B;font-size:12px;font-weight:700;border-radius:999px;padding:2px 12px;z-index:2}
+.nm-price{font-family:'Noto Kufi Arabic',sans-serif;font-size:32px;color:var(--gold2);margin:4px 0 14px}
+.nm-price s{font-size:.5em;color:var(--mut);margin-inline-start:8px}
+.nm-book__ctas{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.nm-link{color:var(--gold2);font-weight:700;text-decoration:none}
+.nm-bundle{margin-top:26px;display:grid;grid-template-columns:260px 1fr;gap:30px;align-items:center;border:1px solid var(--gold);border-radius:24px;padding:22px;background:linear-gradient(135deg,rgba(201,164,92,.14),rgba(201,164,92,.03))}
+.nm-bundle img{width:100%;height:auto;border-radius:16px;display:block}
+.nm-bundle h3{font-size:26px}.nm-bundle p{color:#C9D1DF;max-width:560px}
+.nm-steps{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(3,1fr);gap:20px;counter-reset:s}
+.nm-steps li{border:1px solid var(--line);border-radius:22px;padding:30px 26px;background:var(--ink2);position:relative;overflow:hidden}
+.nm-steps li::before{content:'';position:absolute;inset-inline-start:0;top:0;height:3px;width:0;background:linear-gradient(90deg,var(--gold),transparent);transition:width 1.4s .3s}
+.nm-steps li.is-in::before{width:100%}
+.nm-steps span{font-family:'Noto Kufi Arabic',sans-serif;font-size:54px;line-height:1;color:transparent;-webkit-text-stroke:1px var(--gold);display:block;margin-bottom:12px}
+.nm-steps p{color:#C9D1DF;margin:0}
+.nm-film{position:relative;min-height:520px;display:flex;align-items:center;isolation:isolate;border-block:1px solid var(--line)}
+.nm-film video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.nm-film__shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(10,19,36,.85),rgba(10,19,36,.55))}
+.nm-film blockquote{margin:0 auto;text-align:center}
+.nm-film p{font-family:'Noto Kufi Arabic',sans-serif;font-size:clamp(30px,4.6vw,58px);font-weight:700;line-height:1.45;margin:0}
+.nm-film em{font-style:normal;color:var(--gold2)}
+.nm-film cite{display:block;margin-top:14px;color:var(--gold);font-style:normal;letter-spacing:2px;font-size:14px}
+.nm-pr{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.nm-pr div{border-top:1px solid var(--gold);padding-top:20px}
+.nm-pr i{color:var(--gold);font-style:normal;font-size:20px}
+.nm-pr h3{font-size:19px;margin-top:8px}.nm-pr p{color:#C9D1DF;margin:0;font-size:15px}
+.nm-faqs{background:var(--ink2)}
+.nm-faq{max-width:860px}
+.nm-faq details{border-bottom:1px solid var(--line);padding:18px 4px}
+.nm-faq summary{font-weight:700;font-size:18px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.nm-faq summary::-webkit-details-marker{display:none}
+.nm-faq summary::after{content:'+';color:var(--gold);font-size:24px;line-height:1;transition:transform .3s}
+.nm-faq details[open] summary::after{transform:rotate(45deg)}
+.nm-faq p{color:#C9D1DF;margin:10px 0 0}.nm-faq a{color:var(--gold2)}
+.nm-fine{font-size:13px;color:var(--mut);text-align:center;margin-top:28px}
+.nm-rv{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.nm-rv.is-in{opacity:1;transform:none}
+@media (max-width:1024px){.nm-tracks{grid-template-columns:repeat(2,1fr)}.nm-pr{grid-template-columns:repeat(2,1fr)}.nm-books{grid-template-columns:1fr}}
+@media (max-width:749px){
+  .nm-hero__v--d{display:none}.nm-hero__v--m{display:block}
+  .nm-hero{min-height:88vh;align-items:flex-end}
+  .nm-hero__shade{background:linear-gradient(0deg,var(--ink) 8%,rgba(10,19,36,.82) 45%,rgba(10,19,36,.25) 100%)}
+  .nm-hero__in{padding:80px 20px 70px}
+  .nm-stats{gap:16px 22px}.nm-stats b{font-size:24px}
+  .nm-sec{padding:70px 0}
+  .nm-tracks{grid-template-columns:1fr}.nm-track{min-height:440px}
+  .nm-book{grid-template-columns:1fr}
+  .nm-bundle{grid-template-columns:1fr}
+  .nm-steps{grid-template-columns:1fr}
+  .nm-pr{grid-template-columns:1fr}
+  .nm-film{min-height:420px}
+}
+@media (prefers-reduced-motion:reduce){.nm-rv{opacity:1;transform:none;transition:none}.nm-ticker__t,.nm-hero__pat,.nm-hero h1 em{animation:none}}
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "AI Step Ahead hub (Night Majlis)",
+  "settings": [
+    { "type": "text", "id": "claude_handle", "label": "Claude book handle", "default": "claude-بلا-تخمين-الدليل-العربي-العملي" },
+    { "type": "text", "id": "hero_desktop", "label": "Hero video URL (desktop mp4)" },
+    { "type": "text", "id": "hero_mobile", "label": "Hero video URL (mobile mp4)" },
+    { "type": "text", "id": "film", "label": "Film band video URL (mp4)" }
+  ],
+  "presets": [{ "name": "AI Step Ahead hub (Night Majlis)" }]
+}
+{% endschema %}
