@@ -1,4 +1,4 @@
-{%- assign parts = page.content | split: '<!--LM-->' -%}
+{%- assign parts = page.content | split: '<div class="lm-slot"></div>' -%}
 {{ parts[0] }}
 {%- form 'customer', id: 'lm-form', class: 'lm' -%}
   <input type="hidden" name="contact[tags]" value="newsletter,lead-free-gpt">
