@@ -5,7 +5,10 @@
   #header-group a,#header-group button,#header-group .menu-list__link,#header-group summary,#header-group span,#header-group svg{color:var(--nm-sand)!important}
   #header-group .menu-list__link:hover,#header-group a:hover{color:var(--nm-gold2)!important}
   #header-group .header__row{border-bottom:1px solid rgba(201,164,92,.25)!important}
-  #header-group .header-announcements,#header-group .announcement-bar,#header-group [class*="announcement"]{background:linear-gradient(90deg,#B98F45,var(--nm-gold),#B98F45)!important;color:#121A2B!important}
+  #header-group .shopify-section:has(announcement-bar-component),#header-group .header-announcements{background:linear-gradient(90deg,#B98F45,var(--nm-gold),#B98F45)!important;color:#121A2B!important}
+  #header-group [class*="announcement"]{background:transparent!important;color:#121A2B!important}
+  #header-group .announcement-bar__text{font-size:13px!important;font-family:'IBM Plex Sans Arabic',sans-serif!important}
+  #header-group img[src*="aistepahead-logo"]{filter:invert(1) hue-rotate(180deg) brightness(1.1)}
   #header-group [class*="announcement"] a,#header-group [class*="announcement"] p,#header-group [class*="announcement"] span{color:#121A2B!important;font-weight:600}
   #header-group img{filter:none}
   footer,footer .shopify-section,footer [class*="color-scheme"]{background:var(--nm-ink)!important;color:var(--nm-sand)!important}
