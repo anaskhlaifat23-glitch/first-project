@@ -1,0 +1,20 @@
+
+
+<rte-formatter>
+  {%- liquid
+    assign pc = page.content
+    if page.handle == 'claude-arabic'
+      assign pc = pc | replace: 'files/ar-hero.jpg?v=1793283221', 'files/aisa-hero-claude-3d.webp?v=1793529891' | replace: 'files/ar-pg-bonus.jpg?v=1793283221', 'files/aisa-bonus-claude-3d.webp?v=1793529891'
+    elsif page.handle == 'chatgpt-arabic'
+      assign pc = pc | replace: 'files/ar-gpt-hero.jpg?width=', 'files/aisa-hero-chatgpt-3d.webp?v=1793529891&amp;width=' | replace: 'files/gpt-pg-prompts.jpg?width=', 'files/aisa-bonus-chatgpt-3d.webp?v=1793529891&amp;width='
+    endif
+  -%}
+  {{ pc }}
+</rte-formatter>
+
+{% schema %}
+{
+  "name": "t:names.page_content",
+  "class": "rte"
+}
+{% endschema %}
