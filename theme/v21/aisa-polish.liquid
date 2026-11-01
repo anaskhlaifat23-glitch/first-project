@@ -87,7 +87,8 @@
   /* offer card: living gold frame */
   .cwar .offer{background:#050B17 radial-gradient(60% 50% at 50% 30%,rgba(214,170,80,.18),rgba(214,170,80,0) 70%)!important}
   .cwar .offer .box{position:relative!important;isolation:isolate;box-shadow:0 40px 90px -20px rgba(0,0,0,.7),0 0 80px -20px rgba(233,198,116,.35)!important}
-  .cwar .offer .box::after{content:"";position:absolute;inset:-2px;border-radius:24px;z-index:-1;pointer-events:none;
+  .cwar .offer .box::after{content:"";position:absolute;inset:-2px;padding:2px;border-radius:24px;z-index:1;pointer-events:none;
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);
     background:conic-gradient(from var(--aisa-a),#B98B3C,#FCEBBA,#C99A45 25%,#6E92FF 40%,#C99A45 55%,#FCEBBA 75%,#B98B3C);animation:aisaSpin 9s linear infinite}
   .cwar .offer .box .price{display:flex!important;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px 12px}
   .cwar .price .save{margin:0!important}
