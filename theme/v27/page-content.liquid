@@ -1,0 +1,23 @@
+
+
+<rte-formatter>
+  {%- liquid
+    assign pc = page.content
+    assign faq_anchor = '<details><summary>هل الكتاب مناسب للمبتدئين؟</summary>'
+    if page.handle == 'claude-arabic'
+      assign faq_free = '<details><summary>لماذا أدفع والشروحات مجانية على يوتيوب؟</summary><p>الشروحات المجانية تعرض ما يستطيع Claude فعله، كلّ مقطع على حدة. هذا الكتاب طريقة واحدة مرتّبة بالعربية: من أوّل محادثة، إلى كتابة البرومبت الصحيح، إلى التحقّق من الإجابة قبل أن تعتمد عليها، ثم تطبيقها على عملك الحقيقي. ومعه 120 برومبت جاهزًا للنسخ. مرجع واحد تعود إليه بدل ساعات من البحث بين المقاطع.</p></details>' | append: faq_anchor
+      assign pc = pc | replace: 'files/ar-hero.jpg?v=1793283221', 'files/aisa-hero-claude-3d.webp?v=1793529891' | replace: 'files/ar-pg-bonus.jpg?v=1793283221', 'files/aisa-bonus-claude-3d.webp?v=1793529891' | replace_first: faq_anchor, faq_free
+    elsif page.handle == 'chatgpt-arabic'
+      assign faq_free = '<details><summary>لماذا أدفع والشروحات مجانية على يوتيوب؟</summary><p>الشروحات المجانية تعرض ما يستطيع ChatGPT فعله، كلّ مقطع على حدة. هذا الكتاب طريقة واحدة مرتّبة بالعربية تطبّقها على عملك الحقيقي، وكلّ مثال فيه جرّبناه على ChatGPT نفسه وكتبنا ما حدث فعلًا. ومعه 120 طلبًا جاهزًا للنسخ. مرجع واحد تعود إليه بدل ساعات من البحث بين المقاطع.</p></details>' | append: faq_anchor
+      assign pc = pc | replace: 'files/ar-gpt-hero.jpg?width=', 'files/aisa-hero-chatgpt-3d.webp?v=1793529891&amp;width=' | replace: 'files/gpt-pg-prompts.jpg?width=', 'files/aisa-bonus-chatgpt-3d.webp?v=1793529891&amp;width=' | replace_first: faq_anchor, faq_free
+    endif
+  -%}
+  {{ pc }}
+</rte-formatter>
+
+{% schema %}
+{
+  "name": "t:names.page_content",
+  "class": "rte"
+}
+{% endschema %}
