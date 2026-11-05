@@ -1,0 +1,5 @@
+{
+  "layout": "cl4",
+  "sections": { "main": { "type": "cl4-landing", "settings": {} } },
+  "order": ["main"]
+}

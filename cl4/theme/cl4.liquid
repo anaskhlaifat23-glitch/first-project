@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Claude بلا تخمين · الدليل العربي الشامل · {{ shop.name }}</title>
+<meta name="description" content="الدليل العربي الشامل لاستخدام Claude: 299 صفحة و33 فصلًا، مع 120 برومبت عربي جاهز للتعديل وملفات تدريب. للمبتدئ ولمن يستخدمه كل يوم.">
+<link rel="canonical" href="{{ canonical_url }}">
+<meta property="og:title" content="Claude بلا تخمين · الدليل العربي الشامل">
+<meta property="og:type" content="product">
+<meta property="og:image" content="https:{{ 'cl4-hero-w-poster.jpg' | asset_url }}">
+<link rel="preload" as="image" href="{{ 'cl4-hero-w-poster.jpg' | asset_url }}" media="(min-width:701px)" fetchpriority="high">
+<link rel="preload" as="image" href="{{ 'cl4-hero-m-poster.jpg' | asset_url }}" media="(max-width:700px)" fetchpriority="high">
+<link rel="preload" as="font" type="font/woff2" href="{{ 'cl4-plex-ar-700.woff2' | asset_url }}" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="{{ 'cl4-serif-600.woff2' | asset_url }}" crossorigin>
+<style>html,body{margin:0;background:#F4EFE7}html{scroll-behavior:smooth}@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}</style>
+{{ content_for_header }}
+</head>
+<body>
+<main>{{ content_for_layout }}</main>
+</body>
+</html>

@@ -1,0 +1,594 @@
+{%- liquid
+ assign cl = all_products['claude-بلا-تخمين-الدليل-العربي-العملي']
+ assign gp = all_products['chatgpt-arabic']
+ assign c_p = cl.price | default: 1900
+ assign g_p = gp.price | default: 900
+ assign s_p = c_p | plus: g_p
+ assign b_p = s_p | minus: 400
+ assign d_p = b_p | minus: c_p
+-%}
+<style>
+@font-face{font-family:"C4";font-weight:400;font-display:swap;src:url("{{ 'cl4-plex-ar-400.woff2' | asset_url }}") format("woff2")}
+@font-face{font-family:"C4";font-weight:600;font-display:swap;src:url("{{ 'cl4-plex-ar-600.woff2' | asset_url }}") format("woff2")}
+@font-face{font-family:"C4";font-weight:700;font-display:swap;src:url("{{ 'cl4-plex-ar-700.woff2' | asset_url }}") format("woff2")}
+@font-face{font-family:"C4";font-weight:400;font-display:swap;unicode-range:U+0000-00FF,U+2000-206F,U+2190-21FF,U+2713;src:url("{{ 'cl4-plex-la-400.woff2' | asset_url }}") format("woff2")}
+@font-face{font-family:"C4";font-weight:600;font-display:swap;unicode-range:U+0000-00FF,U+2000-206F,U+2190-21FF,U+2713;src:url("{{ 'cl4-plex-la-600.woff2' | asset_url }}") format("woff2")}
+@font-face{font-family:"C4";font-weight:700;font-display:swap;unicode-range:U+0000-00FF,U+2000-206F,U+2190-21FF,U+2713;src:url("{{ 'cl4-plex-la-700.woff2' | asset_url }}") format("woff2")}
+@font-face{font-family:"C4M";font-display:swap;src:url("{{ 'cl4-mono.woff2' | asset_url }}") format("woff2")}
+@font-face{font-family:"C4S";font-weight:600;font-display:swap;src:url("{{ 'cl4-serif-600.woff2' | asset_url }}") format("woff2")}
+
+/* ===== DESIGN SYSTEM (taken from the book itself) =====
+ paper #F4EFE7 (cover cream) · paper-2 #EBE4D8 · ink #17181C · ink-2 #4A4B52 · mute #77736B · rule #DDD4C6
+ terracotta #C2583A (cover orb / actions) · terracotta-soft #E7B9A2 · navy #1C2A44 (book's dark callouts) · sage #DCE9E3 (book's "you will be able to" boxes)
+ type: IBM Plex Sans Arabic (the book's typeface) 400/600/700 · Cormorant Garamond 600 for Latin "Claude" & numerals (as on the cover) · Plex Mono for prompt codes
+ motion: reveal 700ms ease-out; demo builds; page-turn; everything off under prefers-reduced-motion */
+.C4{--paper:#F4EFE7;--paper2:#EBE4D8;--ink:#17181C;--ink2:#4A4B52;--mute:#77736B;--rule:#DDD4C6;--tc:#C2583A;--tc2:#A9482D;--tcs:#F3DED2;--navy:#1C2A44;--sage:#E2EEE8;
+ --side:clamp(20px,4.4vw,64px);--wrap:1280px;--ease:cubic-bezier(.2,.7,.2,1);
+ direction:rtl;background:var(--paper);color:var(--ink);font-family:"C4",system-ui,sans-serif;font-size:18px;line-height:1.9;-webkit-font-smoothing:antialiased;overflow-x:clip}
+.C4 *{box-sizing:border-box}
+.C4 img,.C4 video{display:block;max-width:100%;height:auto}
+.C4 a{color:inherit}
+.C4 p{margin:0 0 14px}
+.C4 h1,.C4 h2,.C4 h3,.C4 h4{margin:0;font-weight:700;letter-spacing:0;color:var(--ink)}
+.C4 .en{direction:ltr;unicode-bidi:isolate}
+.C4 .js-pc,.C4 .js-pb,.C4 .js-ps,.C4 .js-pd{direction:ltr;unicode-bidi:isolate;display:inline-block}
+.C4 .mono{font-family:"C4M",ui-monospace,monospace;direction:ltr;unicode-bidi:isolate}
+.C4 .serif{font-family:"C4S",Georgia,serif;font-weight:600;direction:ltr;unicode-bidi:isolate}
+.C4 .wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--side)}
+.C4 .kick{display:inline-flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:var(--tc2);margin-bottom:18px}
+.C4 .kick:before{content:"";width:9px;height:9px;border-radius:50%;background:var(--tc)}
+.C4 .h2{font-size:clamp(30px,3.5vw,50px);line-height:1.3}
+.C4 .lead{font-size:clamp(17px,1.35vw,20px);color:var(--ink2);max-width:640px;margin-top:18px}
+.C4 .btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:58px;padding:0 30px;border-radius:999px;background:var(--tc);color:#fff;text-decoration:none;font:700 17.5px/1 "C4",sans-serif;border:0;cursor:pointer;box-shadow:0 14px 30px -14px rgba(162,70,40,.75);transition:transform .25s var(--ease),background .25s}
+.C4 .btn:hover{background:var(--tc2);transform:translateY(-2px)}
+.C4 .btn.dark{background:var(--ink);box-shadow:none}
+.C4 .btn.line{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.C4 .btn .ar{transition:transform .25s var(--ease)}.C4 .btn:hover .ar{transform:translateX(-4px)}
+.C4 :focus-visible{outline:2.5px solid var(--tc);outline-offset:3px}
+.C4 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.C4 [data-rv]{opacity:0;transform:translateY(18px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.C4 [data-rv].in{opacity:1;transform:none}
+
+/* ===== masthead ===== */
+.C4 .mast{position:absolute;inset:0 0 auto 0;z-index:20}
+.C4 .mast .wrap{height:74px;display:flex;align-items:center;justify-content:space-between}
+.C4 .brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:16px}
+.C4 .brand svg{width:18px;height:18px}
+.C4 .mast nav{display:flex;gap:26px;font-size:15px}
+.C4 .mast nav a{text-decoration:none;color:var(--ink2)}.C4 .mast nav a:hover{color:var(--ink)}
+.C4 .mast .pill{text-decoration:none;font-weight:700;font-size:14.5px;background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px}
+
+/* ===== hero ===== */
+.C4 .hero{position:relative;height:min(100vh,56.25vw);min-height:660px;max-height:980px;overflow:hidden;background:#D8CFC2}
+.C4 .hero .media{position:absolute;inset:0}
+.C4 .hero .media img,.C4 .hero .media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:0 50%}
+.C4 .hero .media video{opacity:0;transition:opacity .9s var(--ease)}.C4 .hero .media video.on{opacity:1}
+.C4 .hero .veil{position:absolute;inset:0;z-index:1;background:linear-gradient(270deg,rgba(244,239,231,.86) 0%,rgba(244,239,231,.62) 30%,rgba(244,239,231,0) 50%)}
+.C4 .hero .copy{position:absolute;z-index:3;top:0;bottom:0;right:max(var(--side),calc((100vw - var(--wrap))/2 + var(--side)));width:min(540px,40vw);display:flex;flex-direction:column;justify-content:center;padding-top:50px}
+.C4 .lock{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;line-height:1}
+.C4 .lock .serif{font-size:clamp(66px,6.4vw,104px);letter-spacing:-.01em;color:var(--ink)}
+.C4 .lock .ar{font-size:clamp(46px,4.4vw,72px);font-weight:700;color:var(--tc)}
+.C4 .hero h1{font-size:clamp(20px,1.75vw,27px);line-height:1.6;font-weight:600;color:var(--ink);margin-top:22px}
+.C4 .hero .sub{font-size:clamp(16px,1.2vw,18px);color:var(--ink2);margin:14px 0 26px}
+.C4 .hero .row{display:flex;flex-wrap:wrap;align-items:center;gap:12px 22px}
+.C4 .hero .alt{font-size:15.5px;color:var(--ink2);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:1px}
+.C4 .hero .alt b{color:var(--ink)}
+.C4 .get{margin-top:24px;display:flex;flex-wrap:wrap;gap:8px}
+.C4 .get span{font-size:13.5px;background:rgba(255,255,255,.62);border:1px solid rgba(23,24,28,.12);border-radius:999px;padding:5px 13px;color:var(--ink2);backdrop-filter:blur(4px)}
+.C4 .get b{color:var(--ink);font-weight:600}
+.C4 .hero .ctl{position:absolute;left:var(--side);bottom:22px;z-index:3;font:500 12.5px "C4";color:var(--ink2);background:rgba(244,239,231,.82);border:0;border-radius:999px;padding:7px 13px;cursor:pointer}
+
+/* ===== areas ribbon ===== */
+.C4 .ribbon{background:var(--ink);color:#EDE6DA}
+.C4 .ribbon .wrap{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));}
+.C4 .ribbon a{display:block;text-decoration:none;padding:22px 16px;border-inline-start:1px solid rgba(255,255,255,.1);font-size:15.5px;font-weight:600;line-height:1.5}
+.C4 .ribbon a:first-child{border-inline-start:0}
+.C4 .ribbon a small{display:block;font-weight:400;color:#A9A398;font-size:13px}
+.C4 .ribbon a:hover{background:rgba(255,255,255,.04)}
+
+/* ===== levels ===== */
+.C4 .levels{padding:120px 0 100px}
+.C4 .lv{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:52px}
+.C4 .lv article{background:#FBF8F3;border:1px solid var(--rule);border-radius:22px;padding:30px 28px;position:relative;overflow:hidden}
+.C4 .lv article:before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:var(--c)}
+.C4 .lv h3{font-size:24px;margin-bottom:6px}
+.C4 .lv .who{color:var(--mute);font-size:15px}
+.C4 .lv p{font-size:16px;color:var(--ink2);margin:16px 0 18px}
+.C4 .lv .ch{font-size:13.5px;color:var(--ink2);border-top:1px dashed var(--rule);padding-top:12px}
+.C4 .lv .ch b{font-weight:600;color:var(--ink)}
+.C4 .src{font-size:13px;color:var(--mute);margin-top:18px}
+
+/* ===== applications (signature) ===== */
+.C4 .apps{background:var(--paper2);padding:120px 0}
+.C4 .tabs{display:flex;flex-wrap:wrap;gap:10px;margin-top:40px}
+.C4 .tabs button{font:600 15.5px "C4";border:1px solid var(--rule);background:#FBF8F3;color:var(--ink2);border-radius:999px;padding:11px 20px;cursor:pointer;transition:all .25s}
+.C4 .tabs button[aria-selected=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.C4 .tabs button:hover{border-color:var(--ink)}
+.C4 .panel{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:56px;margin-top:40px;align-items:center;min-height:620px}
+.C4 .panel .txt h3{font-size:clamp(26px,2.5vw,36px);line-height:1.35}
+.C4 .panel .txt .intro{color:var(--ink2);margin:14px 0 22px}
+.C4 .panel ul.do{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
+.C4 .panel ul.do li{padding:13px 30px 13px 0;border-bottom:1px solid var(--rule);font-size:16.5px;position:relative;line-height:1.7}
+.C4 .panel ul.do li:before{content:"";position:absolute;right:4px;top:22px;width:10px;height:10px;border-radius:50%;border:2px solid var(--tc)}
+.C4 .panel .chs{font-size:14px;color:var(--mute);margin-top:16px}
+.C4 .panel .pr{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.C4 .panel .pr span{font-size:14px;background:#FBF8F3;border:1px solid var(--rule);border-radius:10px;padding:6px 12px}
+.C4 .panel .pr .mono{color:var(--tc2);font-size:12.5px;margin-left:6px}
+.C4 .panel .vis{position:relative;perspective:1600px}
+.C4 .panel .sheet{position:relative;border-radius:6px;overflow:hidden;box-shadow:0 50px 70px -40px rgba(60,40,20,.55),0 2px 8px rgba(60,40,20,.15);transform:rotate(-2.2deg);background:#fff;transition:transform .8s var(--ease)}
+.C4 .panel .sheet img{width:100%}
+.C4 .panel .vis .tag{position:absolute;top:-16px;left:-10px;background:var(--tc);color:#fff;font-weight:700;font-size:14px;border-radius:999px;padding:7px 15px;z-index:2;box-shadow:0 10px 20px -10px rgba(162,70,40,.7)}
+.C4 .panel.swap .sheet{animation:c4turn .7s var(--ease)}
+.C4 .panel.swap .txt{animation:c4in .6s var(--ease)}
+@keyframes c4turn{from{transform:rotate(-2.2deg) rotateY(-70deg);transform-origin:100% 50%;opacity:.2}to{transform:rotate(-2.2deg) rotateY(0);opacity:1}}
+@keyframes c4in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.C4 .apps .note{font-size:13.5px;color:var(--mute);margin-top:26px}
+
+/* ===== ARROWS demo ===== */
+.C4 .demo{padding:120px 0;background:var(--paper)}
+.C4 .dg{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:56px;margin-top:48px;align-items:start}
+.C4 .letters{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin-top:28px;direction:ltr}
+.C4 .letters button{all:unset;cursor:pointer;text-align:center;border-radius:14px;padding:12px 4px 10px;background:#FBF8F3;border:1px solid var(--rule);transition:all .3s}
+.C4 .letters button b{display:block;font-family:"C4S",serif;font-size:34px;line-height:1;color:var(--ink)}
+.C4 .letters button span{display:block;font-size:12px;color:var(--mute);margin-top:6px;line-height:1.3}
+.C4 .letters button.on{background:var(--ink);border-color:var(--ink)}.C4 .letters button.on b{color:#fff}.C4 .letters button.on span{color:#C9C2B6}
+.C4 .letters button:focus-visible{outline:2.5px solid var(--tc)}
+.C4 .def{margin-top:18px;min-height:96px;font-size:16px;color:var(--ink2);border-inline-start:3px solid var(--tc);padding-inline-start:16px}
+.C4 .def b{color:var(--ink)}
+.C4 .cmp{display:grid;gap:16px}
+.C4 .card{background:#fff;border:1px solid var(--rule);border-radius:18px;overflow:hidden}
+.C4 .card .hd{display:flex;justify-content:space-between;align-items:center;padding:12px 20px;border-bottom:1px solid var(--rule);font-size:13.5px;color:var(--mute)}
+.C4 .card .hd b{font-size:14.5px;color:var(--ink)}
+.C4 .card.weak .hd b{color:#A33A2A}
+.C4 .card.strong .hd b{color:#1F5E46}
+.C4 .card .bd{padding:18px 22px;font-size:16px;line-height:2}
+.C4 .card.weak .bd{color:var(--ink2);background:#FBF3F1}
+.C4 .card.strong .bd{background:#F3F8F5;min-height:360px}
+.C4 .ln{display:block;opacity:.18;transition:opacity .5s,background .5s;border-radius:6px;padding:0 6px;margin:0 -6px}
+.C4 .ln .k{font-family:"C4S",serif;font-weight:600;font-size:18px;color:#1F5E46;margin-inline-end:8px;display:inline-block;min-width:16px}
+.C4 .ln.on{opacity:1}
+.C4 .ln.hi{background:rgba(31,94,70,.10)}
+.C4 .demo .ctrl{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.C4 .demo .ctrl .btn{min-height:46px;padding:0 20px;font-size:15px}
+.C4 .demo .why{font-size:13.5px;color:var(--mute);margin-top:14px}
+
+/* ===== page explorer ===== */
+.C4 .flip{background:var(--navy);color:#E9E3D8;padding:120px 0 110px;overflow:hidden}
+.C4 .flip .h2{color:#fff}.C4 .flip .lead{color:#B9BFCB}.C4 .flip .kick{color:#E7B9A2}
+.C4 .rail{position:relative;margin-top:50px;height:520px;perspective:1700px}
+.C4 .rail .pgx{position:absolute;top:10px;left:50%;width:300px;margin-left:-150px;aspect-ratio:1/1.4142;border:0;padding:0;background:#fff;cursor:pointer;border-radius:3px;overflow:hidden;transition:transform .9s var(--ease),opacity .6s,filter .6s;box-shadow:0 40px 60px -30px rgba(0,0,0,.7)}
+.C4 .rail .pgx img{width:100%;height:100%;object-fit:cover}
+.C4 .rail .pgx:focus-visible{outline:3px solid #E7B9A2;outline-offset:4px}
+.C4 .rail-cap{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:10px;flex-wrap:wrap}
+.C4 .rail-cap .t{font-size:17px;font-weight:600;color:#fff}
+.C4 .rail-cap .t small{display:block;font-weight:400;font-size:14px;color:#B9BFCB}
+.C4 .rail-cap .nv{display:flex;gap:8px}
+.C4 .rail-cap .nv button{width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:transparent;color:#fff;font-size:18px;cursor:pointer}
+.C4 .rail-cap .nv button.z{width:auto;padding:0 18px;border-radius:999px;font:600 14px "C4"}
+.C4 .lb{position:fixed;inset:0;z-index:100;background:rgba(14,18,28,.88);display:none;align-items:center;justify-content:center;padding:24px}
+.C4 .lb.on{display:flex}
+.C4 .lb img{max-height:92vh;width:auto;max-width:94vw;border-radius:3px;box-shadow:0 30px 60px rgba(0,0,0,.6)}
+.C4 .lb button{position:absolute;top:18px;left:18px;width:46px;height:46px;border-radius:50%;border:0;background:#fff;font-size:20px;cursor:pointer}
+
+/* ===== contents ===== */
+.C4 .toc{padding:120px 0}
+.C4 .parts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 40px;margin-top:44px;border-top:1px solid var(--ink)}
+.C4 .parts div{display:grid;grid-template-columns:44px 1fr;gap:10px;padding:16px 0;border-bottom:1px solid var(--rule)}
+.C4 .parts .n{font-family:"C4S",serif;font-size:26px;line-height:1.1;color:var(--tc)}
+.C4 .parts b{display:block;font-size:16.5px}
+.C4 .parts span{font-size:14px;color:var(--mute);line-height:1.7}
+
+/* ===== receive ===== */
+.C4 .rec{background:var(--paper2);padding:120px 0}
+.C4 .rg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:48px}
+.C4 .rg article{background:#FBF8F3;border-radius:22px;border:1px solid var(--rule);overflow:hidden;display:flex;flex-direction:column}
+.C4 .rg .im{aspect-ratio:4/3;background:#E6DED1;display:flex;align-items:flex-end;justify-content:center;overflow:hidden;padding-top:26px}
+.C4 .rg .im img{width:62%;box-shadow:0 30px 40px -24px rgba(60,40,20,.6);border-radius:3px 3px 0 0}
+.C4 .rg .im.zip{align-items:center;padding:0}
+.C4 .rg .bd{padding:24px 24px 26px}
+.C4 .rg h3{font-size:21px}
+.C4 .rg .spec{font-family:"C4M";direction:ltr;text-align:right;font-size:12.5px;color:var(--mute);margin:4px 0 12px}
+.C4 .rg ul{margin:0;padding:0 18px 0 0;font-size:15.5px;color:var(--ink2)}
+.C4 .rg li{margin-bottom:5px}
+.C4 .verified{display:flex;gap:14px;align-items:flex-start;margin-top:26px;background:#FBF8F3;border:1px solid var(--rule);border-radius:16px;padding:18px 22px;font-size:15.5px;color:var(--ink2)}
+.C4 .verified b{color:var(--ink)}
+
+/* ===== offer ===== */
+.C4 .offer{padding:120px 0;background:var(--paper)}
+.C4 .og{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.12fr);gap:22px;margin-top:48px;align-items:stretch}
+.C4 .oc{border-radius:26px;padding:34px 32px;border:1px solid var(--rule);background:#FBF8F3;display:flex;flex-direction:column;position:relative}
+.C4 .oc h3{font-size:24px}
+.C4 .oc .who{font-size:15px;color:var(--mute);margin-top:4px}
+.C4 .price{display:flex;align-items:baseline;gap:12px;margin:22px 0 4px;flex-wrap:wrap}
+.C4 .price .v{font-family:"C4S",serif;font-size:72px;line-height:1}
+.C4 .price .u{font-size:15px;color:var(--mute)}
+.C4 .oc ul{list-style:none;padding:0;margin:20px 0 26px;flex:1}
+.C4 .oc li{position:relative;padding-right:28px;margin-bottom:10px;font-size:16px;line-height:1.75}
+.C4 .oc li:before{content:"";position:absolute;right:2px;top:9px;width:12px;height:7px;border-left:2px solid var(--tc);border-bottom:2px solid var(--tc);transform:rotate(-45deg)}
+.C4 .oc .btn{width:100%}
+.C4 .oc.both{background:var(--ink);color:#EDE6DA;border-color:var(--ink)}
+.C4 .oc.both h3,.C4 .oc.both .price .v{color:#fff}
+.C4 .oc.both .who,.C4 .oc.both .price .u{color:#B1AA9E}
+.C4 .oc.both li{color:#D9D2C6}.C4 .oc.both li b{color:#fff}
+.C4 .oc.both li:before{border-color:#E7B9A2}
+.C4 .oc .flag{position:absolute;top:-14px;right:28px;background:var(--tc);color:#fff;font-size:13px;font-weight:700;border-radius:999px;padding:5px 14px}
+.C4 .math{font-size:14.5px;color:#B1AA9E;margin-top:-6px}
+.C4 .math b{color:#E7B9A2}
+.C4 .duo{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0 0}
+.C4 .duo div{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:12px 14px;font-size:13.5px;color:#C9C2B6;line-height:1.7}
+.C4 .duo b{display:block;color:#fff;font-size:14.5px;margin-bottom:2px}
+.C4 .trust{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 28px;margin-top:30px;font-size:14.5px;color:var(--ink2)}
+
+/* ===== publisher + faq ===== */
+.C4 .pub{padding:100px 0;border-top:1px solid var(--rule)}
+.C4 .pub .g{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:56px}
+.C4 .pub dl{margin:0;display:grid;grid-template-columns:1fr 1fr;gap:28px 40px}
+.C4 .pub dt{font-weight:700;font-size:18px;margin-bottom:4px}
+.C4 .pub dd{margin:0;font-size:15.5px;color:var(--ink2)}
+.C4 .faq{padding:20px 0 110px}
+.C4 .faq .g{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:56px}
+.C4 details{border-top:1px solid var(--rule);padding:18px 0}
+.C4 details:last-of-type{border-bottom:1px solid var(--rule)}
+.C4 summary{list-style:none;cursor:pointer;font-weight:600;font-size:17px;display:flex;justify-content:space-between;gap:18px}
+.C4 summary::-webkit-details-marker{display:none}
+.C4 summary:after{content:"+";font-family:"C4M";color:var(--tc)}
+.C4 details[open] summary:after{content:"−"}
+.C4 details p{margin:10px 0 0;color:var(--ink2);font-size:16px}
+
+/* ===== final + foot ===== */
+.C4 .final{background:var(--tc);color:#fff;padding:90px 0;text-align:center;position:relative;overflow:hidden}
+.C4 .final h2{color:#fff;font-size:clamp(30px,3.6vw,52px);line-height:1.3}
+.C4 .final p{color:#FBE6DC;font-size:18px;margin:16px auto 30px;max-width:620px}
+.C4 .final .btn{background:#fff;color:var(--ink);box-shadow:none}
+.C4 .final .btn:hover{background:#F4EFE7}
+.C4 .final .orb{position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.22),rgba(255,255,255,0) 60%);left:-140px;top:-180px;pointer-events:none}
+.C4 .foot{padding:34px 0 46px;font-size:13.5px;color:var(--mute)}
+.C4 .foot .g{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 30px}
+.C4 .sbar{position:fixed;inset:auto 0 0 0;z-index:60;background:rgba(23,24,28,.97);color:#EDE6DA;display:none;align-items:center;justify-content:space-between;gap:14px;padding:10px 16px calc(10px + env(safe-area-inset-bottom));transform:translateY(110%);transition:transform .35s var(--ease)}
+.C4 .sbar.on{transform:none}
+.C4 .sbar b{font-family:"C4S",serif;font-size:30px;color:#fff;line-height:1}
+.C4 .sbar span{display:block;font-size:12px;color:#A9A398}
+.C4 .sbar .btn{min-height:46px;padding:0 22px;font-size:15.5px}
+
+/* ===== responsive ===== */
+@media (max-width:1100px){
+ .C4 .mast nav{display:none}
+ .C4 .hero{height:auto;min-height:0;max-height:none;display:flex;flex-direction:column;background:var(--paper)}
+ .C4 .hero .copy{position:relative;right:auto;width:auto;padding:110px var(--side) 34px;order:1}
+ .C4 .hero .media{position:relative;aspect-ratio:16/9;order:2}
+ .C4 .hero .veil{display:none}
+ .C4 .ribbon .wrap{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .C4 .ribbon a:nth-child(4){border-inline-start:0}
+ .C4 .ribbon a{border-top:1px solid rgba(255,255,255,.08)}
+ .C4 .panel,.C4 .dg,.C4 .pub .g,.C4 .faq .g{grid-template-columns:1fr;gap:36px}
+ .C4 .panel{min-height:0}
+ .C4 .panel .vis{max-width:520px;margin:0 auto;width:100%}
+ .C4 .parts{grid-template-columns:1fr 1fr}
+ .C4 .og{grid-template-columns:1fr}
+ .C4 .oc.both{order:-1}
+}
+@media (max-width:700px){
+ .C4{font-size:16.5px}
+ .C4 .mast .wrap{height:62px}
+ .C4 .hero .copy{padding:86px var(--side) 26px}
+ .C4 .lock .serif{font-size:64px}.C4 .lock .ar{font-size:44px}
+ .C4 .hero h1{font-size:20px;margin-top:16px}
+ .C4 .hero .row .btn{width:100%}
+ .C4 .hero .alt{width:100%;text-align:center;border:0;text-decoration:underline}
+ .C4 .hero .media{aspect-ratio:4/5}
+ .C4 .ribbon .wrap{grid-template-columns:1fr 1fr;padding:0}
+ .C4 .ribbon a{padding:16px 18px;font-size:15px}
+ .C4 .ribbon a:nth-child(odd){border-inline-start:0}.C4 .ribbon a:nth-child(4){border-inline-start:1px solid rgba(255,255,255,.1)}
+ .C4 .levels,.C4 .apps,.C4 .demo,.C4 .flip,.C4 .toc,.C4 .rec,.C4 .offer{padding:76px 0}
+ .C4 .lv{grid-template-columns:1fr;gap:14px;margin-top:34px}
+ .C4 .tabs{flex-wrap:nowrap;overflow-x:auto;margin:30px calc(-1*var(--side)) 0;padding:0 var(--side) 6px;scrollbar-width:none}
+ .C4 .tabs::-webkit-scrollbar{display:none}
+ .C4 .tabs button{flex:none}
+ .C4 .panel{margin-top:28px}
+ .C4 .panel .vis{max-width:300px;order:-1}
+ .C4 .letters{gap:6px}.C4 .letters button b{font-size:28px}.C4 .letters button span{font-size:10.5px}
+ .C4 .card.strong .bd{min-height:0;font-size:15px}
+ .C4 .rail{height:420px}.C4 .rail .pgx{width:230px;margin-left:-115px}
+ .C4 .parts{grid-template-columns:1fr}
+ .C4 .rg{grid-template-columns:1fr}
+ .C4 .oc{padding:28px 22px}.C4 .price .v{font-size:60px}
+ .C4 .duo{grid-template-columns:1fr}
+ .C4 .pub dl{grid-template-columns:1fr}
+ .C4 .sbar{display:flex}
+ .C4 .foot{padding-bottom:110px}
+}
+@media (prefers-reduced-motion:reduce){
+ .C4 [data-rv]{opacity:1;transform:none;transition:none}
+ .C4 *{animation:none!important;transition-duration:.01ms!important}
+ .C4 .ln{opacity:1}
+}
+</style>
+
+<div class="C4" id="cl4">
+<header class="mast"><div class="wrap">
+ <div class="brand"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 12l7-6 7 6M3 17l7-6 7 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>AI Step Ahead</div>
+ <nav aria-label="أقسام الصفحة"><a href="#apps">التطبيقات</a><a href="#method">الطريقة</a><a href="#pages">تصفّح الكتاب</a><a href="#offer">السعر</a></nav>
+ <a class="pill" href="#offer"><span class="js-pc">{{ c_p | money_without_trailing_zeros }}</span> · اشترِ</a>
+</div></header>
+
+<section class="hero" aria-label="Claude بلا تخمين">
+ <div class="copy">
+  <div class="lock"><span class="serif">Claude</span><span class="ar">بلا تخمين</span></div>
+  <h1>الدليل العربي الشامل لاستخدام Claude: من أول محادثة إلى المشاريع والأتمتة.</h1>
+  <p class="sub">للمبتدئ ولمن يستخدمه كلّ يوم. تطبيقات عملية في العمل والدراسة والأعمال والمحتوى والبحث والأتمتة، ومعه 120 برومبت عربي جاهز للتعديل وملفات تدريب.</p>
+  <div class="row">
+   <a class="btn js-buy-c" href="/cart/55538560631121:1">احصل على الدليل · <span class="js-pc">{{ c_p | money_without_trailing_zeros }}</span> <span class="ar">←</span></a>
+   <a class="alt" href="#offer">أو الكتابان معًا (Claude + ChatGPT) بـ <b class="js-pb">{{ b_p | money_without_trailing_zeros }}</b></a>
+  </div>
+  <div class="get" aria-label="ما تحصل عليه">
+   <span><b>299 صفحة</b> · 33 فصلًا</span><span><b>120 برومبت</b> جاهز للتعديل</span><span><b>ملفات تدريب</b> وقوالب</span><span>PDF · تنزيل فوري</span><span>دفعة واحدة</span>
+  </div>
+ </div>
+ <div class="media">
+  <picture><source media="(max-width:700px)" srcset="{{ 'cl4-hero-m-poster.jpg' | asset_url }}"><img src="{{ 'cl4-hero-w-poster.jpg' | asset_url }}" alt="كتاب Claude بلا تخمين مفتوحًا على جهاز لوحي، ومكتبة الـ120 برومبت على هاتف" width="1600" height="900" fetchpriority="high"></picture>
+  <video muted playsinline loop preload="none" aria-hidden="true" data-w="{{ 'cl4-hero-w.mp4' | asset_url }}" data-m="{{ 'cl4-hero-m.mp4' | asset_url }}" data-pw="{{ 'cl4-hero-w-poster.jpg' | asset_url }}" data-pm="{{ 'cl4-hero-m-poster.jpg' | asset_url }}"></video>
+  <button class="ctl" type="button" aria-label="إيقاف الفيديو">إيقاف الحركة</button>
+ </div>
+ <div class="veil"></div>
+</section>
+
+<nav class="ribbon" aria-label="مجالات التطبيق"><div class="wrap">
+ <a href="#apps" data-go="0">العمل والإنتاجية<small>بريد، تقارير، اجتماعات، خطط</small></a>
+ <a href="#apps" data-go="1">الدراسة والتعلّم<small>تعلّم سريع، ترجمة، لغات</small></a>
+ <a href="#apps" data-go="2">الأعمال وريادة الأعمال<small>8 حالات من الواقع</small></a>
+ <a href="#apps" data-go="3">المحتوى والكتابة<small>استراتيجية، صوت، نصوص</small></a>
+ <a href="#apps" data-go="4">البحث والمستندات<small>مصادر، PDF، Excel</small></a>
+ <a href="#apps" data-go="5">المشاريع والأتمتة<small>ذاكرة، Claude Code، ربط</small></a>
+</div></nav>
+
+<section class="levels"><div class="wrap">
+ <div class="kick" data-rv>لأيّ مستوى؟</div>
+ <h2 class="h2" data-rv>سواء فتحت Claude أول مرة، أو تستخدمه كلّ يوم.</h2>
+ <p class="lead" data-rv>الكتاب لا يُقرأ بالضرورة من أوله إلى آخره. اختر مسارك بحسب هدفك، واقرأ الجزء الثاني كاملًا أيًّا كان اختيارك، فكلّ ما بعده مبنيّ عليه.</p>
+ <div class="lv">
+  <article data-rv style="--c:#C2583A"><h3>المبتدئ</h3><div class="who">لم تستخدم Claude استخدامًا جادًّا بعد</div><p>ابدأ من البداية، وأنجز تمرين كلّ فصل قبل أن تنتقل. ستفهم كيف يعمل، وتجهّز حسابك، وتكتب أول برومبت يصيب.</p><div class="ch"><b>الفصول:</b> 1 · 2 · 3 · 4 · 5–10 · 11 وما بعده</div></article>
+  <article data-rv style="--c:#1C2A44"><h3>المحترف المشغول</h3><div class="who">تريد إنتاجًا أكبر من عملك</div><p>اقرأ الفصلين 3 و4 للإعداد، ثم الجزء الثاني، ثم الأجزاء التي تناسب عملك: البريد والتقارير، أو البحث، أو الملفات والبيانات.</p><div class="ch"><b>الفصول:</b> 3–4 · 5–10 · 11–16 · 17 · 19 · 21–22 · 30</div></article>
+  <article data-rv style="--c:#5E7F6F"><h3>المستخدم المتقدّم</h3><div class="who">تبني أنظمة عمل وأدوات</div><p>تصفّح الجزء الأول من أجل بطاقات التحقق، ثم ركّز على سير العمل الموثوق، وClaude Code، وأدوات الربط، والمهارات والمهام المجدولة.</p><div class="ch"><b>الفصول:</b> 2 · 5–10 · 17 · 20 · 24–29 · 30–31</div></article>
+ </div>
+ <p class="src" data-rv>من صفحة «كيف تقرأ هذا الكتاب» في الدليل نفسه.</p>
+</div></section>
+
+<section class="apps" id="apps"><div class="wrap">
+ <div class="kick" data-rv>تطبيقات عملية</div>
+ <h2 class="h2" data-rv>دليل واحد، لكلّ ما تستخدم فيه Claude.</h2>
+ <p class="lead" data-rv>كلّ مجال هنا فصول كاملة بتمارين وبرومبتات جاهزة، لا فقرات عابرة. اختر مجالك لترى صفحة حقيقية منه.</p>
+ <div class="tabs" role="tablist" aria-label="مجالات التطبيق" data-rv></div>
+ <div class="panel" role="tabpanel" aria-live="polite">
+  <div class="txt"></div>
+  <div class="vis"><span class="tag"></span><div class="sheet"><img alt="" width="900" height="1273"></div></div>
+ </div>
+ <p class="note">المثال المستمر في الكتاب: رنا، صاحبة محمصة قهوة متخيَّلة في عمّان، تظهر في معظم الفصول من الفصل 5 حتى الفصل 31. كلّ الأسماء والأرقام فيه خيالية للتعليم.</p>
+</div></section>
+
+<section class="demo" id="method"><div class="wrap">
+ <div class="kick" data-rv>الطريقة</div>
+ <h2 class="h2" data-rv>لماذا «بلا تخمين»؟ لأنك تتوقف عن ترك Claude يخمّن ما تريد.</h2>
+ <p class="lead" data-rv>إطار ARROWS في الفصل 5: ستة عناصر تحوّل الطلب المبهم إلى مواصفات واضحة. هذا مثال الكتاب نفسه، خطوة بخطوة.</p>
+ <div class="dg">
+  <div data-rv>
+   <div class="letters" role="tablist" aria-label="عناصر ARROWS"></div>
+   <div class="def" aria-live="polite"></div>
+   <div class="ctrl"><button class="btn dark" type="button" id="dplay">ابنِ البرومبت <span class="ar">←</span></button><button class="btn line" type="button" id="dreset">من البداية</button></div>
+   <p class="why">ARROWS إطار تعليمي وضعه المؤلف، يقوم على مبادئ واردة في إرشادات Anthropic المنشورة، وليس منهجًا رسميًّا صادرًا عنها.</p>
+  </div>
+  <div class="cmp" data-rv>
+   <div class="card weak"><div class="hd"><b>البرومبت الضعيف</b><span>سطر واحد</span></div><div class="bd">اكتب رسالة بريد إلكتروني إلى المورد عن الشحنة التي تأخرت.</div></div>
+   <div class="card strong"><div class="hd"><b>البرومبت المحسَّن · ARROWS</b><span class="mono">prompts/ch05-supplier-email.md</span></div>
+    <div class="bd" id="dbody">
+     <span class="ln" data-k="0"><span class="k">R</span>أنا رنا، صاحبة محمصة ندى في عمّان، ونبيع القهوة المختصة عبر الإنترنت. أحتاج إلى رسالة بريد إلكتروني إلى موردنا في كولومبيا، <span class="en">Finca Verde</span>. نتعامل معهم منذ 3 سنوات، والعلاقة بيننا جيدة.</span>
+     <span class="ln" data-k="2"><span class="k">R</span>الوقائع: طلب الشراء رقم <span class="en">PO-2291</span>، ويشمل 120 كغ من بن <span class="en">Huila</span> الأخضر، وموعده المحدد 1 سبتمبر. مرّت 3 أسابيع على الموعد ولم يُشحن بعد، ولم يردّوا على آخر رسالتين. مخزوننا من هذه القهوة يكفي 10 أيام فقط.</span>
+     <span class="ln" data-k="1"><span class="k">A</span>الهدف: الحصول على موعد شحن مؤكد خلال 48 ساعة، مع الحفاظ على العلاقة.</span>
+     <span class="ln" data-k="3"><span class="k">O</span>اكتب الرسالة بالإنجليزية، في 100 إلى 150 كلمة، مع سطر موضوع واضح.</span>
+     <span class="ln" data-k="4"><span class="k">W</span>النبرة: حازمة وودودة. لا تعتذر نيابةً عنا، ولا تهدد، ولا تبالغ في المجاملة.</span>
+     <span class="ln" data-k="5"><span class="k">S</span>اختم بطلبين محددين يمكنهم الرد عليهما: موعد شحن مؤكد، ورقم التتبع فور صدوره.</span>
+    </div></div>
+  </div>
+ </div>
+</div></section>
+
+<section class="flip" id="pages"><div class="wrap">
+ <div class="kick" data-rv>تصفّح قبل أن تشتري</div>
+ <h2 class="h2" data-rv>صفحات حقيقية من الكتاب.</h2>
+ <p class="lead" data-rv>ما تراه هنا هو ما تنزّله: نفس الصفحات، ونفس التصميم. اضغط على أيّ صفحة لتكبيرها.</p>
+ <div class="rail" id="rail"></div>
+ <div class="rail-cap"><div class="t" id="rcap" aria-live="polite"></div><div class="nv"><button type="button" id="rprev" aria-label="الصفحة السابقة">→</button><button type="button" class="z" id="rzoom">تكبير الصفحة</button><button type="button" id="rnext" aria-label="الصفحة التالية">←</button></div></div>
+</div>
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="صفحة مكبّرة"><button type="button" aria-label="إغلاق">×</button><img alt=""></div>
+</section>
+
+<section class="toc"><div class="wrap">
+ <div class="kick" data-rv>المحتويات</div>
+ <h2 class="h2" data-rv>15 جزءًا. من الأساسيات إلى المشاريع الختامية.</h2>
+ <div class="parts" data-rv>
+  <div><span class="n">1</span><p><b>اكتشاف Claude</b><span>ما هو، كيف تعمل النماذج اللغوية، جولة في الواجهة، الخطط والحدود</span></p></div>
+  <div><span class="n">2</span><p><b>كتابة البرومبت</b><span>إطار ARROWS، الأمثلة ووسوم XML، سلاسل البرومبتات، الهلوسة والتحقق، مكتبتك الشخصية</span></p></div>
+  <div><span class="n">3</span><p><b>العمل اليومي</b><span>البريد والتقارير والاجتماعات والخطط، التعلّم السريع والترجمة</span></p></div>
+  <div><span class="n">4</span><p><b>البحث والتحليل</b><span>البحث على الويب وميزة Research وفحص المصادر، تقرير سوق موثّق</span></p></div>
+  <div><span class="n">5</span><p><b>الملفات والبيانات</b><span>PDF وWord والصور الممسوحة، ملفات Excel وCSV</span></p></div>
+  <div><span class="n">6</span><p><b>المشاريع والذاكرة</b><span>التعليمات والمعرفة والعمل الممتد، الذاكرة والمحادثات الخفية</span></p></div>
+  <div><span class="n">7</span><p><b>Artifacts والمنتجات الرقمية</b><span>مستندات وعروض وتصاميم ولوحات معلومات، أداة تسعير تفاعلية</span></p></div>
+  <div><span class="n">8</span><p><b>الأعمال والتسويق</b><span>ثماني حالات: متجر، خدمة عملاء، مستقل، موظف، صانع محتوى، مؤسس، مدير، فريق تسويق</span></p></div>
+  <div><span class="n">9</span><p><b>صنّاع المحتوى</b><span>نظام لإنتاج المحتوى: الاستراتيجية والصوت والنصوص ومراجعة الجودة</span></p></div>
+  <div><span class="n">10</span><p><b>البرمجة وبناء التطبيقات</b><span>البرمجة لغير المبرمجين، Claude Code، مدخل إلى API</span></p></div>
+  <div><span class="n">11</span><p><b>الأتمتة والتكامل</b><span>أدوات الربط وMCP والأذونات، المهارات والمهام المجدولة</span></p></div>
+  <div><span class="n">12</span><p><b>تقنيات متقدمة</b><span>سير عمل موثوق: معايير قبول، اختبار، مقارنة نماذج وتكلفة</span></p></div>
+  <div><span class="n">13</span><p><b>الأمان والخصوصية</b><span>البيانات الحساسة، حقن البرومبت، حقوق النشر، التحقق قبل القرار</span></p></div>
+  <div><span class="n">14</span><p><b>المشاريع الختامية</b><span>خمسة مشاريع تجمع ما تعلّمته في عمل حقيقي</span></p></div>
+  <div><span class="n">15</span><p><b>مكتبة البرومبتات</b><span>الأربعون الأساسية من 120، في ثماني فئات</span></p></div>
+ </div>
+</div></section>
+
+<section class="rec"><div class="wrap">
+ <div class="kick" data-rv>ماذا تحصل؟</div>
+ <h2 class="h2" data-rv>ثلاثة ملفات، تصلك فور الدفع.</h2>
+ <div class="rg">
+  <article data-rv><div class="im"><img src="{{ 'cl4-cover-s.webp' | asset_url }}" alt="غلاف كتاب Claude بلا تخمين" width="420" height="594" loading="lazy"></div><div class="bd"><h3>الكتاب</h3><div class="spec">PDF · 299 pages · 15 parts · 33 chapters</div><ul><li>تمرين واختبار إتقان في نهاية كلّ فصل</li><li>معجم للمصطلحات، وقائمة مصادر، وسجلّ تحقق</li><li>طبعة أكتوبر 2026</li></ul></div></article>
+  <article data-rv><div class="im"><img src="{{ 'cl4-pcover-s.webp' | asset_url }}" alt="غلاف مكتبة 120 برومبت عربي" width="420" height="594" loading="lazy"></div><div class="bd"><h3>120 برومبت عربي</h3><div class="spec">PDF · 38 pages · 8 categories × 15</div><ul><li>الكتابة، التقارير، البحث، المستندات، البيانات، المحتوى، الأعمال، الجودة والأمان</li><li>انسخ، واستبدل ما بين القوسين بمعلوماتك</li></ul></div></article>
+  <article data-rv><div class="im"><img src="{{ 'cl4-prompts-s.webp' | asset_url }}" alt="صفحة من مكتبة البرومبتات: الكتابة والبريد" width="420" height="594" loading="lazy"></div><div class="bd"><h3>ملفات التدريب</h3><div class="spec">ZIP · 29 files</div><ul><li>بيانات التمارين (CSV وPDF وصورة)، وقوالب، وبرومبتات الفصول، وكود</li><li>بأسمائها الأصلية بالإنجليزية كما يشير إليها الكتاب</li></ul></div></article>
+ </div>
+ <div class="verified" data-rv><span aria-hidden="true">✓</span><p style="margin:0"><b>معلومات مؤرَّخة.</b> روجعت المعلومات التقنية المتغيرة (الخطط والنماذج وأسماء الإعدادات) على المصادر الرسمية في 17–18 أكتوبر 2026، ولكلّ معلومة منها بطاقة تحقق تسمّي مصدرها. وإن خالف الكتاب ما تراه في التطبيق، فالوثائق الرسمية هي المرجع.</p></div>
+</div></section>
+
+<section class="offer" id="offer"><div class="wrap">
+ <div class="kick" data-rv>اختر</div>
+ <h2 class="h2" data-rv>ابدأ بـ Claude. أو خذ الأداتين بفرق بسيط.</h2>
+ <div class="og">
+  <article class="oc" data-rv>
+   <h3>Claude بلا تخمين</h3><div class="who">الدليل كاملًا مع هديّته</div>
+   <div class="price"><span class="v js-pc">{{ c_p | money_without_trailing_zeros }}</span><span class="u">دفعة واحدة</span></div>
+   <ul><li>الكتاب: 299 صفحة و33 فصلًا</li><li>120 برومبت عربي جاهز للتعديل</li><li>ملفات التدريب والقوالب</li></ul>
+   <a class="btn dark js-buy-c" href="/cart/55538560631121:1">اشترِ Claude بلا تخمين</a>
+  </article>
+  <article class="oc both" data-rv>
+   <span class="flag">الكتابان معًا</span>
+   <h3>Claude + ChatGPT بلا تخمين</h3><div class="who">لمن يستخدم الأداتين، أو لم يقرّر بعد</div>
+   <div class="price"><span class="v js-pb">{{ b_p | money_without_trailing_zeros }}</span><span class="u">بدل <span class="js-ps">{{ s_p | money_without_trailing_zeros }}</span> عند شراء كلّ كتاب وحده</span></div>
+   <p class="math">أي أنّ كتاب ChatGPT يضيف <b class="js-pd">{{ d_p | money_without_trailing_zeros }}</b> فقط إلى سعر Claude. الخصم يُطبَّق تلقائيًّا عند الدفع.</p>
+   <div class="duo">
+    <div><b>Claude بلا تخمين</b>إطار ARROWS، والمستندات الطويلة، والمشاريع والذاكرة، وArtifacts، وClaude Code وأدوات الربط.</div>
+    <div><b>ChatGPT بلا تخمين</b>طريقة «المِقاس» وبروتوكول «تأكَّد»، والصورة والصوت، ومقطع قصير لكلّ فصل، ونسخة للجوّال.</div>
+   </div>
+   <ul><li><b>كتابان كاملان</b> (أكثر من 590 صفحة)</li><li><b>240 برومبت</b> وملفات تدريب لكلّ كتاب</li><li>تعرف ما تتقنه كلّ أداة، فتختار الأنسب لكلّ مهمة</li></ul>
+   <a class="btn js-buy-b" href="/cart/55563696013649:1,55538560631121:1">أريد الكتابين · <span class="js-pb">{{ b_p | money_without_trailing_zeros }}</span></a>
+  </article>
+ </div>
+ <div class="trust"><span>تنزيل فوري بعد الدفع، ونسخة على بريدك</span><span>Apple Pay وGoogle Pay والبطاقات</span><span>ضمان 30 يومًا وفق <a href="/policies/refund-policy">سياسة الاسترداد</a></span></div>
+</div></section>
+
+<section class="pub"><div class="wrap g">
+ <div data-rv><div class="kick">الناشر</div><h2 class="h2" style="font-size:clamp(26px,2.6vw,38px)">AI Step Ahead: أدلّة عربية عملية في الذكاء الاصطناعي.</h2></div>
+ <dl data-rv>
+  <div><dt>مكتوب ليُطبَّق</dt><dd>كلّ فصل يبدأ بأهداف واضحة وينتهي بتمرين واختبار إتقان، ولكلّ مفهوم مثال عملي.</dd></div>
+  <div><dt>مؤرَّخ ومنسوب</dt><dd>ما يتغيّر في Claude له تاريخ تحقق ومصدر رسمي، وفي آخر الكتاب فصل عن البقاء مواكبًا.</dd></div>
+  <div><dt>أمثلة واضحة الحدود</dt><dd>كلّ مخرج توضيحي موسوم بذلك، ورسوم الواجهة مبسّطة وليست لقطات شاشة.</dd></div>
+  <div><dt>دليل مستقل</dt><dd>Claude علامة تجارية لشركة Anthropic، وتُذكر هنا للوصف فقط.</dd></div>
+ </dl>
+</div></section>
+
+<section class="faq"><div class="wrap g">
+ <div data-rv><div class="kick">أسئلة</div><h2 class="h2" style="font-size:clamp(26px,2.6vw,38px)">قبل أن تشتري</h2></div>
+ <div data-rv>
+  <details><summary>هل يناسبني إن لم أستخدم Claude من قبل؟</summary><p>نعم. الجزء الأول يشرح Claude من الصفر: كيف يعمل، وإعدادات يومك الأول، وأول مهمة كاملة مع ملف مرفق. وللمبتدئ مسار قراءة خاص.</p></details>
+  <details><summary>وإن كنت أستخدمه كلّ يوم؟</summary><p>الأجزاء المتقدمة تغطّي المشاريع والذاكرة وArtifacts وClaude Code وأدوات الربط وMCP والمهارات والمهام المجدولة وسير العمل الموثوق، وخمسة مشاريع ختامية.</p></details>
+  <details><summary>هل أحتاج اشتراكًا مدفوعًا في Claude؟</summary><p>كثير من الفصول تعمل على الخطة المجانية. بعض المزايا المتقدمة تحتاج خطة مدفوعة، والفصل 4 يشرح الخطط وحدود الاستخدام وما يناسب كلّ نوع من المستخدمين.</p></details>
+  <details><summary>ما الفرق بينه وبين كتاب ChatGPT بلا تخمين؟</summary><p>كتابان مستقلّان لأداتين مختلفتين، لكلّ منهما إعداداته وأمثلته. إن كنت تستخدم أداة واحدة فاختر كتابها، وإن كنت تستخدم الاثنتين فالكتابان معًا أوفر.</p></details>
+  <details><summary>كيف أستلم الملفات؟</summary><p>روابط التنزيل تظهر فور الدفع في صفحة تأكيد الطلب، وتصلك على بريدك الإلكتروني.</p></details>
+  <details><summary>ماذا لو لم يناسبني؟</summary><p>راجع <a href="/policies/refund-policy">سياسة الاسترداد</a>، وراسلنا خلال 30 يومًا من الشراء مع رقم الطلب.</p></details>
+ </div>
+</div></section>
+
+<section class="final"><span class="orb" aria-hidden="true"></span><div class="wrap">
+ <h2>Claude متاح للجميع. الفرق في طريقة استخدامه.</h2>
+ <p>الدليل كاملًا مع 120 برومبت وملفات التدريب، بدفعة واحدة.</p>
+ <a class="btn js-buy-c" href="/cart/55538560631121:1">احصل على Claude بلا تخمين · <span class="js-pc">{{ c_p | money_without_trailing_zeros }}</span> <span class="ar">←</span></a>
+</div></section>
+<footer class="foot"><div class="wrap g"><span>© AI Step Ahead · Claude بلا تخمين · طبعة أكتوبر 2026</span><span><a href="/policies/refund-policy">الاسترداد</a> · <a href="/policies/privacy-policy">الخصوصية</a> · <a href="/policies/terms-of-service">الشروط</a> · <a href="/pages/contact">تواصل معنا</a></span></div></footer>
+<div class="sbar" aria-hidden="true"><div><b class="js-pc">{{ c_p | money_without_trailing_zeros }}</b><span>الدليل + 120 برومبت</span></div><a class="btn" href="#offer" tabindex="-1">اشترِ الآن</a></div>
+</div>
+
+<script type="application/json" id="cl4data">{"img":{"work":"{{ 'cl4-work.webp' | asset_url }}","study":"{{ 'cl4-study.webp' | asset_url }}","biz":"{{ 'cl4-biz.webp' | asset_url }}","content":"{{ 'cl4-content.webp' | asset_url }}","research":"{{ 'cl4-research.webp' | asset_url }}","auto":"{{ 'cl4-auto.webp' | asset_url }}","cover":"{{ 'cl4-cover.webp' | asset_url }}","paths":"{{ 'cl4-paths.webp' | asset_url }}","arrows":"{{ 'cl4-arrows.webp' | asset_url }}","excel":"{{ 'cl4-excel.webp' | asset_url }}","docs":"{{ 'cl4-docs.webp' | asset_url }}","code":"{{ 'cl4-code.webp' | asset_url }}","capstone":"{{ 'cl4-capstone.webp' | asset_url }}","prompts":"{{ 'cl4-prompts.webp' | asset_url }}","pcats":"{{ 'cl4-pcats.webp' | asset_url }}"},"handleC":"claude-بلا-تخمين-الدليل-العربي-العملي","handleG":"chatgpt-arabic","disc":4}</script>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+ var root=document.getElementById('cl4'); if(!root) return;
+ var D=JSON.parse(document.getElementById('cl4data').textContent), IMG=D.img;
+ var RM=matchMedia('(prefers-reduced-motion: reduce)').matches, MOB=matchMedia('(max-width:700px)').matches;
+ var esc=function(s){return String(s).replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]})};
+
+ /* reveal */
+ var rv=root.querySelectorAll('[data-rv]');
+ if(!RM&&'IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -6% 0px'});rv.forEach(function(el){io.observe(el)})}else rv.forEach(function(el){el.classList.add('in')});
+
+ /* hero video: poster is the LCP; video only after load, never with reduced motion or data saver */
+ var vid=root.querySelector('.hero video'),ctl=root.querySelector('.hero .ctl'),save=navigator.connection&&navigator.connection.saveData;
+ if(vid&&!RM&&!save){addEventListener('load',function(){setTimeout(function(){vid.poster=MOB?vid.dataset.pm:vid.dataset.pw;vid.src=MOB?vid.dataset.m:vid.dataset.w;vid.load();vid.addEventListener('playing',function(){vid.classList.add('on')},{once:true});var p=vid.play();if(p&&p.catch)p.catch(function(){})},250)});
+  ctl.addEventListener('click',function(){if(vid.paused){vid.play();ctl.textContent='إيقاف الحركة';ctl.setAttribute('aria-label','إيقاف الفيديو')}else{vid.pause();ctl.textContent='تشغيل الحركة';ctl.setAttribute('aria-label','تشغيل الفيديو')}})}
+ else if(ctl) ctl.remove();
+
+ /* applications */
+ var AREAS=[
+  {k:'work',t:'العمل والإنتاجية',h:'بريد وتقارير واجتماعات وخطط، بصوتك أنت.',i:'دورة العمل المكتبي في أربع خطوات، وكيف تعلّم Claude أسلوبك في الكتابة.',
+   d:['ردّ على سلسلة رسائل كاملة بموقف واضح، دون مجاملة زائدة','التقرير: المخطط أولًا، ثم الكتابة','محضر اجتماع يُظهر فجواته بصدق، وتحديث أسبوعي من جدول المتابعة','خطة ضمن القيود الحقيقية، ثم تحليل ما قبل الفشل'],
+   c:'الفصول 11 و19، وإطار ARROWS في الفصل 5',p:[['W01','ردّ بموقف واضح'],['R01','مخطط التقرير أولًا'],['R04','تحليل ما قبل الفشل']],tag:'الفصل 11'},
+  {k:'study',t:'الدراسة والتعلّم',h:'اجعله معلّمًا يشرح لك، لا موسوعة تنسخ منها.',i:'كيف تتعلّم موضوعًا جديدًا بسرعة، وتترجم بدقة، وتعمل بأكثر من لغة دون أخطاء صامتة.',
+   d:['أربع حركات تثبّت ما تتعلّمه في جلسة مع Claude','الترجمة موجز يُكتب: ابنِ المسرد قبل أن تحتاجه','ثلاثة فحوص قبل أن تنشر أي ترجمة','افهم لماذا «يهلوس» النموذج، ومتى تثق بالإجابة'],
+   c:'الفصول 2 و8 و12',p:[['D01','اقتبس، ثم أجب'],['S01','موجز بحث'],['Q02','اسألني أولًا']],tag:'الفصل 12'},
+  {k:'biz',t:'الأعمال وريادة الأعمال',h:'ثماني حالات من الواقع، لكلّ دور خطواته.',i:'متجر إلكتروني، وخدمة عملاء، ومستقل، وموظف، وصانع محتوى، ومؤسس، ومدير، وفريق تسويق. ابحث عن حالتك وطبّقها.',
+   d:['صفحة منتج تجيب عن الاعتراضات، وسلسلة متابعة لمن يشترون أول مرة','مكتبة ردود لخدمة العملاء مع قواعد للتصعيد','من موجز مبهم إلى عرض عمل بحدود واضحة','مشروع: أداة تسعير تفاعلية تبنيها بنفسك'],
+   c:'الفصول 20 و21 و22',p:[['B01','خريطة الاعتراضات'],['B02','عرض عمل بحدود واضحة'],['B05','مكتبة ردود العملاء']],tag:'الفصل 21'},
+  {k:'content',t:'المحتوى والكتابة',h:'نظام لإنتاج المحتوى، لا برومبت واحد.',i:'الاستراتيجية والصوت الكتابي والنصوص ومراجعة الجودة، بإيقاع أسبوعي واضح.',
+   d:['الاستراتيجية في صفحة واحدة','دليل صوت كتابي مبني على عيّناتك أنت','نصوص الفيديو: أول ثلاث ثوانٍ تحسم الأمر','فكرة واحدة، صيغ كثيرة، وبوابة جودة قبل النشر'],
+   c:'الفصلان 6 و23',p:[['C02','دليل الصوت الكتابي'],['C04','جدول نص فيديو قصير'],['C05','فحص الادعاءات']],tag:'الفصل 23'},
+  {k:'research',t:'البحث وتحليل المستندات',h:'من سؤال حقيقي إلى إجابة موثّقة بمصادرها.',i:'البحث على الويب وميزة Research، والحكم على المصادر، وقراءة PDF وWord والصور، وتحليل Excel وCSV.',
+   d:['سلّم الأدلة: خمسة أسئلة تطرحها على أي مصدر','فحص الاستشهاد بثلاث نقرات','استخراج جدول من PDF مع أرقام الصفحات','نظّف البيانات مع سجل، ثم أثبت توافق الإجماليات'],
+   c:'الفصول 13 إلى 16',p:[['S03','تدقيق الاستشهادات'],['D03','استخراج جدول مع أرقام الصفحات'],['N01','وصّف البيانات قبل تنظيفها']],tag:'الفصل 13'},
+  {k:'auto',t:'المشاريع والأتمتة',h:'من محادثات متفرقة إلى نظام يعمل معك.',i:'المشاريع والذاكرة، وClaude Code لغير المبرمجين، وأدوات الربط وMCP، والمهارات والمهام المجدولة، وحدود الأتمتة.',
+   d:['مشروع بتعليمات ومعرفة لا تنتهي صلاحيتها','أول مشروع حقيقي في Claude Code، بأوضاع أذونات تناسب المخاطرة','أول سير عمل مربوط، بأقل صلاحية تكفي','ثلاثة أسئلة قبل أن تؤتمت أيّ مهمة'],
+   c:'الفصول 17–18 و24–28، وخمسة مشاريع ختامية في الفصل 31',p:[['Q01','مواصفات ARROWS الكاملة'],['Q04','ملخص التسليم'],['Q05','حارس المحتوى غير الموثوق']],tag:'الفصل 28'}];
+ var tabs=root.querySelector('.tabs'),panel=root.querySelector('.panel'),txt=panel.querySelector('.txt'),img=panel.querySelector('.sheet img'),tag=panel.querySelector('.tag'),curA=-1;
+ AREAS.forEach(function(a,i){var b=document.createElement('button');b.type='button';b.setAttribute('role','tab');b.textContent=a.t;b.addEventListener('click',function(){showA(i,true)});
+  b.addEventListener('keydown',function(e){if(e.key==='ArrowLeft'){e.preventDefault();showA((i+1)%6,true);tabs.children[(i+1)%6].focus()}if(e.key==='ArrowRight'){e.preventDefault();showA((i+5)%6,true);tabs.children[(i+5)%6].focus()}});tabs.appendChild(b)});
+ function showA(i,anim){if(i===curA)return;curA=i;var a=AREAS[i];
+  [].forEach.call(tabs.children,function(b,j){b.setAttribute('aria-selected',j===i?'true':'false');b.tabIndex=j===i?0:-1});
+  txt.innerHTML='<h3>'+esc(a.h)+'</h3><p class="intro">'+esc(a.i)+'</p><ul class="do">'+a.d.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul><p class="chs">'+esc(a.c)+'</p><div class="pr">'+a.p.map(function(p){return '<span><span class="mono">'+p[0]+'</span>'+esc(p[1])+'</span>'}).join('')+'</div>';
+  img.src=IMG[a.k]; img.alt='صفحة من الكتاب: '+a.tag+' · '+a.t; tag.textContent=a.tag;
+  if(anim&&!RM){panel.classList.remove('swap');void panel.offsetWidth;panel.classList.add('swap')}}
+ showA(0,false);
+ root.querySelectorAll('.ribbon [data-go]').forEach(function(a){a.addEventListener('click',function(){showA(+a.dataset.go,true)})});
+
+ /* ARROWS builder */
+ var L=[['R','Reality','الخلفية والسياق','من أنت؟ ولمن يُكتب هذا؟ ماذا حدث، وماذا يعرف القارئ مسبقًا؟'],['A','Aim','الهدف','ما النتيجة الواقعية التي تريدها بعد استخدام المخرجات؟'],['R','Request','المهمة المطلوبة','ما الذي يُطلب من Claude بالضبط، وبأيّ مدخلات؟'],['O','Output','مواصفات المخرجات','اللغة، والطول، والبنية، والقالب.'],['W','Walls','القيود والحدود','ما يجب تجنّبه، وما لا يجوز افتراضه، وأيّ النبرات مقبول.'],['S','Standard','معيار قبول النتيجة','متى تصبح المخرجات جاهزة؟ حدّد شرطًا يمكنك التحقق منه.']];
+ var lw=root.querySelector('.letters'),def=root.querySelector('.def'),lines=root.querySelectorAll('#dbody .ln'),step=-1,timer=null;
+ [1,0,2,3,4,5].forEach(function(i){var l=L[i];var b=document.createElement('button');b.dataset.i=i;b.type='button';b.innerHTML='<b>'+l[0]+'</b><span>'+l[2]+'</span>';b.setAttribute('aria-label',l[1]+': '+l[2]);b.addEventListener('click',function(){stop();focusL(i,true)});lw.appendChild(b)});
+ function focusL(i,showAll){[].forEach.call(lw.children,function(b){b.classList.toggle('on',+b.dataset.i===i)});
+  def.innerHTML='<b><span class="en">'+L[i][1]+'</span> · '+L[i][2]+'</b><br>'+esc(L[i][3]);
+  lines.forEach(function(ln){var k=+ln.dataset.k;if(showAll)ln.classList.add('on');ln.classList.toggle('hi',k===i)})}
+ function build(){stop();lines.forEach(function(l){l.classList.remove('on','hi')});step=-1;
+  var order=[0,1,2,3,4,5];var n=0;
+  (function next(){if(n>=order.length){timer=null;return}var i=order[n++];focusL(i,false);lines.forEach(function(ln){if(+ln.dataset.k===i)ln.classList.add('on')});timer=setTimeout(next,RM?0:1300)})()}
+ function stop(){if(timer){clearTimeout(timer);timer=null}}
+ function resetD(){stop();lines.forEach(function(l){l.classList.remove('on','hi')});[].forEach.call(lw.children,function(b){b.classList.remove('on')});def.innerHTML='<b>ستة عناصر للبرومبت القوي.</b><br>اضغط «ابنِ البرومبت» لترى كيف يتحوّل السطر الواحد إلى مواصفات واضحة، أو اختر حرفًا.'}
+ root.querySelector('#dplay').addEventListener('click',build); root.querySelector('#dreset').addEventListener('click',resetD); resetD();
+ if(!RM&&'IntersectionObserver' in window){var io2=new IntersectionObserver(function(es){if(es[0].isIntersecting){io2.disconnect();setTimeout(build,500)}},{threshold:.45});io2.observe(root.querySelector('#dbody'))}else lines.forEach(function(l){l.classList.add('on')});
+
+ /* page rail (3D coverflow of real pages) */
+ var PG=[['cover','الغلاف','طبعة أكتوبر 2026'],['paths','كيف تقرأ هذا الكتاب','ثلاثة مسارات للقراءة'],['arrows','الفصل 5 · إطار ARROWS','ستة عناصر للبرومبت القوي'],['work','الفصل 11','البريد والتقارير والاجتماعات والخطط'],['excel','الفصل 16','ملفات Excel وCSV'],['biz','الفصل 21','أربع حالات من الأعمال'],['code','الفصل 25','Claude Code: من التثبيت إلى أول مشروع'],['capstone','الفصل 31','خمسة مشاريع ختامية'],['pcats','مكتبة 120 برومبت','ثماني فئات']];
+ var rail=root.querySelector('#rail'),cap=root.querySelector('#rcap'),ci=2,lb=root.querySelector('#lb');
+ PG.forEach(function(p,i){var b=document.createElement('button');b.type='button';b.className='pgx';b.setAttribute('aria-label',p[1]+' · '+p[2]);b.innerHTML='<img src="'+IMG[p[0]]+'" alt="" loading="lazy" width="900" height="1273">';b.addEventListener('click',function(){if(i===ci)zoom();else{ci=i;lay()}});rail.appendChild(b)});
+ var cards=rail.querySelectorAll('.pgx');
+ function lay(){var sp=MOB?120:190;cards.forEach(function(c,i){var d=i-ci,a=Math.abs(d);c.style.transform='translate3d('+(-d*sp)+'px,'+(a?16:0)+'px,'+(-a*120)+'px) rotateY('+(d*-22)+'deg)';c.style.zIndex=20-a;c.style.opacity=a>3?0:1;c.style.filter=a?'brightness(.72)':'none';c.tabIndex=a>3?-1:0});
+  cap.innerHTML=esc(PG[ci][1])+'<small>'+esc(PG[ci][2])+' · '+(ci+1)+' / '+PG.length+'</small>'}
+ function zoom(){lb.querySelector('img').src=IMG[PG[ci][0]];lb.querySelector('img').alt=PG[ci][1];lb.classList.add('on');lb.querySelector('button').focus()}
+ lb.addEventListener('click',function(e){if(e.target!==lb.querySelector('img'))lb.classList.remove('on')});
+ document.addEventListener('keydown',function(e){if(e.key==='Escape')lb.classList.remove('on')});
+ root.querySelector('#rnext').addEventListener('click',function(){ci=Math.min(PG.length-1,ci+1);lay()});
+ root.querySelector('#rprev').addEventListener('click',function(){ci=Math.max(0,ci-1);lay()});
+ root.querySelector('#rzoom').addEventListener('click',zoom);
+ var sx=null;rail.addEventListener('touchstart',function(e){sx=e.touches[0].clientX},{passive:true});rail.addEventListener('touchend',function(e){if(sx===null)return;var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>40){ci=dx>0?Math.min(PG.length-1,ci+1):Math.max(0,ci-1);lay()}sx=null});
+ lay();
+
+ /* sticky bar */
+ var sb=root.querySelector('.sbar'),off=root.querySelector('#offer');
+ function st(){var o=off.getBoundingClientRect();sb.classList.toggle('on',scrollY>650&&!(o.top<innerHeight&&o.bottom>0))}
+ addEventListener('scroll',st,{passive:true});st();
+
+ /* live prices from the store (stay correct through price changes); bundle = Claude + ChatGPT − automatic discount */
+ var S=window.Shopify||{},R=(S.routes&&S.routes.root)||'/',cur=(S.currency&&S.currency.active)||'USD',rate=parseFloat(S.currency&&S.currency.rate)||1;
+ if(!D.handleC) return;
+ function get(h){return fetch(R+'products/'+encodeURIComponent(h)+'.js',{credentials:'same-origin'}).then(function(r){if(!r.ok)throw 0;return r.json()})}
+ var nf;try{nf=new Intl.NumberFormat('en-US',{style:'currency',currency:cur,minimumFractionDigits:0,maximumFractionDigits:2})}catch(e){nf={format:function(x){return '$'+x}}}
+ Promise.all([get(D.handleC),get(D.handleG)]).then(function(a){var c=a[0].variants[0],g=a[1].variants[0];var cp=c.price/100,gp=g.price/100,dd=Math.round(D.disc*rate*100)/100,sum=cp+gp,b=Math.max(sum-dd,0);
+  function set(cls,v){root.querySelectorAll(cls).forEach(function(e){e.textContent=v})}
+  set('.js-pc',nf.format(cp));set('.js-pb',nf.format(b));set('.js-ps',nf.format(sum));set('.js-pd',nf.format(b-cp));
+  root.querySelectorAll('.js-buy-c').forEach(function(x){x.href=R+'cart/'+c.id+':1'});root.querySelectorAll('.js-buy-b').forEach(function(x){x.href=R+'cart/'+g.id+':1,'+c.id+':1'});
+ }).catch(function(){});
+});
+</script>
+
+{% schema %}
+{"name":"Claude guide v4","settings":[]}
+{% endschema %}
