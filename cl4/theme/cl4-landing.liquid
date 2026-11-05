@@ -1,3 +1,4 @@
+{%- capture aisa_bonus -%}{%- render 'aisa-bonus-on' -%}{%- endcapture -%}{%- assign aisa_bonus = aisa_bonus | strip -%}
 {%- capture aisa_bd -%}{%- render 'aisa-bundle-discount' -%}{%- endcapture -%}
 {%- liquid
  assign bundle_disc = aisa_bd | strip | plus: 0
@@ -203,6 +204,18 @@
 .C4 .verified b{color:var(--ink)}
 
 /* ===== offer ===== */
+.C4 .coll{padding:110px 0 40px;background:#EFE8DC}
+.C4 .trio{display:grid;grid-template-columns:1fr 1.12fr 1fr;gap:28px;align-items:end;margin-top:44px}
+.C4 .trio figure{margin:0;text-align:center}
+.C4 .trio img{width:100%;height:auto;border-radius:6px;box-shadow:0 30px 60px -28px rgba(23,24,28,.45),0 2px 6px rgba(23,24,28,.12)}
+.C4 .trio .mid img{transform:translateY(-14px)}
+.C4 .trio figcaption{margin-top:18px}.C4 .trio figcaption b{display:block;font-size:17px}.C4 .trio figcaption span{display:block;font-size:14px;color:var(--mute);margin-top:4px}
+.C4 .trio em{font-style:normal;font-size:12px;font-weight:700;background:var(--tc);color:#fff;border-radius:99px;padding:2px 9px;margin-right:6px;vertical-align:2px}
+.C4 .week{display:grid;grid-template-columns:260px 1fr;gap:44px;align-items:center;margin-top:64px;background:#FBF8F3;border:1px solid var(--rule);border-radius:26px;padding:34px}
+.C4 .week img{width:100%;height:auto;border-radius:6px;box-shadow:0 18px 40px -20px rgba(23,24,28,.4)}
+.C4 .week h3{font-size:22px;margin-bottom:12px}
+.C4 .week ol{margin:0;padding-right:22px}.C4 .week li{font-size:16px;line-height:1.9}
+.C4 .week li::marker{color:var(--tc);font-weight:700}
 .C4 .offer{padding:120px 0;background:var(--paper)}
 .C4 .og{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.12fr);gap:22px;margin-top:48px;align-items:stretch}
 .C4 .oc{border-radius:26px;padding:34px 32px;border:1px solid var(--rule);background:#FBF8F3;display:flex;flex-direction:column;position:relative}
@@ -277,6 +290,9 @@
  .C4 .oc.both{order:0}
 }
 @media (max-width:700px){
+ .C4 .trio{grid-template-columns:1fr 1fr;gap:16px}.C4 .trio .mid{grid-column:1/-1;width:62%;margin:0 auto;order:-1}.C4 .trio .mid img{transform:none}
+ .C4 .week{grid-template-columns:1fr;padding:22px;gap:22px}.C4 .week img{width:60%;margin:0 auto}
+ .C4 .coll{padding:72px 0 24px}
  .C4{font-size:16.5px}
  .C4 .mast .wrap{height:62px}
  .C4 .hero .copy{padding:86px var(--side) 26px}
@@ -333,7 +349,7 @@
   <p class="plus"><b>+ 120 برومبت عربي إضافي</b> وملفات تدريب وقوالب</p>
   <div class="row">
    <a class="btn js-buy-c" href="/cart/55538560631121:1">احصل على الدليل · <span class="js-pc">{{ c_p | money_without_trailing_zeros }}</span> <span class="ar">←</span></a>
-   <a class="btn2 js-buy-b" href="/cart/55563696013649:1,55538560631121:1"><span>الكتابان معًا: Claude + ChatGPT · <b class="js-pb">{{ b_p | money_without_trailing_zeros }}</b></span><small>كتاب ChatGPT بـ <span class="js-pd">{{ d_p | money_without_trailing_zeros }}</span> إضافية فقط</small></a>
+   {%- if aisa_bonus == "1" -%}<a class="btn2 js-buy-b" href="/cart/55563696013649:1,55538560631121:1"><span>المجموعة الكاملة: الكتابان + دفتر عمل · <b class="js-pb">{{ b_p | money_without_trailing_zeros }}</b></span><small>تضيف <span class="js-pd">{{ d_p | money_without_trailing_zeros }}</span> فقط إلى سعر كتاب Claude</small></a>{%- else -%}<a class="btn2 js-buy-b" href="/cart/55563696013649:1,55538560631121:1"><span>الكتابان معًا: Claude + ChatGPT · <b class="js-pb">{{ b_p | money_without_trailing_zeros }}</b></span><small>كتاب ChatGPT بـ <span class="js-pd">{{ d_p | money_without_trailing_zeros }}</span> إضافية فقط</small></a>{%- endif -%}
   </div>
   <div class="get" aria-label="ما تحصل عليه">
    <span><b>299 صفحة</b> · 33 فصلًا</span><span>PDF · تنزيل فوري</span><span>دفعة واحدة، بلا اشتراك</span>
@@ -449,9 +465,25 @@
  <div class="verified" data-rv><span aria-hidden="true">✓</span><p style="margin:0"><b>معلومات مؤرَّخة.</b> روجعت المعلومات التقنية المتغيرة (الخطط والنماذج وأسماء الإعدادات) على المصادر الرسمية في 17–18 أكتوبر 2026، ولكلّ معلومة منها بطاقة تحقق تسمّي مصدرها. وإن خالف الكتاب ما تراه في التطبيق، فالوثائق الرسمية هي المرجع.</p></div>
 </div></section>
 
+{%- if aisa_bonus == "1" -%}<section class="coll" id="collection"><div class="wrap">
+ <div class="kick" data-rv>المجموعة الكاملة</div>
+ <h2 class="h2" data-rv>أداتان، وطريقة واحدة.</h2>
+ <p class="lead" data-rv>كتابان كاملان يعلّمانك كلّ أداة على حدة، ودفتر عمل جديد يجمعهما في أسبوع واحد: إحداهما تكتب، والأخرى تراجع، وأنت تقرّر.</p>
+ <div class="trio" data-rv>
+  <figure><img src="{{ 'cl4-cover.webp' | asset_url }}" alt="غلاف كتاب Claude بلا تخمين" width="600" height="849" loading="lazy"><figcaption><b>Claude بلا تخمين</b><span>299 صفحة · 33 فصلًا · 120 برومبت · ملفات تدريب</span></figcaption></figure>
+  <figure class="mid"><img src="{{ 'cl4-bonus-cover.webp' | asset_url }}" alt="غلاف دفتر العمل سبعة أيام، سبع نتائج" width="900" height="1273" loading="lazy"><figcaption><b>سبعة أيام، سبع نتائج <em>جديد</em></b><span>دفتر عمل · 19 صفحة · 14 طلبًا جاهزًا · 7 أوراق عمل</span></figcaption></figure>
+  <figure><img src="{{ 'cl4-gpt-cover.webp' | asset_url }}" alt="غلاف كتاب ChatGPT بلا تخمين" width="900" height="1273" loading="lazy"><figcaption><b>ChatGPT بلا تخمين</b><span>298 صفحة · 32 فصلًا · 120 طلبًا · نسخة للجوّال</span></figcaption></figure>
+ </div>
+ <div class="week" data-rv>
+  <img src="{{ 'cl4-bonus-day1.webp' | asset_url }}" alt="صفحة اليوم الأول من دفتر العمل" width="900" height="1273" loading="lazy">
+  <div><h3>ماذا تفعل في أسبوع الدفتر؟</h3>
+  <ol><li>رسالة مهمة تؤجّلها، جاهزة للإرسال</li><li>ملف طويل يصير صفحة قرار بأدلّتها</li><li>سؤال بحثي بإجابة موثّقة المصادر</li><li>عشرون فكرة تُفرز إلى خمس تستحق العمل</li><li>مهمة كبيرة في خطة من صفحة مع مخاطرها</li><li>سير عمل شخصي تعيد استخدامه</li><li>روتين أسبوعي: من يكتب، ومن يراجع، وما لا يُسلَّم لهما</li></ol>
+  <p class="src">لكلّ يوم طلبان جاهزان وورقة عمل. يكفيك الحساب المجاني في الأداتين لمعظم المهام.</p></div>
+ </div>
+</div></section>{%- else -%}{%- endif -%}
 <section class="offer" id="offer"><div class="wrap">
  <div class="kick" data-rv>اختر</div>
- <h2 class="h2" data-rv>ابدأ بـ Claude. أو خذ الأداتين بفرق بسيط.</h2>
+ {%- if aisa_bonus == "1" -%}<h2 class="h2" data-rv>ابدأ بـ Claude، أو خذ المجموعة الكاملة.</h2>{%- else -%}<h2 class="h2" data-rv>ابدأ بـ Claude. أو خذ الأداتين بفرق بسيط.</h2>{%- endif -%}
  <div class="og">
   <article class="oc" data-rv>
    <h3>Claude بلا تخمين</h3><div class="who">الدليل كاملًا مع هديّته</div>
@@ -459,7 +491,18 @@
    <ul><li>الكتاب: 299 صفحة و33 فصلًا</li><li>120 برومبت عربي جاهز للتعديل</li><li>ملفات التدريب والقوالب</li></ul>
    <a class="btn dark js-buy-c" href="/cart/55538560631121:1">اشترِ Claude بلا تخمين</a>
   </article>
-  <article class="oc both" data-rv>
+  {%- if aisa_bonus == "1" -%}<article class="oc both" data-rv>
+   <span class="flag">Claude + ChatGPT</span>
+   <h3>المجموعة الكاملة</h3><div class="who">الكتابان ودفتر العمل، لمن يريد أن يتقن الأداتين ويستخدمهما معًا</div>
+   <div class="price"><span class="v js-pb">{{ b_p | money_without_trailing_zeros }}</span><span class="u">دفعة واحدة</span></div>
+   <p class="math">تضيف كتاب ChatGPT ودفتر العمل بـ <b class="js-pd">{{ d_p | money_without_trailing_zeros }}</b> فقط فوق سعر Claude، ويُحتسب ذلك تلقائيًّا عند الدفع دون كود.</p>
+   <div class="duo">
+    <div><b>Claude بلا تخمين</b>إطار ARROWS، والمستندات الطويلة، والمشاريع والذاكرة، وArtifacts، وClaude Code وأدوات الربط.</div>
+    <div><b>ChatGPT بلا تخمين</b>طريقة «المِقاس» وبروتوكول «تأكَّد»، والصورة والصوت، ومقطع قصير لكلّ فصل، ونسخة للجوّال.</div>
+   </div>
+   <ul><li><b>كتابان كاملان</b> (597 صفحة) و<b>240 طلبًا</b> جاهزًا وملفات تدريب لكلّ كتاب</li><li><b>جديد: «سبعة أيام، سبع نتائج»</b>، دفتر عمل من 19 صفحة تستخدم فيه الأداتين معًا: إحداهما تكتب، والأخرى تراجع</li><li>البطاقة المختصرة لطريقة «المِقاس» ونسخة الجوّال لكتاب ChatGPT</li></ul>
+   <a class="btn js-buy-b" href="/cart/55563696013649:1,55538560631121:1">أريد المجموعة الكاملة · <span class="js-pb">{{ b_p | money_without_trailing_zeros }}</span></a>
+  </article>{%- else -%}<article class="oc both" data-rv>
    <span class="flag">الكتابان معًا</span>
    <h3>Claude + ChatGPT بلا تخمين</h3><div class="who">لمن يستخدم الأداتين، أو لم يقرّر بعد</div>
    <div class="price"><span class="v js-pb">{{ b_p | money_without_trailing_zeros }}</span><span class="u">بدل <span class="js-ps">{{ s_p | money_without_trailing_zeros }}</span> عند شراء كلّ كتاب وحده</span></div>
@@ -470,7 +513,7 @@
    </div>
    <ul><li><b>كتابان كاملان</b> (أكثر من 590 صفحة)</li><li><b>240 برومبت</b> وملفات تدريب لكلّ كتاب</li><li>تعرف ما تتقنه كلّ أداة، فتختار الأنسب لكلّ مهمة</li></ul>
    <a class="btn js-buy-b" href="/cart/55563696013649:1,55538560631121:1">أريد الكتابين · <span class="js-pb">{{ b_p | money_without_trailing_zeros }}</span></a>
-  </article>
+  </article>{%- endif -%}
  </div>
  <div class="trust"><span>تنزيل فوري بعد الدفع، ونسخة على بريدك</span><span>Apple Pay وPayPal وShop Pay والبطاقات</span><span>ضمان 30 يومًا وفق <a href="/policies/refund-policy">سياسة الاسترداد</a></span></div>
 </div></section>
