@@ -694,7 +694,7 @@ document.addEventListener('DOMContentLoaded',function(){
   var tl=gsap.timeline({scrollTrigger:{trigger:'#story',start:'top top',end:'+=2400',pin:'#story .pin',scrub:0.6,onUpdate:function(s){var k=Math.min(3,Math.floor(s.progress*4));rails.forEach(function(r,i){r.classList.toggle('on',i===k)})}}});
   for(var i=1;i<4;i++){ tl.to(cards[i-1],{opacity:0,y:-24,scale:.98,duration:1},i-1+0.5).fromTo(cards[i],{opacity:0,y:24,scale:.98},{opacity:1,y:0,scale:1,duration:1},i-1+0.5); }
  } else {
-  var k=0; rails.forEach(function(r,i){r.style.cursor='pointer';r.addEventListener('click',function(){stage(i)})});
+  var k=0; rails.forEach(function(r,i){r.style.cursor='pointer';r.setAttribute('role','button');r.setAttribute('tabindex','0');r.setAttribute('aria-label','المرحلة '+(i+1));r.addEventListener('click',function(){stage(i)});r.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();stage(i)}})});
   if('IntersectionObserver' in window&&!RM){var t2;var io2=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!t2){t2=setInterval(function(){k=(k+1)%4;stage(k)},2600)}else if(!e.isIntersecting&&t2){clearInterval(t2);t2=null}})},{threshold:.4});io2.observe(root.querySelector('#sstage'))}
  }
 
