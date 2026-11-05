@@ -59,9 +59,9 @@
 .C4 .mast .pill{text-decoration:none;font-weight:700;font-size:14.5px;background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px}
 
 /* ===== hero ===== */
-.C4 .hero{position:relative;height:min(100vh,56.25vw);min-height:660px;max-height:980px;overflow:hidden;background:#D8CFC2}
-.C4 .hero .media{position:absolute;inset:0}
-.C4 .hero .media img,.C4 .hero .media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:0 50%}
+.C4 .hero{position:relative;height:min(100vh,56.25vw);min-height:660px;max-height:980px;overflow:hidden;background:var(--paper)}
+.C4 .hero .media{position:absolute;inset:74px 0 0 0}
+.C4 .hero .media img,.C4 .hero .media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:0 0}
 .C4 .hero .media video{opacity:0;transition:opacity .9s var(--ease)}.C4 .hero .media video.on{opacity:1}
 .C4 .hero .veil{position:absolute;inset:0;z-index:1;background:linear-gradient(270deg,rgba(244,239,231,.86) 0%,rgba(244,239,231,.62) 30%,rgba(244,239,231,0) 50%)}
 .C4 .hero .copy{position:absolute;z-index:3;top:0;bottom:0;right:max(var(--side),calc((100vw - var(--wrap))/2 + var(--side)));width:min(540px,40vw);display:flex;flex-direction:column;justify-content:center;padding-top:50px}
@@ -73,6 +73,13 @@
 .C4 .hero .row{display:flex;flex-wrap:wrap;align-items:center;gap:12px 22px}
 .C4 .hero .alt{font-size:15.5px;color:var(--ink2);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:1px}
 .C4 .hero .alt b{color:var(--ink)}
+.C4 .hero .areas{list-style:none;margin:0 0 12px;padding:0;display:flex;flex-wrap:wrap;gap:7px}
+.C4 .hero .areas li{font-size:15px;font-weight:600;color:var(--ink);background:rgba(255,255,255,.72);border:1px solid rgba(23,24,28,.14);border-radius:999px;padding:4px 13px;line-height:1.6}
+.C4 .hero .plus{font-size:15.5px;color:var(--ink2);margin:0 0 22px}.C4 .hero .plus b{color:var(--tc);font-weight:700}
+.C4 .hero .sub{margin-bottom:10px!important}
+.C4 .btn2{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:0;text-decoration:none;color:var(--ink);border:1.5px solid var(--ink);border-radius:12px;padding:9px 18px;background:rgba(255,255,255,.55);line-height:1.5;transition:background .2s}
+.C4 .btn2:hover{background:#fff}.C4 .btn2>span{font-size:15.5px;font-weight:600}.C4 .btn2 b{font-weight:700}
+.C4 .btn2 small{font-size:12.5px;color:var(--ink2)}
 .C4 .get{margin-top:24px;display:flex;flex-wrap:wrap;gap:8px}
 .C4 .get span{font-size:13.5px;background:rgba(255,255,255,.62);border:1px solid rgba(23,24,28,.12);border-radius:999px;padding:5px 13px;color:var(--ink2);backdrop-filter:blur(4px)}
 .C4 .get b{color:var(--ink);font-weight:600}
@@ -255,7 +262,7 @@
  .C4 .mast nav{display:none}
  .C4 .hero{height:auto;min-height:0;max-height:none;display:flex;flex-direction:column;background:var(--paper)}
  .C4 .hero .copy{position:relative;right:auto;width:auto;padding:110px var(--side) 34px;order:1}
- .C4 .hero .media{position:relative;aspect-ratio:16/9;order:2}
+ .C4 .hero .media{position:relative;inset:auto;aspect-ratio:16/9;order:2}
  .C4 .hero .veil{display:none}
  .C4 .ribbon .wrap{grid-template-columns:repeat(3,minmax(0,1fr))}
  .C4 .ribbon a:nth-child(4){border-inline-start:0}
@@ -275,6 +282,10 @@
  .C4 .hero h1{font-size:20px;margin-top:16px}
  .C4 .hero .row .btn{width:100%}
  .C4 .hero .alt{width:100%;text-align:center;border:0;text-decoration:underline}
+ .C4 .btn2{width:100%}
+ .C4 .hero .areas li{font-size:14px;padding:3px 11px}
+ .C4 .hero .plus{margin-bottom:16px}
+ .C4 .hero .sub{margin-top:10px!important}
  .C4 .hero .media{aspect-ratio:4/5}
  .C4 .ribbon .wrap{grid-template-columns:1fr 1fr;padding:0}
  .C4 .ribbon a{padding:16px 18px;font-size:15px}
@@ -315,13 +326,15 @@
  <div class="copy">
   <div class="lock"><span class="serif">Claude</span><span class="ar">بلا تخمين</span></div>
   <h1>الدليل العربي الشامل لاستخدام Claude: من أول محادثة إلى المشاريع والأتمتة.</h1>
-  <p class="sub">للمبتدئ ولمن يستخدمه كلّ يوم. تطبيقات عملية في العمل والدراسة والأعمال والمحتوى والبحث والأتمتة، ومعه 120 برومبت عربي جاهز للتعديل وملفات تدريب.</p>
+  <p class="sub">للمبتدئ ولمن يستخدمه كلّ يوم، بتطبيقات عملية في:</p>
+  <ul class="areas" aria-label="مجالات الدليل"><li>العمل</li><li>التعلّم</li><li>المحتوى</li><li>البحث</li><li>الأعمال</li><li>المشاريع</li></ul>
+  <p class="plus"><b>+ 120 برومبت عربي إضافي</b> وملفات تدريب وقوالب</p>
   <div class="row">
    <a class="btn js-buy-c" href="/cart/55538560631121:1">احصل على الدليل · <span class="js-pc">{{ c_p | money_without_trailing_zeros }}</span> <span class="ar">←</span></a>
-   <a class="alt" href="#offer">أو الكتابان معًا (Claude + ChatGPT) بـ <b class="js-pb">{{ b_p | money_without_trailing_zeros }}</b></a>
+   <a class="btn2 js-buy-b" href="/cart/55563696013649:1,55538560631121:1"><span>الكتابان معًا: Claude + ChatGPT · <b class="js-pb">{{ b_p | money_without_trailing_zeros }}</b></span><small>كتاب ChatGPT بـ <span class="js-pd">{{ d_p | money_without_trailing_zeros }}</span> إضافية فقط</small></a>
   </div>
   <div class="get" aria-label="ما تحصل عليه">
-   <span><b>299 صفحة</b> · 33 فصلًا</span><span><b>120 برومبت</b> جاهز للتعديل</span><span><b>ملفات تدريب</b> وقوالب</span><span>PDF · تنزيل فوري</span><span>دفعة واحدة</span>
+   <span><b>299 صفحة</b> · 33 فصلًا</span><span>PDF · تنزيل فوري</span><span>دفعة واحدة، بلا اشتراك</span>
   </div>
  </div>
  <div class="media">
