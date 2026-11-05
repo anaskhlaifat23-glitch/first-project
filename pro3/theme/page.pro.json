@@ -1,0 +1,5 @@
+{
+  "layout": "pro3",
+  "sections": { "main": { "type": "pro3-edition", "settings": {} } },
+  "order": ["main"]
+}

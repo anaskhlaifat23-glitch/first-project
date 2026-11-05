@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{ page_title }}{% unless page_title contains shop.name %} · {{ shop.name }}{% endunless %}</title>
+{%- if page_description -%}<meta name="description" content="{{ page_description | escape }}">{%- endif -%}
+<link rel="canonical" href="{{ canonical_url }}">
+<meta property="og:title" content="{{ page_title | escape }}">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https:{{ 'pro3-hero-w-poster.jpg' | asset_url }}">
+<meta name="robots" content="noindex">
+<link rel="preload" as="image" href="{{ 'pro3-hero-w-poster.jpg' | asset_url }}" media="(min-width:701px)" fetchpriority="high">
+<link rel="preload" as="image" href="{{ 'pro3-hero-m-poster.jpg' | asset_url }}" media="(max-width:700px)" fetchpriority="high">
+<link rel="preload" as="font" type="font/woff2" href="{{ 'pro2-markazi-700.woff2' | asset_url }}" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="{{ 'pro-plex-400.woff2' | asset_url }}" crossorigin>
+<style>html,body{margin:0;background:#F7F6F3}html{scroll-behavior:smooth}@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}</style>
+{{ content_for_header }}
+</head>
+<body>
+<a href="#verify" style="position:absolute;right:-9999px" onfocus="this.style.right='12px'" onblur="this.style.right='-9999px'">انتقل إلى التجربة</a>
+<main>{{ content_for_layout }}</main>
+</body>
+</html>
