@@ -41,40 +41,10 @@
 .C4 [data-rv].in{opacity:1;transform:none}
 
 /* ===== masthead ===== */
-.C4 .mast{position:absolute;inset:0 0 auto 0;z-index:20}
-.C4 .mast .wrap{height:74px;display:flex;align-items:center;justify-content:space-between}
 .C4 .brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:16px}
 .C4 .brand svg{width:18px;height:18px}
-.C4 .mast nav{display:flex;gap:26px;font-size:15px}
-.C4 .mast nav a{text-decoration:none;color:var(--ink2)}.C4 .mast nav a:hover{color:var(--ink)}
-.C4 .mast .pill{text-decoration:none;font-weight:700;font-size:14.5px;background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px}
 
 /* ===== hero ===== */
-.C4 .hero{position:relative;height:min(100vh,56.25vw);min-height:660px;max-height:980px;overflow:hidden;background:var(--paper)}
-.C4 .hero .media{position:absolute;inset:74px 0 0 0}
-.C4 .hero .media img,.C4 .hero .media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:0 0}
-.C4 .hero .media video{opacity:0;transition:opacity .9s var(--ease)}.C4 .hero .media video.on{opacity:1}
-.C4 .hero .veil{position:absolute;inset:0;z-index:1;background:linear-gradient(270deg,rgba(244,239,231,.86) 0%,rgba(244,239,231,.62) 30%,rgba(244,239,231,0) 50%)}
-.C4 .hero .copy{position:absolute;z-index:3;top:0;bottom:0;right:max(var(--side),calc((100vw - var(--wrap))/2 + var(--side)));width:min(540px,40vw);display:flex;flex-direction:column;justify-content:center;padding-top:50px}
-.C4 .lock{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;line-height:1}
-.C4 .lock .serif{font-size:clamp(66px,6.4vw,104px);letter-spacing:-.01em;color:var(--ink)}
-.C4 .lock .ar{font-size:clamp(46px,4.4vw,72px);font-weight:700;color:var(--tc)}
-.C4 .hero h1{font-size:clamp(20px,1.75vw,27px);line-height:1.6;font-weight:600;color:var(--ink);margin-top:22px}
-.C4 .hero .sub{font-size:clamp(16px,1.2vw,18px);color:var(--ink2);margin:14px 0 26px}
-.C4 .hero .row{display:flex;flex-wrap:wrap;align-items:center;gap:12px 22px}
-.C4 .hero .alt{font-size:15.5px;color:var(--ink2);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:1px}
-.C4 .hero .alt b{color:var(--ink)}
-.C4 .hero .areas{list-style:none;margin:0 0 12px;padding:0;display:flex;flex-wrap:wrap;gap:7px}
-.C4 .hero .areas li{font-size:15px;font-weight:600;color:var(--ink);background:rgba(255,255,255,.72);border:1px solid rgba(23,24,28,.14);border-radius:999px;padding:4px 13px;line-height:1.6}
-.C4 .hero .plus{font-size:15.5px;color:var(--ink2);margin:0 0 22px}.C4 .hero .plus b{color:var(--tc);font-weight:700}
-.C4 .hero .sub{margin-bottom:10px!important}
-.C4 .btn2{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:0;text-decoration:none;color:var(--ink);border:1.5px solid var(--ink);border-radius:12px;padding:9px 18px;background:rgba(255,255,255,.55);line-height:1.5;transition:background .2s}
-.C4 .btn2:hover{background:#fff}.C4 .btn2>span{font-size:15.5px;font-weight:600}.C4 .btn2 b{font-weight:700}
-.C4 .btn2 small{font-size:12.5px;color:var(--ink2)}
-.C4 .get{margin-top:24px;display:flex;flex-wrap:wrap;gap:8px}
-.C4 .get span{font-size:13.5px;background:rgba(255,255,255,.62);border:1px solid rgba(23,24,28,.12);border-radius:999px;padding:5px 13px;color:var(--ink2);backdrop-filter:blur(4px)}
-.C4 .get b{color:var(--ink);font-weight:600}
-.C4 .hero .ctl{position:absolute;left:var(--side);bottom:22px;z-index:3;font:500 12.5px "C4";color:var(--ink2);background:rgba(244,239,231,.82);border:0;border-radius:999px;padding:7px 13px;cursor:pointer}
 
 /* ===== areas ribbon ===== */
 .C4 .ribbon{background:var(--ink);color:#EDE6DA}
@@ -192,25 +162,13 @@
 .C4 .verified b{color:var(--ink)}
 
 /* ===== offer ===== */
-.C4 .coll{padding:110px 0 40px;background:#EFE8DC}
-.C4 .trio{display:grid;grid-template-columns:1fr 1.12fr 1fr;gap:28px;align-items:end;margin-top:44px}
-.C4 .trio figure{margin:0;text-align:center}
-.C4 .trio img{width:100%;height:auto;border-radius:6px;box-shadow:0 30px 60px -28px rgba(23,24,28,.45),0 2px 6px rgba(23,24,28,.12)}
-.C4 .trio .mid img{transform:translateY(-14px)}
-.C4 .trio figcaption{margin-top:18px}.C4 .trio figcaption b{display:block;font-size:17px}.C4 .trio figcaption span{display:block;font-size:14px;color:var(--mute);margin-top:4px}
-.C4 .trio em{font-style:normal;font-size:12px;font-weight:700;background:var(--tc);color:#fff;border-radius:99px;padding:2px 9px;margin-right:6px;vertical-align:2px}
-.C4 .week{display:grid;grid-template-columns:260px 1fr;gap:44px;align-items:center;margin-top:64px;background:#FBF8F3;border:1px solid var(--rule);border-radius:26px;padding:34px}
-.C4 .week img{width:100%;height:auto;border-radius:6px;box-shadow:0 18px 40px -20px rgba(23,24,28,.4)}
-.C4 .week h3{font-size:22px;margin-bottom:12px}
-.C4 .week ol{margin:0;padding-right:22px}.C4 .week li{font-size:16px;line-height:1.9}
-.C4 .week li::marker{color:var(--tc);font-weight:700}
 .C4 .offer{padding:120px 0;background:var(--paper)}
 .C4 .og{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.12fr);gap:22px;margin-top:48px;align-items:stretch}
 .C4 .oc{border-radius:26px;padding:34px 32px;border:1px solid var(--rule);background:#FBF8F3;display:flex;flex-direction:column;position:relative}
 .C4 .oc h3{font-size:24px}
 .C4 .oc .who{font-size:15px;color:var(--mute);margin-top:4px}
 .C4 .price{display:flex;align-items:baseline;gap:12px;margin:22px 0 4px;flex-wrap:wrap}
-.C4 .price .v{font-family:"C4S",serif;font-size:72px;line-height:1}
+.C4 .price .v{font-family:"C4",sans-serif;font-weight:700;font-size:64px;line-height:1;direction:ltr;font-variant-numeric:tabular-nums}
 .C4 .price .u{font-size:15px;color:var(--mute)}
 .C4 .oc ul{list-style:none;padding:0;margin:20px 0 26px;flex:1}
 .C4 .oc li{position:relative;padding-right:28px;margin-bottom:10px;font-size:16px;line-height:1.75}
@@ -230,11 +188,6 @@
 .C4 .trust{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 28px;margin-top:30px;font-size:14.5px;color:var(--ink2)}
 
 /* ===== publisher + faq ===== */
-.C4 .pub{padding:100px 0;border-top:1px solid var(--rule)}
-.C4 .pub .g{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:56px}
-.C4 .pub dl{margin:0;display:grid;grid-template-columns:1fr 1fr;gap:28px 40px}
-.C4 .pub dt{font-weight:700;font-size:18px;margin-bottom:4px}
-.C4 .pub dd{margin:0;font-size:15.5px;color:var(--ink2)}
 .C4 .faq{padding:20px 0 110px}
 .C4 .faq .g{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:56px}
 .C4 details{border-top:1px solid var(--rule);padding:18px 0}
@@ -246,12 +199,6 @@
 .C4 details p{margin:10px 0 0;color:var(--ink2);font-size:16px}
 
 /* ===== final + foot ===== */
-.C4 .final{background:var(--tc);color:#fff;padding:90px 0;text-align:center;position:relative;overflow:hidden}
-.C4 .final h2{color:#fff;font-size:clamp(30px,3.6vw,52px);line-height:1.3}
-.C4 .final p{color:#FBE6DC;font-size:18px;margin:16px auto 30px;max-width:620px}
-.C4 .final .btn{background:#fff;color:var(--ink);box-shadow:none}
-.C4 .final .btn:hover{background:#F4EFE7}
-.C4 .final .orb{position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.22),rgba(255,255,255,0) 60%);left:-140px;top:-180px;pointer-events:none}
 .C4 .foot{padding:34px 0 46px;font-size:13.5px;color:var(--mute)}
 .C4 .foot .g{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 30px}
 .C4 .sbar{position:fixed;inset:auto 0 0 0;z-index:60;background:rgba(23,24,28,.97);color:#EDE6DA;display:none;align-items:center;justify-content:space-between;gap:14px;padding:10px 16px calc(10px + env(safe-area-inset-bottom));transform:translateY(110%);transition:transform .35s var(--ease)}
@@ -263,10 +210,6 @@
 /* ===== responsive ===== */
 @media (max-width:1100px){
  .C4 .mast nav{display:none}
- .C4 .hero{height:auto;min-height:0;max-height:none;display:flex;flex-direction:column;background:var(--paper)}
- .C4 .hero .copy{position:relative;right:auto;width:auto;padding:110px var(--side) 34px;order:1}
- .C4 .hero .media{position:relative;inset:auto;aspect-ratio:16/9;order:2}
- .C4 .hero .veil{display:none}
  .C4 .ribbon .wrap{grid-template-columns:repeat(3,minmax(0,1fr))}
  .C4 .ribbon a:nth-child(4){border-inline-start:0}
  .C4 .ribbon a{border-top:1px solid rgba(255,255,255,.08)}
@@ -278,21 +221,7 @@
  .C4 .oc.both{order:0}
 }
 @media (max-width:700px){
- .C4 .trio{grid-template-columns:1fr 1fr;gap:16px}.C4 .trio .mid{grid-column:1/-1;width:62%;margin:0 auto;order:-1}.C4 .trio .mid img{transform:none}
- .C4 .week{grid-template-columns:1fr;padding:22px;gap:22px}.C4 .week img{width:60%;margin:0 auto}
- .C4 .coll{padding:72px 0 24px}
  .C4{font-size:16.5px}
- .C4 .mast .wrap{height:62px}
- .C4 .hero .copy{padding:86px var(--side) 26px}
- .C4 .lock .serif{font-size:64px}.C4 .lock .ar{font-size:44px}
- .C4 .hero h1{font-size:20px;margin-top:16px}
- .C4 .hero .row .btn{width:100%}
- .C4 .hero .alt{width:100%;text-align:center;border:0;text-decoration:underline}
- .C4 .btn2{width:100%}
- .C4 .hero .areas li{font-size:14px;padding:3px 11px}
- .C4 .hero .plus{margin-bottom:16px}
- .C4 .hero .sub{margin-top:10px!important}
- .C4 .hero .media{aspect-ratio:4/5}
  .C4 .ribbon .wrap{grid-template-columns:1fr 1fr;padding:0}
  .C4 .ribbon a{padding:16px 18px;font-size:15px}
  .C4 .ribbon a:nth-child(odd){border-inline-start:0}.C4 .ribbon a:nth-child(4){border-inline-start:1px solid rgba(255,255,255,.1)}
@@ -310,7 +239,6 @@
  .C4 .rg{grid-template-columns:1fr}
  .C4 .oc{padding:28px 22px}.C4 .price .v{font-size:60px}
  .C4 .duo{grid-template-columns:1fr}
- .C4 .pub dl{grid-template-columns:1fr}
  .C4 .sbar{display:flex}
  .C4 .foot{padding-bottom:110px}
 }
@@ -318,12 +246,12 @@
 /* ===== why now: research band (navy + gold) ===== */
 .C4{--deep:#0B1528;--gold:#C9A45C;--gold2:#E9D29B}
 .C4 .vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.C4 .why,.C4 .coll{background:radial-gradient(120% 90% at 88% 0%,#1D2E4E 0%,#0B1528 58%,#08101F 100%);color:#D9DEE8;position:relative;overflow:hidden;isolation:isolate}
-.C4 .why:before,.C4 .coll:before{content:"";position:absolute;inset:0;z-index:-1;opacity:.06;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cg fill='none' stroke='%23C9A45C'%3E%3Cpath d='M60 8 L74 46 L112 60 L74 74 L60 112 L46 74 L8 60 L46 46 Z'/%3E%3Ccircle cx='60' cy='60' r='14'/%3E%3C/g%3E%3C/svg%3E") 0 0/120px 120px}
+.C4 .why{background:radial-gradient(120% 90% at 88% 0%,#1D2E4E 0%,#0B1528 58%,#08101F 100%);color:#D9DEE8;position:relative;overflow:hidden;isolation:isolate}
+.C4 .why:before{content:"";position:absolute;inset:0;z-index:-1;opacity:.06;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cg fill='none' stroke='%23C9A45C'%3E%3Cpath d='M60 8 L74 46 L112 60 L74 74 L60 112 L46 74 L8 60 L46 46 Z'/%3E%3Ccircle cx='60' cy='60' r='14'/%3E%3C/g%3E%3C/svg%3E") 0 0/120px 120px}
 .C4 .why{padding:120px 0 110px}
-.C4 .why .kick,.C4 .coll .kick{color:var(--gold2)}.C4 .why .kick:before,.C4 .coll .kick:before{background:var(--gold)}
-.C4 .why .h2,.C4 .coll .h2{color:#fff}.C4 .why .h2{max-width:920px}.C4 .why .h2 em{font-style:normal;color:var(--gold2)}
-.C4 .why .lead,.C4 .coll .lead{color:#AEB7C7}
+.C4 .why .kick{color:var(--gold2)}.C4 .why .kick:before{background:var(--gold)}
+.C4 .why .h2{color:#fff}.C4 .why .h2{max-width:920px}.C4 .why .h2 em{font-style:normal;color:var(--gold2)}
+.C4 .why .lead{color:#AEB7C7}
 .C4 .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-top:52px}
 .C4 .st{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid rgba(201,164,92,.26);border-radius:22px;padding:28px 24px 20px;display:flex;flex-direction:column}
 .C4 .st .n{font:700 clamp(50px,4.4vw,64px)/1 "C4",sans-serif;color:var(--gold2);direction:ltr;text-align:right;font-variant-numeric:tabular-nums}
@@ -352,26 +280,162 @@
 .C4 .why .btn:hover,.C4 .oc.both .btn:hover{background:var(--gold2)}
 .C4 .why .alt2{color:#C9D1DF;font-size:15px;text-underline-offset:4px}
 /* collection + bundle card in the same navy/gold direction */
-.C4 .coll{padding:110px 0 90px}
-.C4 .coll .trio img{box-shadow:0 34px 70px -26px rgba(0,0,0,.75),0 0 0 1px rgba(233,210,155,.12)}
-.C4 .coll .trio figcaption b{color:#fff}.C4 .coll .trio figcaption span{color:#9EA9BC}
-.C4 .coll .trio em{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#111A2C}
-.C4 .coll .week{background:rgba(255,255,255,.04);border-color:rgba(201,164,92,.28)}
-.C4 .coll .week h3{color:#fff}.C4 .coll .week li{color:#DCE1EA}.C4 .coll .week li::marker{color:var(--gold)}
-.C4 .coll .week .src{color:#9EA9BC}
 .C4 .oc.both{background:radial-gradient(130% 100% at 90% 0%,#1D2E4E 0%,#0B1528 65%);border:1.5px solid var(--gold);box-shadow:0 30px 70px -34px rgba(11,21,40,.8)}
 .C4 .oc.both li:before{border-color:var(--gold2)}
 .C4 .oc.both .flag{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#111A2C}
 .C4 .oc.both .math b{color:var(--gold2)}
 @media (max-width:1100px){.C4 .stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:700px){
- .C4 .why{padding:76px 0 70px}.C4 .coll{padding:72px 0 56px}
+ .C4 .why{padding:76px 0 70px}
  .C4 .stats{grid-template-columns:1fr;gap:14px;margin-top:34px}
  .C4 .st{padding:20px 18px 16px;border-radius:18px}.C4 .st .n{font-size:46px}.C4 .st .bar{margin:14px 0}.C4 .st p{font-size:15px;line-height:1.8;margin-bottom:10px}.C4 .st .fair{font-size:13px;line-height:1.75;margin-bottom:10px}.C4 .st .so{padding-top:10px}.C4 .st .cmp{margin:12px 0 14px}
  .C4 .why .next{margin-top:30px;padding-top:26px}.C4 .why .acts,.C4 .why .acts .btn{width:100%}.C4 .why .alt2{width:100%;text-align:center}
  .C4 .fairbox{font-size:14.5px;padding:14px 16px}
 }
+
+/* ===================== brand layer: AI Step Ahead (navy + gold, editorial light) ===================== */
+.C4 .mast{position:absolute;inset:0 0 auto 0;z-index:20;border-bottom:1px solid rgba(233,210,155,.12)}
+.C4 .mast .wrap{height:74px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.C4 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;line-height:1.2}
+.C4 .brand svg{width:20px;height:20px;color:var(--gold)}
+.C4 .brand b{font-size:17px;font-weight:700;letter-spacing:.01em}
+.C4 .brand small{display:block;font-size:11.5px;color:#9EA9BC;font-weight:400}
+.C4 .mast nav{display:flex;gap:26px;font-size:15px}
+.C4 .mast nav a{text-decoration:none;color:#B9C1D0}.C4 .mast nav a:hover{color:#fff}
+.C4 .mast .pill{text-decoration:none;font-weight:700;font-size:14.5px;color:var(--gold2);padding:9px 18px;border-radius:999px;box-shadow:inset 0 0 0 1px rgba(233,210,155,.5)}
+.C4 .mast .pill:hover{background:rgba(233,210,155,.08)}
+
+.C4 .hx{position:relative;isolation:isolate;overflow:hidden;color:#D9DEE8;padding:120px 0 70px;background:radial-gradient(80% 90% at 20% 35%,#203559 0%,#0F1C33 45%,#08101F 100%)}
+.C4 .hx:before{content:"";position:absolute;inset:0;z-index:-1;opacity:.05;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cg fill='none' stroke='%23C9A45C'%3E%3Cpath d='M60 8 L74 46 L112 60 L74 74 L60 112 L46 74 L8 60 L46 46 Z'/%3E%3Ccircle cx='60' cy='60' r='14'/%3E%3C/g%3E%3C/svg%3E") 0 0/120px 120px}
+.C4 .hg{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"a st" "b st";column-gap:56px;align-items:center;min-height:min(74vh,680px)}
+.C4 .hx-a{grid-area:a;align-self:end}.C4 .hx-b{grid-area:b;align-self:start}.C4 .stage{grid-area:st}
+.C4 .hx .publ{display:flex;align-items:center;gap:10px;margin:0 0 18px;font-size:14px;font-weight:600;color:var(--gold2)}
+.C4 .hx .publ:before{content:"";width:22px;height:1px;background:var(--gold)}
+.C4 .hx h1{font-size:clamp(34px,3.6vw,54px);line-height:1.28;color:#fff;font-weight:700;margin:0}
+.C4 .hx h1 em{font-style:normal;color:var(--gold2)}
+.C4 .hx-sub{font-size:clamp(16.5px,1.3vw,19.5px);line-height:1.85;color:#B9C1D0;margin:18px 0 0;max-width:560px}
+.C4 .feat{margin-top:24px;padding-top:18px;border-top:1px solid rgba(233,210,155,.18);max-width:560px}
+.C4 .feat .tag{display:inline-block;font-size:12px;font-weight:700;color:#111A2C;background:linear-gradient(135deg,var(--gold2),var(--gold));border-radius:99px;padding:1px 10px;margin-bottom:6px}
+.C4 .feat b{display:block;font-size:clamp(18px,1.45vw,21px);color:#fff;font-weight:700;line-height:1.6}
+.C4 .feat span.sp{display:block;font-size:14.5px;color:#9EA9BC}
+.C4 .pick{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px;max-width:560px}
+.C4 .opt{display:grid;grid-template-columns:1fr auto;grid-template-areas:"l p" "n p" "g g";column-gap:10px;text-decoration:none;color:#fff;border-radius:16px;padding:14px 16px 14px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.16);transition:border-color .2s,transform .2s var(--ease)}
+.C4 .opt:hover{border-color:rgba(233,210,155,.75);transform:translateY(-2px)}
+.C4 .opt:focus-visible{outline:2px solid var(--gold2);outline-offset:3px}
+.C4 .opt .l{grid-area:l;font-size:12.5px;color:#9EA9BC}
+.C4 .opt .nm{grid-area:n;font-size:15px;font-weight:600;line-height:1.55}
+.C4 .opt .p{grid-area:p;align-self:center;font:700 30px/1 "C4",sans-serif;color:#fff;direction:ltr;font-variant-numeric:tabular-nums}
+.C4 .opt .go{grid-area:g;display:flex;align-items:center;justify-content:center;min-height:46px;margin-top:12px;border-radius:999px;font-weight:700;font-size:15.5px;background:#F4EFE7;color:#111A2C}
+.C4 .opt.g{border-color:rgba(233,210,155,.5);background:rgba(201,164,92,.07)}
+.C4 .opt.g .go{background:linear-gradient(135deg,var(--gold2),var(--gold))}
+.C4 .hx .meta{display:flex;flex-wrap:wrap;gap:6px 20px;margin:16px 0 0;font-size:13.5px;color:#9EA9BC}
+.C4 .hx .meta a{color:var(--gold2);text-underline-offset:4px}
+.C4 .stage{position:relative;height:clamp(400px,40vw,580px)}
+.C4 .stage .glow{position:absolute;inset:6% 4% 8%;background:radial-gradient(closest-side,rgba(233,210,155,.2),rgba(233,210,155,0) 72%);pointer-events:none}
+.C4 .stage .floor{position:absolute;left:12%;right:12%;bottom:6%;height:36px;background:radial-gradient(closest-side,rgba(0,0,0,.6),rgba(0,0,0,0))}
+.C4 .cv{position:absolute;bottom:10%;margin:0;border-radius:4px;overflow:hidden;box-shadow:0 44px 70px -34px rgba(0,0,0,.9),0 0 0 1px rgba(255,255,255,.07);transition:transform .5s var(--ease)}
+.C4 .cv img{display:block;width:100%;height:auto}
+.C4 .cv-c{width:44%;left:28%;z-index:3;transform:translate3d(var(--px,0px),var(--py,0px),0)}
+.C4 .cv-g{width:35%;left:3%;bottom:15%;z-index:1;transform:translate3d(calc(var(--px,0px)*-.5),calc(var(--py,0px)*-.5),0) rotate(-5deg)}
+.C4 .cv-w{width:35%;right:3%;bottom:15%;z-index:2;transform:translate3d(calc(var(--px,0px)*-.5),calc(var(--py,0px)*-.5),0) rotate(5deg)}
+.C4 .cv-c:after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.26) 50%,transparent 62%);transform:translateX(-130%);animation:cl4sheen 1.8s .8s var(--ease) 1 forwards;pointer-events:none}
+@keyframes cl4sheen{to{transform:translateX(130%)}}
+.C4 .stage .cap{position:absolute;inset:auto 0 0 0;text-align:center;font-size:12.5px;color:#8E9AB2}
+
+.C4 .ribbon{background:#08101F;color:#E3E8F0;border-top:1px solid rgba(233,210,155,.14)}
+.C4 .ribbon a small{color:#8E9AB2}
+.C4 .ribbon a:hover{background:rgba(233,210,155,.05)}
+
+/* collection story (light editorial, navy accents) */
+.C4 .coll{padding:110px 0 20px;background:var(--paper)}
+.C4 .story{list-style:none;margin:46px 0 0;padding:0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:20px}
+.C4 .story>li{background:#FBF8F3;border:1px solid var(--rule);border-radius:24px;padding:18px 18px 22px;display:flex;flex-direction:column}
+.C4 .story .vis{position:relative;height:260px;border-radius:16px;overflow:hidden;background:linear-gradient(180deg,#EFE8DC,#E3D9C8);display:flex;align-items:flex-end;justify-content:center;gap:14px;padding:22px 18px 0;margin-bottom:18px}
+.C4 .story .vis img{height:94%;width:auto;border-radius:3px 3px 0 0;box-shadow:0 22px 40px -18px rgba(23,24,28,.55)}
+.C4 .story .vis.pg img{height:100%;border-radius:4px 4px 0 0}
+.C4 .story .vis.dk{background:radial-gradient(120% 100% at 85% 0%,#1D2E4E,#0B1528 65%);align-items:stretch;padding:20px 22px;color:#D9DEE8}
+.C4 .story .vis.dk ol{margin:0;padding:0 18px 0 0;font-size:13.5px;line-height:1.95;align-self:center}
+.C4 .story .vis.dk li::marker{color:var(--gold2);font-weight:700}
+.C4 .story .vis.dk li:last-child{color:#fff;font-weight:600}
+.C4 .story .stp{font-size:13px;font-weight:700;color:var(--tc2);margin-bottom:4px}
+.C4 .story h3{font-size:21px;line-height:1.5}
+.C4 .story p{font-size:15.5px;color:var(--ink2);margin:8px 0 0;line-height:1.85}
+.C4 .story em{font-style:normal;font-size:11.5px;font-weight:700;background:linear-gradient(135deg,var(--gold2),var(--gold));color:#111A2C;border-radius:99px;padding:1px 8px;margin-inline-start:6px;vertical-align:2px}
+.C4 .offer{padding:56px 0 110px}
+.C4 .oc .note{font-size:13px;color:#9EA9BC;margin:-8px 0 18px}
+
+/* publisher / trust */
+.C4 .pubx{padding:110px 0;background:var(--paper2)}
+.C4 .pubx .g2{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:26px;margin-top:44px;align-items:start}
+.C4 .pubx .pr{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.C4 .pubx .pr div{background:#FBF8F3;border:1px solid var(--rule);border-radius:18px;padding:20px}
+.C4 .pubx .pr b{display:block;font-size:17px;margin-bottom:6px}
+.C4 .pubx .pr p{margin:0;font-size:15px;line-height:1.85;color:var(--ink2)}
+.C4 .pubx .diff{margin-top:14px;background:#FBF8F3;border:1px solid var(--rule);border-inline-start:4px solid var(--gold);border-radius:18px;padding:18px 20px;font-size:16px;line-height:1.85}
+.C4 .pubx .card{background:radial-gradient(120% 100% at 85% 0%,#1D2E4E,#0B1528 65%);color:#D9DEE8;border-radius:22px;padding:26px 24px}
+.C4 .pubx .card h3{color:#fff;font-size:19px;margin-bottom:14px}
+.C4 .pubx dl{margin:0;display:grid;gap:14px}
+.C4 .pubx dt{font-size:12.5px;color:var(--gold2);font-weight:600}
+.C4 .pubx dd{margin:2px 0 0;font-size:15px;color:#E4E8EF;line-height:1.75}
+.C4 .pubx dd a{color:#fff;text-underline-offset:3px}
+.C4 .pubx .tm{font-size:12.5px;color:var(--mute);margin-top:16px}
+.C4 details.more{margin-top:18px;border-top:1px solid var(--rule)}
+.C4 details.more>summary{cursor:pointer;list-style:none;padding:16px 0;font-weight:700;font-size:16px;color:var(--tc2)}
+.C4 details.more>summary::-webkit-details-marker{display:none}
+.C4 details.more>summary:after{content:" +";font-family:"C4M"}
+.C4 details.more[open]>summary:after{content:" −"}
+
+/* final CTA */
+.C4 .final{position:relative;overflow:hidden;isolation:isolate;text-align:center;padding:100px 0;color:#D9DEE8;background:radial-gradient(90% 120% at 50% 0%,#203559 0%,#0B1528 60%,#08101F 100%)}
+.C4 .final h2{color:#fff;font-size:clamp(30px,3.4vw,50px);line-height:1.3}
+.C4 .final p{color:#B9C1D0;font-size:18px;margin:16px auto 30px;max-width:640px}
+.C4 .final .two{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+.C4 .final .btn{background:#F4EFE7;color:#111A2C;box-shadow:none}
+.C4 .final .btn.g{background:linear-gradient(135deg,var(--gold2),var(--gold))}
+.C4 .final .fine{font-size:13.5px;color:#8E9AB2;margin:20px 0 0}
+
+/* mobile sticky choices */
+.C4 .sbar{gap:8px;padding:8px 10px calc(8px + env(safe-area-inset-bottom));background:rgba(8,16,31,.97);border-top:1px solid rgba(233,210,155,.18)}
+.C4 .sbar a{flex:1;display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:50px;padding:0 14px;border-radius:14px;text-decoration:none;background:#F4EFE7;color:#111A2C}
+.C4 .sbar a.g{background:linear-gradient(135deg,var(--gold2),var(--gold))}
+.C4 .sbar a span{font-size:13.5px;font-weight:700;color:inherit;display:inline}
+.C4 .sbar a b{font:700 19px/1 "C4",sans-serif;color:inherit;direction:ltr}
+
+@media (max-width:1100px){
+ .C4 .mast nav{display:none}
+ .C4 .hg{grid-template-columns:1fr;grid-template-areas:"a" "st" "b";min-height:0}
+ .C4 .hx-a,.C4 .hx-b{align-self:auto}
+ .C4 .stage{height:clamp(300px,52vw,420px);margin:26px auto 6px;width:100%;max-width:540px}
+ .C4 .story{grid-template-columns:1fr 1fr}.C4 .story>li:first-child{grid-column:1/-1}
+ .C4 .pubx .g2{grid-template-columns:1fr}
+}
+@media (max-width:700px){
+ .C4 .mast .wrap{height:60px}
+ .C4 .brand small{display:none}
+ .C4 .mast .pill{padding:7px 14px;font-size:13.5px}
+ .C4 .hx{padding:80px 0 34px}
+ .C4 .hx .publ{font-size:12.5px;margin-bottom:12px}
+ .C4 .hx h1{font-size:33px;line-height:1.32}
+ .C4 .hx-sub{font-size:15.5px;line-height:1.8;margin-top:12px}
+ .C4 .stage{height:212px;margin:12px auto 0}.C4 .cv{bottom:6%}.C4 .cv-g,.C4 .cv-w{bottom:10%}
+ .C4 .stage .cap{display:none}
+ .C4 .cv-c{width:40%;left:30%}.C4 .cv-g,.C4 .cv-w{width:31%}
+ .C4 .feat{margin-top:14px;padding-top:12px}
+ .C4 .feat b{font-size:16.5px}.C4 .feat span.sp{font-size:13px}
+ .C4 .pick{gap:8px;margin-top:14px}
+ .C4 .opt{padding:12px 12px 12px;border-radius:14px}
+ .C4 .opt .nm{font-size:13.5px}.C4 .opt .p{font-size:24px}
+ .C4 .opt .go{min-height:44px;font-size:14.5px;margin-top:10px}
+ .C4 .hx .meta{font-size:12.5px;gap:4px 14px}
+ .C4 .coll{padding:70px 0 10px}
+ .C4 .story{grid-template-columns:1fr;gap:14px;margin-top:30px}
+ .C4 .story .vis{height:200px}
+ .C4 .offer{padding:40px 0 76px}
+ .C4 .pubx{padding:76px 0}.C4 .pubx .pr{grid-template-columns:1fr}
+ .C4 .final{padding:76px 0 120px}.C4 .final .two .btn{width:100%}
+}
 @media (prefers-reduced-motion:reduce){
+ .C4 .cv-c:after{display:none}
  .C4 [data-rv]{opacity:1;transform:none;transition:none}
  .C4 *{animation:none!important;transition-duration:.01ms!important}
  .C4 .ln{opacity:1}
@@ -380,33 +444,33 @@
 
 <div class="C4" id="cl4">
 <header class="mast"><div class="wrap">
- <div class="brand"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 12l7-6 7 6M3 17l7-6 7 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>AI Step Ahead</div>
- <nav aria-label="أقسام الصفحة"><a href="#apps">التطبيقات</a><a href="#method">الطريقة</a><a href="#pages">تصفّح الكتاب</a><a href="#offer">السعر</a></nav>
- <a class="pill" href="#offer"><span class="js-pc">@@P_C@@</span> · اشترِ</a>
+ <a class="brand" href="/" aria-label="AI Step Ahead: الصفحة الرئيسية"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 12l7-6 7 6M3 17l7-6 7 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>AI Step Ahead</b><small>أدلّة عربية عملية للذكاء الاصطناعي</small></span></a>
+ <nav aria-label="أقسام الصفحة">@@IFB@@<a href="#collection">المجموعة</a>@@ELSEB@@@@ENDB@@<a href="#why">لماذا الآن</a><a href="#method">الطريقة</a><a href="#pages">تصفّح الكتاب</a><a href="#publisher">الناشر</a></nav>
+ <a class="pill" href="#offer">الأسعار</a>
 </div></header>
 
-<section class="hero" aria-label="Claude بلا تخمين">
- <div class="copy">
-  <div class="lock"><span class="serif">Claude</span><span class="ar">بلا تخمين</span></div>
-  <h1>الدليل العربي الشامل لاستخدام Claude: من أول محادثة إلى المشاريع والأتمتة.</h1>
-  <p class="sub">للمبتدئ ولمن يستخدمه كلّ يوم، بتطبيقات عملية في:</p>
-  <ul class="areas" aria-label="مجالات الدليل"><li>العمل</li><li>التعلّم</li><li>المحتوى</li><li>البحث</li><li>الأعمال</li><li>المشاريع</li></ul>
-  <p class="plus"><b>+ 120 برومبت عربي إضافي</b> وملفات تدريب وقوالب</p>
-  <div class="row">
-   <a class="btn js-buy-c" href="/cart/@@V_C@@:1">احصل على الدليل · <span class="js-pc">@@P_C@@</span> <span class="ar">←</span></a>
-   @@IFB@@<a class="btn2 js-buy-b" href="/cart/@@V_G@@:1,@@V_C@@:1"><span>المجموعة الكاملة: الكتابان + دفتر عمل · <b class="js-pb">@@P_B@@</b></span><small>تضيف <span class="js-pd">@@P_D@@</span> فقط إلى سعر كتاب Claude</small></a>@@ELSEB@@<a class="btn2 js-buy-b" href="/cart/@@V_G@@:1,@@V_C@@:1"><span>الكتابان معًا: Claude + ChatGPT · <b class="js-pb">@@P_B@@</b></span><small>كتاب ChatGPT بـ <span class="js-pd">@@P_D@@</span> إضافية فقط</small></a>@@ENDB@@
-  </div>
-  <div class="get" aria-label="ما تحصل عليه">
-   <span><b>299 صفحة</b> · 33 فصلًا</span><span>PDF · تنزيل فوري</span><span>دفعة واحدة، بلا اشتراك</span>
-  </div>
+<section class="hx" aria-labelledby="hx-h"><div class="wrap hg">
+ <div class="hx-a">
+  <p class="publ">AI Step Ahead · ناشر عربي مستقل لأدلّة الذكاء الاصطناعي</p>
+  <h1 id="hx-h">تعلّم الذكاء الاصطناعي،<br><em>وطبّقه بلا تخمين.</em></h1>
+  <p class="hx-sub">أدلّة رقمية عربية بصيغة PDF، تأخذك من أساسيات Claude وChatGPT إلى استخدامهما في العمل والتعلّم والمشاريع والمحتوى.</p>
  </div>
- <div class="media">
-  <picture><source media="(max-width:700px)" srcset="@@A:cl4-hero-m-poster.jpg@@"><img src="@@A:cl4-hero-w-poster.jpg@@" alt="كتاب Claude بلا تخمين مفتوحًا على جهاز لوحي، ومكتبة الـ120 برومبت على هاتف" width="1600" height="900" fetchpriority="high"></picture>
-  <video muted playsinline loop preload="none" aria-hidden="true" data-w="@@A:cl4-hero-w.mp4@@" data-m="@@A:cl4-hero-m.mp4@@" data-pw="@@A:cl4-hero-w-poster.jpg@@" data-pm="@@A:cl4-hero-m-poster.jpg@@"></video>
-  <button class="ctl" type="button" aria-label="إيقاف الفيديو">إيقاف الحركة</button>
+ <div class="stage" aria-hidden="true">
+  <span class="glow"></span><span class="floor"></span>
+  <figure class="cv cv-g"><img src="@@A:cl4-gpt-cover.webp@@" alt="" width="900" height="1273" fetchpriority="low"></figure>
+  @@IFB@@<figure class="cv cv-w"><img src="@@A:cl4-bonus-cover.webp@@" alt="" width="900" height="1273" fetchpriority="low"></figure>@@ELSEB@@@@ENDB@@
+  <figure class="cv cv-c"><img src="@@A:cl4-cover.webp@@" alt="" width="600" height="849" fetchpriority="high"></figure>
+  <span class="cap">إصدارات رقمية بصيغة PDF، تصلك فور الدفع</span>
  </div>
- <div class="veil"></div>
-</section>
+ <div class="hx-b">
+  <div class="feat"><span class="tag">الإصدار الرئيسي</span><b>Claude بلا تخمين: الدليل العربي الشامل</b><span class="sp">299 صفحة · 33 فصلًا · 120 برومبت عربي · ملفات تدريب</span></div>
+  <div class="pick" id="hx-pick">
+   <a class="opt js-buy-c" href="/cart/@@V_C@@:1"><span class="l">الدليل وحده</span><span class="nm">Claude بلا تخمين</span><span class="p js-pc">@@P_C@@</span><span class="go">اشترِ الدليل</span></a>
+   @@IFB@@<a class="opt g js-buy-b" href="/cart/@@V_G@@:1,@@V_C@@:1"><span class="l">المجموعة الكاملة</span><span class="nm">الكتابان + دفتر العمل</span><span class="p js-pb">@@P_B@@</span><span class="go">خذ المجموعة</span></a>@@ELSEB@@<a class="opt g js-buy-b" href="/cart/@@V_G@@:1,@@V_C@@:1"><span class="l">الكتابان معًا</span><span class="nm">Claude + ChatGPT</span><span class="p js-pb">@@P_B@@</span><span class="go">خذ الكتابين</span></a>@@ENDB@@
+  </div>
+  <p class="meta"><a href="#offer">قارن بين الخيارين</a><span>تنزيل فوري بعد الدفع</span><span>ضمان استرداد 30 يومًا</span></p>
+ </div>
+</div></section>
 
 <nav class="ribbon" aria-label="مجالات التطبيق"><div class="wrap">
  <a href="#apps" data-go="0">العمل والإنتاجية<small>بريد، تقارير، اجتماعات، خطط</small></a>
@@ -417,16 +481,55 @@
  <a href="#apps" data-go="5">المشاريع والأتمتة<small>ذاكرة، Claude Code، ربط</small></a>
 </div></nav>
 
-<section class="levels"><div class="wrap">
- <div class="kick" data-rv>لأيّ مستوى؟</div>
- <h2 class="h2" data-rv>سواء فتحت Claude أول مرة، أو تستخدمه كلّ يوم.</h2>
- <p class="lead" data-rv>الكتاب لا يُقرأ بالضرورة من أوله إلى آخره. اختر مسارك بحسب هدفك، واقرأ الجزء الثاني كاملًا أيًّا كان اختيارك، فكلّ ما بعده مبنيّ عليه.</p>
- <div class="lv">
-  <article data-rv style="--c:#C2583A"><h3>المبتدئ</h3><div class="who">لم تستخدم Claude استخدامًا جادًّا بعد</div><p>ابدأ من البداية، وأنجز تمرين كلّ فصل قبل أن تنتقل. ستفهم كيف يعمل، وتجهّز حسابك، وتكتب أول برومبت يصيب.</p><div class="ch"><b>الفصول:</b> 1 · 2 · 3 · 4 · 5–10 · 11 وما بعده</div></article>
-  <article data-rv style="--c:#1C2A44"><h3>المحترف المشغول</h3><div class="who">تريد إنتاجًا أكبر من عملك</div><p>اقرأ الفصلين 3 و4 للإعداد، ثم الجزء الثاني، ثم الأجزاء التي تناسب عملك: البريد والتقارير، أو البحث، أو الملفات والبيانات.</p><div class="ch"><b>الفصول:</b> 3–4 · 5–10 · 11–16 · 17 · 19 · 21–22 · 30</div></article>
-  <article data-rv style="--c:#5E7F6F"><h3>المستخدم المتقدّم</h3><div class="who">تبني أنظمة عمل وأدوات</div><p>تصفّح الجزء الأول من أجل بطاقات التحقق، ثم ركّز على سير العمل الموثوق، وClaude Code، وأدوات الربط، والمهارات والمهام المجدولة.</p><div class="ch"><b>الفصول:</b> 2 · 5–10 · 17 · 20 · 24–29 · 30–31</div></article>
+@@IFB@@<section class="coll" id="collection"><div class="wrap">
+ <div class="kick" data-rv>المجموعة الكاملة</div>
+ <h2 class="h2" data-rv>تعلّم الأداتين، ثم اجعل استخدامهما عادة.</h2>
+ <p class="lead" data-rv>دليلان شاملان، ودفتر عمل من 19 صفحة يحوّل ما تعلّمته إلى روتين أسبوعي: إحدى الأداتين تكتب، والأخرى تراجع، وأنت تقرّر.</p>
+ <ol class="story">
+  <li data-rv><div class="vis"><img src="@@A:cl4-cover.webp@@" alt="غلاف كتاب Claude بلا تخمين" width="600" height="849" loading="lazy"><img src="@@A:cl4-gpt-cover.webp@@" alt="غلاف كتاب ChatGPT بلا تخمين" width="900" height="1273" loading="lazy"></div>
+   <div class="stp">1 · تعلّم</div><h3>دليلان شاملان، لكلّ أداة دليلها</h3><p>Claude بلا تخمين (299 صفحة، 33 فصلًا) وChatGPT بلا تخمين (298 صفحة، 32 فصلًا)، ومع كلّ دليل 120 طلبًا جاهزًا وملفات تدريب.</p></li>
+  <li data-rv><div class="vis pg"><img src="@@A:cl4-bonus-day1.webp@@" alt="صفحة اليوم الأول من دفتر العمل سبعة أيام، سبع نتائج" width="900" height="1273" loading="lazy"></div>
+   <div class="stp">2 · تدرّب</div><h3>سبعة أيام، سبع نتائج<em>جديد</em></h3><p>دفتر عمل: لكلّ يوم مهمة من عملك الحقيقي، وطلبان جاهزان، وورقة عمل تملؤها.</p></li>
+  <li data-rv><div class="vis dk"><ol><li>رسالة مهمة، جاهزة للإرسال</li><li>ملف طويل يصير صفحة قرار</li><li>سؤال بحثي بمصادر موثّقة</li><li>عشرون فكرة تُفرز إلى خمس</li><li>مهمة كبيرة في خطة من صفحة</li><li>سير عمل شخصي تعيد استخدامه</li><li>روتين أسبوعي ثابت</li></ol></div>
+   <div class="stp">3 · اجعلها عادة</div><h3>روتين تعود إليه كلّ أسبوع</h3><p>تنتهي الأيام السبعة بروتين واضح: من يكتب، ومن يراجع، وما لا يُسلَّم لأيّ منهما. يكفيك الحساب المجاني في الأداتين لمعظم المهام.</p></li>
+ </ol>
+</div></section>@@ELSEB@@@@ENDB@@
+
+<section class="offer" id="offer"><div class="wrap">
+ <div class="kick" data-rv>اختر نسختك</div>
+ @@IFB@@<h2 class="h2" data-rv>الدليل وحده، أو المجموعة كاملة.</h2>@@ELSEB@@<h2 class="h2" data-rv>ابدأ بـ Claude. أو خذ الأداتين بفرق بسيط.</h2>@@ENDB@@
+ <div class="og">
+  <article class="oc" data-rv>
+   <h3>Claude بلا تخمين</h3><div class="who">الدليل كاملًا مع هديّته</div>
+   <div class="price"><span class="v js-pc">@@P_C@@</span><span class="u">دفعة واحدة</span></div>
+   <ul><li>الكتاب: 299 صفحة و33 فصلًا</li><li>120 برومبت عربي جاهز للتعديل</li><li>ملفات التدريب والقوالب</li></ul>
+   <a class="btn dark js-buy-c" href="/cart/@@V_C@@:1">اشترِ Claude بلا تخمين</a>
+  </article>
+  @@IFB@@<article class="oc both" data-rv>
+   <span class="flag">Claude + ChatGPT</span>
+   <h3>المجموعة الكاملة</h3><div class="who">الكتابان ودفتر العمل، لمن يريد أن يتقن الأداتين ويستخدمهما معًا</div>
+   <div class="price"><span class="v js-pb">@@P_B@@</span><span class="u">دفعة واحدة</span></div>
+   <p class="math">تضيف كتاب ChatGPT ودفتر العمل بـ <b class="js-pd">@@P_D@@</b> فقط فوق سعر Claude، ويُحتسب ذلك تلقائيًّا عند الدفع دون كود.</p>
+   <div class="duo">
+    <div><b>Claude بلا تخمين</b>إطار ARROWS، والمستندات الطويلة، والمشاريع والذاكرة، وArtifacts، وClaude Code وأدوات الربط.</div>
+    <div><b>ChatGPT بلا تخمين</b>طريقة «المِقاس» وبروتوكول «تأكَّد»، والصورة والصوت، ومقطع قصير لكلّ فصل، ونسخة للجوّال.</div>
+   </div>
+   <ul><li><b>كتابان كاملان</b> (597 صفحة) و<b>240 طلبًا</b> جاهزًا وملفات تدريب لكلّ كتاب</li><li><b>جديد: «سبعة أيام، سبع نتائج»</b>، دفتر عمل من 19 صفحة تستخدم فيه الأداتين معًا (يصل مع كتاب ChatGPT)</li><li>البطاقة المختصرة لطريقة «المِقاس» ونسخة الجوّال لكتاب ChatGPT</li></ul>
+   <a class="btn js-buy-b" href="/cart/@@V_G@@:1,@@V_C@@:1">أريد المجموعة الكاملة · <span class="js-pb">@@P_B@@</span></a>
+  </article>@@ELSEB@@<article class="oc both" data-rv>
+   <span class="flag">الكتابان معًا</span>
+   <h3>Claude + ChatGPT بلا تخمين</h3><div class="who">لمن يستخدم الأداتين، أو لم يقرّر بعد</div>
+   <div class="price"><span class="v js-pb">@@P_B@@</span><span class="u">بدل <span class="js-ps">@@P_S@@</span> عند شراء كلّ كتاب وحده</span></div>
+   <p class="math">أي أنّ كتاب ChatGPT يضيف <b class="js-pd">@@P_D@@</b> فقط إلى سعر Claude. الخصم يُطبَّق تلقائيًّا عند الدفع.</p>
+   <div class="duo">
+    <div><b>Claude بلا تخمين</b>إطار ARROWS، والمستندات الطويلة، والمشاريع والذاكرة، وArtifacts، وClaude Code وأدوات الربط.</div>
+    <div><b>ChatGPT بلا تخمين</b>طريقة «المِقاس» وبروتوكول «تأكَّد»، والصورة والصوت، ومقطع قصير لكلّ فصل، ونسخة للجوّال.</div>
+   </div>
+   <ul><li><b>كتابان كاملان</b> (أكثر من 590 صفحة)</li><li><b>240 برومبت</b> وملفات تدريب لكلّ كتاب</li><li>تعرف ما تتقنه كلّ أداة، فتختار الأنسب لكلّ مهمة</li></ul>
+   <a class="btn js-buy-b" href="/cart/@@V_G@@:1,@@V_C@@:1">أريد الكتابين · <span class="js-pb">@@P_B@@</span></a>
+  </article>@@ENDB@@
  </div>
- <p class="src" data-rv>من صفحة «كيف تقرأ هذا الكتاب» في الدليل نفسه.</p>
+ <div class="trust"><span>تنزيل فوري بعد الدفع، ونسخة على بريدك</span><span>Apple Pay وPayPal وShop Pay والبطاقات</span><span>ضمان 30 يومًا وفق <a href="/policies/refund-policy">سياسة الاسترداد</a></span></div>
 </div></section>
 
 <section class="why" id="why" aria-labelledby="why-h"><div class="wrap">
@@ -459,18 +562,6 @@
  </div>
 </div></section>
 
-<section class="apps" id="apps"><div class="wrap">
- <div class="kick" data-rv>تطبيقات عملية</div>
- <h2 class="h2" data-rv>دليل واحد، لكلّ ما تستخدم فيه Claude.</h2>
- <p class="lead" data-rv>كلّ مجال هنا فصول كاملة بتمارين وبرومبتات جاهزة، لا فقرات عابرة. اختر مجالك لترى صفحة حقيقية منه.</p>
- <div class="tabs" role="tablist" aria-label="مجالات التطبيق" data-rv></div>
- <div class="panel" role="tabpanel" aria-live="polite">
-  <div class="txt"></div>
-  <div class="vis"><span class="tag"></span><div class="sheet"><img alt="" width="900" height="1273"></div></div>
- </div>
- <p class="note">المثال المستمر في الكتاب: رنا، صاحبة محمصة قهوة متخيَّلة في عمّان، تظهر في معظم الفصول من الفصل 5 حتى الفصل 31. كلّ الأسماء والأرقام فيه خيالية للتعليم.</p>
-</div></section>
-
 <section class="demo" id="method"><div class="wrap">
  <div class="kick" data-rv>الطريقة</div>
  <h2 class="h2" data-rv>لماذا «بلا تخمين»؟ لأنك تتوقف عن ترك Claude يخمّن ما تريد.</h2>
@@ -497,6 +588,18 @@
  </div>
 </div></section>
 
+<section class="apps" id="apps"><div class="wrap">
+ <div class="kick" data-rv>تطبيقات عملية</div>
+ <h2 class="h2" data-rv>دليل واحد، لكلّ ما تستخدم فيه Claude.</h2>
+ <p class="lead" data-rv>كلّ مجال هنا فصول كاملة بتمارين وبرومبتات جاهزة، لا فقرات عابرة. اختر مجالك لترى صفحة حقيقية منه.</p>
+ <div class="tabs" role="tablist" aria-label="مجالات التطبيق" data-rv></div>
+ <div class="panel" role="tabpanel" aria-live="polite">
+  <div class="txt"></div>
+  <div class="vis"><span class="tag"></span><div class="sheet"><img alt="" width="900" height="1273"></div></div>
+ </div>
+ <p class="note">المثال المستمر في الكتاب: رنا، صاحبة محمصة قهوة متخيَّلة في عمّان، تظهر في معظم الفصول من الفصل 5 حتى الفصل 31. كلّ الأسماء والأرقام فيه خيالية للتعليم.</p>
+</div></section>
+
 <section class="flip" id="pages"><div class="wrap">
  <div class="kick" data-rv>تصفّح قبل أن تشتري</div>
  <h2 class="h2" data-rv>صفحات حقيقية من الكتاب.</h2>
@@ -507,6 +610,18 @@
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="صفحة مكبّرة"><button type="button" aria-label="إغلاق">×</button><img alt=""></div>
 </section>
 
+<section class="levels"><div class="wrap">
+ <div class="kick" data-rv>لأيّ مستوى؟</div>
+ <h2 class="h2" data-rv>سواء فتحت Claude أول مرة، أو تستخدمه كلّ يوم.</h2>
+ <p class="lead" data-rv>الكتاب لا يُقرأ بالضرورة من أوله إلى آخره. اختر مسارك بحسب هدفك، واقرأ الجزء الثاني كاملًا أيًّا كان اختيارك، فكلّ ما بعده مبنيّ عليه.</p>
+ <div class="lv">
+  <article data-rv style="--c:#C2583A"><h3>المبتدئ</h3><div class="who">لم تستخدم Claude استخدامًا جادًّا بعد</div><p>ابدأ من البداية، وأنجز تمرين كلّ فصل قبل أن تنتقل. ستفهم كيف يعمل، وتجهّز حسابك، وتكتب أول برومبت يصيب.</p><div class="ch"><b>الفصول:</b> 1 · 2 · 3 · 4 · 5–10 · 11 وما بعده</div></article>
+  <article data-rv style="--c:#1C2A44"><h3>المحترف المشغول</h3><div class="who">تريد إنتاجًا أكبر من عملك</div><p>اقرأ الفصلين 3 و4 للإعداد، ثم الجزء الثاني، ثم الأجزاء التي تناسب عملك: البريد والتقارير، أو البحث، أو الملفات والبيانات.</p><div class="ch"><b>الفصول:</b> 3–4 · 5–10 · 11–16 · 17 · 19 · 21–22 · 30</div></article>
+  <article data-rv style="--c:#5E7F6F"><h3>المستخدم المتقدّم</h3><div class="who">تبني أنظمة عمل وأدوات</div><p>تصفّح الجزء الأول من أجل بطاقات التحقق، ثم ركّز على سير العمل الموثوق، وClaude Code، وأدوات الربط، والمهارات والمهام المجدولة.</p><div class="ch"><b>الفصول:</b> 2 · 5–10 · 17 · 20 · 24–29 · 30–31</div></article>
+ </div>
+ <p class="src" data-rv>من صفحة «كيف تقرأ هذا الكتاب» في الدليل نفسه.</p>
+</div></section>
+
 <section class="toc"><div class="wrap">
  <div class="kick" data-rv>المحتويات</div>
  <h2 class="h2" data-rv>15 جزءًا. من الأساسيات إلى المشاريع الختامية.</h2>
@@ -516,6 +631,8 @@
   <div><span class="n">3</span><p><b>العمل اليومي</b><span>البريد والتقارير والاجتماعات والخطط، التعلّم السريع والترجمة</span></p></div>
   <div><span class="n">4</span><p><b>البحث والتحليل</b><span>البحث على الويب وميزة Research وفحص المصادر، تقرير سوق موثّق</span></p></div>
   <div><span class="n">5</span><p><b>الملفات والبيانات</b><span>PDF وWord والصور الممسوحة، ملفات Excel وCSV</span></p></div>
+ </div>
+ <details class="more"><summary>اعرض الأجزاء الخمسة عشر كلّها</summary><div class="parts">
   <div><span class="n">6</span><p><b>المشاريع والذاكرة</b><span>التعليمات والمعرفة والعمل الممتد، الذاكرة والمحادثات الخفية</span></p></div>
   <div><span class="n">7</span><p><b>Artifacts والمنتجات الرقمية</b><span>مستندات وعروض وتصاميم ولوحات معلومات، أداة تسعير تفاعلية</span></p></div>
   <div><span class="n">8</span><p><b>الأعمال والتسويق</b><span>ثماني حالات: متجر، خدمة عملاء، مستقل، موظف، صانع محتوى، مؤسس، مدير، فريق تسويق</span></p></div>
@@ -526,7 +643,7 @@
   <div><span class="n">13</span><p><b>الأمان والخصوصية</b><span>البيانات الحساسة، حقن البرومبت، حقوق النشر، التحقق قبل القرار</span></p></div>
   <div><span class="n">14</span><p><b>المشاريع الختامية</b><span>خمسة مشاريع تجمع ما تعلّمته في عمل حقيقي</span></p></div>
   <div><span class="n">15</span><p><b>مكتبة البرومبتات</b><span>الأربعون الأساسية من 120، في ثماني فئات</span></p></div>
- </div>
+ </div></details>
 </div></section>
 
 <section class="rec"><div class="wrap">
@@ -540,67 +657,32 @@
  <div class="verified" data-rv><span aria-hidden="true">✓</span><p style="margin:0"><b>معلومات مؤرَّخة.</b> روجعت المعلومات التقنية المتغيرة (الخطط والنماذج وأسماء الإعدادات) على المصادر الرسمية في 17–18 أكتوبر 2026، ولكلّ معلومة منها بطاقة تحقق تسمّي مصدرها. وإن خالف الكتاب ما تراه في التطبيق، فالوثائق الرسمية هي المرجع.</p></div>
 </div></section>
 
-@@IFB@@<section class="coll" id="collection"><div class="wrap">
- <div class="kick" data-rv>المجموعة الكاملة</div>
- <h2 class="h2" data-rv>أداتان، وطريقة واحدة.</h2>
- <p class="lead" data-rv>كتابان كاملان يعلّمانك كلّ أداة على حدة، ودفتر عمل جديد يجمعهما في أسبوع واحد: إحداهما تكتب، والأخرى تراجع، وأنت تقرّر.</p>
- <div class="trio" data-rv>
-  <figure><img src="@@A:cl4-cover.webp@@" alt="غلاف كتاب Claude بلا تخمين" width="600" height="849" loading="lazy"><figcaption><b>Claude بلا تخمين</b><span>299 صفحة · 33 فصلًا · 120 برومبت · ملفات تدريب</span></figcaption></figure>
-  <figure class="mid"><img src="@@A:cl4-bonus-cover.webp@@" alt="غلاف دفتر العمل سبعة أيام، سبع نتائج" width="900" height="1273" loading="lazy"><figcaption><b>سبعة أيام، سبع نتائج <em>جديد</em></b><span>دفتر عمل · 19 صفحة · 14 طلبًا جاهزًا · 7 أوراق عمل</span></figcaption></figure>
-  <figure><img src="@@A:cl4-gpt-cover.webp@@" alt="غلاف كتاب ChatGPT بلا تخمين" width="900" height="1273" loading="lazy"><figcaption><b>ChatGPT بلا تخمين</b><span>298 صفحة · 32 فصلًا · 120 طلبًا · نسخة للجوّال</span></figcaption></figure>
- </div>
- <div class="week" data-rv>
-  <img src="@@A:cl4-bonus-day1.webp@@" alt="صفحة اليوم الأول من دفتر العمل" width="900" height="1273" loading="lazy">
-  <div><h3>ماذا تفعل في أسبوع الدفتر؟</h3>
-  <ol><li>رسالة مهمة تؤجّلها، جاهزة للإرسال</li><li>ملف طويل يصير صفحة قرار بأدلّتها</li><li>سؤال بحثي بإجابة موثّقة المصادر</li><li>عشرون فكرة تُفرز إلى خمس تستحق العمل</li><li>مهمة كبيرة في خطة من صفحة مع مخاطرها</li><li>سير عمل شخصي تعيد استخدامه</li><li>روتين أسبوعي: من يكتب، ومن يراجع، وما لا يُسلَّم لهما</li></ol>
-  <p class="src">لكلّ يوم طلبان جاهزان وورقة عمل. يكفيك الحساب المجاني في الأداتين لمعظم المهام.</p></div>
- </div>
-</div></section>@@ELSEB@@@@ENDB@@
-<section class="offer" id="offer"><div class="wrap">
- <div class="kick" data-rv>اختر</div>
- @@IFB@@<h2 class="h2" data-rv>ابدأ بـ Claude، أو خذ المجموعة الكاملة.</h2>@@ELSEB@@<h2 class="h2" data-rv>ابدأ بـ Claude. أو خذ الأداتين بفرق بسيط.</h2>@@ENDB@@
- <div class="og">
-  <article class="oc" data-rv>
-   <h3>Claude بلا تخمين</h3><div class="who">الدليل كاملًا مع هديّته</div>
-   <div class="price"><span class="v js-pc">@@P_C@@</span><span class="u">دفعة واحدة</span></div>
-   <ul><li>الكتاب: 299 صفحة و33 فصلًا</li><li>120 برومبت عربي جاهز للتعديل</li><li>ملفات التدريب والقوالب</li></ul>
-   <a class="btn dark js-buy-c" href="/cart/@@V_C@@:1">اشترِ Claude بلا تخمين</a>
-  </article>
-  @@IFB@@<article class="oc both" data-rv>
-   <span class="flag">Claude + ChatGPT</span>
-   <h3>المجموعة الكاملة</h3><div class="who">الكتابان ودفتر العمل، لمن يريد أن يتقن الأداتين ويستخدمهما معًا</div>
-   <div class="price"><span class="v js-pb">@@P_B@@</span><span class="u">دفعة واحدة</span></div>
-   <p class="math">تضيف كتاب ChatGPT ودفتر العمل بـ <b class="js-pd">@@P_D@@</b> فقط فوق سعر Claude، ويُحتسب ذلك تلقائيًّا عند الدفع دون كود.</p>
-   <div class="duo">
-    <div><b>Claude بلا تخمين</b>إطار ARROWS، والمستندات الطويلة، والمشاريع والذاكرة، وArtifacts، وClaude Code وأدوات الربط.</div>
-    <div><b>ChatGPT بلا تخمين</b>طريقة «المِقاس» وبروتوكول «تأكَّد»، والصورة والصوت، ومقطع قصير لكلّ فصل، ونسخة للجوّال.</div>
+<section class="pubx" id="publisher"><div class="wrap">
+ <div class="kick" data-rv>الناشر</div>
+ <h2 class="h2" data-rv>لماذا AI Step Ahead؟</h2>
+ <p class="lead" data-rv>AI Step Ahead ناشر عربي مستقل يكتب أدلّة عملية لأدوات الذكاء الاصطناعي. لا نطوّر هذه الأدوات؛ نكتب كيف تستخدمها في عملك، بطريقة تستطيع مراجعتها بنفسك.</p>
+ <div class="g2">
+  <div>
+   <div class="pr" data-rv>
+    <div><b>مكتوب ليُطبَّق</b><p>كلّ فصل يبدأ بأهداف واضحة وينتهي بتمرين واختبار إتقان، ولكلّ مفهوم مثال عملي وملفات تدريب تفتحها بنفسك.</p></div>
+    <div><b>مؤرَّخ ومنسوب</b><p>ما يتغيّر في الأدوات، مثل الخطط والنماذج والإعدادات، له تاريخ تحقق ومصدر رسمي، وفي آخر الكتاب فصل عن البقاء مواكبًا.</p></div>
+    <div><b>أمثلة واضحة الحدود</b><p>كلّ مخرج توضيحي موسوم بذلك، ورسوم الواجهة مبسّطة وليست لقطات شاشة، حتى لا تعتمد على ما قد يتغيّر.</p></div>
+    <div><b>عيّنات حقيقية قبل الشراء</b><p>تصفّح <a href="#pages">صفحات من الكتاب</a> كما هي، وجرّب <a href="#method">الطريقة</a> بنفسك في هذه الصفحة.</p></div>
    </div>
-   <ul><li><b>كتابان كاملان</b> (597 صفحة) و<b>240 طلبًا</b> جاهزًا وملفات تدريب لكلّ كتاب</li><li><b>جديد: «سبعة أيام، سبع نتائج»</b>، دفتر عمل من 19 صفحة تستخدم فيه الأداتين معًا: إحداهما تكتب، والأخرى تراجع</li><li>البطاقة المختصرة لطريقة «المِقاس» ونسخة الجوّال لكتاب ChatGPT</li></ul>
-   <a class="btn js-buy-b" href="/cart/@@V_G@@:1,@@V_C@@:1">أريد المجموعة الكاملة · <span class="js-pb">@@P_B@@</span></a>
-  </article>@@ELSEB@@<article class="oc both" data-rv>
-   <span class="flag">الكتابان معًا</span>
-   <h3>Claude + ChatGPT بلا تخمين</h3><div class="who">لمن يستخدم الأداتين، أو لم يقرّر بعد</div>
-   <div class="price"><span class="v js-pb">@@P_B@@</span><span class="u">بدل <span class="js-ps">@@P_S@@</span> عند شراء كلّ كتاب وحده</span></div>
-   <p class="math">أي أنّ كتاب ChatGPT يضيف <b class="js-pd">@@P_D@@</b> فقط إلى سعر Claude. الخصم يُطبَّق تلقائيًّا عند الدفع.</p>
-   <div class="duo">
-    <div><b>Claude بلا تخمين</b>إطار ARROWS، والمستندات الطويلة، والمشاريع والذاكرة، وArtifacts، وClaude Code وأدوات الربط.</div>
-    <div><b>ChatGPT بلا تخمين</b>طريقة «المِقاس» وبروتوكول «تأكَّد»، والصورة والصوت، ومقطع قصير لكلّ فصل، ونسخة للجوّال.</div>
-   </div>
-   <ul><li><b>كتابان كاملان</b> (أكثر من 590 صفحة)</li><li><b>240 برومبت</b> وملفات تدريب لكلّ كتاب</li><li>تعرف ما تتقنه كلّ أداة، فتختار الأنسب لكلّ مهمة</li></ul>
-   <a class="btn js-buy-b" href="/cart/@@V_G@@:1,@@V_C@@:1">أريد الكتابين · <span class="js-pb">@@P_B@@</span></a>
-  </article>@@ENDB@@
+   <p class="diff" data-rv><b>الفرق عن الشروحات المجانية:</b> منهج متسلسل من أول محادثة إلى مشاريع كاملة، بتمارين واختبارات إتقان وملفات تدريب، ومعلومات مؤرَّخة تستطيع التحقق منها، في مكان واحد وبالعربية.</p>
+  </div>
+  <div class="card" data-rv>
+   <h3>معلومات الشراء</h3>
+   <dl>
+    <div><dt>الصيغة</dt><dd>ملفات رقمية: PDF وملفات تدريب مضغوطة. لا يُشحن أيّ منتج مطبوع.</dd></div>
+    <div><dt>الاستلام</dt><dd>روابط التنزيل في صفحة تأكيد الطلب فور الدفع، ونسخة منها على بريدك.</dd></div>
+    <div><dt>الضمان</dt><dd>استرداد كامل خلال 30 يومًا من الشراء. <a href="/policies/refund-policy">سياسة الاسترداد</a></dd></div>
+    <div><dt>الدعم</dt><dd><a href="mailto:support@aistepahead.com">support@aistepahead.com</a></dd></div>
+    <div><dt>الطبعة</dt><dd>طبعة أكتوبر 2026، ومعلوماتها المتغيّرة مؤرَّخة داخل الكتاب.</dd></div>
+   </dl>
+  </div>
  </div>
- <div class="trust"><span>تنزيل فوري بعد الدفع، ونسخة على بريدك</span><span>Apple Pay وPayPal وShop Pay والبطاقات</span><span>ضمان 30 يومًا وفق <a href="/policies/refund-policy">سياسة الاسترداد</a></span></div>
-</div></section>
-
-<section class="pub"><div class="wrap g">
- <div data-rv><div class="kick">الناشر</div><h2 class="h2" style="font-size:clamp(26px,2.6vw,38px)">AI Step Ahead: أدلّة عربية عملية في الذكاء الاصطناعي.</h2></div>
- <dl data-rv>
-  <div><dt>مكتوب ليُطبَّق</dt><dd>كلّ فصل يبدأ بأهداف واضحة وينتهي بتمرين واختبار إتقان، ولكلّ مفهوم مثال عملي.</dd></div>
-  <div><dt>مؤرَّخ ومنسوب</dt><dd>ما يتغيّر في Claude له تاريخ تحقق ومصدر رسمي، وفي آخر الكتاب فصل عن البقاء مواكبًا.</dd></div>
-  <div><dt>أمثلة واضحة الحدود</dt><dd>كلّ مخرج توضيحي موسوم بذلك، ورسوم الواجهة مبسّطة وليست لقطات شاشة.</dd></div>
-  <div><dt>دليل مستقل</dt><dd>Claude علامة تجارية لشركة Anthropic، وتُذكر هنا للوصف فقط.</dd></div>
- </dl>
+ <p class="tm" data-rv>Claude علامة تجارية لشركة Anthropic، وChatGPT علامة تجارية لشركة OpenAI، وتُذكران هنا للوصف فقط.</p>
 </div></section>
 
 <section class="faq"><div class="wrap g">
@@ -610,18 +692,20 @@
   <details><summary>وإن كنت أستخدمه كلّ يوم؟</summary><p>الأجزاء المتقدمة تغطّي المشاريع والذاكرة وArtifacts وClaude Code وأدوات الربط وMCP والمهارات والمهام المجدولة وسير العمل الموثوق، وخمسة مشاريع ختامية.</p></details>
   <details><summary>هل أحتاج اشتراكًا مدفوعًا في Claude؟</summary><p>كثير من الفصول تعمل على الخطة المجانية. بعض المزايا المتقدمة تحتاج خطة مدفوعة، والفصل 4 يشرح الخطط وحدود الاستخدام وما يناسب كلّ نوع من المستخدمين.</p></details>
   <details><summary>ما الفرق بينه وبين كتاب ChatGPT بلا تخمين؟</summary><p>كتابان مستقلّان لأداتين مختلفتين، لكلّ منهما إعداداته وأمثلته. إن كنت تستخدم أداة واحدة فاختر كتابها، وإن كنت تستخدم الاثنتين فالكتابان معًا أوفر.</p></details>
+  <details><summary>ماذا يصلني في كلّ خيار؟</summary><p><b>الدليل وحده:</b> كتاب Claude بلا تخمين (PDF)، ومكتبة 120 برومبت (PDF)، وملفات التدريب (ZIP). <b>المجموعة الكاملة:</b> كلّ ما سبق، وكتاب ChatGPT بلا تخمين مع ملحقاته، ودفتر العمل «سبعة أيام، سبع نتائج». دفتر العمل يصل مع كتاب ChatGPT، فيحصل عليه أيضًا من يشتري كتاب ChatGPT وحده.</p></details>
   <details><summary>كيف أستلم الملفات؟</summary><p>روابط التنزيل تظهر فور الدفع في صفحة تأكيد الطلب، وتصلك على بريدك الإلكتروني.</p></details>
   <details><summary>ماذا لو لم يناسبني؟</summary><p>راجع <a href="/policies/refund-policy">سياسة الاسترداد</a>، وراسلنا خلال 30 يومًا من الشراء مع رقم الطلب.</p></details>
  </div>
 </div></section>
 
-<section class="final"><span class="orb" aria-hidden="true"></span><div class="wrap">
- <h2>Claude متاح للجميع. الفرق في طريقة استخدامه.</h2>
- <p>الدليل كاملًا مع 120 برومبت وملفات التدريب، بدفعة واحدة.</p>
- <a class="btn js-buy-c" href="/cart/@@V_C@@:1">احصل على Claude بلا تخمين · <span class="js-pc">@@P_C@@</span> <span class="ar">←</span></a>
+<section class="final"><div class="wrap">
+ <h2>ابدأ بالدليل، أو خذ المجموعة كاملة.</h2>
+ <p>ملفات رقمية تصلك فور الدفع، وضمان استرداد كامل خلال 30 يومًا.</p>
+ <div class="two"><a class="btn js-buy-c" href="/cart/@@V_C@@:1">Claude بلا تخمين · <span class="js-pc">@@P_C@@</span></a>@@IFB@@<a class="btn g js-buy-b" href="/cart/@@V_G@@:1,@@V_C@@:1">المجموعة الكاملة · <span class="js-pb">@@P_B@@</span></a>@@ELSEB@@<a class="btn g js-buy-b" href="/cart/@@V_G@@:1,@@V_C@@:1">الكتابان معًا · <span class="js-pb">@@P_B@@</span></a>@@ENDB@@</div>
+ <p class="fine">لديك سؤال قبل الشراء؟ <a href="mailto:support@aistepahead.com" style="color:#E9D29B">support@aistepahead.com</a></p>
 </div></section>
 <footer class="foot"><div class="wrap g"><span>© AI Step Ahead · Claude بلا تخمين · طبعة أكتوبر 2026</span><span><a href="/policies/refund-policy">الاسترداد</a> · <a href="/policies/privacy-policy">الخصوصية</a> · <a href="/policies/terms-of-service">الشروط</a> · <a href="/pages/contact">تواصل معنا</a></span></div></footer>
-<div class="sbar" aria-hidden="true"><div><b class="js-pc">@@P_C@@</b><span>الدليل + 120 برومبت</span></div><a class="btn" href="#offer" tabindex="-1">اشترِ الآن</a></div>
+<div class="sbar" aria-hidden="true"><a class="js-buy-c" href="/cart/@@V_C@@:1" tabindex="-1"><span>الدليل</span><b class="js-pc">@@P_C@@</b></a>@@IFB@@<a class="g js-buy-b" href="/cart/@@V_G@@:1,@@V_C@@:1" tabindex="-1"><span>المجموعة الكاملة</span><b class="js-pb">@@P_B@@</b></a>@@ELSEB@@<a class="g js-buy-b" href="/cart/@@V_G@@:1,@@V_C@@:1" tabindex="-1"><span>الكتابان معًا</span><b class="js-pb">@@P_B@@</b></a>@@ENDB@@</div>
 </div>
 
 <script type="application/json" id="cl4data">{"img":{"work":"@@A:cl4-work.webp@@","study":"@@A:cl4-study.webp@@","biz":"@@A:cl4-biz.webp@@","content":"@@A:cl4-content.webp@@","research":"@@A:cl4-research.webp@@","auto":"@@A:cl4-auto.webp@@","cover":"@@A:cl4-cover.webp@@","paths":"@@A:cl4-paths.webp@@","arrows":"@@A:cl4-arrows.webp@@","excel":"@@A:cl4-excel.webp@@","docs":"@@A:cl4-docs.webp@@","code":"@@A:cl4-code.webp@@","capstone":"@@A:cl4-capstone.webp@@","prompts":"@@A:cl4-prompts.webp@@","pcats":"@@A:cl4-pcats.webp@@"},"handleC":"@@H_C@@","handleG":"chatgpt-arabic","disc":4}</script>
@@ -641,15 +725,13 @@ document.addEventListener('DOMContentLoaded',function(){
  var sts=root.querySelectorAll('.why .st');
  if(!RM&&'IntersectionObserver' in window&&sts.length){
   sts.forEach(function(s){s.classList.add('arm');s.querySelectorAll('[data-n]').forEach(function(n){n.textContent='0%'})});
-  var io2=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;io2.unobserve(e.target);var s=e.target;setTimeout(function(){s.classList.remove('arm');s.querySelectorAll('[data-n]').forEach(function(n){var to=+n.getAttribute('data-n'),t0=null;function tick(ts){if(t0===null)t0=ts;var p=Math.min((ts-t0)/1400,1);n.textContent=Math.round(to*(1-Math.pow(1-p,3)))+'%';if(p<1)requestAnimationFrame(tick)}requestAnimationFrame(tick)})},(+s.getAttribute('data-i')||0)*130)})},{threshold:.35});
-  sts.forEach(function(s){io2.observe(s)});
+  var ioW=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;ioW.unobserve(e.target);var s=e.target;setTimeout(function(){s.classList.remove('arm');s.querySelectorAll('[data-n]').forEach(function(n){var to=+n.getAttribute('data-n'),t0=null;function tick(ts){if(t0===null)t0=ts;var p=Math.min((ts-t0)/1400,1);n.textContent=Math.round(to*(1-Math.pow(1-p,3)))+'%';if(p<1)requestAnimationFrame(tick)}requestAnimationFrame(tick)})},(+s.getAttribute('data-i')||0)*130)})},{threshold:.35});
+  sts.forEach(function(s){ioW.observe(s)});
  }
 
- /* hero video: poster is the LCP; video only after load, never with reduced motion or data saver */
- var vid=root.querySelector('.hero video'),ctl=root.querySelector('.hero .ctl'),save=navigator.connection&&navigator.connection.saveData;
- if(vid&&!RM&&!save){addEventListener('load',function(){setTimeout(function(){vid.poster=MOB?vid.dataset.pm:vid.dataset.pw;vid.src=MOB?vid.dataset.m:vid.dataset.w;vid.load();vid.addEventListener('playing',function(){vid.classList.add('on')},{once:true});var p=vid.play();if(p&&p.catch)p.catch(function(){})},250)});
-  ctl.addEventListener('click',function(){if(vid.paused){vid.play();ctl.textContent='إيقاف الحركة';ctl.setAttribute('aria-label','إيقاف الفيديو')}else{vid.pause();ctl.textContent='تشغيل الحركة';ctl.setAttribute('aria-label','تشغيل الفيديو')}})}
- else if(ctl) ctl.remove();
+ /* hero: gentle pointer parallax on the real covers (fine pointers only, never with reduced motion) */
+ var stg=root.querySelector('.stage'),hx=root.querySelector('.hx');
+ if(stg&&hx&&!RM&&matchMedia('(pointer:fine)').matches){var raf=0;hx.addEventListener('pointermove',function(e){if(raf)return;raf=requestAnimationFrame(function(){raf=0;var r=hx.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;stg.style.setProperty('--px',(x*-14).toFixed(1)+'px');stg.style.setProperty('--py',(y*-10).toFixed(1)+'px')})});hx.addEventListener('pointerleave',function(){stg.style.setProperty('--px','0px');stg.style.setProperty('--py','0px')})}
 
  /* applications */
  var AREAS=[
@@ -713,10 +795,10 @@ document.addEventListener('DOMContentLoaded',function(){
  var sx=null;rail.addEventListener('touchstart',function(e){sx=e.touches[0].clientX},{passive:true});rail.addEventListener('touchend',function(e){if(sx===null)return;var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>40){ci=dx>0?Math.min(PG.length-1,ci+1):Math.max(0,ci-1);lay()}sx=null});
  lay();
 
- /* sticky bar */
- var sb=root.querySelector('.sbar'),off=root.querySelector('#offer');
- function st(){var o=off.getBoundingClientRect();sb.classList.toggle('on',scrollY>650&&!(o.top<innerHeight&&o.bottom>0))}
- addEventListener('scroll',st,{passive:true});st();
+ /* sticky bar: both choices; hidden while any purchase block is on screen */
+ var sb=root.querySelector('.sbar'),blocks=[root.querySelector('#hx-pick'),root.querySelector('#offer'),root.querySelector('.final')].filter(Boolean);
+ function st(){var vis=blocks.some(function(b){var o=b.getBoundingClientRect();return o.top<innerHeight&&o.bottom>0});sb.classList.toggle('on',scrollY>500&&!vis)}
+ addEventListener('scroll',st,{passive:true});addEventListener('resize',st);st();
 
  /* live prices from the store (stay correct through price changes); bundle = Claude + ChatGPT − automatic discount */
  var S=window.Shopify||{},R=(S.routes&&S.routes.root)||'/',cur=(S.currency&&S.currency.active)||'USD',rate=parseFloat(S.currency&&S.currency.rate)||1;
