@@ -9,7 +9,7 @@
 .pro{--iv:#F5F0E6;--pa:#FBF8F2;--ink:#1C1D21;--ink2:#4B4E56;--mu:#8A8476;--ln:#E2D9C8;--br:#9A7848;--br2:#C9AB7C;--ch:#17181B;
  direction:rtl;font-family:"ProPlex",system-ui,sans-serif;color:var(--ink);background:var(--pa);font-size:17px;line-height:1.9;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 .pro *{box-sizing:border-box}
-.pro img{max-width:100%;display:block}
+.pro img{max-width:100%;height:auto;display:block}
 .pro h1,.pro h2,.pro h3{font-family:"ProNaskh",serif;font-weight:700;line-height:1.45;margin:0;color:var(--ch);letter-spacing:0}
 .pro p{margin:0 0 14px}
 .pro a{color:inherit}
@@ -37,7 +37,7 @@
 /* hero */
 .pro .hero{padding:64px 0 70px;background:var(--pa)}
 .pro .hero .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
-.pro .hero h1{font-size:clamp(34px,5.6vw,58px);line-height:1.38}
+.pro .hero h1{font-size:clamp(34px,5vw,52px);line-height:1.4}
 .pro .hero h1 em{font-style:normal;color:var(--br)}
 .pro .hero .lead{margin:22px 0 30px}
 .pro .hero .ctas{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
@@ -158,7 +158,10 @@
  .pro section{padding:58px 0}
  .pro .hero{padding:34px 0 50px}
  .pro .hero .grid{grid-template-columns:1fr;gap:34px}
- .pro .hero .stage{order:-1;aspect-ratio:5/4}
+ .pro .hero .stage{aspect-ratio:1/1}
+ .pro .stage .p1{width:60%;right:6%}
+ .pro .stage .p2{width:60%;right:34%}
+ .pro .stage .p3{width:40%}
  .pro .three,.pro .steps,.pro .why3,.pro .trust .grid2{grid-template-columns:1fr}
  .pro .vs{grid-template-columns:1fr}
  .pro .prompts{grid-template-columns:1fr}
@@ -168,7 +171,8 @@
  .pro .item p{grid-column:2}
  .pro .price .box{grid-template-columns:1fr}
  .pro .price .l,.pro .price .r{padding:26px}
- .pro .sbuy{display:flex}
+ .pro .sbuy{display:flex;transform:translateY(110%);transition:transform .35s ease}
+ .pro .sbuy.on{transform:none}
  .pro .foot{padding-bottom:110px}
  .pro .btn{width:100%}
  .pro .hero .ctas .btn.ghost{display:none}
@@ -179,21 +183,20 @@
 <div class="pro" id="pro" data-handle="professional-edition" data-price="79">
 <div class="ribbon">معاينة داخلية غير منشورة · السعر المعروض مقترح وليس سعرًا فعّالًا في المتجر · زرّ الشراء معطّل حتى الموافقة على النشر</div>
 
-<header class="bar"><div class="wrap"><div class="logo"><i></i>AI Step Ahead</div><a class="mini" href="#offer">الإصدار المهني · <span class="js-price">$79</span></a></div></header>
+<header class="bar"><div class="wrap"><div class="logo"><i></i>AI Step Ahead</div><a class="mini" href="#offer">الإصدار المهني · <span class="js-price en">$79</span></a></div></header>
 
 <section class="hero"><div class="wrap grid">
  <div class="rv">
   <span class="eyebrow">الإصدار المهني · Claude وChatGPT في العمل اليومي</span>
   <h1>من استخدامٍ عشوائي للذكاء الاصطناعي إلى <em>طريقة عمل مهنية</em> تعتمد عليها.</h1>
   <p class="lead">نظام عملي بالعربية للمديرين والمختصّين: طريقة واحدة لصياغة الطلب، و12 سير عمل جاهزًا لمهامّ العمل الفعلية، وبروتوكول تحقّق قبل أن يخرج أيّ ناتج باسمك.</p>
-  <div class="ctas"><a class="btn js-buy" href="#offer">احصل على الإصدار المهني · <span class="js-price">$79</span></a><a class="btn ghost" href="#inside">اطّلع على المحتوى أولًا</a></div>
+  <div class="ctas"><a class="btn js-buy" href="#offer">احصل على الإصدار المهني · <span class="js-price en">$79</span></a><a class="btn ghost" href="#inside">اطّلع على المحتوى أولًا</a></div>
   <div class="assure"><span>ملفّات رقمية تصلك فور الدفع</span><span>دفعة واحدة، بلا اشتراك</span><span>ضمان استرداد 30 يومًا</span></div>
  </div>
  <figure class="stage rv" aria-label="صفحات حقيقية من الإصدار المهني">
   <img class="p2" src="{{ 'pro-pg-day.jpg' | asset_url }}" alt="صفحة من دفتر التطبيق" loading="eager" width="900" height="1273">
   <img class="p1" src="{{ 'pro-pg-wf.jpg' | asset_url }}" alt="صفحة من مكتبة سير العمل" loading="eager" width="900" height="1273">
   <img class="p3" src="{{ 'pro-pg-card.jpg' | asset_url }}" alt="بطاقة تأكَّد" loading="lazy" width="900" height="1273">
-  <figcaption>صفحات فعلية من الملفّات</figcaption>
  </figure>
 </div></section>
 
@@ -289,7 +292,7 @@
 
 <section class="price" id="offer"><div class="wrap">
  <span class="eyebrow rv">السعر</span>
- <h2 class="rv">سعر واحد، لما يكفي لبناء طريقة عملك</h2>
+ <h2 class="rv">سعر واحد، ودفعة واحدة</h2>
  <div class="why3 rv">
   <div><b>ليس كتابًا آخر</b>الكتابان مرجع الطريقة. أما الإصدار المهني فيحوّلها إلى أدوات عمل يومية: سير عمل، وقوالب، ودفتر تطبيق.</div>
   <div><b>مبنيّ على مهامّ العمل</b>كلّ ملفّ مرتبط بمهمّة مهنية محدّدة وشكل ناتج واضح، لا بنصائح عامّة.</div>
@@ -303,7 +306,7 @@
    <li>بطاقة «تأكَّد» وبطاقة «أيّ أداة لأيّ مهمّة»</li>
    <li>كتاب «ChatGPT بلا تخمين» مع 120 طلبًا</li>
    <li>كتاب «Claude بلا تخمين» مع 120 برومبت وملفّات التدريب</li></ul></div>
-  <div class="r"><div class="amt"><span class="js-price">$79</span><small>دفعة واحدة</small></div>
+  <div class="r"><div class="amt"><span class="js-price en">$79</span><small>دفعة واحدة</small></div>
    <a class="btn js-buy" href="#" data-variant="55667902808401">اشترِ الإصدار المهني</a>
    <p class="fine">دفع آمن عبر صفحة الدفع في المتجر · الأسعار بالدولار الأمريكي، وقد يعرض بنكك المبلغ بعملتك · ضمان استرداد 30 يومًا</p></div>
  </div>
@@ -325,7 +328,7 @@
 
 <footer class="foot"><div class="wrap row"><span>© AI Step Ahead · الإصدار المهني</span><span><a href="/policies/refund-policy">سياسة الاسترداد</a> · <a href="/policies/privacy-policy">الخصوصية</a> · <a href="/pages/contact">تواصل معنا</a></span></div></footer>
 
-<div class="sbuy"><div><b class="js-price">$79</b><span>دفعة واحدة · ضمان 30 يومًا</span></div><a class="btn js-buy" href="#offer">احصل عليه</a></div>
+<div class="sbuy"><div><b class="js-price en">$79</b><span>دفعة واحدة · ضمان 30 يومًا</span></div><a class="btn js-buy" href="#offer">احصل عليه</a></div>
 <div class="lb" id="lb"><img alt=""></div>
 </div>
 <script>
@@ -336,6 +339,7 @@
  var lb=document.getElementById('lb'), li=lb.querySelector('img');
  root.querySelectorAll('.gallery img,.stage img').forEach(function(im){im.addEventListener('click',function(){li.src=im.src;lb.classList.add('on');});});
  lb.addEventListener('click',function(){lb.classList.remove('on');});
+ var sb=root.querySelector('.sbuy'), off=root.querySelector('#offer'); function st(){var y=window.scrollY||0, o=off.getBoundingClientRect(); sb.classList.toggle('on', y>650 && !(o.top<window.innerHeight && o.bottom>0));} window.addEventListener('scroll',st,{passive:true}); st();
  // Real price & purchasability come from the live product; until it is published, show preview state.
  var h=root.getAttribute('data-handle'), R=(window.Shopify&&Shopify.routes&&Shopify.routes.root)||'/';
  function preview(){ root.classList.add('is-preview'); root.querySelectorAll('.js-buy[data-variant]').forEach(function(b){b.setAttribute('aria-disabled','true');b.textContent='الشراء متاح بعد النشر';b.addEventListener('click',function(e){e.preventDefault();});}); }
