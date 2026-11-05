@@ -326,6 +326,63 @@
  .C4 .sbar{display:flex}
  .C4 .foot{padding-bottom:110px}
 }
+
+/* ===== why now: research band (navy + gold) ===== */
+.C4{--deep:#0B1528;--gold:#C9A45C;--gold2:#E9D29B}
+.C4 .vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.C4 .why,.C4 .coll{background:radial-gradient(120% 90% at 88% 0%,#1D2E4E 0%,#0B1528 58%,#08101F 100%);color:#D9DEE8;position:relative;overflow:hidden;isolation:isolate}
+.C4 .why:before,.C4 .coll:before{content:"";position:absolute;inset:0;z-index:-1;opacity:.06;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cg fill='none' stroke='%23C9A45C'%3E%3Cpath d='M60 8 L74 46 L112 60 L74 74 L60 112 L46 74 L8 60 L46 46 Z'/%3E%3Ccircle cx='60' cy='60' r='14'/%3E%3C/g%3E%3C/svg%3E") 0 0/120px 120px}
+.C4 .why{padding:120px 0 110px}
+.C4 .why .kick,.C4 .coll .kick{color:var(--gold2)}.C4 .why .kick:before,.C4 .coll .kick:before{background:var(--gold)}
+.C4 .why .h2,.C4 .coll .h2{color:#fff}.C4 .why .h2{max-width:920px}.C4 .why .h2 em{font-style:normal;color:var(--gold2)}
+.C4 .why .lead,.C4 .coll .lead{color:#AEB7C7}
+.C4 .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-top:52px}
+.C4 .st{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid rgba(201,164,92,.26);border-radius:22px;padding:28px 24px 20px;display:flex;flex-direction:column}
+.C4 .st .n{font:700 clamp(50px,4.4vw,64px)/1 "C4",sans-serif;color:var(--gold2);direction:ltr;text-align:right;font-variant-numeric:tabular-nums}
+.C4 .st .bar{height:4px;background:rgba(255,255,255,.08);border-radius:4px;margin:18px 0;overflow:hidden}
+.C4 .st .bar i{display:block;height:100%;background:linear-gradient(270deg,var(--gold2),var(--gold));transform:scaleX(var(--p));transform-origin:right center;transition:transform 1.4s var(--ease)}
+.C4 .st .cmp{display:grid;gap:7px;margin:16px 0 18px;font-size:12.5px;color:#9AA5B8}
+.C4 .st .cmp div{display:grid;grid-template-columns:1fr;gap:4px}
+.C4 .st .cmp .bar{margin:0}
+.C4 .st .cmp .lo i{background:rgba(255,255,255,.32)}
+.C4 .st.arm .bar i{transform:scaleX(0)}
+.C4 .st p{color:#E4E8EF;font-size:16px;line-height:1.85;margin:0 0 12px}
+.C4 .st p strong,.C4 .st p b{color:#fff}
+.C4 .st .n2{color:var(--gold2);font-variant-numeric:tabular-nums}
+.C4 .st .fair{font-size:13.5px;color:#9EA9BC;line-height:1.8;margin:0 0 14px;flex:1}
+.C4 .st .so{border-top:1px solid rgba(255,255,255,.09);padding-top:12px;font-size:12.5px;color:#8E9AB2;line-height:1.7}
+.C4 .st .so a{color:var(--gold2);text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+.C4 .st .so a:focus-visible,.C4 .why .alt2:focus-visible{outline:2px solid var(--gold2);outline-offset:3px;border-radius:4px}
+.C4 .fairbox{display:flex;gap:14px;align-items:flex-start;margin-top:26px;max-width:940px;border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:16px 20px;background:rgba(255,255,255,.03);font-size:15px;line-height:1.85;color:#C3CAD6}
+.C4 .fairbox svg{flex:none;width:22px;height:22px;margin-top:4px;color:var(--gold)}
+.C4 .fairbox b{color:#fff}
+.C4 .why .next{display:flex;flex-wrap:wrap;gap:22px 36px;align-items:center;justify-content:space-between;margin-top:44px;padding-top:36px;border-top:1px solid rgba(201,164,92,.22)}
+.C4 .why .next p{font-size:clamp(18px,1.6vw,22px);color:#fff;max-width:660px;line-height:1.75;margin:0}
+.C4 .why .next p b{color:var(--gold2)}
+.C4 .why .acts{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px}
+.C4 .why .btn,.C4 .oc.both .btn{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#111A2C;box-shadow:0 14px 34px -14px rgba(201,164,92,.7)}
+.C4 .why .btn:hover,.C4 .oc.both .btn:hover{background:var(--gold2)}
+.C4 .why .alt2{color:#C9D1DF;font-size:15px;text-underline-offset:4px}
+/* collection + bundle card in the same navy/gold direction */
+.C4 .coll{padding:110px 0 90px}
+.C4 .coll .trio img{box-shadow:0 34px 70px -26px rgba(0,0,0,.75),0 0 0 1px rgba(233,210,155,.12)}
+.C4 .coll .trio figcaption b{color:#fff}.C4 .coll .trio figcaption span{color:#9EA9BC}
+.C4 .coll .trio em{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#111A2C}
+.C4 .coll .week{background:rgba(255,255,255,.04);border-color:rgba(201,164,92,.28)}
+.C4 .coll .week h3{color:#fff}.C4 .coll .week li{color:#DCE1EA}.C4 .coll .week li::marker{color:var(--gold)}
+.C4 .coll .week .src{color:#9EA9BC}
+.C4 .oc.both{background:radial-gradient(130% 100% at 90% 0%,#1D2E4E 0%,#0B1528 65%);border:1.5px solid var(--gold);box-shadow:0 30px 70px -34px rgba(11,21,40,.8)}
+.C4 .oc.both li:before{border-color:var(--gold2)}
+.C4 .oc.both .flag{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#111A2C}
+.C4 .oc.both .math b{color:var(--gold2)}
+@media (max-width:1100px){.C4 .stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:700px){
+ .C4 .why{padding:76px 0 70px}.C4 .coll{padding:72px 0 56px}
+ .C4 .stats{grid-template-columns:1fr;gap:14px;margin-top:34px}
+ .C4 .st{padding:20px 18px 16px;border-radius:18px}.C4 .st .n{font-size:46px}.C4 .st .bar{margin:14px 0}.C4 .st p{font-size:15px;line-height:1.8;margin-bottom:10px}.C4 .st .fair{font-size:13px;line-height:1.75;margin-bottom:10px}.C4 .st .so{padding-top:10px}.C4 .st .cmp{margin:12px 0 14px}
+ .C4 .why .next{margin-top:30px;padding-top:26px}.C4 .why .acts,.C4 .why .acts .btn{width:100%}.C4 .why .alt2{width:100%;text-align:center}
+ .C4 .fairbox{font-size:14.5px;padding:14px 16px}
+}
 @media (prefers-reduced-motion:reduce){
  .C4 [data-rv]{opacity:1;transform:none;transition:none}
  .C4 *{animation:none!important;transition-duration:.01ms!important}
@@ -382,6 +439,36 @@
   <article data-rv style="--c:#5E7F6F"><h3>المستخدم المتقدّم</h3><div class="who">تبني أنظمة عمل وأدوات</div><p>تصفّح الجزء الأول من أجل بطاقات التحقق، ثم ركّز على سير العمل الموثوق، وClaude Code، وأدوات الربط، والمهارات والمهام المجدولة.</p><div class="ch"><b>الفصول:</b> 2 · 5–10 · 17 · 20 · 24–29 · 30–31</div></article>
  </div>
  <p class="src" data-rv>من صفحة «كيف تقرأ هذا الكتاب» في الدليل نفسه.</p>
+</div></section>
+
+<section class="why" id="why" aria-labelledby="why-h"><div class="wrap">
+ <div class="kick" data-rv>لماذا الآن؟</div>
+ <h2 class="h2" id="why-h" data-rv>سوق العمل يتغيّر بسرعة، <em>والمهارة التي يطلبها قابلة للتعلّم.</em></h2>
+ <p class="lead" data-rv>أربعة أرقام من تقارير عالمية منشورة، كما وردت في مصادرها، ومع كلّ رقم ما يعنيه بدقّة.</p>
+ <div class="stats">
+  <article class="st" data-i="0"><b class="n" data-n="22" aria-hidden="true">22%</b><span class="vh">22%</span><div class="bar" style="--p:.22"><i></i></div>
+   <p>نسبة الوظائف التي يُتوقّع أن <strong>تُستحدث أو تُزاح</strong> بين 2025 و2030، من إجمالي الوظائف الرسمية اليوم: 170 مليونًا جديدة مقابل 92 مليونًا تُزاح، بصافي زيادة 78 مليون وظيفة.</p>
+   <p class="fair">ليس الذكاء الاصطناعي وحده: ينسب التقرير التغيير أيضًا إلى التحوّل الأخضر، والتركيبة السكانية، والظروف الاقتصادية.</p>
+   <div class="so">المنتدى الاقتصادي العالمي، تقرير مستقبل الوظائف 2025 <span style="white-space:nowrap">(يناير 2025)</span><br><a href="https://www.weforum.org/publications/the-future-of-jobs-report-2025/" target="_blank" rel="noopener">المصدر<svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true" style="margin-inline-start:4px;vertical-align:0"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></a></div></article>
+  <article class="st" data-i="1"><b class="n" data-n="39" aria-hidden="true">39%</b><span class="vh">39%</span><div class="bar" style="--p:.39"><i></i></div>
+   <p>من المهارات الحالية لدى العاملين يُتوقّع أن <strong>تتغيّر أو تتقادم</strong> بين 2025 و2030، و«الذكاء الاصطناعي والبيانات الضخمة» في صدارة المهارات الأسرع نموًّا.</p>
+   <p class="fair">تقدير أصحاب العمل المشاركين في المسح، وكانت النسبة 44% في إصدار 2023.</p>
+   <div class="so">المنتدى الاقتصادي العالمي، تقرير مستقبل الوظائف 2025 <span style="white-space:nowrap">(يناير 2025)</span><br><a href="https://www.weforum.org/publications/the-future-of-jobs-report-2025/" target="_blank" rel="noopener">المصدر<svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true" style="margin-inline-start:4px;vertical-align:0"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></a></div></article>
+  <article class="st" data-i="2"><b class="n" data-n="66" aria-hidden="true">66%</b><span class="vh">66%</span><div class="bar" style="--p:.66"><i></i></div>
+   <p>من القادة في الاستطلاع قالوا إنهم <strong>لن يوظّفوا</strong> شخصًا بلا مهارات ذكاء اصطناعي، و<b class="n2" data-n="71" aria-hidden="true">71%</b><span class="vh">71%</span> قالوا إنهم يفضّلون مرشحًا أقلّ خبرة يملكها على مرشح أكثر خبرة لا يملكها.</p>
+   <p class="fair">آراء معلنة في استطلاع شمل 31,000 عامل معرفي في 31 دولة (فبراير ومارس 2024)، وليست قرارات توظيف فعلية.</p>
+   <div class="so">Microsoft وLinkedIn، مؤشر اتجاهات العمل 2024 <span style="white-space:nowrap">(مايو 2024)</span><br><a href="https://www.microsoft.com/en-us/worklab/work-trend-index/ai-at-work-is-here-now-comes-the-hard-part" target="_blank" rel="noopener">المصدر<svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true" style="margin-inline-start:4px;vertical-align:0"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></a></div></article>
+  <article class="st" data-i="3"><b class="n" data-n="62" aria-hidden="true">62%</b><span class="vh">62%</span>
+   <div class="cmp" aria-hidden="true"><div class="lo"><span>أجر معلن دون مهارات ذكاء اصطناعي</span><div class="bar" style="--p:.617"><i></i></div></div><div><span>للوظيفة نفسها مع مهارات ذكاء اصطناعي</span><div class="bar" style="--p:1"><i></i></div></div></div>
+   <p>متوسط الفرق في <strong>الأجر المعلن</strong> بين إعلانات وظائف تطلب مهارات ذكاء اصطناعي، وإعلانات للوظيفة نفسها لا تطلبها.</p>
+   <p class="fair">مبنيّ على أكثر من مليار إعلان وظيفة، ويتراوح بين 16% و118% بحسب القطاع. هو متوسط للسوق، لا زيادة مضمونة في دخل أحد. وكان إصدار 2025 قد قدّره بـ56%.</p>
+   <div class="so">PwC، مقياس وظائف الذكاء الاصطناعي العالمي 2026 <span style="white-space:nowrap">(يونيو 2026)</span><br><a href="https://www.pwc.com/gx/en/news-room/press-releases/2026/pwc-2026-ai-jobs-barometer.html" target="_blank" rel="noopener">المصدر<svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true" style="margin-inline-start:4px;vertical-align:0"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></a> · <a href="https://www.pwc.com/gx/en/news-room/press-releases/2025/ai-linked-to-a-fourfold-increase-in-productivity-growth.html" target="_blank" rel="noopener">إصدار 2025<svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true" style="margin-inline-start:4px;vertical-align:0"><path d="M4 2h6v6M10 2 3 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></a></div></article>
+ </div>
+ <div class="fairbox" data-rv><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 10.5v6M12 7.2v.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><p style="margin:0"><b>قراءة منصفة:</b> هذه أرقام عن سوق العمل ككلّ، لا عن شخص بعينه، والذكاء الاصطناعي واحد من عدّة أسباب للتغيير. لا يضمن هذا الكتاب، ولا أيّ كتاب، وظيفة أو زيادة في الدخل أو ترقية.</p></div>
+ <div class="next" data-rv>
+  <p>ما يمكنك التحكّم فيه هو <b>مهارتك</b>. هذا الدليل طريقة منظّمة تتعلّم بها Claude خطوة بخطوة، وتطبّقه على عملك الحقيقي: البريد، والتقارير، والبحث، والملفات.</p>
+  <div class="acts"><a class="btn" href="#apps">شاهد ما يمكنك فعله بـ Claude <span class="ar">←</span></a><a class="alt2" href="#offer">أو انتقل إلى السعر</a></div>
+ </div>
 </div></section>
 
 <section class="apps" id="apps"><div class="wrap">
@@ -560,6 +647,15 @@ document.addEventListener('DOMContentLoaded',function(){
  /* reveal */
  var rv=root.querySelectorAll('[data-rv]');
  if(!RM&&'IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -6% 0px'});rv.forEach(function(el){io.observe(el)})}else rv.forEach(function(el){el.classList.add('in')});
+
+
+ /* why-now: count-up + bars, once, only when motion is allowed */
+ var sts=root.querySelectorAll('.why .st');
+ if(!RM&&'IntersectionObserver' in window&&sts.length){
+  sts.forEach(function(s){s.classList.add('arm');s.querySelectorAll('[data-n]').forEach(function(n){n.textContent='0%'})});
+  var io2=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;io2.unobserve(e.target);var s=e.target;setTimeout(function(){s.classList.remove('arm');s.querySelectorAll('[data-n]').forEach(function(n){var to=+n.getAttribute('data-n'),t0=null;function tick(ts){if(t0===null)t0=ts;var p=Math.min((ts-t0)/1400,1);n.textContent=Math.round(to*(1-Math.pow(1-p,3)))+'%';if(p<1)requestAnimationFrame(tick)}requestAnimationFrame(tick)})},(+s.getAttribute('data-i')||0)*130)})},{threshold:.35});
+  sts.forEach(function(s){io2.observe(s)});
+ }
 
  /* hero video: poster is the LCP; video only after load, never with reduced motion or data saver */
  var vid=root.querySelector('.hero video'),ctl=root.querySelector('.hero .ctl'),save=navigator.connection&&navigator.connection.saveData;
