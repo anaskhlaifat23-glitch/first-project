@@ -1,10 +1,12 @@
+{%- capture aisa_bd -%}{%- render 'aisa-bundle-discount' -%}{%- endcapture -%}
 {%- liquid
+ assign bundle_disc = aisa_bd | strip | plus: 0
  assign cl = all_products['claude-بلا-تخمين-الدليل-العربي-العملي']
  assign gp = all_products['chatgpt-arabic']
  assign c_p = cl.price | default: 1900
  assign g_p = gp.price | default: 900
  assign s_p = c_p | plus: g_p
- assign b_p = s_p | minus: 400
+ assign b_p = s_p | minus: bundle_disc
  assign d_p = b_p | minus: c_p
 -%}
 <style>
@@ -504,7 +506,7 @@
 <div class="sbar" aria-hidden="true"><div><b class="js-pc">{{ c_p | money_without_trailing_zeros }}</b><span>الدليل + 120 برومبت</span></div><a class="btn" href="#offer" tabindex="-1">اشترِ الآن</a></div>
 </div>
 
-<script type="application/json" id="cl4data">{"img":{"work":"{{ 'cl4-work.webp' | asset_url }}","study":"{{ 'cl4-study.webp' | asset_url }}","biz":"{{ 'cl4-biz.webp' | asset_url }}","content":"{{ 'cl4-content.webp' | asset_url }}","research":"{{ 'cl4-research.webp' | asset_url }}","auto":"{{ 'cl4-auto.webp' | asset_url }}","cover":"{{ 'cl4-cover.webp' | asset_url }}","paths":"{{ 'cl4-paths.webp' | asset_url }}","arrows":"{{ 'cl4-arrows.webp' | asset_url }}","excel":"{{ 'cl4-excel.webp' | asset_url }}","docs":"{{ 'cl4-docs.webp' | asset_url }}","code":"{{ 'cl4-code.webp' | asset_url }}","capstone":"{{ 'cl4-capstone.webp' | asset_url }}","prompts":"{{ 'cl4-prompts.webp' | asset_url }}","pcats":"{{ 'cl4-pcats.webp' | asset_url }}"},"handleC":"claude-بلا-تخمين-الدليل-العربي-العملي","handleG":"chatgpt-arabic","disc":4}</script>
+<script type="application/json" id="cl4data">{"img":{"work":"{{ 'cl4-work.webp' | asset_url }}","study":"{{ 'cl4-study.webp' | asset_url }}","biz":"{{ 'cl4-biz.webp' | asset_url }}","content":"{{ 'cl4-content.webp' | asset_url }}","research":"{{ 'cl4-research.webp' | asset_url }}","auto":"{{ 'cl4-auto.webp' | asset_url }}","cover":"{{ 'cl4-cover.webp' | asset_url }}","paths":"{{ 'cl4-paths.webp' | asset_url }}","arrows":"{{ 'cl4-arrows.webp' | asset_url }}","excel":"{{ 'cl4-excel.webp' | asset_url }}","docs":"{{ 'cl4-docs.webp' | asset_url }}","code":"{{ 'cl4-code.webp' | asset_url }}","capstone":"{{ 'cl4-capstone.webp' | asset_url }}","prompts":"{{ 'cl4-prompts.webp' | asset_url }}","pcats":"{{ 'cl4-pcats.webp' | asset_url }}"},"handleC":"claude-بلا-تخمين-الدليل-العربي-العملي","handleG":"chatgpt-arabic","disc":{{ bundle_disc | divided_by: 100.0 }}}</script>
 <script>
 document.addEventListener('DOMContentLoaded',function(){
  var root=document.getElementById('cl4'); if(!root) return;
