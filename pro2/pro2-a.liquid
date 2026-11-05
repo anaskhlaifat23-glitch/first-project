@@ -1,0 +1,526 @@
+<!--PRO2-START-->
+<style>
+@font-face{font-family:"AMarkazi";font-weight:600;font-display:swap;src:url("{{ 'pro2-markazi-600.woff2' | asset_url }}") format("woff2")}
+@font-face{font-family:"AMarkazi";font-weight:700;font-display:swap;src:url("{{ 'pro2-markazi-700.woff2' | asset_url }}") format("woff2")}
+@font-face{font-family:"AMarkazi";font-weight:600;font-display:swap;unicode-range:U+0000-00FF;src:url("{{ 'pro2-markazil-600.woff2' | asset_url }}") format("woff2")}
+@font-face{font-family:"APlex";font-weight:400;font-display:swap;src:url("{{ 'pro-plex-400.woff2' | asset_url }}") format("woff2")}
+@font-face{font-family:"APlex";font-weight:600;font-display:swap;src:url("{{ 'pro-plex-600.woff2' | asset_url }}") format("woff2")}
+@font-face{font-family:"APlex";font-weight:400;font-display:swap;unicode-range:U+0000-00FF,U+2000-206F,U+2190-21FF;src:url("{{ 'pro-plexl-400.woff2' | asset_url }}") format("woff2")}
+@font-face{font-family:"APlex";font-weight:600;font-display:swap;unicode-range:U+0000-00FF,U+2000-206F,U+2190-21FF;src:url("{{ 'pro-plexl-600.woff2' | asset_url }}") format("woff2")}
+@font-face{font-family:"AMono";font-weight:400;font-display:swap;src:url("{{ 'pro2-mono-400.woff2' | asset_url }}") format("woff2")}
+
+/* ---------- tokens ---------- */
+.L{--paper:#F7F6F3;--stone:#ECEAE5;--stage:#E6E4DF;--ink:#121317;--ink2:#474B54;--mute:#6B6E75;--rule:#D9D6CF;--red:#B42318;--green:#1F5E46;
+ --s1:8px;--s2:16px;--s3:24px;--s4:40px;--s5:64px;--s6:104px;--s7:160px;
+ --wrap:1320px;--gut:32px;--side:clamp(20px,4vw,56px);
+ direction:rtl;background:var(--paper);color:var(--ink);font-family:"APlex",system-ui,sans-serif;font-size:18px;line-height:1.85;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.L *{box-sizing:border-box}
+.L img{display:block;max-width:100%;height:auto}
+.L a{color:inherit}
+.L p{margin:0 0 var(--s2)}
+.L h1,.L h2,.L h3{font-family:"AMarkazi",serif;font-weight:700;margin:0;letter-spacing:0;color:var(--ink)}
+.L .mono{font-family:"AMono",ui-monospace,monospace;direction:ltr;unicode-bidi:isolate;letter-spacing:.02em}
+.L .en{direction:ltr;unicode-bidi:isolate}
+.L .wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--side)}
+.L .kick{font-size:13px;color:var(--mute);display:flex;gap:14px;align-items:center;margin-bottom:var(--s3)}
+.L .kick .mono{color:var(--ink)}
+.L .kick:before{content:"";width:28px;height:1px;background:var(--ink)}
+.L .rule{height:1px;background:var(--ink);border:0;margin:0}
+.L .btn{display:inline-flex;align-items:center;gap:14px;height:58px;padding:0 30px;background:var(--ink);color:#F7F6F3;text-decoration:none;font-weight:600;font-size:17px;border-radius:2px;transition:background .25s,transform .25s}
+.L .btn:hover{background:#2a2c33}
+.L .btn:focus-visible,.L a:focus-visible,.L button:focus-visible,.L summary:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+.L .btn .ar{font-family:"APlex";transition:transform .25s}
+.L .btn:hover .ar{transform:translateX(-4px)}
+.L .btn[aria-disabled=true]{background:#8D8F94;cursor:not-allowed}
+.L .lnk{font-weight:600;text-decoration:none;border-bottom:1px solid var(--ink);padding-bottom:2px}
+.L figure{margin:0}
+.L figcaption{font-size:13px;color:var(--mute);margin-top:12px;display:flex;gap:10px}
+.L figcaption .mono{color:var(--ink)}
+/* ---------- preview ribbon ---------- */
+.L .rib{display:none;background:var(--red);color:#fff;font-size:13px;text-align:center;padding:7px 14px}
+.L.is-preview .rib{display:block}
+/* ---------- masthead ---------- */
+.L .mast{position:sticky;top:0;z-index:40;background:rgba(247,246,243,.94);backdrop-filter:saturate(1.2) blur(10px);border-bottom:1px solid var(--rule)}
+.L .mast .wrap{height:64px;display:flex;align-items:center;justify-content:space-between}
+.L .brand{font-weight:600;font-size:15px;letter-spacing:.01em}
+.L .brand small{font-weight:400;color:var(--mute);margin-right:10px}
+.L .mast .buy{font-size:14px;font-weight:600;text-decoration:none;display:flex;gap:14px;align-items:center}
+.L .mast .buy .p{color:var(--mute);font-weight:400}
+.L .mast .buy b{background:var(--ink);color:#fff;padding:8px 16px;border-radius:2px;font-weight:600}
+/* ---------- hero ---------- */
+.L .hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.L .hero .txt{padding:var(--s5) var(--side) var(--s5) var(--s5);display:flex;flex-direction:column;justify-content:center;max-width:680px;margin-right:max(0px,calc((100vw - var(--wrap))/2))}
+.L .hero h1{font-size:clamp(38px,3.9vw,60px);line-height:1.2;font-weight:700}
+.L .hero h1 span{display:block;color:var(--ink2);font-weight:600;margin-top:6px}
+.L .hero .sub{font-size:clamp(17px,1.35vw,20px);color:var(--ink2);margin:var(--s4) 0 var(--s4);max-width:540px}
+.L .hero .meta{margin-top:var(--s3);font-size:13.5px;color:var(--mute);display:flex;flex-wrap:wrap;gap:6px 18px}
+.L .hero .meta span+span:before{content:"·";margin-left:18px;color:var(--rule)}
+.L .hero .img{background:var(--stage);position:relative;overflow:hidden;aspect-ratio:1/1;max-height:calc(100vh - 64px);min-height:560px}
+.L .hero .img picture,.L .hero .img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%}
+.L .hero .img .cap{position:absolute;right:var(--s3);bottom:var(--s3);font-size:12.5px;color:#6E7076;background:rgba(247,246,243,.8);padding:4px 10px}
+/* ---------- tension ---------- */
+.L .tension{padding:var(--s7) 0 var(--s6)}
+.L .tension h2{font-size:clamp(34px,4.4vw,64px);line-height:1.2;max-width:15ch}
+.L .tension h2 em{font-style:normal;color:var(--red)}
+.L .tgrid{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:var(--s5);margin-top:var(--s5);align-items:start}
+.L .clock{font-family:"AMono";font-size:15px;color:var(--ink);direction:ltr;text-align:right}
+.L .story p{color:var(--ink2);font-size:17.5px}
+.L .story .clock{margin-bottom:var(--s2)}
+.L .story ul{list-style:none;padding:0;margin:var(--s3) 0 0;border-top:1px solid var(--rule)}
+.L .story li{padding:12px 0;border-bottom:1px solid var(--rule);font-size:15.5px;color:var(--ink2)}
+.L .story li b{color:var(--ink);font-weight:600}
+.L .sheet{background:#fff;border:1px solid var(--rule);padding:var(--s4) var(--s4) var(--s3);box-shadow:0 40px 60px -40px rgba(30,25,15,.35)}
+.L .sheet .hd{display:flex;justify-content:space-between;font-size:12.5px;color:var(--mute);border-bottom:1px solid var(--rule);padding-bottom:10px;margin-bottom:var(--s3)}
+.L .draft{font-size:clamp(17px,1.5vw,20px);line-height:2.3;color:var(--ink)}
+.L .mk{border-bottom:2px solid var(--red);padding-bottom:1px}
+.L .mk i{font-style:normal;font-family:"AMono";font-size:11px;color:#fff;background:var(--red);border-radius:50%;display:inline-block;width:19px;height:19px;line-height:19px;text-align:center;vertical-align:super;margin-right:3px}
+.L .notes{list-style:none;padding:0;margin:var(--s3) 0 0;counter-reset:n}
+.L .notes li{display:grid;grid-template-columns:28px 1fr;gap:12px;padding:11px 0;border-top:1px solid var(--rule);font-size:15px;color:var(--ink2);line-height:1.7}
+.L .notes li:before{counter-increment:n;content:counter(n);font-family:"AMono";font-size:11px;color:#fff;background:var(--red);border-radius:50%;width:20px;height:20px;line-height:20px;text-align:center;margin-top:3px}
+.L .notes b{color:var(--red);font-weight:600}
+/* ---------- transformation ---------- */
+.L .flow{background:var(--stone);padding:var(--s6) 0}
+.L .flow h2{font-size:clamp(32px,3.8vw,56px);line-height:1.2;max-width:20ch}
+.L .flow .lead{color:var(--ink2);max-width:640px;margin-top:var(--s3)}
+.L .steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:var(--s5);border-top:1px solid var(--ink)}
+.L .step{padding:var(--s3) var(--s3) var(--s3) var(--s3);border-left:1px solid var(--rule);min-width:0}
+.L .step:last-child{border-left:0}
+.L .step .no{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:var(--s3)}
+.L .step .no .mono{font-size:13px}
+.L .step .no b{font-family:"AMarkazi";font-size:26px;font-weight:700}
+.L .step .doc{background:#fff;border:1px solid var(--rule);padding:18px;font-size:13.5px;line-height:1.75;min-height:290px}
+.L .step .doc.req{background:var(--ink);color:#E8E6E1;border-color:var(--ink)}
+.L .step p.d{font-size:14.5px;color:var(--ink2);margin-top:var(--s2)}
+.L table.mini{width:100%;border-collapse:collapse;font-size:12.5px}
+.L table.mini td{padding:5px 0;border-bottom:1px solid #EEE;white-space:nowrap}
+.L table.mini td.n{font-family:"AMono";direction:ltr;text-align:left}
+.L table.mini tr.t td{font-weight:600;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.L .neg{color:var(--red)}.L .pos{color:var(--green)}
+.L .req{background:var(--ink);color:#E8E6E1;border:0}
+.L .req .m{color:#E9B8B2;font-weight:600}
+.L .req .ph{background:#33353B;color:#F3D9A8;padding:0 4px}
+.L .log div{display:grid;grid-template-columns:1fr auto;gap:8px;padding:6px 0;border-bottom:1px solid #EEE}
+.L .log .ok{color:var(--green);font-weight:600;white-space:nowrap}
+.L .log .tag{font-family:"AMono";font-size:11px;color:var(--mute)}
+.L .memo h5{font-family:"AMarkazi";font-size:17px;margin:8px 0 2px}
+.L .memo .st{display:inline-block;margin-top:10px;border:1px solid var(--green);color:var(--green);font-size:11.5px;font-weight:600;padding:2px 8px}
+/* ---------- system ---------- */
+.L .system{padding:var(--s7) 0 var(--s6)}
+.L .system h2{font-size:clamp(32px,3.8vw,56px);max-width:18ch;line-height:1.2}
+.L .chain{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:var(--s5);border-top:1px solid var(--ink)}
+.L .chain > div{padding:var(--s4) 0 var(--s3) var(--s4);position:relative}
+.L .chain > div + div{padding-right:var(--s4);border-right:1px solid var(--rule)}
+.L .chain .big{font-family:"AMarkazi";font-weight:700;font-size:clamp(40px,4.4vw,68px);line-height:1}
+.L .chain .q{font-size:15.5px;color:var(--ink2);margin-top:var(--s2);max-width:34ch}
+.L .ruler{display:flex;justify-content:space-between;margin-top:var(--s3);border-top:1px solid var(--ink);padding-top:10px;font-size:13px}
+.L .ruler span{position:relative;padding-top:6px}
+.L .ruler span:before{content:"";position:absolute;top:-16px;right:50%;width:1px;height:10px;background:var(--ink)}
+.L .letters{display:flex;gap:10px;margin-top:var(--s3)}
+.L .letters span{flex:1;border:1px solid var(--ink);text-align:center;padding:8px 0 6px;font-size:13px;line-height:1.4}
+.L .letters b{display:block;font-family:"AMarkazi";font-size:26px}
+.L .loop{display:flex;align-items:center;gap:10px;margin-top:var(--s3);font-size:14px;color:var(--ink2)}
+.L .loop svg{flex:0 0 auto}
+.L .risk{margin-top:var(--s5);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
+.L .risk div{padding:14px 0 0;border-top:4px solid;font-size:15px;color:var(--ink2);padding-left:var(--s3)}
+.L .risk b{display:block;color:var(--ink);font-weight:600;margin-bottom:2px}
+/* ---------- reveal ---------- */
+.L .reveal{background:var(--stone);padding:var(--s6) 0 var(--s6)}
+.L .reveal .head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--s5);align-items:end}
+.L .reveal h2{font-size:clamp(40px,5.4vw,84px);line-height:1.08}
+.L .reveal .head p{color:var(--ink2);font-size:18px;margin:0}
+.L .reveal figure{margin-top:var(--s5)}
+.L .index{margin-top:var(--s5);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:var(--s5);border-top:1px solid var(--ink)}
+.L .index .r{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:18px;padding:20px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.L .index .r .mono{font-size:14px}
+.L .index h3{font-size:22px;line-height:1.35}
+.L .index p{font-size:14.5px;color:var(--ink2);margin:4px 0 0;line-height:1.7}
+.L .index .f{font-size:12.5px;color:var(--mute);white-space:nowrap;font-family:"AMono";direction:ltr}
+.L .compare{margin-top:var(--s6);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--s5);align-items:start}
+.L .compare h3{font-size:clamp(28px,2.8vw,40px);line-height:1.25}
+.L .compare p{color:var(--ink2)}
+.L table.cmp{width:100%;border-collapse:collapse;font-size:15.5px;background:#fff}
+.L table.cmp th{font-weight:600;text-align:right;padding:16px 18px;border-bottom:1px solid var(--ink);font-size:14px}
+.L table.cmp th:nth-child(3){background:var(--ink);color:#fff}
+.L table.cmp td{padding:13px 18px;border-bottom:1px solid var(--rule);vertical-align:top}
+.L table.cmp td:nth-child(2),.L table.cmp td:nth-child(3),.L table.cmp th:nth-child(2),.L table.cmp th:nth-child(3){text-align:center;width:22%}
+.L table.cmp td:nth-child(3){background:#FAFAF8}
+.L .y{color:var(--green);font-weight:600}.L .x{color:#B9BBC0}
+/* ---------- explorer ---------- */
+.L .explore{padding:var(--s7) 0 var(--s6)}
+.L .explore h2{font-size:clamp(32px,3.8vw,56px);line-height:1.2;max-width:20ch}
+.L .explore .lead{color:var(--ink2);max-width:620px;margin-top:var(--s3)}
+.L .ex{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:0;margin-top:var(--s5);border-top:1px solid var(--ink)}
+.L .ex .list{list-style:none;margin:0;padding:0;border-left:1px solid var(--rule)}
+.L .ex .list button{all:unset;cursor:pointer;display:grid;grid-template-columns:34px 1fr;gap:10px;width:100%;box-sizing:border-box;padding:13px 0 13px 18px;border-bottom:1px solid var(--rule);font-size:15.5px;color:var(--ink2);line-height:1.5}
+.L .ex .list button .mono{font-size:12.5px;color:var(--mute);padding-top:3px}
+.L .ex .list button[aria-selected=true]{color:var(--ink);font-weight:600}
+.L .ex .list button[aria-selected=true] .mono{color:var(--red)}
+.L .ex .panel{padding:var(--s4) var(--s5) var(--s4) 0}
+.L .ex .panel .w{color:var(--ink2);font-size:15.5px;margin-bottom:var(--s3)}
+.L .ex .panel h3{font-size:30px;margin-bottom:6px}
+.L .ex .lv{font-size:12.5px;font-weight:600;padding:2px 10px;border-radius:2px;color:#fff;margin-right:8px;vertical-align:middle}
+.L .ex .rq{background:var(--ink);color:#E8E6E1;padding:var(--s4);font-size:15.5px;line-height:2}
+.L .ex .rq .m{color:#E9B8B2;font-weight:600;margin-left:6px}
+.L .ex .rq .ph{background:#33353B;color:#F3D9A8;padding:0 5px}
+.L .ex .rq .bar{display:flex;justify-content:space-between;font-size:12.5px;color:#9EA1A8;border-bottom:1px solid #2E3036;padding-bottom:10px;margin-bottom:14px}
+.L .ex .vf{margin-top:var(--s3);list-style:none;padding:0}
+.L .ex .vf li{padding:10px 30px 10px 0;border-bottom:1px solid var(--rule);font-size:15px;color:var(--ink2);position:relative;line-height:1.7}
+.L .ex .vf li:before{content:"";position:absolute;right:4px;top:17px;width:11px;height:6px;border-left:2px solid var(--green);border-bottom:2px solid var(--green);transform:rotate(-45deg)}
+.L .ex select{display:none}
+/* ---------- publisher ---------- */
+.L .pub{border-top:1px solid var(--ink);padding:var(--s6) 0}
+.L .pub .g{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--s5)}
+.L .pub h2{font-size:clamp(28px,3vw,44px);line-height:1.25}
+.L .pub dl{margin:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--s4) var(--s5)}
+.L .pub dt{font-family:"AMarkazi";font-weight:700;font-size:22px;margin-bottom:6px}
+.L .pub dd{margin:0;color:var(--ink2);font-size:15.5px;line-height:1.8}
+/* ---------- offer ---------- */
+.L .offer{background:var(--ink);color:#EDEBE6;padding:var(--s6) 0}
+.L .offer .g{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:var(--s5);align-items:start}
+.L .offer h2{color:#F7F6F3;font-size:clamp(34px,4vw,60px);line-height:1.15}
+.L .offer .kick{color:#9EA1A8}.L .offer .kick:before{background:#EDEBE6}.L .offer .kick .mono{color:#EDEBE6}
+.L .offer ol{list-style:none;padding:0;margin:var(--s4) 0 0;border-top:1px solid #3A3C42}
+.L .offer ol li{display:grid;grid-template-columns:44px 1fr auto;gap:12px;padding:14px 0;border-bottom:1px solid #2C2E33;font-size:16px;align-items:baseline}
+.L .offer ol .mono{font-size:13px;color:#9EA1A8}
+.L .offer ol .f{font-family:"AMono";font-size:12px;color:#9EA1A8;direction:ltr}
+.L .card{background:#F7F6F3;color:var(--ink);padding:var(--s4);position:sticky;top:96px}
+.L .card .pr{font-family:"AMarkazi";font-weight:700;font-size:76px;line-height:1;display:flex;align-items:baseline;gap:14px}
+.L .card .pr small{font-family:"APlex";font-size:15px;font-weight:400;color:var(--ink2)}
+.L .card .btn{width:100%;justify-content:center;margin-top:var(--s3)}
+.L .card dl{margin:var(--s3) 0 0;font-size:14.5px}
+.L .card dl div{display:grid;grid-template-columns:110px 1fr;gap:12px;padding:10px 0;border-top:1px solid var(--rule)}
+.L .card dt{color:var(--mute)}
+.L .card dd{margin:0;color:var(--ink)}
+.L .card .alt{font-size:13.5px;color:var(--ink2);margin-top:var(--s2)}
+/* ---------- faq ---------- */
+.L .faq{padding:var(--s6) 0}
+.L .faq .g{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:var(--s5)}
+.L .faq h2{font-size:clamp(28px,3vw,44px)}
+.L details{border-top:1px solid var(--rule);padding:18px 0}
+.L details:last-child{border-bottom:1px solid var(--rule)}
+.L summary{list-style:none;cursor:pointer;font-weight:600;font-size:17px;display:flex;justify-content:space-between;gap:18px}
+.L summary::-webkit-details-marker{display:none}
+.L summary:after{content:"+";font-family:"AMono";color:var(--mute)}
+.L details[open] summary:after{content:"−"}
+.L details p{margin:10px 0 0;color:var(--ink2);font-size:16px}
+/* ---------- footer ---------- */
+.L .foot{border-top:1px solid var(--ink);padding:var(--s4) 0 var(--s5);font-size:13.5px;color:var(--mute)}
+.L .foot .g{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 32px}
+.L .foot a{color:var(--ink2)}
+/* ---------- sticky mobile buy ---------- */
+.L .sbar{position:fixed;inset:auto 0 0 0;z-index:50;background:rgba(18,19,23,.97);color:#EDEBE6;display:none;align-items:center;justify-content:space-between;gap:14px;padding:12px 18px calc(12px + env(safe-area-inset-bottom));transform:translateY(110%);transition:transform .35s ease}
+.L .sbar.on{transform:none}
+.L .sbar b{font-family:"AMarkazi";font-size:26px;color:#fff}
+.L .sbar span{display:block;font-size:12px;color:#9EA1A8}
+.L .sbar .btn{height:46px;padding:0 20px;background:#F7F6F3;color:var(--ink);font-size:15.5px}
+/* ---------- motion ---------- */
+.L [data-rv]{opacity:0;transform:translateY(14px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+.L [data-rv].in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.L [data-rv]{opacity:1;transform:none;transition:none}}
+/* ---------- tablet ---------- */
+@media (max-width:1100px){
+ .L .hero{grid-template-columns:1fr;max-height:none;min-height:0}
+ .L .hero .txt{padding:var(--s5) var(--side) var(--s4);margin:0;max-width:760px}
+ .L .hero .img{aspect-ratio:1/1;max-height:none;min-height:0}
+ .L .tgrid,.L .compare,.L .pub .g,.L .faq .g,.L .offer .g,.L .reveal .head{grid-template-columns:1fr;gap:var(--s4)}
+ .L .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .L .step:nth-child(2){border-left:0}
+ .L .step:nth-child(n+3){border-top:1px solid var(--rule)}
+ .L .card{position:static}
+ .L .ex{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}
+ .L .ex .panel{padding:var(--s4) var(--s4) var(--s4) 0}
+}
+/* ---------- mobile ---------- */
+@media (max-width:700px){
+ .L{font-size:16.5px;--s6:72px;--s7:96px}
+ .L .mast .wrap{height:56px}
+ .L .hero .k2{display:none}
+ .L .mast .buy .p{display:none}
+ .L .brand small{display:none}
+ .L .hero .txt{padding:var(--s4) var(--side) var(--s4)}
+ .L .hero h1{font-size:clamp(36px,10.4vw,46px);line-height:1.18}
+ .L .hero .sub{margin:var(--s3) 0}
+ .L .hero .btn{width:100%;justify-content:center}
+ .L .hero .img{aspect-ratio:12/13}
+ .L .hero .img .cap{display:none}
+ .L .sheet{padding:var(--s3) 18px 18px}
+ .L .steps{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;border-top:0;margin-right:calc(-1*var(--side));margin-left:calc(-1*var(--side));padding:0 var(--side) 8px;scrollbar-width:none}
+ .L .steps::-webkit-scrollbar{display:none}
+ .L .step{flex:0 0 84%;scroll-snap-align:center;border:0;border-top:1px solid var(--ink);padding:var(--s3) 0 0}
+ .L .step:nth-child(n+3){border-top:1px solid var(--ink)}
+ .L .swipe{display:block!important}
+ .L .chain{grid-template-columns:1fr}
+ .L .chain > div{padding:var(--s4) 0 var(--s3)}
+ .L .chain > div + div{padding-right:0;border-right:0;border-top:1px solid var(--rule)}
+ .L .risk{grid-template-columns:1fr;gap:var(--s3)}
+ .L .index{grid-template-columns:1fr}
+ .L .index .r{grid-template-columns:40px minmax(0,1fr)}
+ .L .index .f{grid-column:2}
+ .L table.cmp{font-size:14px}
+ .L table.cmp th,.L table.cmp td{padding:11px 10px}
+ .L .ex{grid-template-columns:1fr}
+ .L .ex .list{display:none}
+ .L .ex select{display:block;width:100%;height:52px;margin:var(--s3) 0 0;font:inherit;font-size:16px;padding:0 14px;border:1px solid var(--ink);border-radius:2px;background:#fff;color:var(--ink)}
+ .L .ex .panel{padding:var(--s3) 0 0}
+ .L .ex .rq{padding:var(--s3) 18px;font-size:15px}
+ .L .pub dl{grid-template-columns:1fr}
+ .L .offer ol li{grid-template-columns:36px 1fr}
+ .L .offer ol .f{grid-column:2}
+ .L .card{padding:var(--s3)}
+ .L .card .pr{font-size:64px}
+ .L .sbar{display:flex}
+ .L .foot{padding-bottom:110px}
+}
+</style>
+
+<div class="L" id="pro2" data-handle="professional-edition">
+<div class="rib">معاينة داخلية غير منشورة · السعر المعروض مقترح وغير فعّال في المتجر · زرّ الشراء يعمل بعد الموافقة على النشر</div>
+
+<header class="mast"><div class="wrap">
+ <div class="brand">AI Step Ahead<small>الإصدار المهني</small></div>
+ <a class="buy" href="#offer"><span class="p">8 مكوّنات · PDF وWord وExcel</span><b><span class="js-price en">$79</span> · اطلب الآن</b></a>
+</div></header>
+
+<section class="hero">
+ <div class="txt">
+  <div class="kick" data-rv><span class="mono">AISA / PRO</span><span class="k2">الإصدار المهني · Claude وChatGPT في العمل اليومي</span></div>
+  <h1 data-rv>العمل الذي يحمل اسمك<span>يستحقّ أكثر من إجابة لم تتحقّق منها.</span></h1>
+  <p class="sub" data-rv>نظام عمل كامل لمن يكتبون التقارير، ويقدّمون التوصيات، ويُسألون عن الأرقام: كيف تطلب بدقّة، وكيف تتحقّق قبل أن ترسل، وكيف تسلّم عملًا تقف خلفه.</p>
+  <div data-rv><a class="btn" href="#offer">احصل على الإصدار المهني · <span class="js-price en">$79</span> <span class="ar">←</span></a></div>
+  <div class="meta" data-rv><span>8 مكوّنات رقمية</span><span>تحميل فوري</span><span>دفعة واحدة</span><span>ضمان استرداد 30 يومًا</span></div>
+ </div>
+ <figure class="img">
+  <picture><source media="(max-width:700px)" srcset="{{ 'pro2-heroM.webp' | asset_url }}" type="image/webp"><source srcset="{{ 'pro2-heroSq.webp' | asset_url }}" type="image/webp"><img src="{{ 'pro2-heroSq.jpg' | asset_url }}" alt="صفحات حقيقية من الإصدار المهني على حاسوب محمول وجهاز لوحي وهاتف: مكتبة سير العمل، والمذكّرة النهائية في الحالة العملية، وبطاقة تأكَّد" width="1600" height="1600" fetchpriority="high"></picture>
+  <span class="cap">صفحات فعلية من الملفّات · عرض توضيحي على الأجهزة</span>
+ </figure>
+</section>
+
+<section class="tension"><div class="wrap">
+ <div class="kick" data-rv><span class="mono">01</span>الموقف</div>
+ <h2 data-rv>لن يقيّمك مديرك على جودة الطلب. سيقيّمك على <em>ما سلّمته</em>.</h2>
+ <div class="tgrid">
+  <div class="story" data-rv>
+   <div class="clock">SUN 09:10 → 10:30</div>
+   <p>تقرير أكتوبر جاهز في الجدول، والاجتماع مع الرئيس التنفيذي بعد ساعة وعشرين دقيقة. تطلب من الذكاء الاصطناعي تعليقًا للإدارة، فيصلك نصّ واثق ومهذّب في ثوانٍ.</p>
+   <p>يبدو جاهزًا للإرسال. لكن قارئًا يعرف الأرقام سيجد فيه خمس مشكلات قبل أن يصل إلى السطر الأخير.</p>
+   <ul>
+    <li><b>الجدول:</b> الإيرادات أقلّ من الموازنة بـ 5.5%، والدمام فوق الموازنة.</li>
+    <li><b>المعروف:</b> عميل في جدة أجّل طلبيات بنحو 300 ألف ريال، ورسوم وقود جديدة على النقل.</li>
+   </ul>
+  </div>
+  <figure data-rv>
+   <div class="sheet">
+    <div class="hd"><span>مسودّة الذكاء الاصطناعي · طلب من سطر واحد</span><span>مراجعة بالقلم الأحمر</span></div>
+    <p class="draft"><span class="mk">شهدت الشركة خلال أكتوبر انخفاضًا في الإيرادات بنسبة 8%<i>1</i></span>، ويعود ذلك إلى <span class="mk">ضعف الطلب في السوق<i>2</i></span>، <span class="mk">خاصةً في منطقة الدمام<i>3</i></span>. كما <span class="mk">ارتفعت المصاريف التشغيلية بشكل ملحوظ<i>4</i></span>. <span class="mk">ونوصي بتكثيف الجهود التسويقية<i>5</i></span>.</p>
+    <ol class="notes">
+     <li><span><b>رقم غير موجود في الجدول.</b> الانخفاض 5.5% (500 ألف)، لا 8%.</span></li>
+     <li><span><b>سبب مخترَع.</b> لا شيء في البيانات يقول «ضعف الطلب».</span></li>
+     <li><span><b>عكس الحقيقة.</b> الدمام الوحيدة التي تجاوزت الموازنة (+5%).</span></li>
+     <li><span><b>غير قابل للقياس.</b> الزيادة 45 ألفًا، معظمها رسوم الوقود.</span></li>
+     <li><span><b>لا يرتبط بالأرقام.</b> التسويق أنفق أقلّ من الموازنة أصلًا.</span></li>
+    </ol>
+   </div>
+   <figcaption><span class="mono">FIG. 1</span>من الحالة العملية في الإصدار (02). الشركة والأرقام متخيَّلة، والمسودّة مكتوبة لأغراض الشرح.</figcaption>
+  </figure>
+ </div>
+</div></section>
+
+<section class="flow"><div class="wrap">
+ <div class="kick" data-rv><span class="mono">02</span>التحوّل</div>
+ <h2 data-rv>الطريقة نفسها في كلّ مرّة: من الجدول إلى مذكّرة تقف خلفها.</h2>
+ <p class="lead" data-rv>هذه هي الحالة العملية كما تجدها في الإصدار، مختصرة في أربع خطوات. الفرق لا يكمن في أداة أذكى، بل في طلب يحدّد ما يُعدّ ناتجًا جيّدًا، وتحقّق لا يُترك للأداة.</p>
+ <div class="steps" data-rv>
+  <div class="step"><div class="no"><b>المُدخل</b><span class="mono">01 / 04</span></div>
+   <div class="doc"><table class="mini">
+    <tr><td>الرياض</td><td class="n">4,120</td><td class="n neg">-4.2%</td></tr>
+    <tr><td>جدة</td><td class="n">2,640</td><td class="n neg">-13.4%</td></tr>
+    <tr><td>الدمام</td><td class="n">1,890</td><td class="n pos">+5.0%</td></tr>
+    <tr class="t"><td>الإيرادات</td><td class="n">8,650</td><td class="n neg">-5.5%</td></tr>
+    <tr><td>النقل</td><td class="n">610</td><td class="n neg">-13.0%</td></tr>
+    <tr class="t"><td>الربح التشغيلي</td><td class="n">560</td><td class="n neg">-33.3%</td></tr>
+   </table></div>
+   <p class="d">جدول الشهر بالألف ريال: الفعلي والفرق عن الموازنة. مرفق بصيغة Excel لتطبّق عليه بنفسك.</p></div>
+  <div class="step"><div class="no"><b>الطلب</b><span class="mono">02 / 04</span></div>
+   <div class="doc req"><span class="m">الهدف:</span> تعليق يقرؤه <span class="ph">الرئيس التنفيذي</span> في دقيقتين.<br><span class="m">السياق:</span> سببان مؤكَّدان فقط. لا تفترض غيرهما.<br><span class="m">الحدود:</span> الفروق فوق <span class="ph">5%</span> فقط.<br><span class="m">الشكل:</span> ما تغيّر · الأسباب · المطلوب من الإدارة.<br><span class="m">المعيار:</span> كلّ رقم من الجدول، أو «يحتاج تأكيدًا».</div>
+   <p class="d">طلب بالمِقاس الكامل من سير العمل 01، مختصر هنا.</p></div>
+  <div class="step"><div class="no"><b>التحقّق</b><span class="mono">03 / 04</span></div>
+   <div class="doc log">
+    <div><span>الإيرادات -5.5% (500 ألف)</span><span class="ok">✓ ك</span></div>
+    <div><span>الربح التشغيلي -33.3%</span><span class="ok">✓ ك</span></div>
+    <div><span>تأجيل طلبيات جدة 300 ألف</span><span class="ok">✓ د</span></div>
+    <div><span>110 آلاف متبقية من فرق جدة</span><span class="ok">✓ يحتاج تأكيدًا</span></div>
+    <div><span>النقل +70 ألفًا، رسوم الوقود</span><span class="ok">✓ أ</span></div>
+    <div><span>الأرقام لشهر أكتوبر</span><span class="ok">✓ ت</span></div>
+   </div>
+   <p class="d">سجلّ «تأكَّد»: كلّ رقم إلى مصدره قبل الإرسال.</p></div>
+  <div class="step"><div class="no"><b>المُخرَج</b><span class="mono">04 / 04</span></div>
+   <div class="doc memo"><h5>ما الذي تغيّر</h5>الإيرادات 8.65 مليون، أقلّ بـ 500 ألف (-5.5%). الدمام +5%.<h5>الأسباب</h5>مؤكَّد: تأجيل جدة، ورسوم الوقود. يحتاج تأكيدًا: 110 آلاف.<h5>المطلوب</h5>قرار بشأن رسوم الوقود قبل دورة نوفمبر.<br><span class="st">✓ تمّ التحقّق: ت · أ · ك · د</span></div>
+   <p class="d">مذكّرة تنتهي بقرار، وكلّ رقم فيها له مصدر.</p></div>
+ </div>
+ <p class="swipe" style="display:none;font-size:13px;color:var(--mute);margin-top:10px">اسحب لترى الخطوات الأربع ←</p>
+</div></section>
+
+<section class="system"><div class="wrap">
+ <div class="kick" data-rv><span class="mono">03</span>المنهج</div>
+ <h2 data-rv>ثلاث حركات تتكرّر في كلّ مهمّة، مع أيّ أداة.</h2>
+ <div class="chain">
+  <div data-rv><div class="big">المِقاس</div><p class="q">قبل أن تطلب: سبعة مقاييس تحوّل الطلب من أمنية إلى مواصفات.</p>
+   <div class="ruler"><span>هدف</span><span>سياق</span><span>جمهور</span><span>حدود</span><span>شكل</span><span>مثال</span><span>معيار</span></div></div>
+  <div data-rv><div class="big">البروفة</div><p class="q">حين لا يناسبك الناتج: قارنه بالمعيار، وسمِّ المقياس الذي فاته، وأصلحه وحده.</p>
+   <div class="loop"><svg width="46" height="22" viewBox="0 0 46 22" aria-hidden="true"><path d="M40 11a9 9 0 1 1-3-6.7" fill="none" stroke="#121317" stroke-width="1.4"/><path d="M37.5 1.5v4.2h-4.2" fill="none" stroke="#121317" stroke-width="1.4"/><line x1="0" y1="11" x2="22" y2="11" stroke="#121317" stroke-width="1.4"/></svg>هدفها: ناتج جيّد من الرسالة الثانية.</div></div>
+  <div data-rv><div class="big">تأكَّد</div><p class="q">قبل أن ترسل: أربعة فحوص، بعمق يتناسب مع ثمن الخطأ.</p>
+   <div class="letters"><span><b>ت</b>التاريخ</span><span><b>أ</b>الأصل</span><span><b>ك</b>الكمّ</span><span><b>د</b>الدليل</span></div></div>
+ </div>
+ <div class="risk" data-rv>
+  <div style="border-color:#1F5E46"><b>أخضر · مسودّة داخلية</b>قراءة سريعة تكفي.</div>
+  <div style="border-color:#A86A12"><b>أصفر · يُرسَل لآخرين</b>الفحوص الأربعة كاملة.</div>
+  <div style="border-color:#B42318"><b>أحمر · مالي أو قانوني أو قرار</b>الفحوص الأربعة ومراجعة مختصّ. الأداة لا تكون المراجع الأخير.</div>
+ </div>
+</div></section>
+
+<section class="reveal" id="kit"><div class="wrap">
+ <div class="head">
+  <div><div class="kick" data-rv><span class="mono">04</span>ما تحصل عليه</div><h2 data-rv>ثمانية مكوّنات.<br>نظام واحد.</h2></div>
+  <p data-rv>كلّ ملفّ في الإصدار يحمل رقمه ولونه ومكانه في النظام، ويحلّ مهمّة محدّدة. تبدأ بالحالة العملية، وتبني عادتك بدفتر التطبيق، وتعمل يوميًّا من المكتبة والقوالب، وترجع إلى الكتابين حين تحتاج العمق.</p>
+ </div>
+ <figure data-rv>
+  <picture><source media="(max-width:700px)" srcset="{{ 'pro2-sysM.webp' | asset_url }}" type="image/webp"><source srcset="{{ 'pro2-sys.webp' | asset_url }}" type="image/webp"><img src="{{ 'pro2-sys.jpg' | asset_url }}" alt="أغلفة المكوّنات الثمانية للإصدار المهني من 00 إلى 07" width="2000" height="1250" loading="lazy"></picture>
+  <figcaption><span class="mono">FIG. 2</span>الأغلفة الفعلية للملفّات الثمانية. كلّها رقمية: PDF وWord وExcel.</figcaption>
+ </figure>
+ <div class="index">
+  <div class="r" data-rv><span class="mono">00</span><div><h3>ابدأ من هنا</h3><p>ما في الإصدار، ولأيّ مهمّة يصلح كلّ ملفّ، وبأيّ ترتيب.</p></div><span class="f">PDF · 3 pp</span></div>
+  <div class="r" data-rv><span class="mono">04</span><div><h3>بطاقتا المرجع</h3><p>«تأكَّد» قبل الإرسال، و«أيّ أداة لأيّ مهمّة».</p></div><span class="f">PDF · 3 pp</span></div>
+  <div class="r" data-rv><span class="mono">01</span><div><h3>مكتبة سير العمل المهنية</h3><p>اثنا عشر سير عمل: ما تجهّزه، والطلب الجاهز، والتحقّق، وشكل الناتج الجيّد.</p></div><span class="f">PDF · 26 pp</span></div>
+  <div class="r" data-rv><span class="mono">05</span><div><h3>قوالب الطلبات</h3><p>الطلبات الاثنا عشر قابلة للتعديل، لتبني مكتبتك الخاصّة.</p></div><span class="f">DOCX · 12</span></div>
+  <div class="r" data-rv><span class="mono">02</span><div><h3>حالة عملية: تقرير أكتوبر</h3><p>الطريقة كاملة على تقرير شهري، من الجدول إلى مذكّرة متحقَّق منها، مع ملفّ الأرقام.</p></div><span class="f">PDF + XLSX</span></div>
+  <div class="r" data-rv><span class="mono">06</span><div><h3>«ChatGPT بلا تخمين»</h3><p>المرجع الكامل للطريقة، مع 120 طلبًا، وملفّات تدريب، ونسخة للجوال.</p></div><span class="f">PDF · 298 pp</span></div>
+  <div class="r" data-rv><span class="mono">03</span><div><h3>دفتر التطبيق: 7 أيام</h3><p>جلسة قصيرة كلّ يوم تبني فيها نظامك حول مهامّك الفعلية.</p></div><span class="f">PDF · 11 pp</span></div>
+  <div class="r" data-rv><span class="mono">07</span><div><h3>«Claude بلا تخمين»</h3><p>القراءة الطويلة والكتابة الدقيقة مع Claude، مع 120 برومبت وملفّات تدريب.</p></div><span class="f">PDF · 299 pp</span></div>
+ </div>
+ <div class="compare">
+  <div data-rv><h3>الكتابان يعلّمان الطريقة. الإصدار المهني يضعها في عملك.</h3><p>إن كنت تريد أن تفهم الأداتين، فالكتابان يكفيان. وإن كنت تريد أن تسلّم تقاريرك ومذكّراتك ومراسلاتك بطريقة ثابتة وموثوقة، فهذه الطبقة هي ما يختصر عليك البناء.</p></div>
+  <table class="cmp" data-rv>
+   <tr><th>المحتوى</th><th>الكتابان</th><th>الإصدار المهني</th></tr>
+   <tr><td>الطريقة كاملة: «المِقاس» و«تأكَّد»</td><td class="y">✓</td><td class="y">✓</td></tr>
+   <tr><td>240 طلبًا عامًّا وملفّات تدريب</td><td class="y">✓</td><td class="y">✓</td></tr>
+   <tr><td>12 سير عمل لمهامّ مهنية محدّدة</td><td class="x">—</td><td class="y">✓</td></tr>
+   <tr><td>حالة عملية كاملة مع ملفّ Excel</td><td class="x">—</td><td class="y">✓</td></tr>
+   <tr><td>قوالب Word قابلة للتعديل</td><td class="x">—</td><td class="y">✓</td></tr>
+   <tr><td>دفتر تطبيق لسبعة أيام</td><td class="x">—</td><td class="y">✓</td></tr>
+   <tr><td>بطاقتا مرجع للطباعة</td><td class="x">—</td><td class="y">✓</td></tr>
+  </table>
+ </div>
+</div></section>
+
+<section class="explore"><div class="wrap">
+ <div class="kick" data-rv><span class="mono">05</span>من داخل المكتبة</div>
+ <h2 data-rv>اقرأ الطلبات الفعلية قبل أن تشتري.</h2>
+ <p class="lead" data-rv>هذه نصوص الطلبات كما هي في مكتبة سير العمل، مع فحوص التحقّق الخاصّة بكلّ مهمّة. ما بين الأقواس تستبدله بمعلوماتك.</p>
+ <div class="ex" data-rv>
+  <ul class="list" role="tablist" aria-label="سير العمل الاثنا عشر"></ul>
+  <div>
+   <label class="sr" for="wfsel" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">اختر سير العمل</label>
+   <select id="wfsel"></select>
+   <div class="panel" role="tabpanel" aria-live="polite"></div>
+  </div>
+ </div>
+</div></section>
+
+<section class="pub"><div class="wrap g">
+ <div data-rv><div class="kick"><span class="mono">06</span>الناشر</div><h2><span style="font-family:APlex;font-weight:600;font-size:.62em;display:block;margin-bottom:8px">AI Step Ahead</span>كتب عمل عربية عن Claude وChatGPT.</h2></div>
+ <dl data-rv>
+  <div><dt>منهج تحريري واحد</dt><dd>الطريقة نفسها في كلّ ملفّ: «المِقاس» لصياغة الطلب، و«البروفة» للتحسين، و«تأكَّد» للتحقّق.</dd></div>
+  <div><dt>معلومات مؤرَّخة</dt><dd>كلّ فصل في «ChatGPT بلا تخمين» ينتهي بقسم «معلومات قد تتغيّر» مؤرَّخ، مستند إلى المصادر الرسمية.</dd></div>
+  <div><dt>أمثلة معلنة</dt><dd>كلّ مثال ورقم توضيحي موسوم بذلك صراحة، في الكتب وفي هذه الصفحة.</dd></div>
+  <div><dt>مستقلّون</dt><dd>نؤلّف وننشر بشكل مستقلّ. Claude علامة تجارية لشركة Anthropic، وChatGPT علامة تجارية لشركة OpenAI.</dd></div>
+ </dl>
+</div></section>
+
+<section class="offer" id="offer"><div class="wrap g">
+ <div>
+  <div class="kick" data-rv><span class="mono">07</span>الإصدار المهني</div>
+  <h2 data-rv>كلّ ما تحتاجه لتعمل بهذه الطريقة من الغد.</h2>
+  <ol data-rv>
+   <li><span class="mono">00</span><span>دليل البدء</span><span class="f">PDF</span></li>
+   <li><span class="mono">01</span><span>مكتبة سير العمل المهنية · 12 سير عمل</span><span class="f">PDF</span></li>
+   <li><span class="mono">02</span><span>حالة عملية: تقرير أكتوبر + ملفّ الأرقام</span><span class="f">PDF · XLSX</span></li>
+   <li><span class="mono">03</span><span>دفتر التطبيق: 7 أيام</span><span class="f">PDF</span></li>
+   <li><span class="mono">04</span><span>بطاقتا المرجع</span><span class="f">PDF</span></li>
+   <li><span class="mono">05</span><span>قوالب الطلبات القابلة للتعديل</span><span class="f">DOCX</span></li>
+   <li><span class="mono">06</span><span>«ChatGPT بلا تخمين» مع ملحقاته</span><span class="f">PDF · ZIP</span></li>
+   <li><span class="mono">07</span><span>«Claude بلا تخمين» مع ملحقاته</span><span class="f">PDF · ZIP</span></li>
+  </ol>
+ </div>
+ <div class="card" data-rv>
+  <div class="pr"><span class="js-price en">$79</span><small>دفعة واحدة</small></div>
+  <a class="btn js-buy" href="#" data-variant="55667902808401">اشترِ الإصدار المهني <span class="ar">←</span></a>
+  <dl>
+   <div><dt>التسليم</dt><dd>رابط تحميل فوري بعد الدفع، وعلى بريدك.</dd></div>
+   <div><dt>الصيغ</dt><dd>PDF وWord وExcel. تعمل على الحاسوب والجهاز اللوحي والهاتف.</dd></div>
+   <div><dt>الأدوات</dt><dd>تعمل الطريقة مع Claude أو ChatGPT، بما فيها النسخ المجانية.</dd></div>
+   <div><dt>الضمان</dt><dd>استرداد كامل خلال 30 يومًا وفق <a href="/policies/refund-policy">سياسة الاسترداد</a>.</dd></div>
+  </dl>
+  <p class="alt">تحتاج كتابًا واحدًا فقط؟ <a class="lnk" href="/pages/claude-arabic">Claude</a> · <a class="lnk" href="/pages/chatgpt-arabic">ChatGPT</a></p>
+ </div>
+</div></section>
+
+<section class="faq"><div class="wrap g">
+ <div data-rv><div class="kick"><span class="mono">08</span>أسئلة</div><h2>قبل أن تقرّر</h2></div>
+ <div data-rv>
+  <details><summary>ما الذي يميّزه عن الدروس المجانية؟</summary><p>الدروس المجانية تشرح الأدوات. الإصدار المهني يعطيك طريقة واحدة متّسقة، وطلبات جاهزة لاثنتي عشرة مهمّة عمل، وتحقّقًا منهجيًّا، وحالة كاملة تطبّقها على ملفّ حقيقي الشكل.</p></details>
+  <details><summary>هل هو دورة أم كتاب؟</summary><p>مجموعة أدوات عمل رقمية تتعلّمها وتطبّقها بنفسك: ملفّات PDF وWord وExcel، تستخدمها مرجعًا يوميًّا.</p></details>
+  <details><summary>هل أحتاج خبرة تقنية أو اشتراكًا مدفوعًا؟</summary><p>لا. يكفي أن تستخدم الحاسوب في عملك. الطريقة تعمل مع النسخ المجانية، وبعض المهامّ مثل تحليل جداول كبيرة تستفيد من خطة تتيح رفع الملفّات.</p></details>
+  <details><summary>ماذا عن بيانات العمل السرّية؟</summary><p>كلّ سير عمل يذكّرك بسياسة جهتك، ويخصّص دفتر التطبيق يومًا كاملًا لما يجوز رفعه وكيف تخفي الأسماء والمعرّفات.</p></details>
+  <details><summary>كيف تصلني التحديثات؟</summary><p>إن صدرت نسخة مصحّحة من ملفّات الإصدار نرسل رابطها إلى بريد الطلب دون رسوم.</p></details>
+  <details><summary>وإن لم يناسبني؟</summary><p>اطلب الاسترداد خلال 30 يومًا من الشراء عبر <a href="/pages/contact">صفحة التواصل</a>، مع رقم الطلب.</p></details>
+ </div>
+</div></section>
+
+<footer class="foot"><div class="wrap g"><span>© AI Step Ahead · الإصدار المهني · طبعة نوفمبر 2026</span><span><a href="/policies/refund-policy">الاسترداد</a> · <a href="/policies/privacy-policy">الخصوصية</a> · <a href="/policies/terms-of-service">الشروط</a> · <a href="/pages/contact">تواصل معنا</a></span></div></footer>
+
+<div class="sbar" aria-hidden="true"><div><b class="js-price en">$79</b><span>8 مكوّنات · دفعة واحدة</span></div><a class="btn" href="#offer" tabindex="-1">اطلب الآن</a></div>
+<script type="application/json" id="wfdata">[{"t": "تعليق تقرير الأداء الشهري للإدارة", "w": "جدول أرقام الشهر جاهز، والمطلوب تعليق قصير يقرؤه المدير التنفيذي أو لجنة الإدارة قبل الاجتماع.", "lvl": "أصفر", "lvc": "y", "req": [["الهدف", "اكتب تعليق الإدارة على أداء شهر ⟦الشهر والسنة⟧ ، لأرسله مع الجدول المرفق إلى ⟦المدير المالي / لجنة الإدارة⟧ ."], ["السياق", "نحن ⟦نوع النشاط والبلد⟧ . الجدول المرفق فيه الفعلي والموازنة والفترة نفسها من العام الماضي. أحداث الشهر التي أعرفها: ⟦حدث 1، حدث 2⟧ . عتبة الأهمية لدينا: ⟦5% أو 50,000 ريال، أيّهما أكبر⟧ ."], ["الجمهور", "إدارة عليا تقرأ في دقيقتين، يهمّها الأثر على الربح والنقد."], ["الحدود", "علّق فقط على البنود التي تتجاوز العتبة. لا تذكر سببًا لم يرد في الجدول أو في الأحداث أعلاه؛ إن لم تجد سببًا فاكتب «السبب قيد التحقّق». لا مبالغة ولا لغة تسويقية. 250 كلمة على الأكثر."], ["الشكل", "أربعة عناوين: «ما الذي تغيّر» (3 نقاط، كلّ منها بالفرق مبلغًا ونسبة)، «لماذا»، «ما نراقبه الشهر القادم»، «المطلوب من الإدارة» (قرار محدّد، أو «لا شيء هذا الشهر»)."], ["المثال", "⟦الصق تعليق شهر سابق قبلته الإدارة، للنبرة والطول فقط⟧ ."], ["المعيار", "يستطيع المدير أن يقرّر من التعليق دون أن يفتح الجدول. قبل أن تكتب، أعِد حساب كلّ فرق ونسبة من الجدول واعرضها لي في جدول صغير للمراجعة. إن نقصتك معلومة فاسألني قبل أن تكتب، ولا تخترع أرقامًا."]], "v": ["الكمّ: أعِد حساب كلّ فرق ونسبة من الجدول الأصلي، لا من جدول الأداة.", "الأصل: كلّ سبب في «لماذا» يقابله حدث ذكرته أو رقم في الجدول؛ وإلّا فهو «قيد التحقّق».", "التاريخ: المقارنة بالفترة الصحيحة (شهر أم تراكمي)، والموازنة هي آخر نسخة معتمدة.", "الدليل: كلّ بند فوق العتبة مذكور، ولا بند دونها أُقحم."]}, {"t": "شرح الانحرافات بين الفعلي والموازنة", "w": "بند تجاوز الموازنة أو قصر عنها، ويُطلب منك تفسير مكتوب قبل اجتماع مراجعة الأداء.", "lvl": "أصفر", "lvc": "y", "req": [["الهدف", "حلّل انحرافات ⟦الفترة⟧ بين الفعلي والموازنة، واكتب تفسيرًا أعرضه في اجتماع مراجعة الأداء."], ["السياق", "البيانات المرفقة لـ ⟦الإدارة / الشركة⟧ ، وفيها لكلّ بند: الكمّية والسعر في الموازنة وفي الفعلي. افتراضات الموازنة: ⟦سعر الصرف، تواريخ البدء…⟧ . ما أعرفه عن الأسباب: ⟦المعلومات، مع تحديد المؤكَّد منها⟧ ."], ["الجمهور", "لجنة مراجعة الأداء؛ تريد أن تعرف هل الانحراف مؤقّت أم دائم، ومن يملك معالجته."], ["الحدود", "حلّل فقط البنود التي يتجاوز انحرافها ⟦5%⟧ و ⟦100,000 ريال⟧ معًا. لا تقدّم أيّ سبب على أنه حقيقة ما لم يرد في معلوماتي."], ["الشكل", "(1) جدول: البند · الموازنة · الفعلي · الانحراف بالمبلغ · بالنسبة · موافق/غير موافق. (2) لكلّ بند مهمّ: تفكيك الانحراف إلى أثر الكمّية وأثر السعر وأثر المزيج حيث ينطبق، مع المعادلة المستخدمة. (3) قائمتان منفصلتان: «حقائق معروفة» و«فرضيات تحتاج تأكيدًا»، مع الإدارة التي تؤكّد كلّ فرضية. (4) هل الانحراف توقيت أم دائم، وأثره على توقّع نهاية السنة."], ["المثال", "⟦تفسير سابق قبلته اللجنة، إن وُجد⟧ ."], ["المعيار", "مجموع آثار الكمّية والسعر والمزيج يساوي الانحراف الكلّي لكلّ بند بالضبط؛ اعرض هذا التحقّق صراحة. إن نقصتك الكمّيات أو الأسعار فقل ذلك، ولا تفكّك بالتقدير ولا تخترع أرقامًا."]], "v": ["الكمّ: اجمع آثار الكمّية والسعر والمزيج بنفسك. أيّ فرق عن الانحراف الكلّي، ولو صغير، يعني خطأ في المعادلة أو في البيانات.", "الأصل: الأداة استخدمت الموازنة التي حدّدتها (الأصلية أم المعدّلة)، والكمّيات والأسعار من الملفّ نفسه.", "الدليل: أرسل كلّ «فرضية» إلى الإدارة المعنية لتأكيدها قبل الاجتماع، ولا ترفعها إلى «حقيقة» من عندك.", "التاريخ: افصل انحراف التوقيت (مصروف تأجّل شهرًا) عن الانحراف الدائم؛ الخلط بينهما يضلّل توقّع نهاية السنة."]}, {"t": "الملخّص التنفيذي لمستند طويل", "w": "تقرير أو سياسة أو كرّاسة طلب عروض طويلة، ومدير يحتاج صفحة واحدة يقرّر منها.", "lvl": "أصفر", "lvc": "y", "req": [["الهدف", "لخّص المستند المرفق في صفحة واحدة، يقرّر منها ⟦المدير العام⟧ : ⟦هل نتقدّم للمناقصة / هل نعتمد السياسة⟧ ."], ["السياق", "المستند ⟦نوعه وعنوانه⟧ صادر عن ⟦الجهة⟧ ، في ⟦عدد⟧ صفحة. يهمّنا خصوصًا: ⟦المواعيد، معايير التقييم، الالتزامات المالية، الجزاءات⟧ ."], ["الجمهور", "مدير لن يقرأ الأصل، ويريد أن يعرف ما يُلزمنا، وما يكلّفنا، وما يقلقنا."], ["الحدود", "كلّ نقطة تنتهي بمرجعها بين قوسين، هكذا: (القسم 4.2، ص 17). لا تضف معلومة ليست في المستند، ولا تستنتج ما لم يُكتب. إذا كان المستند غامضًا في نقطة مهمّة فقل ذلك صراحة. صفحة واحدة."], ["الشكل", "(1) سطران: ما المستند وماذا يطلب منّا. (2) أهمّ 5 نقاط. (3) جدول المواعيد: الحدث · التاريخ · المرجع. (4) ما يقلقنا. (5) أسئلة للجهة قبل ⟦الموعد⟧ ."], ["المثال", "⟦ملخّص سابق أعجبك، إن وُجد⟧ ."], ["المعيار", "يستطيع القارئ أن يتحقّق من أيّ نقطة بفتح الصفحة المذكورة فقط. في النهاية اذكر ما لم تقرأه أو لم تستطع قراءته (جداول مصوّرة، ملاحق). إن نقصتك معلومة فاسألني، ولا تخترع."]], "v": ["الأصل: افتح ثلاثة مراجع على الأقلّ، منها موعد ومبلغ، وتأكّد أن الصفحة تقول ما نُسب إليها.", "الكمّ: طابق كلّ تاريخ ومبلغ ونسبة في الملخّص مع الأصل رقمًا برقم.", "التاريخ: هذه أحدث نسخة من المستند، والملاحق والتعديلات اللاحقة مشمولة.", "الدليل: راجع قائمة «ما لم يُقرأ»؛ الجداول المصوّرة والملاحق كثيرًا ما تحمل أهمّ الشروط."]}, {"t": "مراجعة عقد أو سياسة: الالتزامات والمواعيد والمخاطر", "w": "عقد مورّد أو عميل، أو سياسة داخلية، قبل التوقيع أو التطبيق؛ لتصل إلى المستشار القانوني بجدول وأسئلة، لا بملفّ خام.", "lvl": "أحمر", "lvc": "r", "req": [["الهدف", "استخرج من العقد المرفق الالتزامات والمواعيد والمخاطر، لأعدّ أسئلة للمستشار القانوني قبل ⟦التوقيع / الاجتماع⟧ في ⟦التاريخ⟧ ."], ["السياق", "العقد بين شركتنا، وموقعنا فيه ⟦المشتري / المورّد⟧ ، و ⟦الطرف الآخر⟧ لـ ⟦موضوع العقد⟧ . القانون الحاكم المذكور: ⟦إن وُجد⟧ . يهمّنا: ⟦التجديد التلقائي، رفع الأسعار، حدود المسؤولية، الإنهاء، الجزاءات⟧ ."], ["الجمهور", "أنا ثم المستشار القانوني، وكلانا سيعود إلى النصّ الأصلي."], ["الحدود", "لا تقدّم رأيًا قانونيًّا، ولا تحكم على صحّة أيّ بند. اقتبس النصّ حرفيًّا، ولا تُعِد صياغته في عمود الاقتباس. إذا لم تجد بندًا متوقّعًا (حدود المسؤولية مثلًا) فاكتب «غير موجود»، ولا تفترض وجوده."], ["الشكل", "(1) جدول: رقم البند · الاقتباس الحرفي · الالتزام بلغة بسيطة · على من يقع · المهلة أو الموعد · مستوى الخطر (مرتفع/متوسّط/منخفض) وسببه في سطر. (2) البنود المتوقّعة الغائبة. (3) من 5 إلى 8 أسئلة للمستشار، كلّ سؤال برقم بنده."], ["المثال", "⟦شروطنا المعيارية، إن وُجدت⟧ ."], ["المعيار", "كلّ صفّ يمكن مطابقته مع العقد برقم البند والاقتباس. راجع الجدول مقابل العقد مرّة ثانية قبل أن تسلّمه، واذكر أيّ صفحة أو ملحق لم تستطع قراءته."]], "v": ["الأصل: طابق كلّ اقتباس مع العقد كلمة بكلمة. الاقتباس المعاد صياغته يُعامَل على أنه خطأ.", "الكمّ: راجع في الأصل كلّ مهلة ونسبة ومبلغ: أيّام الإشعار، نسبة الزيادة، سقف التعويض.", "التاريخ: الملاحق والتعديلات الموقّعة لاحقًا مقروءة، فقد تُلغي بندًا في المتن.", "الدليل: ابحث في العقد بنفسك عن «تجديد» و«إشعار» و«إنهاء» و«تعويض»، لتتأكّد أن الجدول لم يُسقط بندًا."]}, {"t": "من محضر الاجتماع إلى قرارات ومهامّ", "w": "انتهى الاجتماع، ولديك ملاحظات مبعثرة أو نصّ مفرَّغ من تسجيل، والمطلوب محضر يُرسَل خلال اليوم.", "lvl": "أصفر", "lvc": "y", "req": [["الهدف", "حوّل ملاحظات ⟦اسم الاجتماع⟧ بتاريخ ⟦التاريخ⟧ إلى محضر قرارات ومهامّ، أرسله إلى الحضور اليوم."], ["السياق", "الحضور وأدوارهم: ⟦الدور 1، الدور 2…⟧ . جدول الأعمال: ⟦البنود⟧ . الملاحظات مرفقة، وفيها عامية وأحاديث جانبية."], ["الجمهور", "الحضور ومديروهم؛ يريد كلّ منهم أن يعرف المطلوب منه وموعده."], ["الحدود", "لا تُسند مهمّة إلى شخص لم يُكلَّف بها صراحة في النصّ، ولا تخترع موعدًا. ما نوقش دون حسم «مسألة مفتوحة» لا «قرار». تجاهل الأحاديث الجانبية."], ["الشكل", "(1) القرارات: كلّ قرار في سطر، مع بند جدول الأعمال. (2) جدول المهامّ: المهمّة · المسؤول · الموعد · المصدر (اقتباس قصير من النصّ). اكتب «غير محدّد» في كلّ خانة لم يُذكر فيها شيء صراحة. (3) مسائل مفتوحة، ومن يحسمها إن ذُكر. (4) بنود جدول الأعمال التي لم تُناقش."], ["المثال", "⟦محضر سابق بالشكل المعتمد⟧ ."], ["المعيار", "لا خانة مملوءة بالتخمين. في النهاية أعطني قائمة منفصلة بكلّ «غير محدّد»، لأسأل عنه قبل الإرسال."]], "v": ["الأصل: طابق كلّ قرار مع الاقتباس الذي استند إليه؛ «نفكّر في…» ليست قرارًا.", "الدليل: كلّ مسؤول في جدول المهامّ قَبِل المهمّة في النصّ أو كُلِّف بها بوضوح.", "التاريخ: المواعيد النسبية («الأسبوع القادم») حُوِّلت إلى تواريخ بحسب تاريخ الاجتماع، لا تاريخ اليوم.", "الكمّ: بنود جدول الأعمال = البنود المغطّاة + البنود التي لم تُناقش."]}, {"t": "البريد المهني الحسّاس", "w": "اعتذار عن طلب، أو تصعيد، أو تفاوض على سعر أو موعد، أو خبر سيّئ.", "lvl": "أصفر", "lvc": "y", "req": [["الهدف", "اكتب رسالة بريد ⟦اعتذار عن طلب / تصعيد / تفاوض / خبر سيّئ⟧ إلى ⟦دور المستلم⟧ . ما أريده بعد قراءتها: ⟦مثلًا: أن يوافق على تأجيل التسليم أسبوعين⟧ ."], ["السياق", "ما حدث: ⟦الوقائع بالتواريخ⟧ . أستطيع تقديم: ⟦البدائل⟧ . لا أستطيع: ⟦الحدود⟧ . العلاقة: ⟦عميل منذ سنوات / مدير أعلى منّي⟧ ."], ["الجمهور", "⟦المستلم⟧ ، ويهمّه ⟦ما يهمّه⟧ . قد تُحال الرسالة إلى ⟦مديره / الإدارة القانونية⟧ ."], ["الحدود", "اعتذار واحد على الأكثر. لا تبرير مطوّل، ولا لوم لأحد، ولا وعد لم أذكره. أقلّ من 150 كلمة."], ["الشكل", "سطر موضوع، ثم نسختان: (أ) مباشرة وحازمة، (ب) ودّية تحافظ على العلاقة. كلّ نسخة تبدأ بالغرض، وتنتهي بخطوة تالية وموعد."], ["المثال", "⟦رسالة سابقة أعجبتك نبرتها، إن وُجدت⟧ ."], ["المعيار", "يفهم المستلم الغرض والمطلوب منه من السطر الأول. بعد النسختين، نبّهني إلى أيّ جملة قد تُفهم التزامًا ماليًّا أو قانونيًّا. إن نقصتك معلومة فاسألني، ولا تخترع تفاصيل."]], "v": ["الأصل: كلّ تاريخ ومبلغ ورقم طلبية في الرسالة يطابق السجلّات.", "الدليل: لا وعد في الرسالة لم تقرّره أنت: خصم، موعد، تعويض.", "التاريخ: المواعيد المقترحة ما زالت ممكنة يوم الإرسال، لا يوم كتابة المسوّدة.", "القراءة المزدوجة: اقرأها بعين مستلم غاضب ثم بعين محامٍ. وما يمسّ عقدًا أو نزاعًا يراه مديرك أو القانونية قبل الإرسال."]}, {"t": "عرض تقديمي للإدارة", "w": "عرض أمام الإدارة العليا أو لجنة، في وقت قصير، والمادّة الخام أرقام وأفكار متفرّقة.", "lvl": "أصفر", "lvc": "y", "req": [["الهدف", "ابنِ لي تسلسل عرض مدّته ⟦12 دقيقة⟧ أمام ⟦لجنة الإدارة⟧ ، ينتهي بطلب: ⟦الموافقة على…⟧ ."], ["السياق", "الرسالة الأساسية: ⟦جملة واحدة⟧ . المادّة المتاحة: ⟦أرقام، نتائج، مقارنات⟧ . ما تعرفه الإدارة سلفًا: ⟦...⟧ . الاعتراضات المتوقّعة: ⟦التكلفة، التوقيت…⟧ ."], ["الجمهور", "⟦المدير التنفيذي والمدير المالي⟧ : يريدان الخلاصة أوّلًا، والتفاصيل عند السؤال."], ["الحدود", "⟦8⟧ شرائح رئيسية على الأكثر. عنوان كلّ شريحة جملة كاملة تقول الاستنتاج («التكلفة تُستردّ خلال 18 شهرًا»)، لا موضوعًا («التكلفة»). لا رقم من خارج المادّة التي أعطيتك. التفاصيل الداعمة تذهب إلى الملحق."], ["الشكل", "(1) جدول: رقم الشريحة · العنوان-الاستنتاج · الرسالة الواحدة · الدليل (رقم أو رسم مقترح ومصدره في مادّتي) · ما يقوله المتحدّث في جملتين. (2) شرائح الملحق. (3) أصعب 3 أسئلة متوقّعة، والشريحة التي تجيب عن كلّ منها."], ["المثال", "⟦عرض سابق نجح، أو قالب الشركة المعتمد⟧ ."], ["المعيار", "من يقرأ العناوين وحدها متتابعة يفهم الحجّة والطلب. اعرض العناوين متتابعة في النهاية لأختبر ذلك. إن رأيت ثغرة في الحجّة أو نقصًا في الأدلّة فقلها صراحة، ولا تسدّها بأرقام من عندك."]], "v": ["الأصل: كلّ رقم في جدول الشرائح موجود في مادّتك بالقيمة نفسها.", "الكمّ: أعِد حساب كلّ رقم مشتقّ: فترة الاسترداد، النموّ، النسب.", "التاريخ: البيانات حتى آخر فترة مغلقة، لا من نسخة قديمة.", "الدليل: اقرأ العناوين متتابعة بصوت مسموع: هل تبني حجّة تنتهي بالطلب؟"]}, {"t": "موجز بحثي موثّق", "w": "تحتاج صورة سريعة عن سوق أو منافس أو تنظيم جديد قبل اجتماع أو قرار، وكلّ رقم فيها قد يُقتبس أمام الإدارة.", "lvl": "أصفر", "lvc": "y", "req": [["الهدف", "أعدّ موجزًا بحثيًّا عن ⟦الموضوع⟧ يجيب عن سؤال: ⟦السؤال⟧ ، أعرضه قبل قرار ⟦القرار⟧ ."], ["السياق", "نحن ⟦نوع الشركة⟧ . نعرف مسبقًا: ⟦ما نعرفه⟧ . النطاق: ⟦البلد أو المنطقة⟧ ، والفترة: ⟦آخر 24 شهرًا⟧ ."], ["الجمهور", "⟦مدير تطوير الأعمال⟧ : سيقتبس منه، فكلّ رقم يجب أن يصمد أمام سؤال «من أين هذا؟»."], ["الحدود", "ابحث في الويب. كلّ معلومة أو رقم يحمل رابط مصدر فتحته وقرأته، مع تاريخ نشره. فضّل ⟦المصادر الرسمية والهيئات التنظيمية وتقارير الشركات المنشورة⟧ . لا تسدّ الفراغات من معرفتك العامة؛ إن لم تجد مصدرًا فاكتب «لم أجد مصدرًا»."], ["الشكل", "(1) الخلاصة في 5 أسطر. (2) جدول: المعلومة · المصدر (الرابط) · تاريخ النشر · الحالة: «موثّق من مصدر أصلي» أو «يحتاج تحقّقًا» (مصدر ثانوي، أو قديم، أو متعارض). (3) ما بحثت عنه ولم تجده. (4) المصادر المتعارضة، وسبب الاختلاف إن ظهر."], ["المثال", "⟦موجز سابق بالشكل المعتمد، إن وُجد⟧ ."], ["المعيار", "لا رقم بلا رابط وتاريخ. قبل أن تسلّم، طابق كلّ رقم مع صفحته، وانقل إلى «يحتاج تحقّقًا» كلّ ما لم تستطع مطابقته."]], "v": ["الدليل: افتح كلّ رابط يحمل رقمًا مهمًّا، وتأكّد أن الرقم في الصفحة نفسها، وبالسياق نفسه: السنة والعملة والنطاق الجغرافي.", "التاريخ: تاريخ النشر مناسب للقرار؛ الرقم القديم يُذكر بتاريخه أو يُستبعد.", "الأصل: الرقم المنقول عن مقال صحفي يُتتبّع إلى التقرير أو الجهة التي أصدرته قبل اعتماده.", "الكمّ: إذا جُمعت أرقام من مصادر مختلفة أو حُوّلت عملات، فأعِد الحساب، وتأكّد أن التعريفات متطابقة."]}, {"t": "مذكّرة قرار", "w": "أمام الإدارة خياران أو أكثر (مورّد، نظام، توسّع، توظيف)، والمطلوب توصية واحدة مسبّبة قابلة للنقاش.", "lvl": "أصفر، وأحمر للقرارات الكبيرة", "lvc": "y", "req": [["الهدف", "اكتب مذكّرة قرار لـ ⟦صاحب القرار⟧ حول: ⟦السؤال القراري⟧ ، تنتهي بتوصية واحدة."], ["السياق", "الخيارات: ⟦أ، ب، الإبقاء على الوضع الحالي⟧ . بيانات كلّ خيار مرفقة. القيود: ⟦الميزانية، الموعد، السياسات⟧ ."], ["الجمهور", "⟦المدير العام⟧ : يقرّر في اجتماع واحد، ويريد أن يرى أن البدائل عوملت بإنصاف."], ["الحدود", "استخدم هذه المعايير والأوزان فقط، ولا تعدّلها: ⟦التكلفة 35%، المخاطر 25%، سرعة التنفيذ 20%، قابلية التوسّع 20%⟧ . لا تخترع بيانات لخيار ناقص؛ اكتب «بيانات ناقصة» وأثرها على النتيجة. صفحتان على الأكثر."], ["الشكل", "(1) التوصية في 3 أسطر. (2) الخلفية في فقرة. (3) مصفوفة: المعيار · الوزن · درجة كلّ خيار من 5 · سبب الدرجة في جملة. (4) المجموع المرجّح. (5) أهمّ مخاطر الخيار الموصى به وطريقة تخفيفها. (6) «ما الذي يغيّر التوصية»: الأرقام أو الشروط التي لو تغيّرت لتغيّر الاختيار."], ["المثال", "⟦مذكّرة سابقة بالشكل المعتمد⟧ ."], ["المعيار", "تصمد التوصية أمام سؤال «لماذا لا الخيار الثاني؟». إذا كان الفرق بين أعلى خيارين أقلّ من ⟦10%⟧ في المجموع المرجّح، فقل إن النتيجة حسّاسة، ووضّح ما يحسمها."]], "v": ["الكمّ: أعِد حساب المجموع المرجّح لكلّ خيار بنفسك، وتأكّد أن مجموع الأوزان 100%.", "الأصل: كلّ درجة لها سبب من البيانات التي أعطيتها، لا من انطباع عام.", "التاريخ: عروض الأسعار والبيانات صالحة حتى موعد القرار.", "الدليل: «ما الذي يغيّر التوصية» محدّد بأرقام أو شروط، لا بعبارات مثل «تغيّر ظروف السوق»."]}, {"t": "كتابة إجراء عمل ( SOP ) قابل للتنفيذ", "w": "عملية تتكرّر (اعتماد مورّد جديد، تسوية عهدة، إقفال شهري) وكلّ موظف ينفّذها بطريقته، أو موظف جديد يحتاج دليلًا مكتوبًا.", "lvl": "أصفر", "lvc": "y", "req": [["الهدف", "اكتب إجراء عمل لعملية ⟦اسم العملية⟧ ، ينفّذه موظف جديد في ⟦الإدارة⟧ دون أن يسأل أحدًا."], ["السياق", "هكذا تُنفَّذ العملية اليوم: ⟦الوصف أو الملاحظات⟧ . الأدوار: ⟦الأدوار⟧ . صلاحيات الاعتماد: ⟦مثلًا: حتى 50,000 ريال مدير الإدارة، وما فوقها المدير المالي⟧ . الأنظمة والنماذج: ⟦الأسماء⟧ ."], ["الجمهور", "موظف جديد ينفّذ، ومدقّق داخلي يراجع."], ["الحدود", "كلّ خطوة تبدأ بفعل أمر، ولها منفّذ واحد ومخرج واضح. لا تضف ضوابط أو صلاحيات لم أذكرها؛ إن رأيت ثغرة رقابية فاقترح علاجها في قسم منفصل."], ["الشكل", "(1) الغرض والنطاق في سطرين. (2) جدول الأدوار: من ينفّذ، ومن يعتمد، ومن يُستشار، ومن يُبلَّغ. (3) المدخلات والمخرجات. (4) الخطوات: الرقم · الخطوة · المنفّذ · النظام أو النموذج · المخرج · المهلة. (5) الضوابط: ما يُراجَع، ومن يراجعه، والدليل الذي يبقى للتدقيق. (6) الاستثناءات: غياب المعتمد، نقص مستند، تجاوز الحدّ. (7) ثغرات رقابية مقترحة."], ["المثال", "⟦إجراء آخر معتمد لديكم، للشكل⟧ ."], ["المعيار", "يستطيع من لم يرَ العملية أن ينفّذها من الورقة. في النهاية، اذكر كلّ خطوة كان وصفي لها غامضًا فافترضت فيها شيئًا، ولا تخترع ما لا تعرفه."]], "v": ["الأصل: صلاحيات الاعتماد تطابق جدول الصلاحيات المعتمد حرفيًّا.", "الدليل: اطلب من زميل يعرف العملية أن يمرّ عليها خطوة بخطوة، ويسجّل كلّ موضع توقّف فيه.", "التاريخ: الأنظمة والنماذج المذكورة هي المستخدمة اليوم، لا قبل آخر تحديث.", "الكمّ: مجموع مهل الخطوات يتّسق مع المهلة الكلّية للعملية."]}, {"t": "مساعد Excel : المعادلات والتحقّق من التحليل", "w": "تحتاج معادلة لا تعرف بناءها، أو تريد فهم معادلة ورثتها في ملفّ زميل، أو تتحقّق من تحليل قبل إرساله.", "lvl": "أصفر", "lvc": "y", "req": [["الهدف", "⟦ابنِ لي معادلة / اشرح هذه المعادلة / تحقّق من هذا الحساب⟧ : ⟦الوصف أو المعادلة⟧ ."], ["السياق", "الورقة اسمها ⟦المبيعات⟧ ، والبيانات في النطاق ⟦A2:F500⟧ : العمود ⟦A⟧ التاريخ، ⟦B⟧ الفرع، ⟦C⟧ المنتج، ⟦F⟧ المبلغ. أستخدم Excel بواجهة ⟦عربية/إنجليزية⟧ . عيّنة: ⟦الصق 5 صفوف⟧ . في هذه العيّنة، النتيجة الصحيحة لـ ⟦الحالة⟧ هي ⟦القيمة⟧ ."], ["الشكل", "(1) المعادلة جاهزة للّصق بعناوين خلاياي الفعلية. (2) شرح كلّ جزء منها في سطر. (3) الحالات التي تفشل فيها: خلايا فارغة، نصّ مكان رقم، تواريخ مخزّنة نصًّا، صفوف مكرّرة، مسافات زائدة. (4) طريقة اختبار على العيّنة تصل إلى القيمة التي أعطيتك. وإن كان المطلوب تحقّقًا: أعِد حساب كلّ مجموع من البيانات الخام، ولا تعتمد المجاميع الموجودة في الملفّ، واعرض الفروق في جدول. إن كان أيّ عمود غامضًا فاسألني، ولا تفترض."]], "v": ["الكمّ: اختبر المعادلة على الحالة التي تعرف نتيجتها قبل نسخها إلى العمود كلّه.", "الكمّ مرّة ثانية: لا تثق بأيّ مجموع، حتى في ملفّك. أعِد حسابه بطريقة ثانية (جدول محوري أو SUMIFS ) وقارن.", "الأصل: النطاقات تغطّي الصفوف كلّها، والمراجع المطلقة ($) في مكانها قبل السحب.", "التاريخ: إذا فتح الملفّ زميل بإصدار آخر أو بإعدادات إقليمية مختلفة، فقد تتغيّر فواصل المعاملات أو تتعطّل دالّة؛ اختبره عنده."]}, {"t": "الكتابة المهنية بين العربية والإنجليزية", "w": "تقرير أو سياسة أو تعميم يجب أن يصدر باللغتين، أو مستند إنجليزي من المقرّ الرئيسي يحتاج نسخة عربية يفهمها الفريق المحلّي.", "lvl": "أصفر، وأحمر للنصوص القانونية", "lvc": "y", "req": [["الهدف", "انقل ⟦المستند⟧ من ⟦الإنجليزية⟧ إلى ⟦العربية⟧ ، لـ ⟦النشر الرسمي / التعميم الداخلي⟧ ."], ["السياق", "المستند ⟦نوعه⟧ صادر عن ⟦الإدارة⟧ . المسرد المعتمد مرفق. البلد: ⟦الإمارات⟧ ، والعملة: ⟦الدرهم⟧ ."], ["الجمهور", "⟦موظفو الفروع / العملاء / جهة رسمية⟧ : يقرؤون بالعربية، ويجب ألّا يشعروا أن النصّ مترجَم."], ["الحدود", "انقل المعنى لا الكلمات، بفصحى واضحة وجمل قصيرة. الأرقام والتواريخ والمبالغ والنسب وأسماء الأشخاص والجهات والمنتجات تبقى كما هي حرفيًّا، بالأرقام الغربية. لا تحذف جملة ولا تضف معلومة. ما لا تجد له مقابلًا عربيًّا مستقرًّا، اكتب مقابلك المقترح ثم الأصل الإنجليزي بين قوسين."], ["الشكل", "(1) النصّ المنقول بالعناوين والترتيب نفسيهما. (2) جدول مصطلحات: المصطلح الأصلي · المقابل المستخدم · ملاحظة (من المسرد / مقترح). (3) المواضع التي تحتمل أكثر من معنى، مع اختيارك وسببه."], ["المثال", "⟦فقرة من نسخة سابقة معتمدة، للنبرة⟧ ."], ["المعيار", "يقرؤه قارئ عربي دون أن يتعثّر، ويطابق الأصل جملة بجملة. قبل أن تسلّم، قارن كلّ رقم وتاريخ واسم بين النصّين، واذكر أيّ اختلاف. إن التبس عليك معنى فاسألني، ولا تخمّن."]], "v": ["الكمّ: طابق كلّ رقم ومبلغ ونسبة وتاريخ بين النصّين واحدًا واحدًا، وانتبه لترتيب اليوم والشهر في التواريخ.", "الأصل: عدد الفقرات والبنود متساوٍ في النصّين؛ لم يسقط شيء.", "الدليل: كلّ مصطلح يطابق المسرد المعتمد، والمصطلح الواحد مترجَم بالطريقة نفسها في المستند كلّه.", "التاريخ: الأصل الذي ترجمته هو آخر نسخة معتمدة، لا مسوّدة سابقة."]}]</script>
+</div>
+<script>
+(function(){
+ var root=document.getElementById('pro2'); if(!root) return;
+ /* reveal */
+ var els=root.querySelectorAll('[data-rv]');
+ if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{rootMargin:'0px 0px -6% 0px'});els.forEach(function(el){io.observe(el)});}else{els.forEach(function(el){el.classList.add('in')})}
+ /* workflow explorer */
+ var data=[];try{data=JSON.parse(document.getElementById('wfdata').textContent)}catch(e){}
+ var list=root.querySelector('.ex .list'),panel=root.querySelector('.ex .panel'),sel=root.querySelector('#wfsel');
+ var esc=function(s){return s.replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]})};
+ var phs=function(s){return esc(s).replace(/⟦([^⟧]*)⟧/g,'<span class="ph">$1</span>')};
+ var col={g:'#1F5E46',y:'#A86A12',r:'#B42318'};
+ function show(i){var d=data[i]; if(!d) return;
+  list.querySelectorAll('button').forEach(function(b,j){b.setAttribute('aria-selected',j===i?'true':'false')}); sel.value=i;
+  panel.innerHTML='<h3>'+esc(d.t)+'<span class="lv" style="background:'+(col[d.lvc]||col.y)+'">'+esc(d.lvl||'')+'</span></h3><p class="w">'+esc(d.w)+'</p>'+
+   '<div class="rq"><div class="bar"><span>الطلب الجاهز · سير العمل '+String(i+1).padStart(2,'0')+'</span><span>من المكتبة كما هو</span></div>'+
+   d.req.map(function(r){return '<div>'+(r[0]?'<span class="m">'+esc(r[0])+':</span>':'')+phs(r[1])+'</div>'}).join('')+'</div>'+
+   '<ul class="vf">'+d.v.map(function(v){return '<li>'+esc(v)+'</li>'}).join('')+'</ul>';}
+ data.forEach(function(d,i){var b=document.createElement('button');b.setAttribute('role','tab');b.innerHTML='<span class="mono">'+String(i+1).padStart(2,'0')+'</span><span>'+esc(d.t)+'</span>';b.addEventListener('click',function(){show(i)});var li=document.createElement('li');li.appendChild(b);list.appendChild(li);
+  var o=document.createElement('option');o.value=i;o.textContent=String(i+1).padStart(2,'0')+' · '+d.t;sel.appendChild(o);});
+ sel.addEventListener('change',function(){show(+sel.value)}); show(0);
+ /* sticky bar */
+ var sb=root.querySelector('.sbar'),off=root.querySelector('#offer');
+ function st(){var o=off.getBoundingClientRect();sb.classList.toggle('on',(window.scrollY||0)>700&&!(o.top<innerHeight&&o.bottom>0));}
+ addEventListener('scroll',st,{passive:true}); st();
+ /* price + purchase: real product only */
+ var h=root.getAttribute('data-handle'),R=(window.Shopify&&Shopify.routes&&Shopify.routes.root)||'/';
+ function preview(){root.classList.add('is-preview');root.querySelectorAll('.js-buy').forEach(function(b){b.setAttribute('aria-disabled','true');b.innerHTML='الشراء متاح بعد النشر';b.addEventListener('click',function(e){e.preventDefault()})});}
+ if(!h){preview();return;}
+ fetch(R+'products/'+encodeURIComponent(h)+'.js',{credentials:'same-origin'}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(p){
+  var v=p.variants&&p.variants[0]; if(!v||!v.available) throw 0;
+  var cur=(window.Shopify&&Shopify.currency&&Shopify.currency.active)||'USD',t;
+  try{t=new Intl.NumberFormat('en',{style:'currency',currency:cur,maximumFractionDigits:0}).format(v.price/100)}catch(e){t='$'+v.price/100}
+  root.querySelectorAll('.js-price').forEach(function(s){s.textContent=t});
+  root.querySelectorAll('.js-buy').forEach(function(b){b.href=R+'cart/'+v.id+':1'});
+ }).catch(preview);
+})();
+</script>
+<!--PRO2-END-->
+
+{% schema %}
+{"name":"Pro Edition v2","settings":[]}
+{% endschema %}
